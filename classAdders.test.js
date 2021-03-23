@@ -1,8 +1,7 @@
 const md = require("markdown-it")().use(md => {
-    md.block.ruler.after('fence', 'classAdders', require("./classAdders"));
+    md.inline.ruler.push('classAdders', require("./classAdders"));
 });
 
-// TODO: Figure out why this isn't working.
-it("handles a random class addition", () => {
-    expect(md.render("```\n<$>[test]\ntest\n<$>```")).toBe();
+it("handles a class addition", () => {
+    expect(md.render("<$>[test]\ntest\n<$>")).toBe('<p><span class="test">test\n</span></p>');
 })

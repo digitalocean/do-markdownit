@@ -84,12 +84,13 @@ module.exports = (state, silent) => {
     // Else we should set the cursor and backup the old value.
 	const oldMax = state.posMax;
 	state.pos = classEnd + 1;
+	if (state.src.charCodeAt(state.pos) === 10) state.pos++;
 	state.posMax = pos - 3;
 
 	// Lets add the tokens.
 	const token = state.push("span_open", "span", 1);
     token.attrs = [["class", classNames]];
-	state.md.block.tokenize(state);
+	state.md.inline.tokenize(state);
 	state.push("span_close", "span", -1);
 
 	// Restore the old maximum position.
