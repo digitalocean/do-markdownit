@@ -3,5 +3,5 @@ const md = require("markdown-it")().use(md => {
 });
 
 it("handles a class addition", () => {
-    expect(md.render("<$>[test]\ntest\n<$>")).toBe('<p><span class="test">test\n</span></p>');
+    expect(md.render("<$>[test]\ntest\n<$>")).toBe('<p><span class="test">test\n</span></p>\n');
 })
