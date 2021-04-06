@@ -29,4 +29,3 @@ module.exports = (md, options) => {
 		md.renderer.code_inline = highlight.code(md.renderer.code_inline);
 	}
 };
-module.exports.default = module.exports; // Support default imports.
