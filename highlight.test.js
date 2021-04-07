@@ -38,6 +38,14 @@ it("handles hightlight tags in code block", () => {
     expect(md.render("```\nhello\nworld\n<^>test<^>\n```")).toBe("<pre><code>hello\nworld\n<mark>test</mark>\n</code></pre>\n");
 });
 
-it("handles hightlight tags in code inline", () => {
+it("handles hightlight tags in code (inline)", () => {
     expect(md.renderInline("`<^>test<^>`")).toBe("<code><mark>test</mark></code>");
 });
+
+it("handles hightlight tags in code (not inline)", () => {
+    expect(md.render("`<^>test<^>`")).toBe("<p><code><mark>test</mark></code></p>\n");
+});
+
+//it("handles hightlight tags in class tags", () => {
+//    expect(md.render("<$>[testing]\n`<^>test<^>`<$>")).toBe('<p><span class="testing"><code><mark>test</mark></code></span></p>');
+//});

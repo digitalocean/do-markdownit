@@ -19,13 +19,13 @@ module.exports = (md, options) => {
 	options = md.utils.assign({}, {}, options || {});
 
 	// Add the custom parser behaviour.
-	if (options.codePrefix !== false) md.renderer.fence = codePrefix(md.renderer.fence);
-	if (options.codeEnvironment !== false) md.renderer.fence = codeEnvironment(md.renderer.fence);
+	if (options.codePrefix !== false) md.renderer.rules.fence = codePrefix(md.renderer.rules.fence);
+	if (options.codeEnvironment !== false) md.renderer.rules.fence = codeEnvironment(md.renderer.rules.fence);
 	if (options.classAdders !== false) md.inline.ruler.push('classAdders', classAdders);
 	if (options.highlight !== false) {
 		md.inline.ruler.push('highlight', highlight.tokenize);
-		md.renderer.code_block = highlight.code(md.renderer.code_block);
-		md.renderer.fence = highlight.code(md.renderer.fence);
-		md.renderer.code_inline = highlight.code(md.renderer.code_inline);
+		md.renderer.rules.code_block = highlight.code(md.renderer.rules.code_block);
+		md.renderer.rules.fence = highlight.code(md.renderer.rules.fence);
+		md.renderer.rules.code_inline = highlight.code(md.renderer.rules.code_inline);
 	}
 };
