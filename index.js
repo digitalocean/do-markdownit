@@ -2,7 +2,7 @@
 
 const highlight = require("./highlight");
 const codePrefix = require("./codePrefix");
-const codeEnvironment = require("./codeEnvironment");
+const codeMetadata = require("./codeMetadata");
 const classAdders = require("./classAdders");
 
 /**
@@ -11,7 +11,7 @@ const classAdders = require("./classAdders");
  * @param {Object} options - The options for the application.
  * @param {boolean} [options.highlight=true] - Defines if the highlight parser is on.
  * @param {boolean} [options.codePrefix=true] - Defines if code prefixes are on.
- * @param {boolean} [options.codeEnvironment=true] - Defines if code environment is on.
+ * @param {boolean} [options.codeMetadata=true] - Defines if code metadata is on.
  * @param {boolean} [options.classAdders=true] - Defines if class adding tags are on.
  */
 module.exports = (md, options) => {
@@ -19,8 +19,8 @@ module.exports = (md, options) => {
 	options = md.utils.assign({}, {}, options || {});
 
 	// Add the custom parser behaviour.
+	if (options.codeMetadata !== false) md.renderer.rules.fence = codeMetadata(md, md.renderer.rules.fence);
 	if (options.codePrefix !== false) md.renderer.rules.fence = codePrefix(md.renderer.rules.fence);
-	if (options.codeEnvironment !== false) md.renderer.rules.fence = codeEnvironment(md.renderer.rules.fence);
 	if (options.classAdders !== false) md.inline.ruler.push('classAdders', classAdders);
 	if (options.highlight !== false) {
 		md.inline.ruler.push('highlight', highlight.tokenize);

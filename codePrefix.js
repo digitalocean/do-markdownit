@@ -16,15 +16,6 @@ const parsePrefix = firstLine => {
     return [match[1], match[0].length];
 };
 
-// Defines the environments.
-const ENVS = [
-    "[environment local]",
-    "[environment second]",
-    "[environment third]",
-    "[environment fourth]",
-    "[environment fifth]",
-];
-
 // Handles code prefixes.
 module.exports = previousRenderer => (tokens, idx, options, env, self) => {
     // Get the token.
@@ -59,9 +50,6 @@ module.exports = previousRenderer => (tokens, idx, options, env, self) => {
         for (let index = 0; index < split.length; index++) {
             // Get the content.
             const element = split[index];
-            
-            // Make sure this isn't a [environment ...].
-            if (index === 0 && ENVS.includes(element)) continue;
 
             // Ignore if completely blank.
             if (element === "") continue;
