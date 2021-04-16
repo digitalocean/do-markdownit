@@ -4,6 +4,7 @@ const highlight = require("./highlight");
 const codePrefix = require("./codePrefix");
 const codeMetadata = require("./codeMetadata");
 const classAdders = require("./classAdders");
+const embed = require("./embed");
 
 /**
  * Handles patching in the behaivour to the markdown parser.
@@ -13,7 +14,11 @@ const classAdders = require("./classAdders");
  * @param {boolean} [options.codePrefix=true] - Defines if code prefixes are on.
  * @param {boolean} [options.codeMetadata=true] - Defines if code metadata is on.
  * @param {boolean} [options.classAdders=true] - Defines if class adding tags are on.
- */
+ * @param {boolean} [options.embed=true] - Defines if embeds are on.
+ * @param {boolean} [options.ampRequest=false] - Defines if this is an AMP Request.
+ * @param {Number} [options.formId] - Defines the form ID.
+ * @param {Number} [options.canoicalUrl] - Defines the canoical URL.
+*/
 module.exports = (md, options) => {
 	// Get the correct options.
 	options = md.utils.assign({}, {}, options || {});
@@ -27,5 +32,12 @@ module.exports = (md, options) => {
 		md.renderer.rules.code_block = highlight.code(md.renderer.rules.code_block);
 		md.renderer.rules.fence = highlight.code(md.renderer.rules.fence);
 		md.renderer.rules.code_inline = highlight.code(md.renderer.rules.code_inline);
+	}
+	if (options.embed !== false) {
+		const ampRequest = typeof options.ampRequest === "boolean" ? options.ampRequest : false;
+		const formId = typeof options.formId === "number" ? options.formId : null;
+		const canoicalUrl = typeof options.canoicalUrl === "string" ? options.canoicalUrl : null;
+		md.renderer.renderInline = embed(md, formId, ampRequest, canoicalUrl, md.renderer.renderInline.bind(md.renderer));
+		md.renderer.render = embed(md, formId, ampRequest, canoicalUrl, md.renderer.render.bind(md.renderer));
 	}
 };
