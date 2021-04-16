@@ -17,7 +17,7 @@ const embed = require("./embed");
  * @param {boolean} [options.embed=true] - Defines if embeds are on.
  * @param {boolean} [options.ampRequest=false] - Defines if this is an AMP Request.
  * @param {Number} [options.formId] - Defines the form ID.
- * @param {Number} [options.canoicalUrl] - Defines the canoical URL.
+ * @param {string} [options.canoicalUrl] - Defines the canoical URL.
 */
 module.exports = (md, options) => {
 	// Get the correct options.
