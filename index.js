@@ -17,7 +17,7 @@ const embed = require("./embed");
  * @param {boolean} [options.embed=true] - Defines if embeds are on.
  * @param {boolean} [options.ampRequest=false] - Defines if this is an AMP Request.
  * @param {Number} [options.formId] - Defines the form ID.
- * @param {string} [options.canoicalUrl] - Defines the canoical URL.
+ * @param {string} [options.canonicalUrl] - Defines the canonical URL.
 */
 module.exports = (md, options) => {
 	// Get the correct options.
@@ -36,8 +36,8 @@ module.exports = (md, options) => {
 	if (options.embed !== false) {
 		const ampRequest = typeof options.ampRequest === "boolean" ? options.ampRequest : false;
 		const formId = typeof options.formId === "number" ? options.formId : null;
-		const canoicalUrl = typeof options.canoicalUrl === "string" ? options.canoicalUrl : null;
-		md.renderer.renderInline = embed(md, formId, ampRequest, canoicalUrl, md.renderer.renderInline.bind(md.renderer));
-		md.renderer.render = embed(md, formId, ampRequest, canoicalUrl, md.renderer.render.bind(md.renderer));
+		const canonicalUrl = typeof options.canonicalUrl === "string" ? options.canonicalUrl : null;
+		md.renderer.renderInline = embed(md, formId, ampRequest, canonicalUrl, md.renderer.renderInline.bind(md.renderer));
+		md.renderer.render = embed(md, formId, ampRequest, canonicalUrl, md.renderer.render.bind(md.renderer));
 	}
 };

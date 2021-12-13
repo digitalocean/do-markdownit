@@ -4,7 +4,7 @@ const md = require("markdown-it")().use(md => {
     md.renderer.render = embed(md, null, false, null, md.renderer.render.bind(md.renderer));
 });
 
-it("handle glob embeds (not inline)", () => {
+it("handles glob embeds (not inline)", () => {
     expect(md.render("[glob *.js /]")).toBe(`<p><div data-glob-tool-embed data-glob-string="*.js" data-glob-test-0="/">
     <a href="https://www.digitalocean.com/community/tools/glob?glob=*.js&tests=%2F" target="_blank">
         Explore <code>*.js</code> as a glob string in our glob testing tool
@@ -13,7 +13,7 @@ it("handle glob embeds (not inline)", () => {
 `);
 });
 
-it("handle glob embeds (inline)", () => {
+it("handles glob embeds (inline)", () => {
     expect(md.renderInline("[glob *.js /]")).toBe(`<div data-glob-tool-embed data-glob-string="*.js" data-glob-test-0="/">
     <a href="https://www.digitalocean.com/community/tools/glob?glob=*.js&tests=%2F" target="_blank">
         Explore <code>*.js</code> as a glob string in our glob testing tool
@@ -53,7 +53,7 @@ it("handles dns embeds (not inline, with records)", () => {
 </div></p>
 `);});
 
-it("handle dns embeds (inline)", () => {
+it("handles dns embeds (inline)", () => {
     expect(md.renderInline("[dns digitalocean.com]")).toBe(`<div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
@@ -70,4 +70,18 @@ it("handles asciinema embeds (inline)", () => {
     expect(md.renderInline("[asciinema 325730]")).toBe(`<script src="https://asciinema.org/a/325730.js" id="asciicast-325730" async data-cols="80" data-rows="24"></script><noscript><a href="https://asciinema.org/a/325730" target="_blank">View asciinema recording</a></noscript>`);
 });
 
-// rsvp
+it("handles youtube embeds (not inline)", () => {
+    expect(md.render("[youtube KHFOVDixnyw 380 560]")).toBe(`<p><iframe src="https://www.youtube.com/embed/KHFOVDixnyw" height="380" width="560" frameborder="0" allowfullscreen /></p>\n`);
+});
+
+it("handles youtube embeds (inline)", () => {
+    expect(md.renderInline("[youtube KHFOVDixnyw 380 560]")).toBe(`<iframe src="https://www.youtube.com/embed/KHFOVDixnyw" height="380" width="560" frameborder="0" allowfullscreen />`);
+});
+
+it("handles youtube embeds (inline, without height and width)", () => {
+    expect(md.renderInline("[youtube KHFOVDixnyw]")).toBe(`<iframe src="https://www.youtube.com/embed/KHFOVDixnyw" height="300" width="300" frameborder="0" allowfullscreen />`);
+});
+
+it("handles youtube embeds (escapes HTML)", () => {
+    expect(md.renderInline("[youtube <script>alert();</script> 380 560]")).toBe(`<iframe src="https://www.youtube.com/embed/&amp;lt;script&amp;gt;alert();&amp;lt;/script&amp;gt;" height="380" width="560" frameborder="0" allowfullscreen />`);
+});

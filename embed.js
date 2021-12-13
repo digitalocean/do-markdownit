@@ -195,6 +195,25 @@ module.exports = (md, formId, ampRequest, canonicalUrl, previousRenderer) => (to
         content = content.replace(key, globHtml);
     }
 
+    // Replace any youtube strings.
+    for (;;) {
+        // Get the youtube match.
+        const match = content.match(/\[youtube (.+?)(?:\s(\d+))?(?:\s(\d+))?\]/);
+        if (!match) break;
+
+        // Get the video id.
+        const videoId = md.utils.escapeHtml(match[1]);
+
+        // Get the video height.
+        const videoHeight = Number(match[2]) || 300;
+
+        // Get the video width.
+        const videoWidth = Number(match[3]) || 300;
+
+        // Replace with the HTML.
+        content = content.replace(match[0], `<iframe src="https://www.youtube.com/embed/${videoId}" height="${videoHeight}" width="${videoWidth}" frameborder="0" allowfullscreen />`);
+    }
+
     // Return the content.
     return content;
 };
