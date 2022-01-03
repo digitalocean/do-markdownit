@@ -1,0 +1,256 @@
+<h1 id="title-header-h1-header">Title Header (H1 header)</h1>
+<h3 id="introduction-h3-header">Introduction (H3 header)</h3>
+<p>This is some placeholder text to show examples of Markdown formatting.
+We have <a href="https://github.com/do-community/do-article-templates">a full article template</a> you can use when writing a DigitalOcean article.
+Please refer to our style and formatting guidelines for more detailed explanations: <a href="https://do.co/style">https://do.co/style</a></p>
+<h2 id="prerequisites-h2-header">Prerequisites (H2 header)</h2>
+<p>Before you begin this guide you’ll need the following:</p>
+<ul>
+<li>Familiarity with <a href="https://daringfireball.net/projects/markdown/">Markdown</a></li>
+</ul>
+<h2 id="step-1-basic-markdown">Step 1 — Basic Markdown</h2>
+<p>This is <em>italics</em>, this is <strong>bold</strong>, and this is <s>strikethrough</s>.</p>
+<ul>
+<li>This is a list item.</li>
+<li>This list is unordered.</li>
+</ul>
+<ol>
+<li>This is a list item.</li>
+<li>This list is ordered.</li>
+</ol>
+<blockquote>
+<p>This is a quote.</p>
+<blockquote>
+<p>This is a quote inside a quote.</p>
+</blockquote>
+<ul>
+<li>This is a list in a quote.</li>
+<li>Another item in the quote list.</li>
+</ul>
+</blockquote>
+<p>Here’s how to include an image with alt text and a title:</p>
+<p><img src="https://assets.digitalocean.com/logos/DO_Logo_horizontal_blue.png" alt="Alt text for screen readers" title="DigitalOcean Logo"></p>
+<p>Use horizontal rules to break up long sections:</p>
+<hr>
+<p>Rich transformations are also applied:</p>
+<ul>
+<li>On ellipsis: …</li>
+<li>On quote pairs: “sammy”, ‘test’</li>
+<li>On dangling single quotes: it’s</li>
+<li>On en/em dashes: a – b, a — b</li>
+</ul>
+<p>&lt;!-- Comments will be removed from the output --&gt;</p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th>are</th>
+<th>also</th>
+<th>supported</th>
+<th>and</th>
+<th>will</th>
+<th>overflow</th>
+<th>cleanly</th>
+<th>if</th>
+<th>needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 1</td>
+<td>col 2</td>
+<td>col 3</td>
+<td>col 4</td>
+<td>col 5</td>
+<td>col 6</td>
+<td>col 7</td>
+<td>col 8</td>
+<td>col 9</td>
+<td>col 10</td>
+</tr>
+<tr>
+<td>col 1</td>
+<td>col 2</td>
+<td>col 3</td>
+<td>col 4</td>
+<td>col 5</td>
+<td>col 6</td>
+<td>col 7</td>
+<td>col 8</td>
+<td>col 9</td>
+<td>col 10</td>
+</tr>
+<tr>
+<td>col 1</td>
+<td>col 2</td>
+<td>col 3</td>
+<td>col 4</td>
+<td>col 5</td>
+<td>col 6</td>
+<td>col 7</td>
+<td>col 8</td>
+<td>col 9</td>
+<td>col 10</td>
+</tr>
+<tr>
+<td>col 1</td>
+<td>col 2</td>
+<td>col 3</td>
+<td>col 4</td>
+<td>col 5</td>
+<td>col 6</td>
+<td>col 7</td>
+<td>col 8</td>
+<td>col 9</td>
+<td>col 10</td>
+</tr>
+<tr>
+<td>col 1</td>
+<td>col 2</td>
+<td>col 3</td>
+<td>col 4</td>
+<td>col 5</td>
+<td>col 6</td>
+<td>col 7</td>
+<td>col 8</td>
+<td>col 9</td>
+<td>col 10</td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-2-code">Step 2 — Code</h2>
+<p>This is <code>inline code</code>. This is a <mark>variable</mark>. This is an <code>in-line code <mark>variable</mark></code>.</p>
+<p>Here’s a configuration file with a label:</p>
+<div class="code-label" title="/etc/nginx/sites-available/default">/etc/nginx/sites-available/default</div>
+<pre class="language-nginx drop-tokens"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span> <mark>default_server</mark></span><span class="token punctuation">;</span>
+    . . .
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Examples can have line numbers, and every code block has a ‘Copy’ button to copy just the code:</p>
+<pre class="prefixed line_numbers language-javascript drop-tokens"><code><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span></li>
+<li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span></li>
+<li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span></li></ol>
+</code></pre>
+<p>Here’s output from a command with a secondary label:</p>
+<pre><code><div class="secondary-code-label" title="Output">Output</div>Could not connect to Redis at 127.0.0.1:6379: Connection refused
+</code></pre>
+<p>This is a non-root user command example:</p>
+<pre class="prefixed command language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> update</li>
+<li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3</li></ol>
+</code></pre>
+<p>This is a root command example:</p>
+<pre class="prefixed super_user language-bash drop-tokens"><code><ol><li data-prefix="#">adduser sammy</li>
+<li data-prefix="#"><span class="token function">shutdown</span></li></ol>
+</code></pre>
+<p>This is a custom prefix command example:</p>
+<pre class="prefixed custom_prefix language-bash drop-tokens"><code><ol><li data-prefix="mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span></li>
+<li data-prefix="mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span></li></ol>
+</code></pre>
+<p>Indicate where commands are being run with environments:</p>
+<pre class="prefixed command environment-local language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token function">ssh</span> root@server_ip</li></ol>
+</code></pre>
+<pre class="prefixed command environment-second language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Secondary server&quot;</span></li></ol>
+</code></pre>
+<pre class="prefixed command environment-third language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Tertiary server&quot;</span></li></ol>
+</code></pre>
+<pre class="prefixed command environment-fourth language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quaternary server&quot;</span></li></ol>
+</code></pre>
+<pre class="prefixed command environment-fifth language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quinary server&quot;</span></li></ol>
+</code></pre>
+<p>And all of these can be combined together, with a language for syntax highlighting as well as a line prefix (line numbers, command, custom prefix, etc.), and even an environment and label:</p>
+<div class="code-label" title="/etc/nginx/sites-available/default">/etc/nginx/sites-available/default</div>
+<pre class="prefixed line_numbers environment-second language-nginx drop-tokens"><code><ol><li data-prefix="1"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span></li>
+<li data-prefix="2">    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span> <mark>default_server</mark></span><span class="token punctuation">;</span></li>
+<li data-prefix="3">    . . .</li>
+<li data-prefix="4"><span class="token punctuation">}</span></li></ol>
+</code></pre>
+<h2 id="step-3-callouts">Step 3 — Callouts</h2>
+<p>Here is a note, a warning, some info and a draft note:</p>
+<div class="note">
+<p><strong>Note:</strong> Use this for notes on a publication.</p>
+</div>
+<div class="warning">
+<p><strong>Warning:</strong> Use this to warn users.</p>
+</div>
+<div class="info">
+<p><strong>Info:</strong> Use this for product information.</p>
+</div>
+<div class="draft">
+<p><strong>Draft:</strong> Use this for notes in a draft publication.</p>
+</div>
+<p>You can also mention users by username:</p>
+<p><a href="/users/MattIPv4">@MattIPv4</a></p>
+<h2 id="step-4-embeds">Step 4 — Embeds</h2>
+<p>Embedding a YouTube video (id, height, width):</p>
+<iframe src="https://www.youtube.com/embed/iom_nhYQIYk" height="225" width="400" frameborder="0" allowfullscreen>
+    <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
+</iframe>
+<p>Embedding DNS record lookups (hostname, record types…):</p>
+<div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
+    <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
+        Perform a full DNS lookup for digitalocean.com
+    </a>
+</div>
+<p>Demonstrating how glob matching works (pattern, tests…):</p>
+<div data-glob-tool-embed data-glob-string="**/*.js" data-glob-test-0="a/b.js" data-glob-test-1="c/d.js" data-glob-test-2="e.jsx" data-glob-test-3="f.md">
+    <a href="https://www.digitalocean.com/community/tools/glob?glob=**%2F*.js&tests=a%2Fb.js&tests=c%2Fd.js&tests=e.jsx&tests=f.md" target="_blank">
+        Explore <code>**/*.js</code> as a glob string in our glob testing tool
+    </a>
+</div>
+<p>Glob embeds can also be written as multiple lines if needed:</p>
+<div data-glob-tool-embed data-glob-string="**/*.js" data-glob-test-0="a/b.js" data-glob-test-1="c/d.js" data-glob-test-2="e.jsx" data-glob-test-3="f.md">
+    <a href="https://www.digitalocean.com/community/tools/glob?glob=**%2F*.js&tests=a%2Fb.js&tests=c%2Fd.js&tests=e.jsx&tests=f.md" target="_blank">
+        Explore <code>**/*.js</code> as a glob string in our glob testing tool
+    </a>
+</div>
+<p>Embedding a CodePen example (username, pen ID, flags…):</p>
+<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Setting a custom height for the CodePen:</p>
+<p class="codepen" data-height="512" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 512px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Enabling dark mode on a CodePen embed:</p>
+<p class="codepen" data-height="256" data-theme-id="dark" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Setting the CodePen embed to only run when clicked:</p>
+<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" data-preview="true" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Changing the default table of a CodePen embed:</p>
+<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Making the CodePen editable by the user (requires a Pro CodePen account):</p>
+<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="chriscoyier" data-slug-hash="Yxzjdz" data-editable="true" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/Yxzjdz">Yxzjdz by chriscoyier</a> (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Combining different CodePen embed flags together is also supported:</p>
+<p class="codepen" data-height="384" data-theme-id="dark" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 384px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<p>Embedding a terminal recording from Asciinema:</p>
+<script src="https://asciinema.org/a/239367.js" id="asciicast-239367" async data-cols="80" data-rows="24"></script>
+<noscript>
+    <a href="https://asciinema.org/a/239367" target="_blank">View asciinema recording</a>
+</noscript>
+<p>Setting a custom number of cols and rows for the Asciinema terminal:</p>
+<script src="https://asciinema.org/a/239367.js" id="asciicast-239367" async data-cols="50" data-rows="20"></script>
+<noscript>
+    <a href="https://asciinema.org/a/239367" target="_blank">View asciinema recording</a>
+</noscript>
+<h2 id="step-5-tutorials">Step 5 — Tutorials</h2>
+<p>Certain features of our Markdown engine are designed specifically for our tutorials and are locked behind additional flags.</p>
+<p>&lt;p style=‘color: red;’&gt;Raw HTML is supported with the <code>html</code> flag.&lt;/p&gt;</p>
+<p>[rsvp_button 1234 “Marketo RSVP buttons are behind the <code>rsvp_button</code> flag”]</p>
+<button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
+    Terminals are behind the `terminal` flag
+</button>
+<h2 id="conclusion">Conclusion</h2>
+<p>Please refer to our <a href="https://do.co/style">writing guidelines</a> for more detailed explanations on our style and formatting.</p>
+<script async defer src="https://do-community.github.io/glob-tool-embed/bundle.js" type="text/javascript" onload="window.GlobToolEmbeds()"></script>
+<script async defer src="https://do-community.github.io/dns-tool-embed/bundle.js" type="text/javascript" onload="window.DNSToolEmbeds()"></script>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
