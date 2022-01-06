@@ -124,11 +124,13 @@ module.exports = (md, options) => {
         const posEnd = pos + value.length;
 
         // Handle opening and closing any additional elements within this text
+        // Allow closing tags to happen up to and after the end of the text,
+        //  but only allow opening tags to happen before the end of the text
+        // This ensures we don't open a tag that should open after a closing tag for the current text
         while (data.length
         && data[0].pos >= pos
-        && data[0].pos <= posEnd
-        && (data[0].type === 'open'
-          || (data[0].type === 'close' && stack[stack.length - 1] === data[0].name))) {
+        && ((data[0].type === 'open' && data[0].pos < posEnd)
+          || (data[0].type === 'close' && data[0].pos <= posEnd && stack[stack.length - 1] === data[0].name))) {
           const elm = data.shift();
 
           // Get text before element
@@ -162,6 +164,12 @@ module.exports = (md, options) => {
     });
     parserHtml.write(highlighted);
     parserHtml.end();
+
+    // Handle bad render
+    if (stack.length) {
+      console.error(`Bad PrismJS render, tags remain open: ${stack.join(', ')}`);
+      return rendered;
+    }
 
     // Return the new content
     return html;

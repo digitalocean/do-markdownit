@@ -46,7 +46,7 @@ module.exports = md => {
     const token = tokens[index];
 
     // Return the HTML
-    return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(token.youtube.id)}" height="${token.youtube.height}" width="${token.youtube.width}" frameborder="0" allowfullscreen>
+    return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(token.youtube.id)}" class="youtube" height="${token.youtube.height}" width="${token.youtube.width}" frameborder="0" allowfullscreen>
     <a href="https://www.youtube.com/watch?v=${encodeURIComponent(token.youtube.id)}" target="_blank">View YouTube video</a>
 </iframe>\n`;
   };

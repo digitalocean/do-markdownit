@@ -6,22 +6,17 @@ module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
-  md.block.ruler.before('paragraph', 'rsvp_button', (state, startLine, endLine, silent) => {
+  md.inline.ruler.before('link', 'rsvp_button', (state, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
-    // Get current string to consider (just current line)
-    const pos = state.bMarks[startLine] + state.tShift[startLine];
-    const max = state.eMarks[startLine];
-    const currentLine = state.src.substring(pos, max);
-
     // Perform some non-regex checks for speed
-    if (currentLine.length < 15) return false; // [rsvp_button a]
-    if (currentLine.slice(0, 13) !== '[rsvp_button ') return false;
-    if (currentLine[currentLine.length - 1] !== ']') return false;
+    if (state.src[state.pos] !== '[') return false;
+    if (state.posMax - state.pos < 15) return false; // [rsvp_button a]
+    if (state.src.slice(state.pos, state.pos + 13) !== '[rsvp_button ') return false;
 
     // Check for rsvp button match
-    const match = currentLine.match(/^\[rsvp_button (\d+)(?: "(.{1,50})")?\]$/);
+    const match = state.src.slice(state.pos).match(/^\[rsvp_button (\d+)(?: "(.{1,50})")?\]/);
     if (!match) return false;
 
     // Get the id
@@ -31,14 +26,14 @@ module.exports = (md, options) => {
     // Get the button text
     const text = (match[2] || '').trim() || 'RSVP Here';
 
-    // Update the pos for the parser
-    state.line = startLine + 1;
-
     // Add token to state
     const token = state.push('rsvp_button', 'rsvp_button', 0);
     token.block = true;
     token.markup = match[0];
     token.rsvp_button = { id, text };
+
+    // Move position to the end
+    state.pos += match[0].length;
 
     // Done
     return true;
@@ -51,8 +46,6 @@ module.exports = (md, options) => {
     const className = typeof options.className === 'string' ? options.className : 'rsvp';
 
     // Return the HTML
-    return `<button data-js="rsvp-button" data-form-id="${md.utils.escapeHtml(token.rsvp_button.id)}" disabled="disabled" class="${md.utils.escapeHtml(className)}">
-    ${md.utils.escapeHtml(token.rsvp_button.text)}
-</button>\n`;
+    return `<button data-js="rsvp-button" data-form-id="${md.utils.escapeHtml(token.rsvp_button.id)}" disabled="disabled" class="${md.utils.escapeHtml(className)}">${md.utils.escapeHtml(token.rsvp_button.text)}</button>`;
   };
 };

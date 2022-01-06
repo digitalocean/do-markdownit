@@ -137,13 +137,18 @@ echo "Quinary server"
 
 And all of these can be combined together, with a language for syntax highlighting as well as a line prefix (line numbers, command, custom prefix, etc.), and even an environment and label:
 
-```line_numbers,nginx
+```line_numbers,html
 [environment second]
-[label /etc/nginx/sites-available/default]
-server {
-    listen 80 <^>default_server<^>;
-    . . .
-}
+[label index.html]
+<html>
+<body>
+<head>
+  <title><^>My Title<^></title>
+</head>
+<body>
+  . . .
+</body>
+</html>
 ```
 
 

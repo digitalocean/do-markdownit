@@ -1,9 +1,7 @@
 const md = require('markdown-it')().use(require('./rsvp_button'));
 
-it('handles rsvp button embeds (not inline)', () => {
-  expect(md.render('[rsvp_button 12345]')).toBe(`<button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">
-    RSVP Here
-</button>
+it('handles rsvp button embeds', () => {
+  expect(md.render('[rsvp_button 12345]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">RSVP Here</button></p>
 `);
 });
 
@@ -13,9 +11,7 @@ it('handles rsvp button embeds with no id (no embed)', () => {
 });
 
 it('handles rsvp button embeds with title set', () => {
-  expect(md.render('[rsvp_button 12345 "button title"]')).toBe(`<button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">
-    button title
-</button>
+  expect(md.render('[rsvp_button 12345 "button title"]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">button title</button></p>
 `);
 });
 
@@ -25,25 +21,42 @@ it('handles rsvp button embeds with unclosed title string (no embed)', () => {
 });
 
 it('handles rsvp button embeds with title set containing quotes', () => {
-  expect(md.render('[rsvp_button 12345 "button "title""]')).toBe(`<button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">
-    button &quot;title&quot;
-</button>
+  expect(md.render('[rsvp_button 12345 "button "title""]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">button &quot;title&quot;</button></p>
 `);
 });
 
 it('handles rsvp button embeds attempting html injection', () => {
-  expect(md.render('[rsvp_button 12345 "<script>alert();</script>"]')).toBe(`<button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">
-    &lt;script&gt;alert();&lt;/script&gt;
-</button>
+  expect(md.render('[rsvp_button 12345 "<script>alert();</script>"]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">&lt;script&gt;alert();&lt;/script&gt;</button></p>
+`);
+});
+
+it('handles rsvp button embeds with surrounding text', () => {
+  expect(md.render('You can join here: [rsvp_button 12345] - 10:00am')).toBe(`<p>You can join here: <button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">RSVP Here</button> - 10:00am</p>
+`);
+});
+
+it('handles rsvp button embeds inside a table', () => {
+  expect(md.render('| Time    | RSVP                |\n|---------|---------------------|\n| 10:00am | [rsvp_button 12345] |')).toBe(`<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>RSVP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10:00am</td>
+<td><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">RSVP Here</button></td>
+</tr>
+</tbody>
+</table>
 `);
 });
 
 const mdClass = require('markdown-it')().use(require('./rsvp_button'), { className: 'test' });
 
 it('handles rsvp button embeds with a custom class', () => {
-  expect(mdClass.render('[rsvp_button 12345]')).toBe(`<button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="test">
-    RSVP Here
-</button>
+  expect(mdClass.render('[rsvp_button 12345]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="test">RSVP Here</button></p>
 `);
 });
 
