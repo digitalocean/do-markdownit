@@ -15,6 +15,7 @@ it('handles a code fence with a language alias', () => {
 });
 
 it('does not pollute global scope', () => {
+  global.window = {};
   expect(window).not.toBeUndefined();
 
   const mdTemp = require('markdown-it')().use(require('./prismjs'));
