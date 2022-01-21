@@ -69,8 +69,8 @@ module.exports = (md, options) => {
     // Get lines and apply prefix to each
     const lines = content.slice(open.end, close)
       .split('\n')
-      .map((line, idx) => `<li data-prefix="${md.utils.escapeHtml(prefix(line, idx))}">${line}</li>`)
-      .join('\n');
+      .map((line, idx) => `<li data-prefix="${md.utils.escapeHtml(prefix(line, idx))}">${line}\n</li>`)
+      .join('');
 
     // Return the new content
     return `${content.slice(0, open.end)}<ol>${lines}</ol>${content.slice(close)}`;

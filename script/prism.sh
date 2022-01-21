@@ -2,11 +2,13 @@
 
 set -e -u -o pipefail
 
+echo "Vendoring and patching PrismJS to avoid global/window pollution..."
+
 # Clean out existing vendor-ed PrismJS
 rm -rf vendor/prismjs
 
 # Fetch latest PrismJS source
-FILE=$(npm pack prismjs)
+FILE=$(npm pack prismjs -q)
 FILE_DIR="vendor/prismjs"
 
 # Extract PrismJS

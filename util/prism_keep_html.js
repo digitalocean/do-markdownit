@@ -1,0 +1,183 @@
+'use strict';
+
+const htmlparser2 = require('htmlparser2');
+const slimdom = require('slimdom');
+
+const {
+    domOffsetNode,
+    domCommonAncestor,
+    domSplit,
+    domPreviousSiblingsEmpty,
+    domNextSiblingsEmpty,
+    domRemoveEmpty,
+} = require('./dom_utils');
+
+module.exports = Prism => {
+    if (typeof Prism === 'undefined' || Prism.plugins.KeepHTML) return;
+
+    Prism.plugins.KeepHTML = true;
+
+    const extractTextAndNodes = html => {
+        // Track the plain-text and all the HTML nodes we find
+        let text = '';
+        const allNodes = [];
+
+        // Hold a temporary stack of open nodes
+        const stack = [];
+
+        // Parse the HTML
+        const parser = new htmlparser2.Parser({
+            onopentag: (name, attributes) => {
+                // Add the node to the stack
+                stack.push({
+                    name,
+                    attributes,
+                    open: text.length,
+                    depth: stack.length,
+                });
+            },
+            ontext: value => {
+                text += value;
+            },
+            onclosetag: () => {
+                // Remove the node from the stack
+                const node = stack.pop();
+                node.close = text.length;
+                allNodes.push(node);
+            },
+        });
+        parser.write(html);
+        parser.end();
+
+        // Handle bad input HTML
+        if (stack.length) throw new Error('Unclosed tag in code');
+
+        // Filter out token nodes, and sort by depth
+        const nodes = allNodes
+            .filter(node => node.name !== 'span' || !/(^| )token( |$)/.test(node.attributes.class || ''))
+            .sort((a, b) => a.depth !== b.depth
+                // Deepest nodes first
+                ? b.depth - a.depth
+                // Fallback to start position
+                : a.open - b.open);
+
+        // Done
+        return {
+            text,
+            nodes,
+        };
+    };
+
+    const parseAndInsertNodes = (html, nodes) => {
+        // Create an empty DOM
+        const document = new slimdom.Document();
+        const root = document.createElement('root');
+        let current = document.appendChild(root);
+
+        // Parse the highlighted code into the DOM
+        let pos = 0;
+        const parserPost = new htmlparser2.Parser({
+            onopentag: (name, attributes) => {
+                const node = document.createElement(name);
+                Object.entries(attributes).forEach(([ key, value ]) => node.setAttribute(key, value));
+                current.appendChild(node);
+                current = node;
+            },
+            ontext: value => {
+                const text = document.createTextNode(value);
+                current.appendChild(text);
+
+                nodes.forEach(node => {
+                    // If this node starts within the text, track that
+                    if (!node.openNode && pos + value.length > node.open) {
+                        node.openNode = text;
+                        node.openPos = node.open - pos;
+                    }
+
+                    // If this node ends within the text, or at the end of it, track that
+                    if (!node.closeNode && pos + value.length >= node.close) {
+                        node.closeNode = text;
+                        node.closePos = node.close - pos;
+                    }
+                });
+
+                pos += value.length;
+            },
+            onclosetag: () => {
+                current = current.parentNode;
+            },
+        });
+        parserPost.write(html);
+        parserPost.end();
+
+        // Inject our preserved HTML
+        nodes.forEach(node => {
+            if (!node.openNode || !node.closeNode) throw new Error('Untracked node');
+
+            // Apply the offset to each and get the ancestor
+            // Very loosely equivalent to creating a DOM Level 2 Range
+            const [ openNode, openPos ] = domOffsetNode(node.openNode, node.openPos, root, true);
+            let [ closeNode, closePos ] = domOffsetNode(node.closeNode, node.closePos, root);
+            let ancestor = domCommonAncestor(openNode, closeNode);
+
+            // Split the DOM and get the middle
+            // Very loosely equivalent to using DOM Level 2 Range#extractContents
+            const splitOpen = domSplit(ancestor, openNode, openPos, true);
+            [ closeNode, closePos ] = domOffsetNode(closeNode, closePos, root); // Update based on open split
+            const splitClose = domSplit(ancestor, closeNode, closePos);
+            const middle = splitOpen.right.filter(node => splitClose.left.includes(node));
+
+            // No-op if no middle
+            if (!middle.length) return;
+
+            // If the middle is the whole of the parent, use the parent
+            while (ancestor !== root
+            && middle[0].parentNode === middle[middle.length - 1].parentNode
+            && domPreviousSiblingsEmpty(middle[0])
+            && domNextSiblingsEmpty(middle[middle.length - 1])) {
+                const parent = middle[0].parentNode;
+                while (middle.length) middle.pop();
+                middle.push(parent);
+                ancestor = ancestor.parentNode;
+            }
+
+            // Wrap the middle
+            const wrap = document.createElement(node.name);
+            Object.entries(node.attributes).forEach(([ key, value ]) => wrap.setAttribute(key, value));
+            ancestor.insertBefore(wrap, middle[0]);
+            middle.forEach(middleNode => wrap.appendChild(middleNode));
+        });
+
+        // Clean out any empty elements from splitting
+        domRemoveEmpty(root);
+
+        // Done
+        return root.innerHTML;
+    };
+
+    // Wrap highlight directly because Prism doesn't expose a hook for after highlight completes
+    const highlight = original => (html, grammar, language) => {
+        // Extract the plain-text and HTML nodes inside the code block
+        const { text, nodes } = extractTextAndNodes(html);
+
+        // Highlight the plain-text code with Prism
+        const highlighted = original(text, grammar, language);
+
+        // Re-insert the extracted HTML
+        return parseAndInsertNodes(highlighted, nodes);
+    };
+    Prism.highlight = highlight(Prism.highlight);
+
+    Prism.hooks.add('before-sanity-check', env => {
+        // Disable the standard keep-markup plugin
+        env.element.classList.add('no-keep-markup');
+
+        // Use the innerHTML instead of textContent
+        env.code = env.element.innerHTML;
+    });
+
+    Prism.hooks.add('before-insert', env => {
+        // Remove the no-keep-markup class
+        env.element.classList.remove('no-keep-markup');
+    });
+};

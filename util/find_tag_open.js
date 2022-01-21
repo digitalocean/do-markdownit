@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (tag, html) => {
   // Find the start of the tag
   const start = html.indexOf(`<${tag}`);

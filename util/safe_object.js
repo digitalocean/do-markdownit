@@ -1,3 +1,5 @@
+'use strict';
+
 const isObject = obj => obj && typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]';
 
 const clone = original => Object.entries(original).reduce((target, [ key, value ]) => ({

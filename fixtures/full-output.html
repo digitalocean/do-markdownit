@@ -122,53 +122,63 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <p>This is <code>inline code</code>. This is a <mark>variable</mark>. This is an <code>in-line code <mark>variable</mark></code>.</p>
 <p>Here’s a configuration file with a label:</p>
 <div class="code-label" title="/etc/nginx/sites-available/default">/etc/nginx/sites-available/default</div>
-<pre class="language-nginx drop-tokens"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+<pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span> <mark>default_server</mark></span><span class="token punctuation">;</span>
     . . .
 <span class="token punctuation">}</span>
 </code></pre>
 <p>Examples can have line numbers, and every code block has a ‘Copy’ button to copy just the code:</p>
-<pre class="prefixed line_numbers language-javascript drop-tokens"><code><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span></li>
-<li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span></li>
-<li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span></li></ol>
+<pre class="prefixed line_numbers language-javascript"><code><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+</li><li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span>
+</li><li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</li></ol>
 </code></pre>
 <p>Here’s output from a command with a secondary label:</p>
 <pre><code><div class="secondary-code-label" title="Output">Output</div>Could not connect to Redis at 127.0.0.1:6379: Connection refused
 </code></pre>
 <p>This is a non-root user command example:</p>
-<pre class="prefixed command language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> update</li>
-<li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3</li></ol>
+<pre class="prefixed command language-bash"><code><ol><li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+</li><li data-prefix="$"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3
+</li></ol>
 </code></pre>
 <p>This is a root command example:</p>
-<pre class="prefixed super_user language-bash drop-tokens"><code><ol><li data-prefix="#">adduser sammy</li>
-<li data-prefix="#"><span class="token function">shutdown</span></li></ol>
+<pre class="prefixed super_user language-bash"><code><ol><li data-prefix="#">adduser sammy
+</li><li data-prefix="#"><span class="token function">shutdown</span>
+</li></ol>
 </code></pre>
 <p>This is a custom prefix command example:</p>
-<pre class="prefixed custom_prefix language-bash drop-tokens"><code><ol><li data-prefix="mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span></li>
-<li data-prefix="mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span></li></ol>
+<pre class="prefixed custom_prefix language-bash"><code><ol><li data-prefix="mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span>
+</li><li data-prefix="mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span>
+</li></ol>
 </code></pre>
 <p>Indicate where commands are being run with environments:</p>
-<pre class="prefixed command environment-local language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token function">ssh</span> root@server_ip</li></ol>
+<pre class="prefixed command environment-local language-bash"><code><ol><li data-prefix="$"><span class="token function">ssh</span> root@server_ip
+</li></ol>
 </code></pre>
-<pre class="prefixed command environment-second language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Secondary server&quot;</span></li></ol>
+<pre class="prefixed command environment-second language-bash"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">"Secondary server"</span>
+</li></ol>
 </code></pre>
-<pre class="prefixed command environment-third language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Tertiary server&quot;</span></li></ol>
+<pre class="prefixed command environment-third language-bash"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">"Tertiary server"</span>
+</li></ol>
 </code></pre>
-<pre class="prefixed command environment-fourth language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quaternary server&quot;</span></li></ol>
+<pre class="prefixed command environment-fourth language-bash"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">"Quaternary server"</span>
+</li></ol>
 </code></pre>
-<pre class="prefixed command environment-fifth language-bash drop-tokens"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quinary server&quot;</span></li></ol>
+<pre class="prefixed command environment-fifth language-bash"><code><ol><li data-prefix="$"><span class="token builtin class-name">echo</span> <span class="token string">"Quinary server"</span>
+</li></ol>
 </code></pre>
 <p>And all of these can be combined together, with a language for syntax highlighting as well as a line prefix (line numbers, command, custom prefix, etc.), and even an environment and label:</p>
 <div class="code-label" title="index.html">index.html</div>
-<pre class="prefixed line_numbers environment-second language-markup drop-tokens"><code><ol><li data-prefix="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="2"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="3"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="4">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span><mark>My Title</mark><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="5"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="6"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="7">  . . .</li>
-<li data-prefix="8"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span></li>
-<li data-prefix="9"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></li></ol>
+<pre class="prefixed line_numbers environment-second language-markup"><code><ol><li data-prefix="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="2"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="3"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="4">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span><mark>My Title</mark><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="5"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="6"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="7">  . . .
+</li><li data-prefix="8"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</li><li data-prefix="9"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</li></ol>
 </code></pre>
 <h2 id="step-3-callouts">Step 3 — Callouts</h2>
 <p>Here is a note, a warning, some info and a draft note:</p>

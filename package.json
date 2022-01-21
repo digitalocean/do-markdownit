@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "htmlparser2": "^7.2.0",
-    "prismjs": "^1.26.0"
+    "prismjs": "^1.26.0",
+    "slimdom": "^3.0.1"
   }
 }

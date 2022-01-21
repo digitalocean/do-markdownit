@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (attr, tag) => {
   // Find where attrs start and end
   let start = tag.indexOf(' ');
