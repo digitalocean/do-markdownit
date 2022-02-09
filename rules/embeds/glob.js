@@ -1,6 +1,6 @@
 'use strict';
 
-const safeObject = require('../util/safe_object');
+const safeObject = require('../../util/safe_object');
 
 module.exports = md => {
   md.block.ruler.before('paragraph', 'glob', (state, startLine, endLine, silent) => {

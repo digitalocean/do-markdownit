@@ -28,7 +28,7 @@ it('does not pollute global scope', () => {
 describe('HTML preservation', () => {
   // This does pollute the tests, no longer isolated, but is needed to inject HTML into the code blocks
   const mdHtml = require('markdown-it')()
-      .use(require('./highlight'))
+      .use(require('../rules/highlight'))
       .use(require('./fence_label'))
       .use(require('./prismjs'));
 

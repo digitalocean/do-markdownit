@@ -5,6 +5,9 @@ module.exports = md => {
     // If silent, don't replace
     if (silent) return false;
 
+    // Check we have space for opening and closing tags
+    if (state.pos + 6 > state.posMax) return false;
+
     // Check we're on an opening marker
     if (state.src.slice(state.pos, state.pos + 3) !== '<^>') return false;
 

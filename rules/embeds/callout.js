@@ -1,6 +1,6 @@
 'use strict';
 
-const safeObject = require('../util/safe_object');
+const safeObject = require('../../util/safe_object');
 
 module.exports = (md, options) => {
   // Get the correct options
