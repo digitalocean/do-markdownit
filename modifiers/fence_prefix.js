@@ -37,7 +37,7 @@ const getPrefix = (token, deliminator) => {
   const custom = [...flags].find(flag => flag.match(/^custom_prefix\((.+)\)$/));
   if (custom) {
     update([ 'prefixed', 'custom_prefix' ], [ custom ], [ 'bash' ]);
-    return () => custom.slice(14, -1);
+    return () => custom.slice(14, -1).replace(/\\s/g, ' ');
   }
 
   return null;

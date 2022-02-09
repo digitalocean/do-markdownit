@@ -32,6 +32,14 @@ it('handles custom prefixes', () => {
 `);
 });
 
+it('handles custom prefixes with escaped spaces', () => {
+    expect(md.render('```custom_prefix(hello\\sworld)\nhello\nworld\n```')).toBe(`<pre><code class="prefixed custom_prefix language-bash"><ol><li data-prefix="hello world">hello
+</li><li data-prefix="hello world">world
+</li></ol>
+</code></pre>
+`);
+});
+
 it('handles the line numbers prefix combined with other classes', () => {
     expect(md.render('```js,line_numbers,test\nhello\nworld\n```')).toBe(`<pre><code class="prefixed line_numbers language-js,test"><ol><li data-prefix="1">hello
 </li><li data-prefix="2">world

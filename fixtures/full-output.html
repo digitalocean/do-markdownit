@@ -150,6 +150,11 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 </li><li data-prefix="mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span>
 </li></ol>
 </code></pre>
+<p>A custom prefix can contain a space by using <code>\s</code>:</p>
+<pre class="prefixed custom_prefix language-bash"><code><ol><li data-prefix="(my-server) mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span>
+</li><li data-prefix="(my-server) mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span>
+</li></ol>
+</code></pre>
 <p>Indicate where commands are being run with environments:</p>
 <pre class="prefixed command environment-local language-bash"><code><ol><li data-prefix="$"><span class="token function">ssh</span> root@server_ip
 </li></ol>

@@ -108,6 +108,13 @@ FLUSH PRIVILEGES;
 SELECT * FROM articles;
 ```
 
+A custom prefix can contain a space by using `\s`:
+
+```custom_prefix((my-server)\smysql>)
+FLUSH PRIVILEGES;
+SELECT * FROM articles;
+```
+
 Indicate where commands are being run with environments:
 
 ```command
