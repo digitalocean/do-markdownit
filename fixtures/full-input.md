@@ -172,6 +172,14 @@ Here is a note, a warning, some info and a draft note:
 **Draft:** Use this for notes in a draft publication.
 <$>
 
+A callout can also be given a label, which supports inline markdown as well:
+
+<$>[note]
+[label Labels support _inline_ **markdown**]
+**Note:** Use this for notes on a publication.
+<$>
+
+
 You can also mention users by username:
 
 @MattIPv4

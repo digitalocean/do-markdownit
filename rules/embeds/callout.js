@@ -26,7 +26,7 @@ module.exports = (md, options) => {
     if (closingMark === -1) return false;
 
     // Check for callout match
-    const match = currentLines.slice(0, closingMark + 4).match(/^<\$>\[([^\]\n]+)\]([\s\S]+?)\n?<\$>(?:$|\n)/);
+    const match = currentLines.slice(0, closingMark + 4).match(/^<\$>\[([^\[\]\n]+)]([\s\S]+?)\n?<\$>(?:$|\n)/);
     if (!match) return false;
 
     // Get the class name
@@ -50,15 +50,41 @@ module.exports = (md, options) => {
     tokenOpen.callout = { className };
     tokenOpen.map = [ startLine, state.line ];
 
-    // Get the content within
-    state.bMarks[startLine] = state.bMarks[startLine] + `<$>[${match[1]}]`.length;
-    state.eMarks[state.line - 1] = state.eMarks[state.line - 1] - '<$>'.length;
+    // Update the boundaries based on the markup
+    state.bMarks[startLine] += `<$>[${match[1]}]`.length;
+    state.eMarks[state.line - 1] -= '<$>'.length;
+
+    // Check for a label
+    const labelMatch = match[2].match(/^\n\[label ([^\n]+)](?:$|\n)/);
+    if (labelMatch) {
+      // Add opening token to state
+      const labelOpenToken = state.push('callout_label_open', 'p', 1);
+      labelOpenToken.block = true;
+      labelOpenToken.markup = `[label `;
+      labelOpenToken.map = [ startLine + 1, startLine + 2 ];
+
+      // Create an inline token for the content
+      const labelToken = state.push('inline', '', 0);
+      labelToken.content = labelMatch[1];
+      labelToken.map = [ startLine + 1, startLine + 2 ];
+      labelToken.children = [];
+
+      // Add closing token to state
+      const labelCloseToken = state.push('callout_label_close', 'p', -1);
+      labelCloseToken.block = true;
+      labelCloseToken.markup = ']';
+
+      // Change the start line
+      startLine += 2;
+    }
+
+    // Add content to state
     state.md.block.tokenize(state, startLine, state.line);
 
     // Add closing token to state
     const tokenClose = state.push('callout_close', 'div', -1);
     tokenClose.block = true;
-    tokenClose.markup = `<$>`;
+    tokenClose.markup = '<$>';
 
     // Reset parent type
     state.parentType = oldParentType;
@@ -77,5 +103,13 @@ module.exports = (md, options) => {
 
   md.renderer.rules.callout_close = () => {
     return '</div>\n';
+  };
+
+  md.renderer.rules.callout_label_open = () => {
+    return `<p class="${md.utils.escapeHtml(options.labelClass || 'callout-label')}">`;
+  };
+
+  md.renderer.rules.callout_label_close = () => {
+    return '</p>\n';
   };
 };

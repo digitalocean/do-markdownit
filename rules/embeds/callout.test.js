@@ -45,6 +45,29 @@ it('handles callout embeds with mixed linebreaks and markdown', () => {
 `);
 });
 
+it('handles callout embeds with a label', () => {
+  expect(md.render('<$>[info]\n[label hello]\n<$>')).toBe(`<div class="info">
+<p class="callout-label">hello</p>
+</div>
+`);
+});
+
+it('handles callout embeds with a label and content', () => {
+  expect(md.render('<$>[info]\n[label hello]\nworld\n<$>')).toBe(`<div class="info">
+<p class="callout-label">hello</p>
+<p>world</p>
+</div>
+`);
+});
+
+it('handles callout embeds with a label using markdown', () => {
+  expect(md.render('<$>[info]\n[label **hello**]\nworld\n<$>')).toBe(`<div class="info">
+<p class="callout-label"><strong>hello</strong></p>
+<p>world</p>
+</div>
+`);
+});
+
 const mdAllowed = require('markdown-it')().use(require('./callout'), { allowedClasses: [ 'test' ] });
 
 it('handles callout embeds with an allowed class name', () => {
