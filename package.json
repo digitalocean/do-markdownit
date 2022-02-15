@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "postinstall": "script/prism.sh"
+    "postinstall": "node script/prism.js"
   },
   "author": "DigitalOcean",
   "license": "Apache-2.0",

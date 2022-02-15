@@ -4,23 +4,56 @@ const path = require('path');
 const getFilesInDir = dir => fs.readdirSync(dir, { withFileTypes: true })
   .flatMap(file => (file.isDirectory() ? getFilesInDir(path.join(dir, file.name)) : path.join(dir, file.name)));
 
-const base = path.join(process.cwd(), 'vendor', 'prismjs');
+const copyRecursively = (src, dest) => {
+  const exists = fs.existsSync(src);
+  if (!exists) throw new Error(`${src} does not exist`);
+
+  if (fs.lstatSync(src).isDirectory()) {
+    if (!fs.existsSync(dest)) fs.mkdirSync(dest);
+    for (const child of fs.readdirSync(src)) copyRecursively(path.join(src, child), path.join(dest, child));
+  } else {
+    fs.copyFileSync(src, dest);
+  }
+};
+
+const base = path.join(__dirname, '..', 'vendor', 'prismjs');
+
+console.info('Patching Prism to avoid window + global pollution...');
+
+// Clean out the directory, and create it
+if (fs.existsSync(base)) fs.rmSync(base, { recursive: true });
+fs.mkdirSync(base, { recursive: true });
+
+// Copy Prism over
+copyRecursively(path.join(__dirname, '..', 'node_modules', 'prismjs'), base);
 
 // Patch the core to not use `window` or `global`
-let core = fs.readFileSync(path.join(base, 'prism.js'), 'utf8');
-core = core.replace(/\nvar _self = [^;]+;\n/, '\nvar _self = {};\n');
-core = core.replace(/\/\/\/ <reference lib="WebWorker"\/>\n+/, '');
-core = core.replace(/global\.Prism = Prism;/, '// global.Prism = Prism;');
-fs.writeFileSync(path.join(base, 'prism.js'), core);
+const core = path.join(base, 'prism.js');
+fs.writeFileSync(
+  core,
+  fs.readFileSync(core, 'utf8')
+    .replace(/\nvar _self = [^;]+;\n/, '\nvar _self = {};\n') // Always use an object, not window or global
+    .replace('global.Prism = Prism;', '// global.Prism = Prism;'), // Don't bind to global
+);
 
-// Remove the auto-loader
-fs.unlinkSync(path.join(base, 'components', 'index.js'));
+// Patch the autoloader to not rely on global Prism
+const autoloader = path.join(base, 'components', 'index.js');
+fs.writeFileSync(
+  autoloader,
+  fs.readFileSync(autoloader, 'utf8')
+    .replace(/((\n[ \t*]*)@param {string\|string\[]} \[languages])/, '$2@param {Prism} Prism$1') // Update jsdoc to include Prism
+    .replace(/loadLanguages\((.+?)\)/g, 'loadLanguages(Prism, $1)') // Accept Prism as a parameter
+    .replace('require(pathToLanguage)', 'require(pathToLanguage)(Prism)'), // Pass Prism when loading a language
+);
 
-// Patch all the components + plugins to export functions
-const components = getFilesInDir(path.join(base, 'components')).filter(f => f.endsWith('.js'));
+// Define the templates
+const template = source => `const component = Prism => {\n\t${source.replace(/\n/g, '\n\t')}\n};\n\nif (typeof module !== \'undefined\' && module.exports) {\n\tmodule.exports = component;\n} else {\n\tcomponent(Prism);\n}\n`;
+const templateMin = source => `const component=Prism=>{${source}};typeof module!=\'undefined\'&&module.exports?module.exports=component:component(Prism);\n`;
+
+// Patch all the components (except autoloader) + plugins to export functions
+const components = getFilesInDir(path.join(base, 'components')).filter(f => f !== autoloader && f.endsWith('.js'));
 const plugins = getFilesInDir(path.join(base, 'plugins')).filter(f => f.endsWith('.js'));
-for (const file of components.concat(plugins)) {
-  let source = fs.readFileSync(file, 'utf8');
-  source = `module.exports = Prism => {\n\t${source.trim().replace(/\n/g, '\n\t')}\n};\n`;
-  fs.writeFileSync(file, source);
-}
+for (const file of components.concat(plugins))
+  fs.writeFileSync(file, (file.endsWith('.min.js') ? templateMin : template)(fs.readFileSync(file, 'utf8').trim()));
+
+console.info('Prism patched successfully!');
