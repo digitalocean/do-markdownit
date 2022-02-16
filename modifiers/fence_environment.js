@@ -2,10 +2,40 @@
 
 const safeObject = require('../util/safe_object');
 
+/**
+ * @typedef {Object} FenceEnvironmentOptions
+ * @property {string[]} [allowedEnvironments] List of case-sensitive environments that are allowed. If not array, all environments are allowed.
+ * @property {string} [extraClasses=''] String of extra classes to set when an environment is used.
+ */
+
+/**
+ * Add support for environment markup at the start of a fence, translating to a class.
+ *
+ * Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
+ *
+ * @example
+ * ```
+ * [environment test]
+ * hello
+ * world
+ * ```
+ *
+ * <pre><code class="environment-test">hello
+ * world
+ * </code></pre>
+ *
+ * @type {import('markdown-it').PluginWithOptions<FenceEnvironmentOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
+  /**
+   * Wrap the fence render function to detect environment markup and replace it with the correct class.
+   *
+   * @param {import('markdown-it/lib/renderer').RenderRule} original
+   * @return {import('markdown-it/lib/renderer').RenderRule}
+   */
   const render = original => (tokens, idx, opts, env, self) => {
     // Get the token
     const token = tokens[idx];

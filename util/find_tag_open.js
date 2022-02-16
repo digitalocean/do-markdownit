@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Find the opening tag for a given tag name.
+ *
+ * @param {string} tag Name of the tag to find.
+ * @param {string} html HTML snippet to search within.
+ * @return {?{start: number, end: number}}
+ */
 module.exports = (tag, html) => {
   // Find the start of the tag
   const start = html.indexOf(`<${tag}`);

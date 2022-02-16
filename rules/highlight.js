@@ -1,7 +1,38 @@
 'use strict';
 
+/**
+ * Add support for highlight markup across all Markdown, including inside code.
+ *
+ * The syntax for highlighting text is `<^>`. E.g. `<^>hello world<^>`.
+ * This syntax is treated as regular inline syntax, similar to bold or italics.
+ * However, when used within code the opening and closing tags must be on the same line.
+ *
+ * @example
+ * <^>test<^>
+ *
+ * <mark>test</mark>
+ *
+ * @example
+ * ```
+ * hello
+ * world
+ * <^>test<^>
+ * ```
+ *
+ * <pre><code>hello
+ * world
+ * <mark>test</mark>
+ * </code></pre>
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
-  md.inline.ruler.before('emphasis', 'highlight', (state, silent) => {
+  /**
+   * Parsing rule for highlight markup.
+   *
+   * @type {import('markdown-it/lib/parser_inline').RuleInline}
+   */
+  const highlightRule = (state, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -35,8 +66,16 @@ module.exports = md => {
 
     // Done
     return true;
-  });
+  };
 
+  md.inline.ruler.before('emphasis', 'highlight', highlightRule);
+
+  /**
+   * Wrap the code render functions to detect highlight markup and replace it with the correct HTML.
+   *
+   * @param {import('markdown-it/lib/renderer').RenderRule} original
+   * @return {import('markdown-it/lib/renderer').RenderRule}
+   */
   const code = original => (tokens, idx, options, env, self) => {
     // Run the original renderer
     return original(tokens, idx, options, env, self)

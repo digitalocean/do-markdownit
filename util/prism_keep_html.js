@@ -12,11 +12,35 @@ const {
     domRemoveEmpty,
 } = require('./dom_utils');
 
-module.exports = Prism => {
+/**
+ * Prism plugin to preserve existing HTML within the code. Supports non-browser environments.
+ *
+ * @param {import('prismjs')} Prism
+ */
+const plugin = Prism => {
     if (typeof Prism === 'undefined' || Prism.plugins.KeepHTML) return;
 
     Prism.plugins.KeepHTML = true;
 
+    /**
+     * @typedef {Object} ExtractedNode
+     * @property {string} name
+     * @property {Object} attributes
+     * @property {number} open
+     * @property {number} close
+     * @property {number} depth
+     * @property {Node} [openNode]
+     * @property {number} [openPos]
+     * @property {Node} [closeNode]
+     * @property {number} [closePos]
+     */
+
+    /**
+     * Extract plain-text and HTML nodes from a given HTML snippet.
+     *
+     * @param {string} html
+     * @return {{nodes: ExtractedNode[], text: string}}
+     */
     const extractTextAndNodes = html => {
         // Track the plain-text and all the HTML nodes we find
         let text = '';
@@ -68,6 +92,13 @@ module.exports = Prism => {
         };
     };
 
+    /**
+     * Parse a given HTML snippet into a DOM tree and inject extracted nodes back in.
+     *
+     * @param {string} html
+     * @param {ExtractedNode[]} nodes
+     * @return {string}
+     */
     const parseAndInsertNodes = (html, nodes) => {
         // Create an empty DOM
         const document = new slimdom.Document();
@@ -155,7 +186,12 @@ module.exports = Prism => {
         return root.innerHTML;
     };
 
-    // Wrap highlight directly because Prism doesn't expose a hook for after highlight completes
+    /**
+     * Wrap highlight directly because Prism doesn't expose a hook for after highlight completes
+     *
+     * @param {function(string, import('prismjs').Grammar, string): string} original
+     * @return {function(string, import('prismjs').Grammar, string): string}
+     */
     const highlight = original => (html, grammar, language) => {
         // Extract the plain-text and HTML nodes inside the code block
         const { text, nodes } = extractTextAndNodes(html);
@@ -168,16 +204,34 @@ module.exports = Prism => {
     };
     Prism.highlight = highlight(Prism.highlight);
 
-    Prism.hooks.add('before-sanity-check', env => {
+    /**
+     * Before Prism begins highlighting, disable the default HTML preservation and use raw HTML for the code.
+     *
+     * @param {Object} env
+     */
+    const beforeSanityHook = env => {
         // Disable the standard keep-markup plugin
         env.element.classList.add('no-keep-markup');
 
         // Use the innerHTML instead of textContent
         env.code = env.element.innerHTML;
-    });
+    };
+    Prism.hooks.add('before-sanity-check', beforeSanityHook);
 
-    Prism.hooks.add('before-insert', env => {
+    /**
+     * After Prism has finished highlighting, remove the class used to disable the default HTML preservation.
+     *
+     * @param {Object} env
+     */
+    const beforeInsertHook = env => {
         // Remove the no-keep-markup class
         env.element.classList.remove('no-keep-markup');
-    });
+    };
+    Prism.hooks.add('before-insert', beforeInsertHook);
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = plugin;
+} else {
+    plugin(Prism);
+}

@@ -2,11 +2,56 @@
 
 const safeObject = require('../../util/safe_object');
 
+/**
+ * @typedef {Object} CalloutOptions
+ * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not array, all classes are allowed.
+ * @property {string[]} [extraClasses=[]] List of extra classes to apply to a callout div, alongside the given class.
+ * @property {string} [labelClass='callout-label'] Class to use for the label.
+ */
+
+/**
+ * Add support for callout embeds in Markdown, as block syntax.
+ *
+ * The basic syntax is `<$>[<class>]<text><$>`. E.g. `<$>[hello]world<$>`.
+ * The class must be in square brackets, and must come immediately after the opening `<$>`.
+ * Newlines are allowed in the text, as is any other Markdown syntax (both block and inline).
+ *
+ * Callouts can also have a label set within them. The label should be in the format `[label <text>]`.
+ * The label must be on the first newline after the opening `<$>`.
+ * The label cannot contain any newlines, but does support inline Markdown syntax.
+ *
+ * @example
+ * <$>[info]
+ * test
+ * <$>
+ *
+ * <div class="info">
+ * <p>test</p>
+ * </div>
+ *
+ * @example
+ * <$>[info]
+ * [label hello]
+ * world
+ * <$>
+ *
+ * <div class="info">
+ * <p class="callout-label">hello</p>
+ * <p>world</p>
+ * </div>
+ *
+ * @type {import('markdown-it').PluginWithOptions<CalloutOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
-  md.block.ruler.before('paragraph', 'callout', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for callout markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const calloutRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -91,8 +136,15 @@ module.exports = (md, options) => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'callout', calloutRule);
+
+  /**
+   * Rendering rule for the start of a callout.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.callout_open = (tokens, index) => {
     const token = tokens[index];
     const classes = options.extraClasses
@@ -101,14 +153,29 @@ module.exports = (md, options) => {
     return `<div class="${md.utils.escapeHtml(classes)}">\n`;
   };
 
+  /**
+   * Rendering rule for the end of a callout.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.callout_close = () => {
     return '</div>\n';
   };
 
+  /**
+   * Rendering rule for the start of a callout label inside a callout.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.callout_label_open = () => {
     return `<p class="${md.utils.escapeHtml(options.labelClass || 'callout-label')}">`;
   };
 
+  /**
+   * Rendering rule for the end of a callout label inside a callout.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.callout_label_close = () => {
     return '</p>\n';
   };

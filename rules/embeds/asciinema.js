@@ -1,7 +1,29 @@
 'use strict';
 
+/**
+ * Add support for [Asciinema](http://asciinema.org/) embeds in Markdown, as block syntax.
+ *
+ * The basic syntax is `[asciinema <id>]`. E.g. `[asciinema 325730]`.
+ * The cols and rows can optionally be set using `[asciinema <id> [cols] [rows]]`. E.g. `[asciinema 325730 100 50]`.
+ * The default value for cols is 80, and for rows is 24.
+ *
+ * @example
+ * [asciinema 325730]
+ *
+ * <script src="https://asciinema.org/a/325730.js" id="asciicast-325730" async data-cols="80" data-rows="24"></script>
+ * <noscript>
+ *     <a href="https://asciinema.org/a/325730" target="_blank">View asciinema recording</a>
+ * </noscript>
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
-  md.block.ruler.before('paragraph', 'asciinema', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for asciinema markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const asciinemaRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -40,8 +62,15 @@ module.exports = md => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'asciinema', asciinemaRule);
+
+  /**
+   * Rendering rule for asciinema markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.asciinema = (tokens, index) => {
     const token = tokens[index];
 

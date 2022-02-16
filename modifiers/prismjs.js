@@ -7,6 +7,11 @@ const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 const findAttr = require('../util/find_attr');
 
+/**
+ * @typedef {Object} PrismJsOptions
+ * @property {string} [delimiter=','] String to split fence information on.
+ */
+
 // Get languages that Prism supports
 const languages = new Set(Object.keys(components.languages).filter(lang => lang !== 'meta'));
 const languageAliases = Object.entries(components.languages).reduce((aliases, [ lang, { alias } ]) => {
@@ -23,6 +28,13 @@ const loadLanguage = language => {
 // Load our HTML plugin
 require('../util/prism_keep_html')(Prism);
 
+/**
+ * Extract a code block (content inside a `<code>` tag in a `<pre>` element), applying a given language class.
+ *
+ * @param {string} html
+ * @param {{original: string, clean: string}} language
+ * @return {{before: string, after: string, inside: string}}
+ */
 const extractCodeBlock = (html, language) => {
   // Find the pre tag
   const pre = findTagOpen('pre', html);
@@ -72,10 +84,36 @@ const extractCodeBlock = (html, language) => {
   };
 };
 
+/**
+ * Apply PrismJS syntax highlighting to fenced code blocks, based on the language set in the fence info.
+ *
+ * This loads a custom PrismJS plugin to ensure that any existing HTML markup inside the code block is preserved.
+ * This plugin is similar to the default `keep-markup` plugin, but works in a non-browser environment.
+ *
+ * @example
+ * ```nginx
+ * server {
+ *     try_files test =404;
+ * }
+ * ```
+ *
+ * <pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+ *     <span class="token directive"><span class="token keyword">try_files</span> test =404</span><span class="token punctuation">;</span>
+ * <span class="token punctuation">}</span>
+ * </code></pre>
+ *
+ * @type {import('markdown-it').PluginWithOptions<PrismJsOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
+  /**
+   * Wrap the fence render function to detect a language and highlight the code using PrismJS.
+   *
+   * @param {import('markdown-it/lib/renderer').RenderRule} original
+   * @return {import('markdown-it/lib/renderer').RenderRule}
+   */
   const render = original => (tokens, idx, opts, env, self) => {
     // Get the token
     const token = tokens[idx];
@@ -85,7 +123,7 @@ module.exports = (md, options) => {
 
     try {
       // Find language from token info
-      const tokenInfo = (token.info || '').split(options.deliminator || ',');
+      const tokenInfo = (token.info || '').split(options.delimiter || ',');
       const language = tokenInfo.map(info => {
         const clean = info.toLowerCase().trim();
         return { clean: languageAliases[clean] || clean, original: info };

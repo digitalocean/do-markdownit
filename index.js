@@ -3,28 +3,32 @@
 const safeObject = require('./util/safe_object');
 
 /**
- * Inject all parts of the DigitalOcean community MarkdownIt plugin
- * @param {MarkdownIt} md - The MarkdownIt instance
- * @param {Object} options - The options for the DigitalOcean community plugin parts
- * @param {boolean|Object} [options.highlight={}] - Disable highlight syntax, or set options for the feature
- * @param {boolean|Object} [options.user_mention={}] - Disable user mentions, or set options for the feature
- * @param {boolean|Object} [options.html_comment={}] - Disable HTML comment stripping, or set options for the feature
- * @param {boolean|Object} [options.callout={}] - Disable callout block syntax, or set options for the feature
- * @param {boolean|Object} [options.rsvp_button={}] - Disable RSVP buttons, or set options for the feature
- * @param {boolean|Object} [options.glob={}] - Disable glob tool embeds, or set options for the feature
- * @param {boolean|Object} [options.dns={}] - Disable DNS tool embeds, or set options for the feature
- * @param {boolean|Object} [options.asciinema={}] - Disable Asciinema recording embeds, or set options for the feature
- * @param {boolean|Object} [options.codepen={}] - Disable CodePen editor embeds, or set options for the feature
- * @param {boolean|Object} [options.youtube={}] - Disable YouTube video embeds, or set options for the feature
- * @param {boolean|Object} [options.terminal={}] - Disable Lyceum terminal embeds, or set options for the feature
- * @param {boolean|Object} [options.fence_label={}] - Disable fence labels, or set options for the feature
- * @param {boolean|Object} [options.fence_secondary_label={}] - Disable fence secondary labels, or set options for the feature
- * @param {boolean|Object} [options.fence_environment={}] - Disable fence environments, or set options for the feature
- * @param {boolean|Object} [options.fence_prefix={}] - Disable fence prefixes, or set options for the feature
- * @param {boolean|Object} [options.fence_pre_attrs={}] - Disable fence pre attributes, or set options for the feature
- * @param {boolean|Object} [options.fence_classes={}] - Disable fence class filtering, or set options for the feature
- * @param {boolean|Object} [options.heading_id={}] - Disable Ids on headings, or set options for the feature
- * @param {boolean|Object} [options.prismjs={}] - Disable Prism highlighting, or set options for the feature
+ * @typedef {Object} DoMarkdownItOptions
+ * @property {false} [highlight] Disable highlight syntax.
+ * @property {false|import('./rules/user_mention').UserMentionOptions} [user_mention] Disable user mentions, or set options for the feature.
+ * @property {false|import('./rules/html_comment').HtmlCommentOptions} [html_comment] Disable HTML comment stripping, or set options for the feature.
+ * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
+ * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
+ * @property {false} [glob] Disable glob embeds.
+ * @property {false} [dns] Disable DNS lookup embeds.
+ * @property {false} [asciinema] Disable Asciinema embeds.
+ * @property {false} [codepen] Disable Codepen embeds.
+ * @property {false} [youtube] Disable YouTube embeds.
+ * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
+ * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
+ * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
+ * @property {false|import('./modifiers/fence_environment').FenceEnvironmentOptions} [fence_environment] Disable fence environments, or set options for the feature.
+ * @property {false|import('./modifiers/fence_prefix').FencePrefixOptions} [fence_prefix] Disable fence prefixes, or set options for the feature.
+ * @property {false} [fence_pre_attrs] Disable fence pre attributes, or set options for the feature.
+ * @property {false|import('./modifiers/fence_classes').FenceClassesOptions} [fence_classes] Disable fence class filtering, or set options for the feature.
+ * @property {false|import('./modifiers/heading_id').HeadingIdOptions} [heading_id] Disable Ids on headings, or set options for the feature.
+ * @property {false|import('./modifiers/prismjs').PrismJsOptions} [prismjs] Disable Prism highlighting, or set options for the feature.
+ */
+
+/**
+ * Inject all parts of the DigitalOcean community MarkdownIt plugin.
+ *
+ * @type {import('markdown-it').PluginWithOptions<DoMarkdownItOptions>}
 */
 module.exports = (md, options) => {
   // Get the correct options
@@ -64,8 +68,8 @@ module.exports = (md, options) => {
   if (options.youtube !== false)
     md.use(require('./rules/embeds/youtube'), safeObject(options.youtube));
 
-  if (options.terminal !== false)
-    md.use(require('./rules/embeds/terminal'), safeObject(options.terminal));
+  if (options.terminal_button !== false)
+    md.use(require('./rules/embeds/terminal_button'), safeObject(options.terminal_button));
 
   // Register modifiers
 

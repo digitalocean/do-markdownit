@@ -2,7 +2,18 @@
 
 const findTagOpen = require('../util/find_tag_open');
 
+/**
+ * Move all attributes from the opening `code` tag of a fenced code block to the `pre` tag.
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
+  /**
+   * Wrap the fence render function to move attributes from `code` to `pre`.
+   *
+   * @param {import('markdown-it/lib/renderer').RenderRule} original
+   * @return {import('markdown-it/lib/renderer').RenderRule}
+   */
   const render = original => (tokens, idx, opts, env, self) => {
     // Get the rendered content
     const content = original(tokens, idx, opts, env, self);

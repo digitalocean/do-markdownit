@@ -1,10 +1,23 @@
 'use strict';
 
+/**
+ * Remove all nodes that have no text content recursively, including the given node.
+ *
+ * @param {Node} node
+ */
 const domRemoveEmpty = node => {
     for (const child of [ ...node.childNodes ]) domRemoveEmpty(child);
     if (node.textContent === '') node.parentNode.removeChild(node);
 };
 
+/**
+ * Find the next sibling leaf node after a given node.
+ * Explores up the tree as far as the given root to find the next leaf.
+ *
+ * @param {Node} node
+ * @param {Node} root
+ * @return {?Node}
+ */
 const domNextSiblingLeaf = (node, root) => {
     // If no direct sibling, backtrack to find the next sibling
     while (!node.nextSibling) {
@@ -20,6 +33,16 @@ const domNextSiblingLeaf = (node, root) => {
     return node;
 };
 
+/**
+ * Find the correct node for a text offset from an existing node.
+ * Will explore sibling leaf nodes up the tree as far as the given root.
+ *
+ * @param {Node} node
+ * @param {number} offset
+ * @param {Node} root
+ * @param {boolean} [nextOnExact=false] Move to the next node if the offset is exactly the length of the current node.
+ * @return {[Node,number]} The node the remaining offset is within.
+ */
 const domOffsetNode = (node, offset, root, nextOnExact = false) => {
     // TODO: Support negative offset with domPreviousSiblingLeaf
     if (offset < 0) throw new Error('Negative offset unsupported');
@@ -45,6 +68,15 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
     return [ node, offset ];
 };
 
+/**
+ * Split a node at a given offset up to a given root.
+ *
+ * @param {Node} root
+ * @param {Node} node
+ * @param {?number} [offset=null]
+ * @param {boolean} [nodeInRight=false] If the node to split on should be in the right tree of the split.
+ * @return {{left: Node[], right: Node[]}}
+ */
 const domSplit = (root, node, offset = null, nodeInRight = false) => {
     if (!root.contains(node)) throw new Error('Node is not a child of root');
 
@@ -107,6 +139,13 @@ const domSplit = (root, node, offset = null, nodeInRight = false) => {
     }, { left: [], right: [] });
 };
 
+/**
+ * Find a common ancestor of two nodes.
+ *
+ * @param {Node} node1
+ * @param {Node} node2
+ * @return {?Node}
+ */
 const domCommonAncestor = (node1, node2) => {
     let parent = node1.parentNode;
     while (parent) {
@@ -116,6 +155,12 @@ const domCommonAncestor = (node1, node2) => {
     return null;
 };
 
+/**
+ * Check if all direct next siblings of a node have no text content.
+ *
+ * @param {Node} node
+ * @return {boolean}
+ */
 const domNextSiblingsEmpty = node => {
     while (node.nextSibling) {
         if (node.nextSibling.textContent !== '') return false;
@@ -124,6 +169,12 @@ const domNextSiblingsEmpty = node => {
     return true;
 };
 
+/**
+ * Check if all direct previous siblings of a node have no text content.
+ *
+ * @param {Node} node
+ * @return {boolean}
+ */
 const domPreviousSiblingsEmpty = node => {
     while (node.previousSibling) {
         if (node.previousSibling.textContent !== '') return false;

@@ -1,7 +1,28 @@
 'use strict';
 
+/**
+ * Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
+ *
+ * The basic syntax is `[youtube <id>]`. E.g. `[youtube iom_nhYQIYk]`.
+ * Height and width can optionally be set using `[youtube <id> [height] [width]]`. E.g. `[youtube iom_nhYQIYk 380 560]`.
+ * The default value for height is 270, and for width is 480.
+ *
+ * @example
+ * [youtube iom_nhYQIYk]
+ *
+ * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="380" width="560" frameborder="0" allowfullscreen>
+ *     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
+ * </iframe>
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
-  md.block.ruler.before('paragraph', 'youtube', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for YouTube markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const youtubeRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -40,8 +61,15 @@ module.exports = md => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'youtube', youtubeRule);
+
+  /**
+   * Rendering rule for YouTube markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.youtube = (tokens, index) => {
     const token = tokens[index];
 

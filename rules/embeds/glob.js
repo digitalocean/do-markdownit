@@ -2,8 +2,44 @@
 
 const safeObject = require('../../util/safe_object');
 
+/**
+ * Add support for [glob](https://www.digitalocean.com/community/tools/glob) embeds in Markdown, as block syntax.
+ *
+ * The basic syntax is `[glob <pattern> <strings>]`. E.g. `[glob *.js a.js b.js c.css]`.
+ * After the pattern, strings can be provided on a single line, or each separated by a newline.
+ * If a newline is included, the full first line will be treated as the pattern, including any spaces.
+ *
+ * @example
+ * [glob *.js /]
+ *
+ * <div data-glob-tool-embed data-glob-string="*.js" data-glob-test-0="/">
+ *     <a href="https://www.digitalocean.com/community/tools/glob?glob=*.js&tests=%2F" target="_blank">
+ *         Explore <code>*.js</code> as a glob string in our glob testing tool
+ *     </a>
+ * </div>
+ * <script async defer src="https://do-community.github.io/glob-tool-embed/bundle.js" type="text/javascript" onload="window.GlobToolEmbeds()"></script>
+ *
+ * @example
+ * [glob * test.js
+ * /a
+ * /b]
+ *
+ * <div data-glob-tool-embed data-glob-string="* test.js" data-glob-test-0="/a" data-glob-test-1="/b">
+ *     <a href="https://www.digitalocean.com/community/tools/glob?glob=*+test.js&tests=%2Fa&tests=%2Fb" target="_blank">
+ *         Explore <code>* test.js</code> as a glob string in our glob testing tool
+ *     </a>
+ * </div>
+ * <script async defer src="https://do-community.github.io/glob-tool-embed/bundle.js" type="text/javascript" onload="window.GlobToolEmbeds()"></script>
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
-  md.block.ruler.before('paragraph', 'glob', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for glob markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const globRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -55,8 +91,35 @@ module.exports = md => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'glob', globRule);
+
+  /**
+   * Parsing rule to inject the glob script.
+   *
+   * @type {import('markdown-it').RuleCore}
+   */
+  const globScriptRule = state => {
+    // Check if we need to inject the script
+    if (state.env._glob && state.env._glob.tokenized && !state.env._glob.injected) {
+      // Set that we've injected it
+      state.env._glob.injected = true;
+
+      // Inject the token
+      const token = new state.Token('html_block', '', 0);
+      token.content = `<script async defer src="https://do-community.github.io/glob-tool-embed/bundle.js" type="text/javascript" onload="window.GlobToolEmbeds()"></script>\n`;
+      state.tokens.push(token);
+    }
+  };
+
+  md.core.ruler.push('glob_script', globScriptRule);
+
+  /**
+   * Rendering rule for glob markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.glob = (tokens, index) => {
     const token = tokens[index];
 
@@ -75,17 +138,4 @@ module.exports = md => {
     </a>
 </div>\n`;
   };
-
-  md.core.ruler.push('glob_script', state => {
-    // Check if we need to inject the script
-    if (state.env._glob && state.env._glob.tokenized && !state.env._glob.injected) {
-      // Set that we've injected it
-      state.env._glob.injected = true;
-
-      // Inject the token
-      const token = new state.Token('html_block', '', 0);
-      token.content = `<script async defer src="https://do-community.github.io/glob-tool-embed/bundle.js" type="text/javascript" onload="window.GlobToolEmbeds()"></script>\n`;
-      state.tokens.push(token);
-    }
-  });
 };

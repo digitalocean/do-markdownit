@@ -2,11 +2,33 @@
 
 const safeObject = require('../util/safe_object');
 
+/**
+ * @typedef {Object} HtmlCommentOptions
+ * @property {boolean} [strict=false] If the end of a comment must be explicitly found.
+ */
+
+/**
+ * Removes all HTML comments from Markdown.
+ *
+ * This treats HTML comments as Markdown syntax, so expects them to either be inline, or a full block.
+ * Comments that start inline and then span a block will not be removed.
+ *
+ * By default, removal is loose, meaning that it does not need to explicitly find the end of a comment to remove it.
+ * If no closing mark is found, the end of the line or block is assumed.
+ * This behaviour can be disabled with the `strict` setting, which will require finding the end of the comment.
+ *
+ * @type {import('markdown-it').PluginWithOptions<HtmlCommentOptions>}
+ */
 module.exports = (md, options) => {
     // Get the correct options
     options = safeObject(options);
 
-    md.inline.ruler.before('html_inline', 'html_comment', (state, silent) => {
+    /**
+     * Parsing rule for remove inline HTML comments.
+     *
+     * @type {import('markdown-it/lib/parser_inline').RuleInline}
+     */
+    const htmlCommentInlineRule = (state, silent) => {
         // If silent, don't replace
         if (silent) return false;
 
@@ -31,9 +53,16 @@ module.exports = (md, options) => {
 
         // Done
         return true;
-    });
+    };
 
-    md.block.ruler.before('html_block', 'html_comment', (state, startLine, endLine, silent) => {
+    md.inline.ruler.before('html_inline', 'html_comment', htmlCommentInlineRule);
+
+    /**
+     * Parsing rule for remove block HTML comments.
+     *
+     * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     */
+    const htmlCommentBlockRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
         if (silent) return false;
 
@@ -71,8 +100,14 @@ module.exports = (md, options) => {
 
         // Done
         return true;
-    });
+    };
 
-    // noop rendering comments
+    md.block.ruler.before('html_block', 'html_comment', htmlCommentBlockRule);
+
+    /**
+     * Noop rendering HTML comments.
+     *
+     * @type {import('markdown-it/lib/renderer').RenderRule}
+     */
     md.renderer.rules.html_comment = () => '';
 };

@@ -1,9 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Get all files within a given directory recursively.
+ *
+ * @param {string} dir
+ * @return {string[]}
+ */
 const getFilesInDir = dir => fs.readdirSync(dir, { withFileTypes: true })
   .flatMap(file => (file.isDirectory() ? getFilesInDir(path.join(dir, file.name)) : path.join(dir, file.name)));
 
+/**
+ * Copy all files recursively from within a given directory to a given destination.
+ *
+ * @param {string} src
+ * @param {string} dest
+ */
 const copyRecursively = (src, dest) => {
   const exists = fs.existsSync(src);
   if (!exists) throw new Error(`${src} does not exist`);
@@ -46,8 +58,18 @@ fs.writeFileSync(
     .replace('require(pathToLanguage)', 'require(pathToLanguage)(Prism)'), // Pass Prism when loading a language
 );
 
-// Define the templates
+/**
+ * Template to wrap an unminified Prism component to export when in a module context.
+ * @param {string} source
+ * @return {string}
+ */
 const template = source => `const component = Prism => {\n\t${source.replace(/\n/g, '\n\t')}\n};\n\nif (typeof module !== \'undefined\' && module.exports) {\n\tmodule.exports = component;\n} else {\n\tcomponent(Prism);\n}\n`;
+
+/**
+ * Template to wrap a minified Prism component to export when in a module context.
+ * @param {string} source
+ * @return {string}
+ */
 const templateMin = source => `const component=Prism=>{${source}};typeof module!=\'undefined\'&&module.exports?module.exports=component:component(Prism);\n`;
 
 // Patch all the components (except autoloader) + plugins to export functions

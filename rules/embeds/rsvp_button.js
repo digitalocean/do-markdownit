@@ -2,11 +2,41 @@
 
 const safeObject = require('../../util/safe_object');
 
+/**
+ * @typedef {Object} RsvpButtonOptions
+ * @property {string} [className='rsvp'] Class to use for the button.
+ */
+
+/**
+ * Add support for RSVP buttons in Markdown, as inline syntax.
+ *
+ * The basic syntax is `[rsvp_button <marketo id>]`. E.g. `[rsvp_button 12345]`.
+ * Optionally, a title can be set for the button in double quotes after the id. E.g. `[rsvp_button 12345 "My Button"]`.
+ * The button title is limited to 50 characters, and contain spaces.
+ *
+ * The buttons are disabled by default and do not have any event listeners.
+ * Once rendered, you should bind your own event listeners and enable the buttons.
+ *
+ * You can find all the buttons in the DOM by looking for the `data-js` attribute being set to `rsvp-button`.
+ * The Marketo form Id will be set as the `data-form-id` attribute.
+ *
+ * @example
+ * [rsvp_button 12345 "button title"]
+ *
+ * <p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">button title</button></p>
+ *
+ * @type {import('markdown-it').PluginWithOptions<RsvpButtonOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
-  md.inline.ruler.before('link', 'rsvp_button', (state, silent) => {
+  /**
+   * Parsing rule for RSVP button markup.
+   *
+   * @type {import('markdown-it/lib/parser_inline').RuleInline}
+   */
+  const rsvpButtonRule = (state, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -37,8 +67,15 @@ module.exports = (md, options) => {
 
     // Done
     return true;
-  });
+  };
 
+  md.inline.ruler.before('link', 'rsvp_button', rsvpButtonRule);
+
+  /**
+   * Rendering rule for RSVP button markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.rsvp_button = (tokens, index) => {
     const token = tokens[index];
 

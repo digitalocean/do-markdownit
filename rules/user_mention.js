@@ -2,13 +2,42 @@
 
 const safeObject = require('../util/safe_object');
 
+/**
+ * @typedef {Object} UserMentionOptions
+ * @property {RegExp} [pattern] A pattern to match user mentions, applied to the string after the `@` symbol.
+ * @property {function(string): string} [path] A function to get the URL path for a user mention.
+ */
+
+/**
+ * Standard function for generating a URL path for a user.
+ *
+ * @param {string} mention
+ * @return {string}
+ */
 const path = mention => `/users/${mention}`;
 
+/**
+ * Add support for mentioning users, using an `@` symbol. Wraps the mention in a link to the user.
+ *
+ * By default, any characters that are not a space or newline after an `@` symbol will be treated as a mention.
+ *
+ * @example
+ * Hello @test
+ *
+ * Hello <a href="/users/test">@test</a>
+ *
+ * @type {import('markdown-it').PluginWithOptions<UserMentionOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
-  md.inline.ruler.before('link', 'user_mention', (state, silent) => {
+  /**
+   * Parsing rule for user mentions.
+   *
+   * @type {import('markdown-it/lib/parser_inline').RuleInline}
+   */
+  const userMentionRule = (state, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -66,5 +95,7 @@ module.exports = (md, options) => {
 
     // Done
     return true;
-  });
+  };
+
+  md.inline.ruler.before('link', 'user_mention', userMentionRule);
 };

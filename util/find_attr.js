@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Find an attribute within a given element.
+ *
+ * @param {string} attr Name of the attribute to find.
+ * @param {string} tag HTML opening tag to search within.
+ * @return {?{start: number, end: number}}
+ */
 module.exports = (attr, tag) => {
   // Find where attrs start and end
   let start = tag.indexOf(' ');

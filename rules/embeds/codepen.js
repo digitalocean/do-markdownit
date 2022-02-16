@@ -2,8 +2,47 @@
 
 const safeObject = require('../../util/safe_object');
 
+/**
+ * Add support for [Codepen](https://codepen.io/) embeds in Markdown, as block syntax.
+ *
+ * The basic syntax is `[codepen <user> <hash>]`. E.g. `[codepen AlbertFeynman gjpgjN]`.
+ * After the user and hash, assorted space-separated flags can be added (in any combination/order):
+ *
+ * - Add `lazy` to set the Codepen embed to not run until the user interacts with it.
+ * - Add `dark` to set the Codepen embed to use dark mode.
+ * - Add `html` to set the Codepen embed to default to the HTML tab.
+ * - Add `css` to set the Codepen embed to default to the CSS tab.
+ * - Add `js` to set the Codepen embed to default to the JavaScript tab.
+ * - Add `editable` to set the Codepen embed to allow the code to be edited (requires the embedded user to be Pro).
+ * - Add any set of digits to set the height of the embed (in pixels).
+ *
+ * If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
+ *
+ * @example
+ * [codepen AlbertFeynman gjpgjN]
+ *
+ * <p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+ *     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+ * </p>
+ * <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+ *
+ * @example
+ * [codepen AlbertFeynman gjpgjN lazy dark 512 html]
+ *
+ * <p class="codepen" data-height="512" data-theme-id="dark" data-default-tab="html" data-user="AlbertFeynman" data-slug-hash="gjpgjN" data-preview="true" style="height: 512px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+ *     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+ * </p>
+ * <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+ *
+ * @type {import('markdown-it').PluginSimple}
+ */
 module.exports = md => {
-  md.block.ruler.before('paragraph', 'codepen', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for Codepen markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const codepenRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -69,8 +108,35 @@ module.exports = md => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'codepen', codepenRule);
+
+  /**
+   * Parsing rule to inject the Codepen script.
+   *
+   * @type {import('markdown-it').RuleCore}
+   */
+  const codepenScriptRule = state => {
+    // Check if we need to inject the script
+    if (state.env._codepen && state.env._codepen.tokenized && !state.env._codepen.injected) {
+      // Set that we've injected it
+      state.env._codepen.injected = true;
+
+      // Inject the token
+      const token = new state.Token('html_block', '', 0);
+      token.content = `<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>\n`;
+      state.tokens.push(token);
+    }
+  };
+
+  md.core.ruler.push('codepen_script', codepenScriptRule);
+
+  /**
+   * Rendering rule for Codepen markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.codepen = (tokens, index) => {
     const token = tokens[index];
 
@@ -93,17 +159,4 @@ module.exports = md => {
     <span>See the Pen <a href="https://codepen.io/${user}/pen/${hash}">${hash} by ${user}</a> (<a href="https://codepen.io/${user}">@${user}</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>\n`;
   };
-
-  md.core.ruler.push('codepen_script', state => {
-    // Check if we need to inject the script
-    if (state.env._codepen && state.env._codepen.tokenized && !state.env._codepen.injected) {
-      // Set that we've injected it
-      state.env._codepen.injected = true;
-
-      // Inject the token
-      const token = new state.Token('html_block', '', 0);
-      token.content = `<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>\n`;
-      state.tokens.push(token);
-    }
-  });
 };

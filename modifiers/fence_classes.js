@@ -4,10 +4,27 @@ const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 const findAttr = require('../util/find_attr');
 
+/**
+ * @typedef {Object} FenceClassesOptions
+ * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not array, all classes are allowed.
+ */
+
+/**
+ * Filters classes on code and pre tags in fences.
+ *
+ * @type {import('markdown-it').PluginWithOptions<FenceClassesOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
+  /**
+   * Filter classes for a given HTML tag in HTML content.
+   *
+   * @param {string} tagName
+   * @param {string} content
+   * @return {string}
+   */
   const filterTag = (tagName, content) => {
     // Locate the tag
     const tagPos = findTagOpen(tagName, content);
@@ -29,6 +46,12 @@ module.exports = (md, options) => {
     return `${content.slice(0, tagPos.start)}${newTag}${content.slice(tagPos.end)}`;
   };
 
+  /**
+   * Wrap the fence render function to filter classes on pre and class tags.
+   *
+   * @param {import('markdown-it/lib/renderer').RenderRule} original
+   * @return {import('markdown-it/lib/renderer').RenderRule}
+   */
   const render = original => (tokens, idx, opts, env, self) => {
     // Get the rendered content
     const content = original(tokens, idx, opts, env, self);

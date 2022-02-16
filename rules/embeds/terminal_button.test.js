@@ -1,4 +1,4 @@
-const md = require('markdown-it')().use(require('./terminal'));
+const md = require('markdown-it')().use(require('./terminal_button'));
 
 it('handles terminal embeds (not inline)', () => {
   expect(md.render('[terminal ubuntu:focal]')).toBe(`<button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
@@ -26,7 +26,7 @@ it('handles terminal embeds attempting html injection', () => {
 `);
 });
 
-const mdClass = require('markdown-it')().use(require('./terminal'), { className: 'test' });
+const mdClass = require('markdown-it')().use(require('./terminal_button'), { className: 'test' });
 
 it('handles terminal embeds with a custom class', () => {
   expect(mdClass.render('[terminal ubuntu:focal]')).toBe(`<button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="test">

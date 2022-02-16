@@ -2,11 +2,42 @@
 
 const safeObject = require('../../util/safe_object');
 
+/**
+ * @typedef {Object} TerminalButtonOptions
+ * @property {string} [className='terminal'] Class to use for the button.
+ */
+
+/**
+ * Add support for terminal buttons in Markdown, as block syntax.
+ *
+ * The basic syntax is `[terminal <image name>]`. E.g. `[terminal ubuntu:focal]`.
+ * An optional button title can be provided after the image name. E.g. `[terminal ubuntu:focal Start Terminal]`.
+ *
+ * The buttons are disabled by default and do not have any event listeners.
+ * Once rendered, you should bind your own event listeners and enable the buttons.
+ *
+ * You can find all the buttons in the DOM by looking for the `data-js` attribute being set to `terminal`.
+ * The image name will be set as the `data-docker-image` attribute.
+ *
+ * @example
+ * [terminal ubuntu:focal button title]
+ *
+ * <button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
+ *     button title
+ * </button>
+ *
+ * @type {import('markdown-it').PluginWithOptions<TerminalButtonOptions>}
+ */
 module.exports = (md, options) => {
   // Get the correct options
   options = safeObject(options);
 
-  md.block.ruler.before('paragraph', 'terminal', (state, startLine, endLine, silent) => {
+  /**
+   * Parsing rule for terminal markup.
+   *
+   * @type {import('markdown-it/lib/parser_block').RuleBlock}
+   */
+  const terminalRule = (state, startLine, endLine, silent) => {
     // If silent, don't replace
     if (silent) return false;
 
@@ -42,8 +73,15 @@ module.exports = (md, options) => {
 
     // Done
     return true;
-  });
+  };
 
+  md.block.ruler.before('paragraph', 'terminal', terminalRule);
+
+  /**
+   * Rendering rule for terminal markup.
+   *
+   * @type {import('markdown-it/lib/renderer').RenderRule}
+   */
   md.renderer.rules.terminal = (tokens, index) => {
     const token = tokens[index];
 
