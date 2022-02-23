@@ -43,39 +43,39 @@ const safeObject = require('../util/safe_object');
  * @type {import('markdown-it').PluginWithOptions<FenceLabelOptions>}
  */
 module.exports = (md, options) => {
-  // Get the correct options
-  options = safeObject(options);
+    // Get the correct options
+    const optsObj = safeObject(options);
 
-  /**
-   * Wrap the fence render function to detect label markup and replace it with the correct class.
-   *
-   * @param {import('markdown-it/lib/renderer').RenderRule} original
-   * @return {import('markdown-it/lib/renderer').RenderRule}
-   */
-  const render = original => (tokens, idx, opts, env, self) => {
-    // Get the token
-    const token = tokens[idx];
+    /**
+     * Wrap the fence render function to detect label markup and replace it with the correct class.
+     *
+     * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
+     * @returns {import('markdown-it/lib/renderer').RenderRule}
+     */
+    const render = original => (tokens, idx, opts, env, self) => {
+        // Get the token
+        const token = tokens[idx];
 
-    // Look for a label at the start of the content
-    const match = token.content.match(/^((?:\[.+\]\n)*?)\[label (.+)\]\n/);
-    const name = (match && (match[2] || '').trim()) || null;
+        // Look for a label at the start of the content
+        const match = token.content.match(/^((?:\[.+\]\n)*?)\[label (.+)\]\n/);
+        const name = (match && (match[2] || '').trim()) || null;
 
-    // If no name, just return original
-    if (!name) return original(tokens, idx, opts, env, self);
+        // If no name, just return original
+        if (!name) return original(tokens, idx, opts, env, self);
 
-    // Remove the label line
-    token.content = token.content.replace(match[0], match[1]);
+        // Remove the label line
+        token.content = token.content.replace(match[0], match[1]);
 
-    // Get the rendered content
-    const content = original(tokens, idx, opts, env, self);
+        // Get the rendered content
+        const content = original(tokens, idx, opts, env, self);
 
-    // Get the class name to use
-    const className = options.className || 'code-label';
+        // Get the class name to use
+        const className = optsObj.className || 'code-label';
 
-    // Inject label and return
-    return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name)}">${md.utils.escapeHtml(name)}</div>
+        // Inject label and return
+        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name)}">${md.utils.escapeHtml(name)}</div>
 ${content}`;
-  };
+    };
 
-  md.renderer.rules.fence = render(md.renderer.rules.fence);
+    md.renderer.rules.fence = render(md.renderer.rules.fence);
 };

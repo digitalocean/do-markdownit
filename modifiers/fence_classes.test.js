@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+'use strict';
+
 const md = require('markdown-it')().use(require('./fence_classes'));
 
 it('does not alter code blocks by default', () => {
@@ -40,7 +42,7 @@ world
 });
 
 it('handles a code block with a disallowed class', () => {
-  expect(mdAllowed.render('```bad\nhello\nworld\n```')).toBe(`<pre><code class="">hello
+    expect(mdAllowed.render('```bad\nhello\nworld\n```')).toBe(`<pre><code class="">hello
 world
 </code></pre>
 `);

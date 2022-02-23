@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+'use strict';
+
 const md = require('markdown-it')().use(require('./fence_prefix'));
 
 it('handles the line numbers prefix', () => {
@@ -65,7 +67,7 @@ it('handles the line numbers prefix combined with other classes', () => {
 });
 
 it('handles the command prefix combined with other classes', () => {
-  expect(md.render('```js,command,test\nhello\nworld\n```')).toBe(`<pre><code class="prefixed command language-js,test,bash"><ol><li data-prefix="$">hello
+    expect(md.render('```js,command,test\nhello\nworld\n```')).toBe(`<pre><code class="prefixed command language-js,test,bash"><ol><li data-prefix="$">hello
 </li><li data-prefix="$">world
 </li></ol>
 </code></pre>
@@ -73,7 +75,7 @@ it('handles the command prefix combined with other classes', () => {
 });
 
 it('handles the super_user prefix combined with other classes', () => {
-  expect(md.render('```js,super_user,test\nhello\nworld\n```')).toBe(`<pre><code class="prefixed super_user language-js,test,bash"><ol><li data-prefix="#">hello
+    expect(md.render('```js,super_user,test\nhello\nworld\n```')).toBe(`<pre><code class="prefixed super_user language-js,test,bash"><ol><li data-prefix="#">hello
 </li><li data-prefix="#">world
 </li></ol>
 </code></pre>

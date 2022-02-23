@@ -31,53 +31,53 @@ const findAttr = require('../util/find_attr');
  * @type {import('markdown-it').PluginWithOptions<FenceClassesOptions>}
  */
 module.exports = (md, options) => {
-  // Get the correct options
-  options = safeObject(options);
+    // Get the correct options
+    const optsObj = safeObject(options);
 
-  /**
-   * Filter classes for a given HTML tag in HTML content.
-   *
-   * @param {string} tagName
-   * @param {string} content
-   * @return {string}
-   */
-  const filterTag = (tagName, content) => {
-    // Locate the tag
-    const tagPos = findTagOpen(tagName, content);
-    if (!tagPos) return content;
+    /**
+     * Filter classes for a given HTML tag in HTML content.
+     *
+     * @param {string} tagName Name of the HTML tag to filter classes for.
+     * @param {string} content Full HTML snippet in which the HTML tag is located.
+     * @returns {string}
+     */
+    const filterTag = (tagName, content) => {
+        // Locate the tag
+        const tagPos = findTagOpen(tagName, content);
+        if (!tagPos) return content;
 
-    // Locate the class attribute
-    const tag = content.slice(tagPos.start, tagPos.end);
-    const classPos = findAttr('class', tag);
-    if (!classPos) return content;
+        // Locate the class attribute
+        const tag = content.slice(tagPos.start, tagPos.end);
+        const classPos = findAttr('class', tag);
+        if (!classPos) return content;
 
-    // Extract the class attribute
-    const classes = tag.slice(classPos.start + 7, classPos.end - 1).split(' ');
-    const permitted = classes.filter(cls => options.allowedClasses.includes(cls));
+        // Extract the class attribute
+        const classes = tag.slice(classPos.start + 7, classPos.end - 1).split(' ');
+        const permitted = classes.filter(cls => optsObj.allowedClasses.includes(cls));
 
-    // Generate the new tag
-    const newTag = `${tag.slice(0, classPos.start + 7)}${permitted.join(' ')}${tag.slice(classPos.end - 1)}`;
+        // Generate the new tag
+        const newTag = `${tag.slice(0, classPos.start + 7)}${permitted.join(' ')}${tag.slice(classPos.end - 1)}`;
 
-    // Return the content with the new tag
-    return `${content.slice(0, tagPos.start)}${newTag}${content.slice(tagPos.end)}`;
-  };
+        // Return the content with the new tag
+        return `${content.slice(0, tagPos.start)}${newTag}${content.slice(tagPos.end)}`;
+    };
 
-  /**
-   * Wrap the fence render function to filter classes on pre and class tags.
-   *
-   * @param {import('markdown-it/lib/renderer').RenderRule} original
-   * @return {import('markdown-it/lib/renderer').RenderRule}
-   */
-  const render = original => (tokens, idx, opts, env, self) => {
-    // Get the rendered content
-    const content = original(tokens, idx, opts, env, self);
+    /**
+     * Wrap the fence render function to filter classes on pre and class tags.
+     *
+     * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
+     * @returns {import('markdown-it/lib/renderer').RenderRule}
+     */
+    const render = original => (tokens, idx, opts, env, self) => {
+        // Get the rendered content
+        const content = original(tokens, idx, opts, env, self);
 
-    // If no permitted classes, return the original content
-    if (!Array.isArray(options.allowedClasses)) return content;
+        // If no permitted classes, return the original content
+        if (!Array.isArray(optsObj.allowedClasses)) return content;
 
-    // Filter the pre and code tags if present
-    return filterTag('code', filterTag('pre', content));
-  };
+        // Filter the pre and code tags if present
+        return filterTag('code', filterTag('pre', content));
+    };
 
-  md.renderer.rules.fence = render(md.renderer.rules.fence);
+    md.renderer.rules.fence = render(md.renderer.rules.fence);
 };

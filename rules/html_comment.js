@@ -37,7 +37,7 @@ const safeObject = require('../util/safe_object');
  */
 module.exports = (md, options) => {
     // Get the correct options
-    options = safeObject(options);
+    const optsObj = safeObject(options);
 
     /**
      * Parsing rule for remove inline HTML comments.
@@ -58,7 +58,7 @@ module.exports = (md, options) => {
         const closingMark = closingMarkFound ? closingMarkRaw : state.posMax;
 
         // If strict, require that we found the actual closing marker
-        if (options.strict && !closingMarkFound) return false;
+        if (optsObj.strict && !closingMarkFound) return false;
 
         // Store the comment
         const token = state.push('html_comment', '', 0);
@@ -100,7 +100,7 @@ module.exports = (md, options) => {
         const closingMark = closingMarkFound ? closingMarkRaw : currentLines.length;
 
         // If strict, require that we found the actual closing marker
-        if (options.strict && !closingMarkFound) return false;
+        if (optsObj.strict && !closingMarkFound) return false;
 
         // Get the comment
         const comment = currentLines.slice(0, closingMark + (closingMarkFound ? 3 : 0));

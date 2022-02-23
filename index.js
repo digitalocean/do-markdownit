@@ -45,71 +45,90 @@ const safeObject = require('./util/safe_object');
  * Inject all parts of the DigitalOcean community MarkdownIt plugin.
  *
  * @type {import('markdown-it').PluginWithOptions<DoMarkdownItOptions>}
-*/
+ */
 module.exports = (md, options) => {
-  // Get the correct options
-  options = safeObject(options);
+    // Get the correct options
+    const optsObj = safeObject(options);
 
-  // Register rules
+    // Register rules
 
-  if (options.highlight !== false)
-    md.use(require('./rules/highlight'), safeObject(options.highlight));
+    if (optsObj.highlight !== false) {
+        md.use(require('./rules/highlight'), safeObject(optsObj.highlight));
+    }
 
-  if (options.user_mention !== false)
-    md.use(require('./rules/user_mention'), safeObject(options.user_mention));
+    if (optsObj.user_mention !== false) {
+        md.use(require('./rules/user_mention'), safeObject(optsObj.user_mention));
+    }
 
-  if (options.html_comment !== false)
-    md.use(require('./rules/html_comment'), safeObject(options.html_comment));
+    if (optsObj.html_comment !== false) {
+        md.use(require('./rules/html_comment'), safeObject(optsObj.html_comment));
+    }
 
-  // Register embeds
+    // Register embeds
 
-  if (options.callout !== false)
-    md.use(require('./rules/embeds/callout'), safeObject(options.callout));
+    if (optsObj.callout !== false) {
+        md.use(require('./rules/embeds/callout'), safeObject(optsObj.callout));
+    }
 
-  if (options.rsvp_button !== false)
-    md.use(require('./rules/embeds/rsvp_button'), safeObject(options.rsvp_button));
+    if (optsObj.rsvp_button !== false) {
+        md.use(require('./rules/embeds/rsvp_button'), safeObject(optsObj.rsvp_button));
+    }
 
-  if (options.glob !== false)
-    md.use(require('./rules/embeds/glob'), safeObject(options.glob));
+    if (optsObj.glob !== false) {
+        md.use(require('./rules/embeds/glob'), safeObject(optsObj.glob));
+    }
 
-  if (options.dns !== false)
-    md.use(require('./rules/embeds/dns'), safeObject(options.dns));
+    if (optsObj.dns !== false) {
+        md.use(require('./rules/embeds/dns'), safeObject(optsObj.dns));
+    }
 
-  if (options.asciinema !== false)
-    md.use(require('./rules/embeds/asciinema'), safeObject(options.asciinema));
+    if (optsObj.asciinema !== false) {
+        md.use(require('./rules/embeds/asciinema'), safeObject(optsObj.asciinema));
+    }
 
-  if (options.codepen !== false)
-    md.use(require('./rules/embeds/codepen'), safeObject(options.codepen));
+    if (optsObj.codepen !== false) {
+        md.use(require('./rules/embeds/codepen'), safeObject(optsObj.codepen));
+    }
 
-  if (options.youtube !== false)
-    md.use(require('./rules/embeds/youtube'), safeObject(options.youtube));
+    if (optsObj.youtube !== false) {
+        md.use(require('./rules/embeds/youtube'), safeObject(optsObj.youtube));
+    }
 
-  if (options.terminal_button !== false)
-    md.use(require('./rules/embeds/terminal_button'), safeObject(options.terminal_button));
+    if (optsObj.terminal_button !== false) {
+        md.use(require('./rules/embeds/terminal_button'), safeObject(optsObj.terminal_button));
+    }
 
-  // Register modifiers
+    // Register modifiers
 
-  if (options.fence_label !== false)
-    md.use(require('./modifiers/fence_label'), safeObject(options.fence_label));
+    if (optsObj.fence_label !== false) {
+        md.use(require('./modifiers/fence_label'), safeObject(optsObj.fence_label));
+    }
 
-  if (options.fence_secondary_label !== false)
-    md.use(require('./modifiers/fence_secondary_label'), safeObject(options.fence_secondary_label));
+    if (optsObj.fence_secondary_label !== false) {
+        md.use(require('./modifiers/fence_secondary_label'), safeObject(optsObj.fence_secondary_label));
+    }
 
-  if (options.fence_environment !== false)
-    md.use(require('./modifiers/fence_environment'), safeObject(options.fence_environment));
+    if (optsObj.fence_environment !== false) {
+        md.use(require('./modifiers/fence_environment'), safeObject(optsObj.fence_environment));
+    }
 
-  if (options.fence_prefix !== false)
-    md.use(require('./modifiers/fence_prefix'), safeObject(options.fence_prefix));
+    if (optsObj.fence_prefix !== false) {
+        md.use(require('./modifiers/fence_prefix'), safeObject(optsObj.fence_prefix));
+    }
 
-  if (options.fence_pre_attrs !== false)
-    md.use(require('./modifiers/fence_pre_attrs'), safeObject(options.fence_pre_attrs));
+    if (optsObj.fence_pre_attrs !== false) {
+        md.use(require('./modifiers/fence_pre_attrs'), safeObject(optsObj.fence_pre_attrs));
+    }
 
-  if (options.fence_classes !== false)
-    md.use(require('./modifiers/fence_classes'), safeObject(options.fence_classes));
+    if (optsObj.fence_classes !== false) {
+        md.use(require('./modifiers/fence_classes'), safeObject(optsObj.fence_classes));
+    }
 
-  if (options.heading_id !== false)
-    md.use(require('./modifiers/heading_id'), safeObject(options.heading_id));
+    if (optsObj.heading_id !== false) {
+        md.use(require('./modifiers/heading_id'), safeObject(optsObj.heading_id));
+    }
 
-  if (options.prismjs !== false)
-    md.use(require('./modifiers/prismjs'), safeObject(options.prismjs));
+    if (optsObj.prismjs !== false) {
+        md.use(require('./modifiers/prismjs'), safeObject(optsObj.prismjs));
+    }
 };

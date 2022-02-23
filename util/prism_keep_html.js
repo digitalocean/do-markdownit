@@ -31,7 +31,7 @@ const {
 /**
  * Prism plugin to preserve existing HTML within the code. Supports non-browser environments.
  *
- * @param {import('prismjs')} Prism
+ * @param {import('prismjs')} Prism Prism instance to register plugin for.
  */
 const plugin = Prism => {
     if (typeof Prism === 'undefined' || Prism.plugins.KeepHTML) return;
@@ -40,22 +40,22 @@ const plugin = Prism => {
 
     /**
      * @typedef {Object} ExtractedNode
-     * @property {string} name
-     * @property {Object} attributes
-     * @property {number} open
-     * @property {number} close
-     * @property {number} depth
-     * @property {Node} [openNode]
-     * @property {number} [openPos]
-     * @property {Node} [closeNode]
-     * @property {number} [closePos]
+     * @property {string} name Name of the HTML node.
+     * @property {Object} attributes Attributes of the HTML node.
+     * @property {number} open Position at which the node opens in the plain text.
+     * @property {number} close Position at which the node closes in the plain text.
+     * @property {number} depth Depth of the node in the tree.
+     * @property {Node} [openNode] Node in which this node opens, when injecting.
+     * @property {number} [openPos] Position at which this node opens in the open node.
+     * @property {Node} [closeNode] Node in which this node closes, when injecting.
+     * @property {number} [closePos] Position at which this node closes in the close node.
      */
 
     /**
      * Extract plain-text and HTML nodes from a given HTML snippet.
      *
-     * @param {string} html
-     * @return {{nodes: ExtractedNode[], text: string}}
+     * @param {string} html HTML snippet to extract nodes and text from.
+     * @returns {{nodes: ExtractedNode[], text: string}}
      */
     const extractTextAndNodes = html => {
         // Track the plain-text and all the HTML nodes we find
@@ -67,6 +67,12 @@ const plugin = Prism => {
 
         // Parse the HTML
         const parser = new htmlparser2.Parser({
+            /**
+             * Add opened tags to the stack, tracking their start position in the text and depth in the stack.
+             *
+             * @param {string} name Name of the opened tag.
+             * @param {Object} attributes Attributes of the opened tag.
+             */
             onopentag: (name, attributes) => {
                 // Add the node to the stack
                 stack.push({
@@ -76,10 +82,19 @@ const plugin = Prism => {
                     depth: stack.length,
                 });
             },
+            /**
+             * Track any plain-text encountered.
+             *
+             * @param {string} value Plain-text to track.
+             */
             ontext: value => {
                 text += value;
             },
+            /**
+             * Remove the top of the stack when a tag is closed, tracking the close position in the text.
+             */
             onclosetag: () => {
+                // TODO: Compare closed tag name to the top of the stack, error if not equal
                 // Remove the node from the stack
                 const node = stack.pop();
                 node.close = text.length;
@@ -95,11 +110,11 @@ const plugin = Prism => {
         // Filter out token nodes, and sort by depth
         const nodes = allNodes
             .filter(node => node.name !== 'span' || !/(^| )token( |$)/.test(node.attributes.class || ''))
-            .sort((a, b) => a.depth !== b.depth
+            .sort((a, b) => (a.depth !== b.depth
                 // Deepest nodes first
                 ? b.depth - a.depth
                 // Fallback to start position
-                : a.open - b.open);
+                : a.open - b.open));
 
         // Done
         return {
@@ -111,9 +126,9 @@ const plugin = Prism => {
     /**
      * Parse a given HTML snippet into a DOM tree and inject extracted nodes back in.
      *
-     * @param {string} html
-     * @param {ExtractedNode[]} nodes
-     * @return {string}
+     * @param {string} html HTML snippet to parse.
+     * @param {ExtractedNode[]} nodes Extracted nodes to inject into the parsed DOM.
+     * @returns {string}
      */
     const parseAndInsertNodes = (html, nodes) => {
         // Create an empty DOM
@@ -124,12 +139,23 @@ const plugin = Prism => {
         // Parse the highlighted code into the DOM
         let pos = 0;
         const parserPost = new htmlparser2.Parser({
+            /**
+             * Add opened tags to the DOM, updating the current node we're in.
+             *
+             * @param {string} name Name of the opened tag.
+             * @param {Object} attributes Attributes of the opened tag.
+             */
             onopentag: (name, attributes) => {
                 const node = document.createElement(name);
                 Object.entries(attributes).forEach(([ key, value ]) => node.setAttribute(key, value));
                 current.appendChild(node);
                 current = node;
             },
+            /**
+             * Add any plain-text encountered to the DOM, updating any nodes to be inserted that fall within this text.
+             *
+             * @param {string} value Plain-text to add to the DOM.
+             */
             ontext: value => {
                 const text = document.createTextNode(value);
                 current.appendChild(text);
@@ -150,7 +176,11 @@ const plugin = Prism => {
 
                 pos += value.length;
             },
+            /**
+             * Use the parent as the current node we're in when a tag is closed.
+             */
             onclosetag: () => {
+                // TODO: Compare closed tag name to the current node, error if not equal
                 current = current.parentNode;
             },
         });
@@ -172,7 +202,7 @@ const plugin = Prism => {
             const splitOpen = domSplit(ancestor, openNode, openPos, true);
             [ closeNode, closePos ] = domOffsetNode(closeNode, closePos, root); // Update based on open split
             const splitClose = domSplit(ancestor, closeNode, closePos);
-            const middle = splitOpen.right.filter(node => splitClose.left.includes(node));
+            const middle = splitOpen.right.filter(n => splitClose.left.includes(n));
 
             // No-op if no middle
             if (!middle.length) return;
@@ -205,8 +235,8 @@ const plugin = Prism => {
     /**
      * Wrap highlight directly because Prism doesn't expose a hook for after highlight completes
      *
-     * @param {function(string, import('prismjs').Grammar, string): string} original
-     * @return {function(string, import('prismjs').Grammar, string): string}
+     * @param {function(string, import('prismjs').Grammar, string): string} original Original highlight function to wrap.
+     * @returns {function(string, import('prismjs').Grammar, string): string}
      */
     const highlight = original => (html, grammar, language) => {
         // Extract the plain-text and HTML nodes inside the code block
@@ -223,7 +253,7 @@ const plugin = Prism => {
     /**
      * Before Prism begins highlighting, disable the default HTML preservation and use raw HTML for the code.
      *
-     * @param {Object} env
+     * @param {Object} env Current Prism environment.
      */
     const beforeSanityHook = env => {
         // Disable the standard keep-markup plugin
@@ -237,7 +267,7 @@ const plugin = Prism => {
     /**
      * After Prism has finished highlighting, remove the class used to disable the default HTML preservation.
      *
-     * @param {Object} env
+     * @param {Object} env Current Prism environment.
      */
     const beforeInsertHook = env => {
         // Remove the no-keep-markup class
@@ -249,5 +279,5 @@ const plugin = Prism => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = plugin;
 } else {
-    plugin(Prism);
+    plugin(Prism); /* global Prism */
 }
