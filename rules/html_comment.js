@@ -33,6 +33,11 @@ const safeObject = require('../util/safe_object');
  * If no closing mark is found, the end of the line or block is assumed.
  * This behaviour can be disabled with the `strict` setting, which will require finding the end of the comment.
  *
+ * @example
+ * Hello <!-- comment --> world
+ *
+ * <p>Hello  world</p>
+ *
  * @type {import('markdown-it').PluginWithOptions<HtmlCommentOptions>}
  */
 module.exports = (md, options) => {

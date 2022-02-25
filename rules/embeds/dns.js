@@ -27,15 +27,13 @@ const safeObject = require('../../util/safe_object');
  * @example
  * [dns digitalocean.com]
  *
+ * [dns digitalocean.com A AAAA]
+ *
  * <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
  *     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
  *         Perform a full DNS lookup for digitalocean.com
  *     </a>
  * </div>
- * <script async defer src="https://do-community.github.io/dns-tool-embed/bundle.js" type="text/javascript" onload="window.DNSToolEmbeds()"></script>
- *
- * @example
- * [dns digitalocean.com A AAAA]
  *
  * <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
  *     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">

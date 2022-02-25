@@ -40,7 +40,7 @@ const path = mention => `/users/${mention}`;
  * @example
  * Hello @test
  *
- * Hello <a href="/users/test">@test</a>
+ * <p>Hello <a href="/users/test">@test</a></p>
  *
  * @type {import('markdown-it').PluginWithOptions<UserMentionOptions>}
  */

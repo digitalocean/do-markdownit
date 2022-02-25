@@ -1,7 +1,7 @@
 {
   "name": "do-markdownit",
   "version": "1.0.0",
-  "description": "markdown-it extensions for DigitalOcean markdown.",
+  "description": "Markdown-It plugin for the DigitalOcean Community.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"{*,@(modifiers|rules|script|util)/**/*}.js\"",

@@ -28,7 +28,7 @@ const safeObject = require('../../util/safe_object');
  *
  * The basic syntax is `[rsvp_button <marketo id>]`. E.g. `[rsvp_button 12345]`.
  * Optionally, a title can be set for the button in double quotes after the id. E.g. `[rsvp_button 12345 "My Button"]`.
- * The button title is limited to 50 characters, and contain spaces.
+ * The button title is limited to 50 characters, and can contain spaces.
  *
  * The buttons are disabled by default and do not have any event listeners.
  * Once rendered, you should bind your own event listeners and enable the buttons.

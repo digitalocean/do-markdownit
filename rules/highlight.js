@@ -26,14 +26,13 @@ limitations under the License.
  * @example
  * <^>test<^>
  *
- * <mark>test</mark>
- *
- * @example
  * ```
  * hello
  * world
  * <^>test<^>
  * ```
+ *
+ * <p><mark>test</mark></p>
  *
  * <pre><code>hello
  * world

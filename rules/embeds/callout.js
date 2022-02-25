@@ -20,7 +20,7 @@ const safeObject = require('../../util/safe_object');
 
 /**
  * @typedef {Object} CalloutOptions
- * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not array, all classes are allowed.
+ * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
  * @property {string[]} [extraClasses=[]] List of extra classes to apply to a callout div, alongside the given class.
  * @property {string} [labelClass='callout-label'] Class to use for the label.
  */
@@ -41,15 +41,14 @@ const safeObject = require('../../util/safe_object');
  * test
  * <$>
  *
- * <div class="info">
- * <p>test</p>
- * </div>
- *
- * @example
  * <$>[info]
  * [label hello]
  * world
  * <$>
+ *
+ * <div class="info">
+ * <p>test</p>
+ * </div>
  *
  * <div class="info">
  * <p class="callout-label">hello</p>

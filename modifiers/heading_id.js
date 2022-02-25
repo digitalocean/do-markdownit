@@ -47,6 +47,11 @@ const sluggify = string => string.toLowerCase()
  * - `slug`: The slug Id given to the heading (e.g. `my-heading`).
  * - `content`: The content of the heading (e.g. `My Heading`).
  *
+ * @example
+ * # Hello World!
+ *
+ * <h1 id="hello-world">Hello World!</h1>
+ *
  * @type {import('markdown-it').PluginWithOptions<HeadingIdOptions>}
  */
 module.exports = (md, options) => {

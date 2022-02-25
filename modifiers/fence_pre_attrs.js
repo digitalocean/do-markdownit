@@ -21,6 +21,16 @@ const findTagOpen = require('../util/find_tag_open');
 /**
  * Move all attributes from the opening `code` tag of a fenced code block to the `pre` tag.
  *
+ * @example
+ * ```js
+ * hello
+ * world
+ * ```
+ *
+ * <pre class="language-js"><code>hello
+ * world
+ * </code></pre>
+ *
  * @type {import('markdown-it').PluginSimple}
  */
 module.exports = md => {

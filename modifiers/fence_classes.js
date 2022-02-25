@@ -22,11 +22,30 @@ const findAttr = require('../util/find_attr');
 
 /**
  * @typedef {Object} FenceClassesOptions
- * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not array, all classes are allowed.
+ * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
  */
 
 /**
  * Filters classes on code and pre tags in fences.
+ *
+ * @example
+ * ```test
+ * hello
+ * world
+ * ```
+ *
+ * ```bad
+ * hello
+ * world
+ * ```
+ *
+ * <pre><code class="language-test">hello
+ * world
+ * </code></pre>
+ *
+ * <pre><code class="">hello
+ * world
+ * </code></pre>
  *
  * @type {import('markdown-it').PluginWithOptions<FenceClassesOptions>}
  */

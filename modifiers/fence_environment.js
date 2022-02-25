@@ -20,7 +20,7 @@ const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} FenceEnvironmentOptions
- * @property {string[]} [allowedEnvironments] List of case-sensitive environments that are allowed. If not array, all environments are allowed.
+ * @property {string[]} [allowedEnvironments] List of case-sensitive environments that are allowed. If not an array, all environments are allowed.
  * @property {string} [extraClasses=''] String of extra classes to set when an environment is used.
  */
 
