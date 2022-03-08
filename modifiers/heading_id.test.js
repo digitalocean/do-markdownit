@@ -25,13 +25,33 @@ it('injects id attributes on headings', () => {
 
 it('exposes headings in an object after render', () => {
     md.render('# Hello World!');
-    expect(md.headings).toEqual([ { slug: 'hello-world', content: 'Hello World!' } ]);
+    expect(md.headings).toEqual([ {
+        slug: 'hello-world',
+        content: 'Hello World!',
+        text: 'Hello World!',
+        rendered: 'Hello World!',
+    } ]);
+});
+
+it('handles inline markdown inside headings', () => {
+    md.render('# Hello **World**!');
+    expect(md.headings).toEqual([ {
+        slug: 'hello-world',
+        content: 'Hello **World**!',
+        text: 'Hello World!',
+        rendered: 'Hello <strong>World</strong>!',
+    } ]);
 });
 
 it('resets exposed headings between repeat renders', () => {
     md.render('# Hello World!');
     md.render('# Testing');
-    expect(md.headings).toEqual([ { slug: 'testing', content: 'Testing' } ]);
+    expect(md.headings).toEqual([ {
+        slug: 'testing',
+        content: 'Testing',
+        text: 'Testing',
+        rendered: 'Testing',
+    } ]);
 });
 
 const mdSluggify = require('markdown-it')().use(require('./heading_id'), {

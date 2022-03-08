@@ -39,13 +39,28 @@ const sluggify = string => string.toLowerCase()
     .replace(/(^-|-$)/g, '');
 
 /**
+ * Extract all plain-text tokens from a token, including its children.
+ *
+ * @param {import('markdown-it/lib/token')} token Token to extract text from.
+ * @returns {string}
+ */
+const extractText = token => {
+    let res = '';
+    if (token.type === 'text') res += token.content;
+    if (token.children) res += token.children.map(extractText).join('');
+    return res;
+};
+
+/**
  * Apply Ids to all rendered headings and generate an array of headings.
  *
  * Headings are available after a render via `md.headings`.
  * Each item in the array is an object with the following properties:
  *
  * - `slug`: The slug Id given to the heading (e.g. `my-heading`).
- * - `content`: The content of the heading (e.g. `My Heading`).
+ * - `content`: The raw Markdown content of the heading (e.g. `My **Heading**`).
+ * - `text`: The plain-text content of the heading (e.g. `My Heading`).
+ * - `rendered`: The rendered HTML content of the heading (e.g. `My <strong>Heading</strong>`).
  *
  * @example
  * # Hello World!
@@ -68,21 +83,23 @@ module.exports = (md, options) => {
         // Get the token
         const token = tokens[idx];
 
-        // Get the content
+        // Get the raw content, the text and the rendered version
         const { content } = tokens[idx + 1];
+        const text = extractText(tokens[idx + 1]);
+        const rendered = self.render([ tokens[idx + 1] ], opts, env);
 
         // Generate an id if not already set
         if (!token.attrs) token.attrs = [];
-        if (token.attrs.every(attr => attr[0] !== 'id')) {
-            // Get the slug
-            const slug = typeof optsObj.sluggify === 'function' ? optsObj.sluggify(content) : sluggify(content);
-
-            // Add the slug as the id attribute
-            token.attrs.push([ 'id', slug ]);
-
-            // Expose the slug in md
-            md.headings.push({ slug, content });
+        let idAttr = token.attrs.find(attr => attr[0] === 'id');
+        if (!idAttr) {
+            idAttr = [ 'id', typeof optsObj.sluggify === 'function'
+                ? optsObj.sluggify(content)
+                : sluggify(content) ];
+            token.attrs.push(idAttr);
         }
+
+        // Expose the heading
+        md.headings.push({ slug: idAttr[1], content, text, rendered });
 
         // Render as normal
         return typeof original === 'function'
