@@ -55,7 +55,7 @@ if (fs.existsSync(base)) fs.rmSync(base, { recursive: true });
 fs.mkdirSync(base, { recursive: true });
 
 // Copy Prism over
-copyRecursively(path.join(__dirname, '..', 'node_modules', 'prismjs'), base);
+copyRecursively(path.dirname(require.resolve('prismjs')), base);
 
 // Patch the core to not use `window` or `global`
 const core = path.join(base, 'prism.js');

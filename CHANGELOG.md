@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Use `require.resolve` to locate Prism for patching
+
 
 ## v1.0.0 - 94361b5
 
