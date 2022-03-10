@@ -1,8 +1,14 @@
 {
-  "name": "do-markdownit",
+  "name": "@digitalocean/do-markdownit",
   "version": "1.0.0",
   "description": "Markdown-It plugin for the DigitalOcean Community.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalocean/do-markdownit.git"
+  },
+  "homepage": "https://github.com/digitalocean/do-markdownit#readme",
+  "bugs": "https://github.com/digitalocean/do-markdownit/issues",
   "scripts": {
     "lint": "eslint \"{*,@(modifiers|rules|script|util)/**/*}.js\"",
     "lint:fix": "npm run lint -- --fix",
@@ -11,6 +17,9 @@
   },
   "author": "DigitalOcean",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
     "eslint": "^8.10.0",

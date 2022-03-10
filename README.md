@@ -16,13 +16,13 @@ You can see this plugin in action and try it out on our
 Install Markdown-It and the plugin:
 
 ```shell
-npm install markdown-it do-markdownit
+npm install markdown-it @digitalocean/do-markdownit
 ```
 
 Instantiate Markdown-It and the plugin, and render some Markdown:
 
 ```js
-const md = require('markdown-it')({}).use(require('do-markdownit'), {});
+const md = require('markdown-it')({}).use(require('@digitalocean/do-markdownit'), {});
 
 md.render('# Hello, world!\n\n<$>[info]do-markdownit is loaded!<$>');
 ```
@@ -636,10 +636,10 @@ scopes with a Prism instance. Instead, each plugin or component for Prism expect
 a Prism instance passed to it.
 
 ```js
-const Prism = require('do-markdownit/vendor/prismjs');
+const Prism = require('@digitalocean/do-markdownit/vendor/prismjs');
 
-require('do-markdownit/vendor/prismjs/plugins/toolbar/prism-toolbar')(Prism);
-require('do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard')(Prism);
+require('@digitalocean/do-markdownit/vendor/prismjs/plugins/toolbar/prism-toolbar')(Prism);
+require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard')(Prism);
 
 Prism.highlightAll();
 ```
@@ -656,9 +656,9 @@ Enabling this plugin will also ensure that the standard Keep Markdown plugin is 
 does not conflict with this plugin.
 
 ```js
-const Prism = require('do-markdownit/vendor/prismjs');
+const Prism = require('@digitalocean/do-markdownit/vendor/prismjs');
 
-require('do-markdownit/util/prism_keep_html')(Prism);
+require('@digitalocean/do-markdownit/util/prism_keep_html')(Prism);
 
 Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.javascript, 'javascript');
 ```
