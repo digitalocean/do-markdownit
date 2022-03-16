@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Add Actions workflows to repo for linting/testing
+
 
 ## v1.0.1 - 599e553
 
