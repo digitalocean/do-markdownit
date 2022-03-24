@@ -46,7 +46,7 @@ const sluggify = string => string.toLowerCase()
  */
 const extractText = token => {
     let res = '';
-    if (token.type === 'text') res += token.content;
+    if (token.type === 'text' || token.type === 'code_inline') res += token.content;
     if (token.children) res += token.children.map(extractText).join('');
     return res;
 };
