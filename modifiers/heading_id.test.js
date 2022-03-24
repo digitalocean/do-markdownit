@@ -43,6 +43,16 @@ it('handles inline markdown inside headings', () => {
     } ]);
 });
 
+it('handles inline code inside headings', () => {
+    md.render('# Hello `World`!');
+    expect(md.headings).toEqual([ {
+        slug: 'hello-world',
+        content: 'Hello `World`!',
+        text: 'Hello World!',
+        rendered: 'Hello <code>World</code>!',
+    } ]);
+});
+
 it('resets exposed headings between repeat renders', () => {
     md.render('# Hello World!');
     md.render('# Testing');
