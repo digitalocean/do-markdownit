@@ -10,6 +10,9 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.0.2 - 149f660
+
 - (patch) Dependency updates
 - (patch) Fix heading_id plugin when encountering inline code
 - (patch) Add Actions workflows to repo for linting/testing
