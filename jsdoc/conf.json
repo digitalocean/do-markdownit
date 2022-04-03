@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "jsdoc-tsimport-plugin"
+    "jsdoc-tsimport-plugin",
+    "jsdoc/automatic-module.js"
   ],
   "source": {
     "include": [
