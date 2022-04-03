@@ -30,6 +30,7 @@ const findTagOpen = require('../util/find_tag_open');
  * @param {import('markdown-it').Token} token MarkdownIt token to determine the prefix for.
  * @param {string} delimiter String to split the token's info string on.
  * @returns {?(function(string, number): string)}
+ * @private
  */
 const getPrefix = (token, delimiter) => {
     // Get all flags passed in token

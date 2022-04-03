@@ -12,6 +12,8 @@
   "scripts": {
     "lint": "eslint \"{*,@(modifiers|rules|script|util)/**/*}.js\"",
     "lint:fix": "npm run lint -- --fix",
+    "jsdoc": "jsdoc -c jsdoc/conf.json",
+    "jsdoc:types": "jsdoc -c jsdoc/conf.json -t tsd-jsdoc/dist -d types",
     "test": "jest",
     "postinstall": "node script/prism.js"
   },
@@ -27,7 +29,10 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsdoc": "^38.0.6",
     "jest": "^27.5.1",
-    "markdown-it": "^12.3.2"
+    "jsdoc": "^3.6.10",
+    "jsdoc-tsimport-plugin": "^1.0.5",
+    "markdown-it": "^12.3.2",
+    "tsd-jsdoc": "^2.5.0"
   },
   "dependencies": {
     "htmlparser2": "^7.2.0",

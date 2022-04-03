@@ -29,6 +29,7 @@ const safeObject = require('../util/safe_object');
  *
  * @param {string} mention User mention to generate a URL path for.
  * @returns {string}
+ * @private
  */
 const path = mention => `/users/${mention}`;
 

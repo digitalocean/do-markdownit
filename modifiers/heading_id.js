@@ -32,6 +32,7 @@ const safeObject = require('../util/safe_object');
  *
  * @param {string} string String to be sluggified.
  * @returns {string}
+ * @private
  */
 const sluggify = string => string.toLowerCase()
     .replace(/\W+/g, '-')
@@ -43,6 +44,7 @@ const sluggify = string => string.toLowerCase()
  *
  * @param {import('markdown-it/lib/token')} token Token to extract text from.
  * @returns {string}
+ * @private
  */
 const extractText = token => {
     let res = '';
@@ -67,7 +69,7 @@ const extractText = token => {
  *
  * <h1 id="hello-world">Hello World!</h1>
  *
- * @type {import('markdown-it').PluginWithOptions<HeadingIdOptions>}
+ * @type {import('@types/markdown-it').PluginWithOptions<HeadingIdOptions>}
  */
 module.exports = (md, options) => {
     // Get the correct options
