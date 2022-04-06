@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Don't inject user mentions inside links
+
 
 ## v1.0.2 - 149f660
 
