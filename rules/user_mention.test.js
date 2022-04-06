@@ -54,6 +54,11 @@ it('handles a mention with text before (double new line)', () => {
 `);
 });
 
+it('does not inject mentions inside links', () => {
+    expect(md.render('[test@test](https://test.com)')).toBe(`<p><a href="https://test.com">test@test</a></p>
+`);
+});
+
 const mdPattern = require('markdown-it')().use(require('./user_mention'), { pattern: /[a-z]+/i });
 
 it('handles a mention using a specific pattern', () => {

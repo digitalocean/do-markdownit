@@ -72,6 +72,22 @@ module.exports = (md, options) => {
         // Expect at least one character between the @ and the end
         if (endIdx <= state.pos + 1) return false;
 
+        // Check what tokens are parents by walking backwards in the tokens until we reach the top level
+        const parents = [];
+        let level = state.level;
+        for (let i = state.tokens.length - 1; i >= 0; i--) {
+            if (level === 0) break;
+
+            const token = state.tokens[i];
+            if (token.level === level - 1 && token.nesting > 0) {
+                level = level - token.nesting;
+                parents.push(token);
+            }
+        }
+
+        // Check we're not inside a link
+        if (parents.some(token => token.type === 'link_open')) return false;
+
         // Apply pattern if set
         if (typeof optsObj.pattern === 'object' && Object.prototype.toString.call(optsObj.pattern) === '[object RegExp]') {
             // Check if the mention matches the pattern
@@ -113,5 +129,5 @@ module.exports = (md, options) => {
         return true;
     };
 
-    md.inline.ruler.before('link', 'user_mention', userMentionRule);
+    md.inline.ruler.after('link', 'user_mention', userMentionRule);
 };
