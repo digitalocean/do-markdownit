@@ -59,6 +59,11 @@ it('does not inject mentions inside links', () => {
 `);
 });
 
+it('handles a mention that contains markdown', () => {
+    expect(md.render('**@test**')).toBe(`<p>**<a href="/users/test**">@test**</a></p>
+`);
+});
+
 const mdPattern = require('markdown-it')().use(require('./user_mention'), { pattern: /[a-z]+/i });
 
 it('handles a mention using a specific pattern', () => {
@@ -78,10 +83,15 @@ const mdPath = require('markdown-it')().use(require('./user_mention'), {
      * @param {string} mention User mention to generate a URL path for.
      * @returns {string}
      */
-    path: mention => `/world/${mention}`,
+    path: mention => (mention === 'blank' ? '' : `/world/${mention}`),
 });
 
 it('handles a mention using a specific link path', () => {
     expect(mdPath.render('hello @test')).toBe(`<p>hello <a href="/world/test">@test</a></p>
+`);
+});
+
+it('does not inject mentions when there is no path', () => {
+    expect(mdPath.render('hello @blank')).toBe(`<p>hello @blank</p>
 `);
 });
