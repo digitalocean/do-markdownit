@@ -199,7 +199,7 @@ const plugin = Prism => {
 
             // Split the DOM and get the middle
             // Very loosely equivalent to using DOM Level 2 Range#extractContents
-            const splitOpen = domSplit(ancestor, openNode, openPos, true);
+            const splitOpen = domSplit(ancestor, openNode, openPos);
             [ closeNode, closePos ] = domOffsetNode(closeNode, closePos, root); // Update based on open split
             const splitClose = domSplit(ancestor, closeNode, closePos);
             const middle = splitOpen.right.filter(n => splitClose.left.includes(n));

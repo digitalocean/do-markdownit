@@ -92,6 +92,14 @@ describe('HTML preservation', () => {
 `);
     });
 
+    it('handles HTML spanning multi-line tokens in the code block', () => {
+        expect(mdHtml.render('```go\n<^>data := `<^>\n  <^>test<^>\n<^>`<^>\n```')).toBe(`<pre class="language-go"><code class="language-go"><mark>data <span class="token operator">:=</span> <span class="token string">\`</span></mark><span class="token string">
+  <mark>test</mark>
+<mark>\`</mark></span>
+</code></pre>
+`);
+    });
+
     it('handles HTML outside the code block', () => {
         expect(mdHtml.render('```typescript\n[label test/hello/world.ts]\nconst test: number = 1;\n```')).toBe(`<div class="code-label" title="test/hello/world.ts">test/hello/world.ts</div>
 <pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> test<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
