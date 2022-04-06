@@ -66,6 +66,11 @@ it('handles a mention using a specific pattern', () => {
 `);
 });
 
+it('handles a mention inside other markdown when using a specific pattern', () => {
+    expect(mdPattern.render('hello **@test**, thanks')).toBe(`<p>hello <strong><a href="/users/test">@test</a></strong>, thanks</p>
+`);
+});
+
 const mdPath = require('markdown-it')().use(require('./user_mention'), {
     /**
      * Custom path function, prepending the world subdirectory to the mention.
