@@ -74,13 +74,13 @@ module.exports = (md, options) => {
 
         // Check what tokens are parents by walking backwards in the tokens until we reach the top level
         const parents = [];
-        let level = state.level;
-        for (let i = state.tokens.length - 1; i >= 0; i--) {
-            if (level === 0) break;
+        let { level } = state;
+        for (let i = state.tokens.length - 1; i >= 0; i -= 1) {
+            if (level <= 0) break;
 
             const token = state.tokens[i];
             if (token.level === level - 1 && token.nesting > 0) {
-                level = level - token.nesting;
+                level -= token.nesting;
                 parents.push(token);
             }
         }
