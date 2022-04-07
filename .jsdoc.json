@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "jsdoc-tsimport-plugin"
+  ],
+  "source": {
+    "include": [
+      "index.js",
+      "modifiers",
+      "rules",
+      "util"
+    ],
+    "excludePattern": "\\.test\\.js$"
+  },
+  "opts": {
+    "recurse": true,
+    "package": "package.json",
+    "destination": "jsdoc"
+  }
+}
