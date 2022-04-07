@@ -17,6 +17,10 @@ limitations under the License.
 'use strict';
 
 /**
+ * @module rules/embeds/youtube
+ */
+
+/**
  * Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
  *
  * The basic syntax is `[youtube <id>]`. E.g. `[youtube iom_nhYQIYk]`.
@@ -37,6 +41,7 @@ module.exports = md => {
      * Parsing rule for YouTube markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const youtubeRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -85,6 +90,7 @@ module.exports = md => {
      * Rendering rule for YouTube markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.youtube = (tokens, index) => {
         const token = tokens[index];

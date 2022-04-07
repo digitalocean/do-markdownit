@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module modifiers/fence_label
+ */
+
 const safeObject = require('../util/safe_object');
 
 /**
@@ -51,6 +55,7 @@ module.exports = (md, options) => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the token

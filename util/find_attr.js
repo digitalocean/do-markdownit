@@ -22,6 +22,7 @@ limitations under the License.
  * @param {string} attr Name of the attribute to find.
  * @param {string} tag HTML opening tag to search within.
  * @returns {?{start: number, end: number}}
+ * @private
  */
 module.exports = (attr, tag) => {
     // Find where attrs start and end

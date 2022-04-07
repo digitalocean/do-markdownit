@@ -20,6 +20,7 @@ limitations under the License.
  * Remove all nodes that have no text content recursively, including the given node.
  *
  * @param {Node} node Node to remove empty nodes from (including self).
+ * @private
  */
 const domRemoveEmpty = node => {
     for (const child of [ ...node.childNodes ]) domRemoveEmpty(child);
@@ -33,6 +34,7 @@ const domRemoveEmpty = node => {
  * @param {Node} node Node to find next leaf for.
  * @param {Node} root Node to consider the root of the tree.
  * @returns {?Node}
+ * @private
  */
 const domNextSiblingLeaf = (node, root) => {
     let workingNode = node;
@@ -59,14 +61,15 @@ const domNextSiblingLeaf = (node, root) => {
  * @param {number} offset Text offset to find node for.
  * @param {Node} root Node to consider the root of the tree.
  * @param {boolean} [nextOnExact=false] Move to the next node if the offset is exactly the length of the current node.
- * @returns {[Node,number]} The node the remaining offset is within.
+ * @returns {{node: Node, offset: number}} The node the remaining offset is within.
+ * @private
  */
 const domOffsetNode = (node, offset, root, nextOnExact = false) => {
     // TODO: Support negative offset with domPreviousSiblingLeaf
     if (offset < 0) throw new Error('Negative offset unsupported');
 
     // Short-circuit if we're already at the offset
-    if (offset === 0) return [ node, 0 ];
+    if (offset === 0) return { node, offset: 0 };
 
     // Jump down to the leaf
     let workingNode = node;
@@ -89,7 +92,7 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
         if (workingNode === null) throw new Error('Offset is larger than the document');
     }
 
-    return [ workingNode, workingOffset ];
+    return { node: workingNode, offset: workingOffset };
 };
 
 /**
@@ -100,6 +103,7 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
  * @param {?number} [offset=null] Optional offset to split at.
  * @param {boolean} [nodeInRight=true] If the node to split on should be in the right tree of the split.
  * @returns {{left: Node[], right: Node[]}}
+ * @private
  */
 const domSplit = (root, node, offset = null, nodeInRight = true) => {
     if (!root.contains(node)) throw new Error('Node is not a child of root');
@@ -170,6 +174,7 @@ const domSplit = (root, node, offset = null, nodeInRight = true) => {
  * @param {Node} node1 First node to consider.
  * @param {Node} node2 Second node to consider.
  * @returns {?Node}
+ * @private
  */
 const domCommonAncestor = (node1, node2) => {
     let parent = node1.parentNode;
@@ -185,6 +190,7 @@ const domCommonAncestor = (node1, node2) => {
  *
  * @param {Node} node Node to consider.
  * @returns {boolean}
+ * @private
  */
 const domNextSiblingsEmpty = node => {
     let workingNode = node;
@@ -200,6 +206,7 @@ const domNextSiblingsEmpty = node => {
  *
  * @param {Node} node Node to consider.
  * @returns {boolean}
+ * @private
  */
 const domPreviousSiblingsEmpty = node => {
     let workingNode = node;

@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module modifiers/fence_classes
+ */
+
 const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 const findAttr = require('../util/find_attr');
@@ -59,6 +63,7 @@ module.exports = (md, options) => {
      * @param {string} tagName Name of the HTML tag to filter classes for.
      * @param {string} content Full HTML snippet in which the HTML tag is located.
      * @returns {string}
+     * @private
      */
     const filterTag = (tagName, content) => {
         // Locate the tag
@@ -86,6 +91,7 @@ module.exports = (md, options) => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the rendered content

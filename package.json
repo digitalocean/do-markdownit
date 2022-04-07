@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "eslint \"{*,@(modifiers|rules|script|util)/**/*}.js\"",
     "lint:fix": "npm run lint -- --fix",
+    "jsdoc": "jsdoc -c .jsdoc.json",
     "test": "jest",
     "postinstall": "node script/prism.js"
   },
@@ -27,6 +28,8 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsdoc": "^38.0.6",
     "jest": "^27.5.1",
+    "jsdoc": "^3.6.10",
+    "jsdoc-tsimport-plugin": "^1.0.5",
     "markdown-it": "^12.3.2"
   },
   "dependencies": {

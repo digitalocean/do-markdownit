@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module rules/embeds/terminal_button
+ */
+
 const safeObject = require('../../util/safe_object');
 
 /**
@@ -52,6 +56,7 @@ module.exports = (md, options) => {
      * Parsing rule for terminal markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const terminalRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -97,6 +102,7 @@ module.exports = (md, options) => {
      * Rendering rule for terminal markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.terminal = (tokens, index) => {
         const token = tokens[index];

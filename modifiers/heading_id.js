@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module modifiers/heading_id
+ */
+
 const safeObject = require('../util/safe_object');
 
 /**
@@ -32,6 +36,7 @@ const safeObject = require('../util/safe_object');
  *
  * @param {string} string String to be sluggified.
  * @returns {string}
+ * @private
  */
 const sluggify = string => string.toLowerCase()
     .replace(/\W+/g, '-')
@@ -43,6 +48,7 @@ const sluggify = string => string.toLowerCase()
  *
  * @param {import('markdown-it/lib/token')} token Token to extract text from.
  * @returns {string}
+ * @private
  */
 const extractText = token => {
     let res = '';
@@ -78,6 +84,7 @@ module.exports = (md, options) => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} [original] Original render function. Defaults to `renderToken`.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the token
@@ -114,6 +121,7 @@ module.exports = (md, options) => {
      *
      * @param {function(string, *?): string} original Original render function to wrap.
      * @returns {function(string, *?): string}
+     * @private
      */
     const reset = original => (src, env) => {
         md.headings = [];

@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module modifiers/prismjs
+ */
+
 const Prism = require('../vendor/prismjs');
 const components = require('../vendor/prismjs/components');
 
@@ -39,6 +43,7 @@ const languageAliases = Object.entries(components.languages).reduce((aliases, [ 
  * Helper to load in a language if not yet loaded.
  *
  * @param {string} language Prism language name to be loaded.
+ * @private
  */
 const loadLanguage = language => {
     if (language in Prism.languages) return;
@@ -55,6 +60,7 @@ require('../util/prism_keep_html')(Prism);
  * @param {string} html HTML snippet that contains the code block.
  * @param {{original: string, clean: string}} language Language information (user-provided original, and clean name).
  * @returns {{before: string, after: string, inside: string}}
+ * @private
  */
 const extractCodeBlock = (html, language) => {
     let workingHtml = html;
@@ -136,6 +142,7 @@ module.exports = (md, options) => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the token

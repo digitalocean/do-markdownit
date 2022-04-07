@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module rules/embeds/rsvp_button
+ */
+
 const safeObject = require('../../util/safe_object');
 
 /**
@@ -51,6 +55,7 @@ module.exports = (md, options) => {
      * Parsing rule for RSVP button markup.
      *
      * @type {import('markdown-it/lib/parser_inline').RuleInline}
+     * @private
      */
     const rsvpButtonRule = (state, silent) => {
         // If silent, don't replace
@@ -91,6 +96,7 @@ module.exports = (md, options) => {
      * Rendering rule for RSVP button markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.rsvp_button = (tokens, index) => {
         const token = tokens[index];

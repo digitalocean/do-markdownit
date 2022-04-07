@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module modifiers/fence_prefix
+ */
+
 const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 
@@ -30,6 +34,7 @@ const findTagOpen = require('../util/find_tag_open');
  * @param {import('markdown-it').Token} token MarkdownIt token to determine the prefix for.
  * @param {string} delimiter String to split the token's info string on.
  * @returns {?(function(string, number): string)}
+ * @private
  */
 const getPrefix = (token, delimiter) => {
     // Get all flags passed in token
@@ -41,6 +46,7 @@ const getPrefix = (token, delimiter) => {
      * @param {string[]} classes Classes to apply to the token, overwriting current.
      * @param {string[]} remove Flags to remove from the token's info.
      * @param {string[]} [add=[]] Flags to add to the token's info.
+     * @private
      */
     const update = (classes, remove, add = []) => {
         remove.forEach(flag => flags.delete(flag));
@@ -121,6 +127,7 @@ module.exports = (md, options) => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the token
