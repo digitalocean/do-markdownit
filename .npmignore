@@ -6,3 +6,7 @@
 
 # Exclude the vendored PrismJS files
 vendor/prismjs/
+
+# Exclude generated files
+jsdoc/
+coverage/
