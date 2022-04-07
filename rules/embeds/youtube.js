@@ -17,6 +17,10 @@ limitations under the License.
 'use strict';
 
 /**
+ * @module @digitalocean/do-markdownit/rules/embeds/youtube
+ */
+
+/**
  * Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
  *
  * The basic syntax is `[youtube <id>]`. E.g. `[youtube iom_nhYQIYk]`.

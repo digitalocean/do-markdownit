@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module @digitalocean/do-markdownit/modifiers/fence_pre_attrs
+ */
+
 const findTagOpen = require('../util/find_tag_open');
 
 /**

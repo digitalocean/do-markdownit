@@ -17,6 +17,10 @@ limitations under the License.
 'use strict';
 
 /**
+ * @module @digitalocean/do-markdownit/rules/embeds/asciinema
+ */
+
+/**
  * Add support for [Asciinema](http://asciinema.org/) embeds in Markdown, as block syntax.
  *
  * The basic syntax is `[asciinema <id>]`. E.g. `[asciinema 325730]`.

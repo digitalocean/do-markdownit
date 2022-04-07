@@ -17,6 +17,10 @@ limitations under the License.
 'use strict';
 
 /**
+ * @module @digitalocean/do-markdownit/rules/highlight
+ */
+
+/**
  * Add support for highlight markup across all Markdown, including inside code.
  *
  * The syntax for highlighting text is `<^>`. E.g. `<^>hello world<^>`.

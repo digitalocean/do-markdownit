@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module @digitalocean/do-markdownit/modifiers/fence_classes
+ */
+
 const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 const findAttr = require('../util/find_attr');

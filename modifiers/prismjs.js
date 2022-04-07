@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module @digitalocean/do-markdownit/modifiers/prismjs
+ */
+
 const Prism = require('../vendor/prismjs');
 const components = require('../vendor/prismjs/components');
 

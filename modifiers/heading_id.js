@@ -16,6 +16,10 @@ limitations under the License.
 
 'use strict';
 
+/**
+ * @module @digitalocean/do-markdownit/modifiers/heading_id
+ */
+
 const safeObject = require('../util/safe_object');
 
 /**
