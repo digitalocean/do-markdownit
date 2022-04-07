@@ -98,10 +98,10 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
  * @param {Node} root Node to consider the root of the tree.
  * @param {Node} node Node to split.
  * @param {?number} [offset=null] Optional offset to split at.
- * @param {boolean} [nodeInRight=false] If the node to split on should be in the right tree of the split.
+ * @param {boolean} [nodeInRight=true] If the node to split on should be in the right tree of the split.
  * @returns {{left: Node[], right: Node[]}}
  */
-const domSplit = (root, node, offset = null, nodeInRight = false) => {
+const domSplit = (root, node, offset = null, nodeInRight = true) => {
     if (!root.contains(node)) throw new Error('Node is not a child of root');
 
     // Handle offset in a node
