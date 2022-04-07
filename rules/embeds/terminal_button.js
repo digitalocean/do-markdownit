@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/embeds/terminal_button
+ * @module rules/embeds/terminal_button
  */
 
 const safeObject = require('../../util/safe_object');

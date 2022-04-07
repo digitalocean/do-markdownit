@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/modifiers/fence_classes
+ * @module modifiers/fence_classes
  */
 
 const safeObject = require('../util/safe_object');

@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/embeds/rsvp_button
+ * @module rules/embeds/rsvp_button
  */
 
 const safeObject = require('../../util/safe_object');

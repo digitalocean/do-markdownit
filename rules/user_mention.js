@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/user_mention
+ * @module rules/user_mention
  */
 
 const safeObject = require('../util/safe_object');

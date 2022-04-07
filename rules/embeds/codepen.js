@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/embeds/codepen
+ * @module rules/embeds/codepen
  */
 
 const safeObject = require('../../util/safe_object');

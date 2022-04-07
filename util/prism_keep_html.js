@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/util/prism_keep_html
+ * @module util/prism_keep_html
  */
 
 const htmlparser2 = require('htmlparser2');

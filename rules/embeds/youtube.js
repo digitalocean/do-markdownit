@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/embeds/youtube
+ * @module rules/embeds/youtube
  */
 
 /**

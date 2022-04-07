@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 /**
- * @module @digitalocean/do-markdownit/rules/embeds/dns
+ * @module rules/embeds/dns
  */
 
 const safeObject = require('../../util/safe_object');
