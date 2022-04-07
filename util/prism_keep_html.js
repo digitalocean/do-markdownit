@@ -208,14 +208,15 @@ const plugin = Prism => {
 
             // Apply the offset to each and get the ancestor
             // Very loosely equivalent to creating a DOM Level 2 Range
-            const [ openNode, openPos ] = domOffsetNode(node.openNode, node.openPos, root, true);
-            let [ closeNode, closePos ] = domOffsetNode(node.closeNode, node.closePos, root);
+            const { node: openNode, offset: openPos } = domOffsetNode(node.openNode, node.openPos, root, true);
+            let { node: closeNode, offset: closePos } = domOffsetNode(node.closeNode, node.closePos, root);
             let ancestor = domCommonAncestor(openNode, closeNode);
 
             // Split the DOM and get the middle
             // Very loosely equivalent to using DOM Level 2 Range#extractContents
             const splitOpen = domSplit(ancestor, openNode, openPos);
-            [ closeNode, closePos ] = domOffsetNode(closeNode, closePos, root); // Update based on open split
+            const updatedClose = domOffsetNode(closeNode, closePos, root); // Update based on open split
+            closeNode = updatedClose.node; closePos = updatedClose.offset;
             const splitClose = domSplit(ancestor, closeNode, closePos);
             const middle = splitOpen.right.filter(n => splitClose.left.includes(n));
 

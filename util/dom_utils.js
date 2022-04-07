@@ -61,7 +61,7 @@ const domNextSiblingLeaf = (node, root) => {
  * @param {number} offset Text offset to find node for.
  * @param {Node} root Node to consider the root of the tree.
  * @param {boolean} [nextOnExact=false] Move to the next node if the offset is exactly the length of the current node.
- * @returns {[Node,number]} The node the remaining offset is within.
+ * @returns {{node: Node, offset: number}} The node the remaining offset is within.
  * @private
  */
 const domOffsetNode = (node, offset, root, nextOnExact = false) => {
@@ -69,7 +69,7 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
     if (offset < 0) throw new Error('Negative offset unsupported');
 
     // Short-circuit if we're already at the offset
-    if (offset === 0) return [ node, 0 ];
+    if (offset === 0) return { node, offset: 0 };
 
     // Jump down to the leaf
     let workingNode = node;
@@ -92,7 +92,7 @@ const domOffsetNode = (node, offset, root, nextOnExact = false) => {
         if (workingNode === null) throw new Error('Offset is larger than the document');
     }
 
-    return [ workingNode, workingOffset ];
+    return { node: workingNode, offset: workingOffset };
 };
 
 /**
