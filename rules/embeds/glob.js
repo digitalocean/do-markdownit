@@ -52,6 +52,7 @@ module.exports = md => {
      * Parsing rule for glob markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const globRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -113,6 +114,7 @@ module.exports = md => {
      * Parsing rule to inject the glob script.
      *
      * @type {import('markdown-it').RuleCore}
+     * @private
      */
     const globScriptRule = state => {
         // Check if we need to inject the script
@@ -133,6 +135,7 @@ module.exports = md => {
      * Rendering rule for glob markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.glob = (tokens, index) => {
         const token = tokens[index];

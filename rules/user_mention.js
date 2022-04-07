@@ -29,6 +29,7 @@ const safeObject = require('../util/safe_object');
  *
  * @param {string} mention User mention to generate a URL path for.
  * @returns {string}
+ * @private
  */
 const path = mention => `/users/${mention}`;
 
@@ -52,6 +53,7 @@ module.exports = (md, options) => {
      * Parsing rule for user mentions.
      *
      * @type {import('markdown-it/lib/parser_inline').RuleInline}
+     * @private
      */
     const userMentionRule = (state, silent) => {
         // If silent, don't replace

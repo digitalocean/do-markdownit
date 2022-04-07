@@ -55,6 +55,7 @@ module.exports = md => {
      * Parsing rule for Codepen markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const codepenRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -124,6 +125,7 @@ module.exports = md => {
      * Parsing rule to inject the Codepen script.
      *
      * @type {import('markdown-it').RuleCore}
+     * @private
      */
     const codepenScriptRule = state => {
         // Check if we need to inject the script
@@ -144,6 +146,7 @@ module.exports = md => {
      * Rendering rule for Codepen markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.codepen = (tokens, index) => {
         const token = tokens[index];

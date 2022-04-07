@@ -22,6 +22,7 @@ limitations under the License.
  * @param {string} tag Name of the tag to find.
  * @param {string} html HTML snippet to search within.
  * @returns {?{start: number, end: number}}
+ * @private
  */
 module.exports = (tag, html) => {
     // Find the start of the tag

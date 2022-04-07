@@ -38,6 +38,7 @@ module.exports = md => {
      * Parsing rule for asciinema markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const asciinemaRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -86,6 +87,7 @@ module.exports = md => {
      * Rendering rule for asciinema markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.asciinema = (tokens, index) => {
         const token = tokens[index];

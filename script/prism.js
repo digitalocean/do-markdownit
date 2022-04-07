@@ -24,6 +24,7 @@ const path = require('path');
  *
  * @param {string} dir Directory to explore.
  * @returns {string[]}
+ * @private
  */
 const getFilesInDir = dir => fs.readdirSync(dir, { withFileTypes: true })
     .flatMap(file => (file.isDirectory() ? getFilesInDir(path.join(dir, file.name)) : path.join(dir, file.name)));
@@ -33,6 +34,7 @@ const getFilesInDir = dir => fs.readdirSync(dir, { withFileTypes: true })
  *
  * @param {string} src Directory to copy from.
  * @param {string} dest Directory to copy to.
+ * @private
  */
 const copyRecursively = (src, dest) => {
     const exists = fs.existsSync(src);
@@ -81,6 +83,7 @@ fs.writeFileSync(
  *
  * @param {string} source Source code of the component.
  * @returns {string}
+ * @private
  */
 const template = source => `const component = Prism => {\n\t${source.replace(/\n/g, '\n\t')}\n};\n\nif (typeof module !== 'undefined' && module.exports) {\n\tmodule.exports = component;\n} else {\n\tcomponent(Prism);\n}\n`;
 
@@ -89,6 +92,7 @@ const template = source => `const component = Prism => {\n\t${source.replace(/\n
  *
  * @param {string} source Source code of the component.
  * @returns {string}
+ * @private
  */
 const templateMin = source => `const component=Prism=>{${source}};typeof module!='undefined'&&module.exports?module.exports=component:component(Prism);\n`;
 

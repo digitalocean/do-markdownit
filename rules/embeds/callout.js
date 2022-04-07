@@ -65,6 +65,7 @@ module.exports = (md, options) => {
      * Parsing rule for callout markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const calloutRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -160,6 +161,7 @@ module.exports = (md, options) => {
      * Rendering rule for the start of a callout.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.callout_open = (tokens, index) => {
         const token = tokens[index];
@@ -173,6 +175,7 @@ module.exports = (md, options) => {
      * Rendering rule for the end of a callout.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.callout_close = () => '</div>\n';
 
@@ -180,6 +183,7 @@ module.exports = (md, options) => {
      * Rendering rule for the start of a callout label inside a callout.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.callout_label_open = () => `<p class="${md.utils.escapeHtml(optsObj.labelClass || 'callout-label')}">`;
 
@@ -187,6 +191,7 @@ module.exports = (md, options) => {
      * Rendering rule for the end of a callout label inside a callout.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.callout_label_close = () => '</p>\n';
 };

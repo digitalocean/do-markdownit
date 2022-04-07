@@ -21,6 +21,7 @@ limitations under the License.
  *
  * @param {*} obj Value to check.
  * @returns {boolean}
+ * @private
  */
 const isObject = obj => obj && typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]';
 
@@ -29,6 +30,7 @@ const isObject = obj => obj && typeof obj === 'object' && Object.prototype.toStr
  *
  * @param {Object} original Object to clone.
  * @returns {Object}
+ * @private
  */
 const clone = original => Object.entries(original).reduce((target, [ key, value ]) => ({
     ...target,
@@ -40,5 +42,6 @@ const clone = original => Object.entries(original).reduce((target, [ key, value 
  *
  * @param {*} original Object to clone, if an Object.
  * @returns {Object}
+ * @private
  */
 module.exports = original => (isObject(original) ? clone(original) : ({}));

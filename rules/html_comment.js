@@ -48,6 +48,7 @@ module.exports = (md, options) => {
      * Parsing rule for remove inline HTML comments.
      *
      * @type {import('markdown-it/lib/parser_inline').RuleInline}
+     * @private
      */
     const htmlCommentInlineRule = (state, silent) => {
         // If silent, don't replace
@@ -82,6 +83,7 @@ module.exports = (md, options) => {
      * Parsing rule for remove block HTML comments.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const htmlCommentBlockRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -129,6 +131,7 @@ module.exports = (md, options) => {
      * Noop rendering HTML comments.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.html_comment = () => '';
 };

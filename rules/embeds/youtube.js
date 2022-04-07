@@ -37,6 +37,7 @@ module.exports = md => {
      * Parsing rule for YouTube markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const youtubeRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -85,6 +86,7 @@ module.exports = md => {
      * Rendering rule for YouTube markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.youtube = (tokens, index) => {
         const token = tokens[index];

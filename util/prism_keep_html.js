@@ -49,6 +49,7 @@ const plugin = Prism => {
      * @property {number} [openPos] Position at which this node opens in the open node.
      * @property {Node} [closeNode] Node in which this node closes, when injecting.
      * @property {number} [closePos] Position at which this node closes in the close node.
+     * @private
      */
 
     /**
@@ -56,6 +57,7 @@ const plugin = Prism => {
      *
      * @param {string} html HTML snippet to extract nodes and text from.
      * @returns {{nodes: ExtractedNode[], text: string}}
+     * @private
      */
     const extractTextAndNodes = html => {
         // Track the plain-text and all the HTML nodes we find
@@ -72,6 +74,7 @@ const plugin = Prism => {
              *
              * @param {string} name Name of the opened tag.
              * @param {Object} attributes Attributes of the opened tag.
+             * @private
              */
             onopentag: (name, attributes) => {
                 // Add the node to the stack
@@ -86,12 +89,15 @@ const plugin = Prism => {
              * Track any plain-text encountered.
              *
              * @param {string} value Plain-text to track.
+             * @private
              */
             ontext: value => {
                 text += value;
             },
             /**
              * Remove the top of the stack when a tag is closed, tracking the close position in the text.
+             *
+             * @private
              */
             onclosetag: () => {
                 // TODO: Compare closed tag name to the top of the stack, error if not equal
@@ -129,6 +135,7 @@ const plugin = Prism => {
      * @param {string} html HTML snippet to parse.
      * @param {ExtractedNode[]} nodes Extracted nodes to inject into the parsed DOM.
      * @returns {string}
+     * @private
      */
     const parseAndInsertNodes = (html, nodes) => {
         // Create an empty DOM
@@ -144,6 +151,7 @@ const plugin = Prism => {
              *
              * @param {string} name Name of the opened tag.
              * @param {Object} attributes Attributes of the opened tag.
+             * @private
              */
             onopentag: (name, attributes) => {
                 const node = document.createElement(name);
@@ -155,6 +163,7 @@ const plugin = Prism => {
              * Add any plain-text encountered to the DOM, updating any nodes to be inserted that fall within this text.
              *
              * @param {string} value Plain-text to add to the DOM.
+             * @private
              */
             ontext: value => {
                 const text = document.createTextNode(value);
@@ -178,6 +187,8 @@ const plugin = Prism => {
             },
             /**
              * Use the parent as the current node we're in when a tag is closed.
+             *
+             * @private
              */
             onclosetag: () => {
                 // TODO: Compare closed tag name to the current node, error if not equal
@@ -237,6 +248,7 @@ const plugin = Prism => {
      *
      * @param {function(string, import('prismjs').Grammar, string): string} original Original highlight function to wrap.
      * @returns {function(string, import('prismjs').Grammar, string): string}
+     * @private
      */
     const highlight = original => (html, grammar, language) => {
         // Extract the plain-text and HTML nodes inside the code block
@@ -254,6 +266,7 @@ const plugin = Prism => {
      * Before Prism begins highlighting, disable the default HTML preservation and use raw HTML for the code.
      *
      * @param {Object} env Current Prism environment.
+     * @private
      */
     const beforeSanityHook = env => {
         // Disable the standard keep-markup plugin
@@ -268,6 +281,7 @@ const plugin = Prism => {
      * After Prism has finished highlighting, remove the class used to disable the default HTML preservation.
      *
      * @param {Object} env Current Prism environment.
+     * @private
      */
     const beforeInsertHook = env => {
         // Remove the no-keep-markup class

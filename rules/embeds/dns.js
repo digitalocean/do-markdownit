@@ -49,6 +49,7 @@ module.exports = md => {
      * Parsing rule for DNS lookup markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
+     * @private
      */
     const dnsRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
@@ -98,6 +99,7 @@ module.exports = md => {
      * Parsing rule to inject the DNS lookup script.
      *
      * @type {import('markdown-it').RuleCore}
+     * @private
      */
     const dnsScriptRule = state => {
         // Check if we need to inject the script
@@ -118,6 +120,7 @@ module.exports = md => {
      * Rendering rule for DNS lookup markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     md.renderer.rules.dns = (tokens, index) => {
         const token = tokens[index];

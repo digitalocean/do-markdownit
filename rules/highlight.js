@@ -46,6 +46,7 @@ module.exports = md => {
      * Parsing rule for highlight markup.
      *
      * @type {import('markdown-it/lib/parser_inline').RuleInline}
+     * @private
      */
     const highlightRule = (state, silent) => {
         // If silent, don't replace
@@ -90,6 +91,7 @@ module.exports = md => {
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} original Original render function to wrap.
      * @returns {import('markdown-it/lib/renderer').RenderRule}
+     * @private
      */
     const code = original => (tokens, idx, options, env, self) => original(tokens, idx, options, env, self)
         // Run the original renderer, replacing any pairs of escaped markers
