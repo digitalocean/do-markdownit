@@ -10,6 +10,9 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.0.3 - 93d59c0
+
 - (patch) Update jsdoc to mark @modules and @privates
 - (patch) Fix issue with HTML preservation inside a multi-line token
 - (patch) Don't inject user mentions inside links
