@@ -32,6 +32,11 @@ it('handles glitch embeds with no slug (no embed)', () => {
 `);
 });
 
+it('handles glitch embeds that are unclosed (no embed)', () => {
+    expect(md.render('[glitch hello-digitalocean')).toBe(`<p>[glitch hello-digitalocean</p>
+`);
+});
+
 it('handles glitch embeds with a custom height', () => {
     expect(md.render('[glitch hello-digitalocean 512]')).toBe(`<div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
     <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">

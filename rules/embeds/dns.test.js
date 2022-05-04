@@ -33,6 +33,11 @@ it('handles dns embeds with no domain (no embed)', () => {
 `);
 });
 
+it('handles dns embeds that are unclosed (no embed)', () => {
+    expect(md.render('[dns digitalocean.com')).toBe(`<p>[dns digitalocean.com</p>
+`);
+});
+
 it('handles dns embeds with a single record', () => {
     expect(md.render('[dns digitalocean.com MX]')).toBe(`<div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="MX">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">

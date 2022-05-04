@@ -30,6 +30,11 @@ it('handles youtube embeds with no id (no embed)', () => {
 `);
 });
 
+it('handles youtube embeds that are unclosed (no embed)', () => {
+    expect(md.render('[youtube iom_nhYQIYk')).toBe(`<p>[youtube iom_nhYQIYk</p>
+`);
+});
+
 it('handles youtube embeds without width', () => {
     expect(md.render('[youtube iom_nhYQIYk 380]')).toBe(`<iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="380" width="480" frameborder="0" allowfullscreen>
     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>

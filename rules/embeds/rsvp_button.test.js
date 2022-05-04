@@ -28,6 +28,11 @@ it('handles rsvp button embeds with no id (no embed)', () => {
 `);
 });
 
+it('handles rsvp button embeds that are unclosed (no embed)', () => {
+    expect(md.render('[rsvp_button 12345')).toBe(`<p>[rsvp_button 12345</p>
+`);
+});
+
 it('handles rsvp button embeds with title set', () => {
     expect(md.render('[rsvp_button 12345 "button title"]')).toBe(`<p><button data-js="rsvp-button" data-form-id="12345" disabled="disabled" class="rsvp">button title</button></p>
 `);
