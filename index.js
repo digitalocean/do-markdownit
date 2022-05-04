@@ -32,7 +32,7 @@ const safeObject = require('./util/safe_object');
  * @property {false} [glob] Disable glob embeds.
  * @property {false} [dns] Disable DNS lookup embeds.
  * @property {false} [asciinema] Disable Asciinema embeds.
- * @property {false} [codepen] Disable Codepen embeds.
+ * @property {false} [codepen] Disable CodePen embeds.
  * @property {false} [glitch] Disable Glitch embeds.
  * @property {false} [youtube] Disable YouTube embeds.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.

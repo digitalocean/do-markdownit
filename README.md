@@ -293,17 +293,17 @@ _No options are available for this plugin._
 
 ### codepen
 
-Add support for [Codepen](https://codepen.io/) embeds in Markdown, as block syntax.
+Add support for [CodePen](https://codepen.io/) embeds in Markdown, as block syntax.
 
 The basic syntax is `[codepen <user> <hash>]`. E.g. `[codepen AlbertFeynman gjpgjN]`.
 After the user and hash, assorted space-separated flags can be added (in any combination/order):
 
-- Add `lazy` to set the Codepen embed to not run until the user interacts with it.
-- Add `dark` to set the Codepen embed to use dark mode.
-- Add `html` to set the Codepen embed to default to the HTML tab.
-- Add `css` to set the Codepen embed to default to the CSS tab.
-- Add `js` to set the Codepen embed to default to the JavaScript tab.
-- Add `editable` to set the Codepen embed to allow the code to be edited (requires the embedded user to be Pro).
+- Add `lazy` to set the CodePen embed to not run until the user interacts with it.
+- Add `dark` to set the CodePen embed to use dark mode.
+- Add `html` to set the CodePen embed to default to the HTML tab.
+- Add `css` to set the CodePen embed to default to the CSS tab.
+- Add `js` to set the CodePen embed to default to the JavaScript tab.
+- Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
 - Add any set of digits to set the height of the embed (in pixels).
 
 If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
@@ -680,7 +680,7 @@ in the core library.
 
 The `rules` directory contains plugins that add net-new syntax rules to the Markdown-It parser, both
 inline and block. Within this is the `embeds` subdirectory, which contains plugins that add what we
-call embed extensions to Markdown, such as embedding a Codepen, YouTube video, etc.
+call embed extensions to Markdown, such as embedding a CodePen, YouTube video, etc.
 
 Every plugin that is written should also have tests written for it, ensuring that it functions as
 expected. As well as isolated tests, example usage of the plugin should be added to
