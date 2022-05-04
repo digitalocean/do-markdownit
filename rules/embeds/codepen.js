@@ -166,12 +166,14 @@ module.exports = md => {
 
         // Escape some HTML
         const user = md.utils.escapeHtml(token.codepen.user);
+        const userUrl = encodeURIComponent(token.codepen.user);
         const hash = md.utils.escapeHtml(token.codepen.hash);
+        const hashUrl = encodeURIComponent(token.codepen.hash);
         const height = md.utils.escapeHtml(token.codepen.height);
 
         // Return the HTML
         return `<p class="codepen"${attrHeight}${attrTheme}${attrTab}${attrUser}${attrHash}${attrLazy}${attrEditable} style="height: ${height}px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/${user}/pen/${hash}">${hash} by ${user}</a> (<a href="https://codepen.io/${user}">@${user}</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+    <span>See the Pen <a href="https://codepen.io/${userUrl}/pen/${hashUrl}">${hash} by ${user}</a> (<a href="https://codepen.io/${userUrl}">@${user}</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>\n`;
     };
 };
