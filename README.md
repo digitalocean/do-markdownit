@@ -332,6 +332,45 @@ Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
 
+### glitch
+
+Add support for [Glitch](https://glitch.com/) embeds in Markdown, as block syntax.
+
+The basic syntax is `[glitch <slug>]`. E.g. `[glitch hello-digitalocean]`.
+After the slug, some space-separated flags can be added (in any combination/order):
+
+- Add `noattr` to tell Glitch to not show the authors of the project.
+- Add `code` to set the Glitch embed to show the project code by default.
+- Add `notree` to set the Glitch embed to collapse the file tree by default.
+- Add any set of digits to set the height of the embed (in pixels).
+
+**Example Markdown input:**
+
+    [glitch hello-digitalocean]
+
+    [glitch hello-digitalocean code 512 notree]
+
+**Example HTML output:**
+
+    <div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+            <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+        </iframe>
+    </div>
+
+    <div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
+        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+            <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+        </iframe>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `glitch` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+
 ### youtube
 
 Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
