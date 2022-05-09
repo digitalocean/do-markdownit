@@ -268,6 +268,10 @@ Hiding the file tree by default when showing the Glitch project code:
 
 [glitch hello-digitalocean code notree]
 
+Setting a default file to show, and highlighting lines in the file:
+
+[glitch hello-digitalocean code path=src/app.jsx highlights=15,25]
+
 Removing the author attribution from the Glitch embed:
 
 [glitch hello-digitalocean noattr]

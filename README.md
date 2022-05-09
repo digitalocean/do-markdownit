@@ -342,13 +342,15 @@ After the slug, some space-separated flags can be added (in any combination/orde
 - Add `noattr` to tell Glitch to not show the authors of the project.
 - Add `code` to set the Glitch embed to show the project code by default.
 - Add `notree` to set the Glitch embed to collapse the file tree by default.
+- Add `path=` followed by a file path to set the Glitch embed to show a specific file by default.
+- Add `highlights=` followed by a comma-separated list of line numbers to tell Glitch to highlight those lines.
 - Add any set of digits to set the height of the embed (in pixels).
 
 **Example Markdown input:**
 
     [glitch hello-digitalocean]
 
-    [glitch hello-digitalocean code 512 notree]
+    [glitch hello-digitalocean code 512 notree path=src/app.jsx]
 
 **Example HTML output:**
 
@@ -359,7 +361,7 @@ After the slug, some space-separated flags can be added (in any combination/orde
     </div>
 
     <div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
-        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true&path=src%2Fapp.jsx" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
             <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
         </iframe>
     </div>

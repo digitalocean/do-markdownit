@@ -29,12 +29,14 @@ limitations under the License.
  * - Add `noattr` to tell Glitch to not show the authors of the project.
  * - Add `code` to set the Glitch embed to show the project code by default.
  * - Add `notree` to set the Glitch embed to collapse the file tree by default.
+ * - Add `path=` followed by a file path to set the Glitch embed to show a specific file by default.
+ * - Add `highlights=` followed by a comma-separated list of line numbers to tell Glitch to highlight those lines.
  * - Add any set of digits to set the height of the embed (in pixels).
  *
  * @example
  * [glitch hello-digitalocean]
  *
- * [glitch hello-digitalocean code 512 notree]
+ * [glitch hello-digitalocean code 512 notree path=src/app.jsx]
  *
  * <div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
  *     <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
@@ -43,7 +45,7 @@ limitations under the License.
  * </div>
  *
  * <div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
- *     <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+ *     <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true&path=src%2Fapp.jsx" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
  *         <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
  *     </iframe>
  * </div>
@@ -72,7 +74,7 @@ module.exports = md => {
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
         // Check for glitch match
-        const match = currentLine.match(/^\[glitch (\S+)((?: (?:noattr|code|notree|\d+))*)\]$/);
+        const match = currentLine.match(/^\[glitch (\S+)((?: (?:noattr|code|notree|path=\S+|highlights=\d+(?:,\d+)*|\d+))*)\]$/);
         if (!match) return false;
 
         // Get the slug
@@ -80,11 +82,11 @@ module.exports = md => {
         if (!slug) return false;
 
         // Get the raw flags
-        const flags = match[2];
+        const flags = match[2].split(' ');
 
         // Get the height
-        const heightMatch = flags.match(/\d+/);
-        const height = heightMatch ? Number(heightMatch[0]) : 256;
+        const heightMatch = flags.find(flag => flag.match(/^\d+$/));
+        const height = Number(heightMatch) || 256;
 
         // Defines if the embed should hide attribution
         const noAttr = flags.includes('noattr');
@@ -95,8 +97,13 @@ module.exports = md => {
         // Defines if the embed should default to collpasing the file tree
         const noTree = flags.includes('notree');
 
-        // TODO: Support path query param
-        // TODO: Support highlights query param (comma-separated list of line numbers)
+        // Get the path
+        const pathMatch = flags.find(flag => flag.match(/^path=\S+$/));
+        const path = pathMatch && pathMatch.slice(5);
+
+        // Get the highlights
+        const highlightsMatch = flags.find(flag => flag.match(/^highlights=\d+(?:,\d+)*$/));
+        const highlights = highlightsMatch && highlightsMatch.slice(11).split(',').map(Number);
 
         // Update the pos for the parser
         state.line = startLine + 1;
@@ -105,7 +112,7 @@ module.exports = md => {
         const token = state.push('glitch', 'glitch', 0);
         token.block = true;
         token.markup = match[0];
-        token.glitch = { slug, height, noAttr, code, noTree };
+        token.glitch = { slug, height, noAttr, code, noTree, path, highlights };
 
         // Done
         return true;
@@ -131,6 +138,8 @@ module.exports = md => {
         if (token.glitch.noAttr) params.append('attributionHidden', 'true');
         params.append('previewSize', token.glitch.code ? '0' : '100');
         if (token.glitch.noTree) params.append('sidebarCollapsed', 'true');
+        if (token.glitch.path) params.append('path', token.glitch.path);
+        if (token.glitch.highlights) params.append('highlights', token.glitch.highlights.join(','));
 
         // Return the HTML
         return `<div class="glitch-embed-wrap" style="height: ${token.glitch.height}px; width: 100%;">
