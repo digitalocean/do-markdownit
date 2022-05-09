@@ -139,6 +139,7 @@ module.exports = {
                 ignoreComments: true,
                 ignoreStrings: true,
                 ignoreTemplateLiterals: true,
+                ignoreRegExpLiterals: true,
             },
         ],
         strict: [
