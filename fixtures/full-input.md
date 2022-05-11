@@ -290,7 +290,7 @@ Setting a custom number of cols and rows for the Asciinema terminal:
 ## Step 5 — Tutorials
 
 Certain features of our Markdown engine are designed specifically for our tutorial content-types.
-These may not be enabled in all contexts on the DigitalOcean community, but are enabled by default in the do-markdownit plugin.
+These may not be enabled in all contexts in the DigitalOcean community, but are enabled by default in the do-markdownit plugin.
 
 [rsvp_button 1234 "Marketo RSVP buttons use the `rsvp_button` flag"]
 
