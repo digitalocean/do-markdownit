@@ -23,17 +23,17 @@ limitations under the License.
 const safeObject = require('../../util/safe_object');
 
 /**
- * Add support for [Codepen](https://codepen.io/) embeds in Markdown, as block syntax.
+ * Add support for [CodePen](https://codepen.io/) embeds in Markdown, as block syntax.
  *
  * The basic syntax is `[codepen <user> <hash>]`. E.g. `[codepen AlbertFeynman gjpgjN]`.
  * After the user and hash, assorted space-separated flags can be added (in any combination/order):
  *
- * - Add `lazy` to set the Codepen embed to not run until the user interacts with it.
- * - Add `dark` to set the Codepen embed to use dark mode.
- * - Add `html` to set the Codepen embed to default to the HTML tab.
- * - Add `css` to set the Codepen embed to default to the CSS tab.
- * - Add `js` to set the Codepen embed to default to the JavaScript tab.
- * - Add `editable` to set the Codepen embed to allow the code to be edited (requires the embedded user to be Pro).
+ * - Add `lazy` to set the CodePen embed to not run until the user interacts with it.
+ * - Add `dark` to set the CodePen embed to use dark mode.
+ * - Add `html` to set the CodePen embed to default to the HTML tab.
+ * - Add `css` to set the CodePen embed to default to the CSS tab.
+ * - Add `js` to set the CodePen embed to default to the JavaScript tab.
+ * - Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
  * - Add any set of digits to set the height of the embed (in pixels).
  *
  * If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
@@ -56,7 +56,7 @@ const safeObject = require('../../util/safe_object');
  */
 module.exports = md => {
     /**
-     * Parsing rule for Codepen markup.
+     * Parsing rule for CodePen markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
      * @private
@@ -126,7 +126,7 @@ module.exports = md => {
     md.block.ruler.before('paragraph', 'codepen', codepenRule);
 
     /**
-     * Parsing rule to inject the Codepen script.
+     * Parsing rule to inject the CodePen script.
      *
      * @type {import('markdown-it').RuleCore}
      * @private
@@ -147,7 +147,7 @@ module.exports = md => {
     md.core.ruler.push('codepen_script', codepenScriptRule);
 
     /**
-     * Rendering rule for Codepen markup.
+     * Rendering rule for CodePen markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
      * @private
@@ -166,12 +166,14 @@ module.exports = md => {
 
         // Escape some HTML
         const user = md.utils.escapeHtml(token.codepen.user);
+        const userUrl = encodeURIComponent(token.codepen.user);
         const hash = md.utils.escapeHtml(token.codepen.hash);
+        const hashUrl = encodeURIComponent(token.codepen.hash);
         const height = md.utils.escapeHtml(token.codepen.height);
 
         // Return the HTML
         return `<p class="codepen"${attrHeight}${attrTheme}${attrTab}${attrUser}${attrHash}${attrLazy}${attrEditable} style="height: ${height}px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/${user}/pen/${hash}">${hash} by ${user}</a> (<a href="https://codepen.io/${user}">@${user}</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+    <span>See the Pen <a href="https://codepen.io/${userUrl}/pen/${hashUrl}">${hash} by ${user}</a> (<a href="https://codepen.io/${userUrl}">@${user}</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>\n`;
     };
 };

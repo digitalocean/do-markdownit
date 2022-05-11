@@ -33,6 +33,11 @@ it('handles glob embeds with no tests (no embed)', () => {
 `);
 });
 
+it('handles glob embeds that are unclosed (no embed)', () => {
+    expect(md.render('[glob *.js /')).toBe(`<p>[glob *.js /</p>
+`);
+});
+
 it('handles glob embeds with markdown inside', () => {
     expect(md.render('[glob **/**/*.js /]')).toBe(`<div data-glob-tool-embed data-glob-string="**/**/*.js" data-glob-test-0="/">
     <a href="https://www.digitalocean.com/community/tools/glob?glob=**%2F**%2F*.js&tests=%2F" target="_blank">

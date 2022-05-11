@@ -293,17 +293,17 @@ _No options are available for this plugin._
 
 ### codepen
 
-Add support for [Codepen](https://codepen.io/) embeds in Markdown, as block syntax.
+Add support for [CodePen](https://codepen.io/) embeds in Markdown, as block syntax.
 
 The basic syntax is `[codepen <user> <hash>]`. E.g. `[codepen AlbertFeynman gjpgjN]`.
 After the user and hash, assorted space-separated flags can be added (in any combination/order):
 
-- Add `lazy` to set the Codepen embed to not run until the user interacts with it.
-- Add `dark` to set the Codepen embed to use dark mode.
-- Add `html` to set the Codepen embed to default to the HTML tab.
-- Add `css` to set the Codepen embed to default to the CSS tab.
-- Add `js` to set the Codepen embed to default to the JavaScript tab.
-- Add `editable` to set the Codepen embed to allow the code to be edited (requires the embedded user to be Pro).
+- Add `lazy` to set the CodePen embed to not run until the user interacts with it.
+- Add `dark` to set the CodePen embed to use dark mode.
+- Add `html` to set the CodePen embed to default to the HTML tab.
+- Add `css` to set the CodePen embed to default to the CSS tab.
+- Add `js` to set the CodePen embed to default to the JavaScript tab.
+- Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
 - Add any set of digits to set the height of the embed (in pixels).
 
 If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
@@ -328,6 +328,47 @@ If any two or more of `html`, `css`, and `js` are added, HTML will be preferred,
 **Options:**
 
 Pass options for this plugin as the `codepen` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+
+### glitch
+
+Add support for [Glitch](https://glitch.com/) embeds in Markdown, as block syntax.
+
+The basic syntax is `[glitch <slug>]`. E.g. `[glitch hello-digitalocean]`.
+After the slug, some space-separated flags can be added (in any combination/order):
+
+- Add `noattr` to tell Glitch to not show the authors of the project.
+- Add `code` to set the Glitch embed to show the project code by default.
+- Add `notree` to set the Glitch embed to collapse the file tree by default.
+- Add `path=` followed by a file path to set the Glitch embed to show a specific file by default.
+- Add `highlights=` followed by a comma-separated list of line numbers to tell Glitch to highlight those lines.
+- Add any set of digits to set the height of the embed (in pixels).
+
+**Example Markdown input:**
+
+    [glitch hello-digitalocean]
+
+    [glitch hello-digitalocean code 512 notree path=src/app.jsx]
+
+**Example HTML output:**
+
+    <div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+            <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+        </iframe>
+    </div>
+
+    <div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
+        <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true&path=src%2Fapp.jsx" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+            <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+        </iframe>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `glitch` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
@@ -680,7 +721,7 @@ in the core library.
 
 The `rules` directory contains plugins that add net-new syntax rules to the Markdown-It parser, both
 inline and block. Within this is the `embeds` subdirectory, which contains plugins that add what we
-call embed extensions to Markdown, such as embedding a Codepen, YouTube video, etc.
+call embed extensions to Markdown, such as embedding a CodePen, YouTube video, etc.
 
 Every plugin that is written should also have tests written for it, ensuring that it functions as
 expected. As well as isolated tests, example usage of the plugin should be added to

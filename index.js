@@ -32,7 +32,8 @@ const safeObject = require('./util/safe_object');
  * @property {false} [glob] Disable glob embeds.
  * @property {false} [dns] Disable DNS lookup embeds.
  * @property {false} [asciinema] Disable Asciinema embeds.
- * @property {false} [codepen] Disable Codepen embeds.
+ * @property {false} [codepen] Disable CodePen embeds.
+ * @property {false} [glitch] Disable Glitch embeds.
  * @property {false} [youtube] Disable YouTube embeds.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
@@ -92,6 +93,10 @@ module.exports = (md, options) => {
 
     if (optsObj.codepen !== false) {
         md.use(require('./rules/embeds/codepen'), safeObject(optsObj.codepen));
+    }
+
+    if (optsObj.glitch !== false) {
+        md.use(require('./rules/embeds/glitch'), safeObject(optsObj.glitch));
     }
 
     if (optsObj.youtube !== false) {

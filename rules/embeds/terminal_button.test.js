@@ -30,6 +30,11 @@ it('handles terminal embeds with no image (no embed)', () => {
 `);
 });
 
+it('handles terminal embeds that are unclosed (no embed)', () => {
+    expect(md.render('[terminal ubuntu:focal')).toBe(`<p>[terminal ubuntu:focal</p>
+`);
+});
+
 it('handles terminal embeds with title set', () => {
     expect(md.render('[terminal ubuntu:focal button title]')).toBe(`<button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
     button title

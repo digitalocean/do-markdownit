@@ -194,13 +194,19 @@ You can also mention users by username:
 
 ## Step 4 — Embeds
 
+### YouTube
+
 Embedding a YouTube video (id, height, width):
 
 [youtube iom_nhYQIYk 225 400]
 
+### DNS
+
 Embedding DNS record lookups (hostname, record types...):
 
 [dns digitalocean.com A AAAA]
+
+### Glob
 
 Demonstrating how glob matching works (pattern, tests...):
 
@@ -213,6 +219,8 @@ a/b.js
 c/d.js
 e.jsx
 f.md]
+
+### CodePen
 
 Embedding a CodePen example (username, pen ID, flags...):
 
@@ -230,7 +238,7 @@ Setting the CodePen embed to only run when clicked:
 
 [codepen MattCowley vwPzeX lazy]
 
-Changing the default table of a CodePen embed:
+Changing the default tab of a CodePen embed (can be html, css, or js):
 
 [codepen MattCowley vwPzeX css]
 
@@ -241,6 +249,34 @@ Making the CodePen editable by the user (requires a Pro CodePen account):
 Combining different CodePen embed flags together is also supported:
 
 [codepen MattCowley vwPzeX dark css 384]
+
+### Glitch
+
+Embedding a Glitch project (slug, flags...):
+
+[glitch hello-digitalocean]
+
+Setting a custom height for the Glitch project:
+
+[glitch hello-digitalocean 512]
+
+Showing the Glitch project code by default:
+
+[glitch hello-digitalocean code]
+
+Hiding the file tree by default when showing the Glitch project code:
+
+[glitch hello-digitalocean code notree]
+
+Setting a default file to show, and highlighting lines in the file:
+
+[glitch hello-digitalocean code path=src/app.jsx highlights=15,25]
+
+Removing the author attribution from the Glitch embed:
+
+[glitch hello-digitalocean noattr]
+
+### Asciinema
 
 Embedding a terminal recording from Asciinema:
 
@@ -253,13 +289,12 @@ Setting a custom number of cols and rows for the Asciinema terminal:
 
 ## Step 5 — Tutorials
 
-Certain features of our Markdown engine are designed specifically for our tutorials and are locked behind additional flags.
+Certain features of our Markdown engine are designed specifically for our tutorial content-types.
+These may not be enabled in all contexts in the DigitalOcean community, but are enabled by default in the do-markdownit plugin.
 
-<p style='color: red;'>Raw HTML is supported with the `html` flag.</p>
+[rsvp_button 1234 "Marketo RSVP buttons use the `rsvp_button` flag"]
 
-[rsvp_button 1234 "Marketo RSVP buttons are behind the `rsvp_button` flag"]
-
-[terminal ubuntu:focal Terminals are behind the `terminal` flag]
+[terminal ubuntu:focal Terminal buttons are behind the `terminal` flag]
 
 
 ## Conclusion

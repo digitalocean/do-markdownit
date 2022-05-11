@@ -206,16 +206,19 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <p>You can also mention users by username:</p>
 <p><a href="/users/MattIPv4">@MattIPv4</a></p>
 <h2 id="step-4-embeds">Step 4 — Embeds</h2>
+<h3 id="youtube">YouTube</h3>
 <p>Embedding a YouTube video (id, height, width):</p>
 <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="225" width="400" frameborder="0" allowfullscreen>
     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
 </iframe>
+<h3 id="dns">DNS</h3>
 <p>Embedding DNS record lookups (hostname, record types…):</p>
 <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>
 </div>
+<h3 id="glob">Glob</h3>
 <p>Demonstrating how glob matching works (pattern, tests…):</p>
 <div data-glob-tool-embed data-glob-string="**/*.js" data-glob-test-0="a/b.js" data-glob-test-1="c/d.js" data-glob-test-2="e.jsx" data-glob-test-3="f.md">
     <a href="https://www.digitalocean.com/community/tools/glob?glob=**%2F*.js&tests=a%2Fb.js&tests=c%2Fd.js&tests=e.jsx&tests=f.md" target="_blank">
@@ -228,6 +231,7 @@ Please refer to our style and formatting guidelines for more detailed explanatio
         Explore <code>**/*.js</code> as a glob string in our glob testing tool
     </a>
 </div>
+<h3 id="codepen">CodePen</h3>
 <p>Embedding a CodePen example (username, pen ID, flags…):</p>
 <p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
@@ -244,7 +248,7 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" data-preview="true" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
-<p>Changing the default table of a CodePen embed:</p>
+<p>Changing the default tab of a CodePen embed (can be html, css, or js):</p>
 <p class="codepen" data-height="256" data-theme-id="light" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
@@ -256,6 +260,44 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <p class="codepen" data-height="384" data-theme-id="dark" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 384px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
+<h3 id="glitch">Glitch</h3>
+<p>Embedding a Glitch project (slug, flags…):</p>
+<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<p>Setting a custom height for the Glitch project:</p>
+<div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<p>Showing the Glitch project code by default:</p>
+<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<p>Hiding the file tree by default when showing the Glitch project code:</p>
+<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<p>Setting a default file to show, and highlighting lines in the file:</p>
+<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&path=src%2Fapp.jsx&highlights=15%2C25" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<p>Removing the author attribution from the Glitch embed:</p>
+<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
+    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?attributionHidden=true&previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
+        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
+    </iframe>
+</div>
+<h3 id="asciinema">Asciinema</h3>
 <p>Embedding a terminal recording from Asciinema:</p>
 <script src="https://asciinema.org/a/239367.js" id="asciicast-239367" async data-cols="80" data-rows="24"></script>
 <noscript>
@@ -267,11 +309,11 @@ Please refer to our style and formatting guidelines for more detailed explanatio
     <a href="https://asciinema.org/a/239367" target="_blank">View asciinema recording</a>
 </noscript>
 <h2 id="step-5-tutorials">Step 5 — Tutorials</h2>
-<p>Certain features of our Markdown engine are designed specifically for our tutorials and are locked behind additional flags.</p>
-<p>&lt;p style=‘color: red;’&gt;Raw HTML is supported with the <code>html</code> flag.&lt;/p&gt;</p>
-<p>[rsvp_button 1234 “Marketo RSVP buttons are behind the <code>rsvp_button</code> flag”]</p>
+<p>Certain features of our Markdown engine are designed specifically for our tutorial content-types.
+These may not be enabled in all contexts in the DigitalOcean community, but are enabled by default in the do-markdownit plugin.</p>
+<p><button data-js="rsvp-button" data-form-id="1234" disabled="disabled" class="rsvp">Marketo RSVP buttons use the `rsvp_button` flag</button></p>
 <button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
-    Terminals are behind the `terminal` flag
+    Terminal buttons are behind the `terminal` flag
 </button>
 <h2 id="conclusion">Conclusion</h2>
 <p>Please refer to our <a href="https://do.co/style">writing guidelines</a> for more detailed explanations on our style and formatting.</p>

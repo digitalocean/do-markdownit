@@ -31,6 +31,11 @@ it('handles codepen embeds with no hash (no embed)', () => {
 `);
 });
 
+it('handles codepen embeds that are unclosed (no embed)', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN')).toBe(`<p>[codepen AlbertFeynman gjpgjN</p>
+`);
+});
+
 it('handles codepen embeds with a custom height', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN 512]')).toBe(`<p class="codepen" data-height="512" data-theme-id="light" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 512px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
