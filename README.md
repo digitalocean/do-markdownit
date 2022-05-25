@@ -192,6 +192,36 @@ Set this property to `false` to disable this plugin.
 
 - `className` (`string`, optional, defaults to `'rsvp'`): Class to use for the button.
 
+### terminal_button
+
+Add support for terminal buttons in Markdown, as block syntax.
+
+The basic syntax is `[terminal <image name>]`. E.g. `[terminal ubuntu:focal]`.
+An optional button title can be provided after the image name. E.g. `[terminal ubuntu:focal Start Terminal]`.
+
+The buttons are disabled by default and do not have any event listeners.
+Once rendered, you should bind your own event listeners and enable the buttons.
+
+You can find all the buttons in the DOM by looking for the `data-js` attribute being set to `terminal`.
+The image name will be set as the `data-docker-image` attribute.
+
+**Example Markdown input:**
+
+    [terminal ubuntu:focal button title]
+
+**Example HTML output:**
+
+    <button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
+        button title
+    </button>
+
+**Options:**
+
+Pass options for this plugin as the `terminal_button` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+
 ### glob
 
 Add support for [glob](https://www.digitalocean.com/community/tools/glob) embeds in Markdown, as block syntax.
@@ -373,6 +403,50 @@ Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
 
+### caniuse
+
+Add support for [CanIUse](https://caniuse.com/) embeds in Markdown, as block syntax.
+Uses https://caniuse.bitsofco.de/ to provide interactive embeds from CanIUse data.
+
+The basic syntax is `[caniuse <feature>]`. E.g. `[caniuse css-grid]`.
+After the slug, some space-separated flags can be added (in any combination/order):
+
+- Add `past=` followed by a number to control how many previous browser versions to include (default is 1, supported 0-5).
+- Add `future=` followed by a number to control how many previous browser versions to include (default is 1, supported 0-3).
+- Add `accessible` to set the default color scheme for the CanIUse embed to be accessible colors.
+
+**Example Markdown input:**
+
+    [caniuse css-grid]
+
+    [caniuse css-grid past=5 future=3 accessible]
+
+**Example HTML output:**
+
+    <p class="ciu_embed" data-feature="css-grid" data-periods="future_1,current,past_1" data-accessible-colours="false">
+        <picture>
+            <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
+            <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
+            <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
+        </picture>
+    </p>
+
+    <p class="ciu_embed" data-periods="future_3,future_2,future_1,current,past_1,past_2,past_3,past_4,past_5" data-accessible-colours="true">
+        <picture>
+            <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/ambient-light.webp" />
+            <source type="image/png" srcset="https://caniuse.bitsofco.de/image/ambient-light.png" />
+            <img src="https://caniuse.bitsofco.de/image/ambient-light.jpg" alt="Data on support for the ambient-light feature across the major browsers from caniuse.com" />
+        </picture>
+    </p>
+    <script async defer src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed@v1.3.0/public/caniuse-embed.min.js" type="text/javascript"></script>
+
+**Options:**
+
+Pass options for this plugin as the `caniuse` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+
 ### youtube
 
 Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
@@ -394,36 +468,6 @@ The default value for height is 270, and for width is 480.
 **Options:**
 
 Pass options for this plugin as the `youtube` property of the `do-markdownit` plugin options.
-Set this property to `false` to disable this plugin.
-
-_No options are available for this plugin._
-
-### terminal_button
-
-Add support for terminal buttons in Markdown, as block syntax.
-
-The basic syntax is `[terminal <image name>]`. E.g. `[terminal ubuntu:focal]`.
-An optional button title can be provided after the image name. E.g. `[terminal ubuntu:focal Start Terminal]`.
-
-The buttons are disabled by default and do not have any event listeners.
-Once rendered, you should bind your own event listeners and enable the buttons.
-
-You can find all the buttons in the DOM by looking for the `data-js` attribute being set to `terminal`.
-The image name will be set as the `data-docker-image` attribute.
-
-**Example Markdown input:**
-
-    [terminal ubuntu:focal button title]
-
-**Example HTML output:**
-
-    <button data-js="terminal" data-docker-image="ubuntu:focal" disabled="disabled" class="terminal">
-        button title
-    </button>
-
-**Options:**
-
-Pass options for this plugin as the `terminal_button` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
