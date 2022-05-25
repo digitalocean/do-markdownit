@@ -149,7 +149,7 @@ module.exports = md => {
         const token = tokens[index];
 
         // Construct the attrs
-        const attrPeriodsFuture = Array(token.caniuse.future).fill('').map((_, i) => `future_${i + 1}`);
+        const attrPeriodsFuture = Array(token.caniuse.future).fill('').map((_, i) => `future_${i + 1}`).reverse();
         const attrPeriodsPast = Array(token.caniuse.past).fill('').map((_, i) => `past_${i + 1}`);
         const attrPeriods = md.utils.escapeHtml([ ...attrPeriodsFuture, 'current', ...attrPeriodsPast ].join(','));
         const attrAccessibleColours = md.utils.escapeHtml(token.caniuse.accessible.toString());

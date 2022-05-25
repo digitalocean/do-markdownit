@@ -80,7 +80,7 @@ it('handles caniuse embeds with a past count that is not a number (no embed)', (
 });
 
 it('handles caniuse embeds with a future count', () => {
-    expect(md.render('[caniuse css-grid future=3]')).toBe(`<p class="ciu_embed" data-feature="css-grid" data-periods="future_1,future_2,future_3,current,past_1" data-accessible-colours="false">
+    expect(md.render('[caniuse css-grid future=3]')).toBe(`<p class="ciu_embed" data-feature="css-grid" data-periods="future_3,future_2,future_1,current,past_1" data-accessible-colours="false">
     <picture>
         <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
         <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
@@ -131,7 +131,7 @@ it('handles caniuse embeds with the accessible flag', () => {
 });
 
 it('handles caniuse embeds with multiple flags combined (past, accessible, future)', () => {
-    expect(md.render('[caniuse css-grid past=2 accessible future=2]')).toBe(`<p class="ciu_embed" data-feature="css-grid" data-periods="future_1,future_2,current,past_1,past_2" data-accessible-colours="true">
+    expect(md.render('[caniuse css-grid past=2 accessible future=2]')).toBe(`<p class="ciu_embed" data-feature="css-grid" data-periods="future_2,future_1,current,past_1,past_2" data-accessible-colours="true">
     <picture>
         <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
         <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
