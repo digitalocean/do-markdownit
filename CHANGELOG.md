@@ -10,6 +10,7 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add support for embedding CanIUse data
 - (minor) Add support for embedding Glitch projects
 
 

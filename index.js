@@ -29,13 +29,14 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./rules/html_comment').HtmlCommentOptions} [html_comment] Disable HTML comment stripping, or set options for the feature.
  * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
  * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
+ * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
  * @property {false} [glob] Disable glob embeds.
  * @property {false} [dns] Disable DNS lookup embeds.
  * @property {false} [asciinema] Disable Asciinema embeds.
  * @property {false} [codepen] Disable CodePen embeds.
  * @property {false} [glitch] Disable Glitch embeds.
+ * @property {false} [caniuse] Disable CanIUse embeds.
  * @property {false} [youtube] Disable YouTube embeds.
- * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_environment').FenceEnvironmentOptions} [fence_environment] Disable fence environments, or set options for the feature.
@@ -79,6 +80,10 @@ module.exports = (md, options) => {
         md.use(require('./rules/embeds/rsvp_button'), safeObject(optsObj.rsvp_button));
     }
 
+    if (optsObj.terminal_button !== false) {
+        md.use(require('./rules/embeds/terminal_button'), safeObject(optsObj.terminal_button));
+    }
+
     if (optsObj.glob !== false) {
         md.use(require('./rules/embeds/glob'), safeObject(optsObj.glob));
     }
@@ -99,12 +104,12 @@ module.exports = (md, options) => {
         md.use(require('./rules/embeds/glitch'), safeObject(optsObj.glitch));
     }
 
-    if (optsObj.youtube !== false) {
-        md.use(require('./rules/embeds/youtube'), safeObject(optsObj.youtube));
+    if (optsObj.caniuse !== false) {
+        md.use(require('./rules/embeds/caniuse'), safeObject(optsObj.caniuse));
     }
 
-    if (optsObj.terminal_button !== false) {
-        md.use(require('./rules/embeds/terminal_button'), safeObject(optsObj.terminal_button));
+    if (optsObj.youtube !== false) {
+        md.use(require('./rules/embeds/youtube'), safeObject(optsObj.youtube));
     }
 
     // Register modifiers

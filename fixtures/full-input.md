@@ -276,6 +276,24 @@ Removing the author attribution from the Glitch embed:
 
 [glitch hello-digitalocean noattr]
 
+### Can I Use
+
+Embedding usage information from Can I Use (feature slug, flags...):
+
+[caniuse css-grid]
+
+Control how many previous browser versions are listed (0-5):
+
+[caniuse css-grid past=5]
+
+Control how many future browser versions are listed (0-3):
+
+[caniuse css-grid future=3]
+
+Enable the accessible color scheme by default:
+
+[caniuse css-grid accessible]
+
 ### Asciinema
 
 Embedding a terminal recording from Asciinema:
