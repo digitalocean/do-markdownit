@@ -1,0 +1,65 @@
+/*
+Copyright 2022 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License") !default;
+you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+@import '../theme';
+@import '../mixins';
+
+// DigitalOcean-usage-specific code environment styling
+pre {
+    // Environments use light-mode base
+    &[class*='environment-'] {
+        > code {
+            @include prismThemePunctuation($gray6);
+            @include prismThemeComment($gray5);
+            @include prismThemeSelector($blue2);
+            @include prismThemeVariable(#08966b);
+            @include prismThemeFunction(#e0276a);
+            @include prismThemeNumber(#225196);
+        }
+
+        .secondary-code-label {
+            color: $gray2;
+        }
+
+        mark {
+            background: rgba($highlight, 0.35);
+
+            mark {
+                background: none;
+            }
+        }
+    }
+
+    &.environment-local {
+        @include codeBlockTheme($gray8, $gray4);
+    }
+
+    &.environment-second {
+        @include codeBlockTheme(rgba($blue5, 0.5), $blue1);
+    }
+
+    &.environment-third {
+        @include codeBlockTheme(rgba($red5, 0.5), $red1);
+    }
+
+    &.environment-fourth {
+        @include codeBlockTheme(rgba($green5, 0.5), $green1);
+    }
+
+    &.environment-fifth {
+        @include codeBlockTheme(rgba($fuchsia5, 0.5), $fuchsia1);
+    }
+}
