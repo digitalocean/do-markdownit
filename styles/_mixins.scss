@@ -14,14 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+@import 'theme';
 
-$smallPhone: 320 !default;
-$phone: 375 !default;
-$largePhone: 425 !default;
-$tablet: 768 !default;
-$desktop: 1024 !default;
-$mediumDesktop: 1220 !default;
-$largeDesktop: 1440 !default;
+@mixin button {
+    background-color: transparent;
+    border: 1px solid $blue2;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: $blue2;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 8px 24px;
+    transition: background-color 0.25s ease;
+
+    &:hover,
+    &:focus {
+        background: $blue5;
+    }
+}
 
 @mixin mQ($size, $limit: 'max', $unit: 'px') {
     @media only screen and (#{$limit}-width: #{$size}#{$unit}) {
