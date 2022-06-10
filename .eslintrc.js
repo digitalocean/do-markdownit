@@ -31,6 +31,12 @@ module.exports = {
                 jest: true,
             },
         },
+        {
+            files: 'dev/client.js',
+            env: {
+                browser: true,
+            },
+        },
     ],
     rules: {
         'space-before-function-paren': [
@@ -160,6 +166,15 @@ module.exports = {
             {
                 object: true,
                 array: false,
+            },
+        ],
+        'import/no-extraneous-dependencies': [
+            'error',
+            {
+                devDependencies: [
+                    '**/*.test.js',
+                    'dev/**/*.js',
+                ],
             },
         ],
         'jsdoc/require-returns-description': 'off',

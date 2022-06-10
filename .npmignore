@@ -4,6 +4,9 @@
 # Exclude all tests (though we do include the fixtures as demo content)
 *.test.js
 
+# Exclude all development files
+dev/
+
 # Exclude the vendored PrismJS files
 vendor/prismjs/
 
