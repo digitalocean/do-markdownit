@@ -16,33 +16,32 @@ limitations under the License.
 
 @import 'theme';
 
-// Highlight
-mark {
-    background: rgba($highlight, 0.35);
-    border-radius: 8px;
-    color: inherit;
-    display: inline;
-    line-height: calc(1.4em + 1px);
-    padding: 0 2px;
+$codeLabelClass: 'code-label' !default;
 
-    // Ignore any nested highlighting
-    mark {
-        background: none;
-        border-radius: initial;
-        line-height: 1.4em;
-        padding: initial;
+// Code labels
+.#{$codeLabelClass} {
+    background-color: $gray7;
+    border-radius: 16px 16px 0 0;
+    color: $gray3;
+    display: block;
+    font-size: 14px;
+    margin: 1em 0 0;
+    padding: 0.5em 1em;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+
+    + pre {
+        border-radius: 0 0 16px 16px;
+        margin: 0 0 1em;
     }
-}
 
-// Highlights in code
-pre {
-    code {
-        mark {
-            background: rgba($highlightDark, 0.35);
+    // Adjust Prism toolbar
+    + .code-toolbar {
+        margin: 0 0 1em;
 
-            mark {
-                background: none;
-            }
+        pre {
+            border-radius: 0 0 16px 16px;
         }
     }
 }

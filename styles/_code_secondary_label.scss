@@ -16,33 +16,14 @@ limitations under the License.
 
 @import 'theme';
 
-// Highlight
-mark {
-    background: rgba($highlight, 0.35);
-    border-radius: 8px;
-    color: inherit;
-    display: inline;
-    line-height: calc(1.4em + 1px);
-    padding: 0 2px;
+$codeSecondaryLabelClass: 'secondary-code-label' !default;
 
-    // Ignore any nested highlighting
-    mark {
-        background: none;
-        border-radius: initial;
-        line-height: 1.4em;
-        padding: initial;
-    }
-}
-
-// Highlights in code
+// Code secondary labels
 pre {
     code {
-        mark {
-            background: rgba($highlightDark, 0.35);
-
-            mark {
-                background: none;
-            }
+        .#{$codeSecondaryLabelClass} {
+            color: $blueRaspberry;
+            margin: 0 0 4px;
         }
     }
 }

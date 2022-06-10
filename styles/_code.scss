@@ -16,33 +16,36 @@ limitations under the License.
 
 @import 'theme';
 
-// Highlight
-mark {
-    background: rgba($highlight, 0.35);
+// Inline code
+pre,
+code {
+    background-color: $gray8;
     border-radius: 8px;
-    color: inherit;
-    display: inline;
-    line-height: calc(1.4em + 1px);
-    padding: 0 2px;
-
-    // Ignore any nested highlighting
-    mark {
-        background: none;
-        border-radius: initial;
-        line-height: 1.4em;
-        padding: initial;
-    }
+    color: $gray3;
+    //font-family: ${fontFamilyHelper('code')};
+    font-size: 14px;
+    line-height: 1.4em;
+    padding: 3px;
 }
 
-// Highlights in code
+// Code blocks
 pre {
-    code {
-        mark {
-            background: rgba($highlightDark, 0.35);
+    background-color: $codeBlockBackground;
+    border-radius: 16px;
+    color: $codeBlockText;
+    display: block;
+    margin: 1em 0;
+    overflow: auto;
+    overflow-wrap: normal;
+    padding: 1em;
+    white-space: normal;
+    word-wrap: normal;
 
-            mark {
-                background: none;
-            }
-        }
+    code {
+        background: 0;
+        border-radius: 0;
+        color: inherit;
+        padding: 0;
+        white-space: pre;
     }
 }
