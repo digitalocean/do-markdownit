@@ -25,7 +25,7 @@ const safeObject = require('../../util/safe_object');
 /**
  * @typedef {Object} CalloutOptions
  * @property {string[]} [allowedClasses] List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
- * @property {string[]} [extraClasses=[]] List of extra classes to apply to a callout div, alongside the given class.
+ * @property {string[]} [extraClasses=['callout']] List of extra classes to apply to a callout div, alongside the given class.
  * @property {string} [labelClass='callout-label'] Class to use for the label.
  */
 
@@ -50,11 +50,11 @@ const safeObject = require('../../util/safe_object');
  * world
  * <$>
  *
- * <div class="info">
+ * <div class="callout info">
  * <p>test</p>
  * </div>
  *
- * <div class="info">
+ * <div class="callout info">
  * <p class="callout-label">hello</p>
  * <p>world</p>
  * </div>
@@ -169,9 +169,7 @@ module.exports = (md, options) => {
      */
     md.renderer.rules.callout_open = (tokens, index) => {
         const token = tokens[index];
-        const classes = optsObj.extraClasses
-            ? `${optsObj.extraClasses} ${token.callout.className}`
-            : `${token.callout.className}`;
+        const classes = [ ...(optsObj.extraClasses || ['callout']), token.callout.className ].join(' ');
         return `<div class="${md.utils.escapeHtml(classes)}">\n`;
     };
 

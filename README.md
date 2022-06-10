@@ -145,11 +145,11 @@ The label cannot contain any newlines, but does support inline Markdown syntax.
 
 **Example HTML output:**
 
-    <div class="info">
+    <div class="callout info">
     <p>test</p>
     </div>
 
-    <div class="info">
+    <div class="callout info">
     <p class="callout-label">hello</p>
     <p>world</p>
     </div>
@@ -160,7 +160,7 @@ Pass options for this plugin as the `callout` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 - `allowedClasses` (`string[]`, optional): List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
-- `extraClasses` (`string[]`, optional, defaults to `[]`): List of extra classes to apply to a callout div, alongside the given class.
+- `extraClasses` (`string[]`, optional, defaults to `['callout']`): List of extra classes to apply to a callout div, alongside the given class.
 - `labelClass` (`string`, optional, defaults to `'callout-label'`): Class to use for the label.
 
 ### rsvp_button
