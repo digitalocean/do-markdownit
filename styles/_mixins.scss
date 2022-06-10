@@ -35,6 +35,122 @@ limitations under the License.
     }
 }
 
+@mixin codeBlockTheme($background, $text) {
+    background: $background;
+    color: $text;
+
+    code {
+        color: $text;
+    }
+
+    // Prefixes
+    &.prefixed {
+        code {
+            ol {
+                li {
+                    &::before {
+                        color: $text;
+                    }
+                }
+            }
+        }
+
+        &.line_numbers {
+            code {
+                ol {
+                    li {
+                        &::before {
+                            border-right-color: rgba($text, 0.5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin prismThemePunctuation($color) {
+    &.language-css,
+    &.style {
+        .token {
+            &.string {
+                color: $color;
+            }
+        }
+    }
+
+    .token {
+        &.punctuation,
+        &.operator,
+        &.entity,
+        &.url {
+            color: $color;
+        }
+    }
+}
+
+@mixin prismThemeComment($color) {
+    .token {
+        &.comment,
+        &.prolog,
+        &.doctype,
+        &.cdata {
+            color: $color;
+        }
+    }
+}
+
+@mixin prismThemeSelector($color) {
+    .token {
+        &.atrule,
+        &.property,
+        &.tag,
+        &.constant,
+        &.symbol,
+        &.deleted,
+        &.selector,
+        &.char,
+        &.builtin,
+        &.keyword,
+        &.inserted,
+        &.delimiter {
+            color: $color;
+        }
+    }
+}
+
+@mixin prismThemeVariable($color) {
+    .token {
+        &.boolean,
+        &.attr-name,
+        &.color,
+        &.string,
+        &.variable {
+            color: $color;
+        }
+    }
+}
+
+@mixin prismThemeFunction($color) {
+    .token {
+        &.attr-value,
+        &.function,
+        &.class-name {
+            color: $color;
+        }
+    }
+}
+
+@mixin prismThemeNumber($color) {
+    .token {
+        &.regex,
+        &.number,
+        &.important {
+            color: $color;
+        }
+    }
+}
+
 @mixin mQ($size, $limit: 'max', $unit: 'px') {
     @media only screen and (#{$limit}-width: #{$size}#{$unit}) {
         @content;

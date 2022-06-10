@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 @import 'theme';
+@import 'mixins';
 
 // Inline code
 pre,
@@ -30,9 +31,9 @@ code {
 
 // Code blocks
 pre {
-    background-color: $codeBlockBackground;
+    @include codeBlockTheme($gray2, $white);
+
     border-radius: 16px;
-    color: $codeBlockText;
     display: block;
     margin: 1em 0;
     overflow: auto;
