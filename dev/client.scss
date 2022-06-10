@@ -1,0 +1,40 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
+#textbox,
+#output {
+    padding: 1rem;
+    margin: 0;
+}
+
+#textbox {
+    border: none;
+    background: rgba(0, 0, 0, 0.025);
+}
+
+#output {
+    @import '../styles';
+    @import '../styles/digitalocean';
+
+    overflow: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    #app {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    #textbox,
+    #output {
+        flex-basis: 50%;
+    }
+}

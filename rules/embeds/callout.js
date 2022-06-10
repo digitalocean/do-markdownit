@@ -169,7 +169,7 @@ module.exports = (md, options) => {
      */
     md.renderer.rules.callout_open = (tokens, index) => {
         const token = tokens[index];
-        const classes = [ ...(optsObj.extraClasses || ['callout']), token.callout.className ].join(' ');
+        const classes = [ ...(optsObj.extraClasses || [ 'callout' ]), token.callout.className ].join(' ');
         return `<div class="${md.utils.escapeHtml(classes)}">\n`;
     };
 
