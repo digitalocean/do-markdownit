@@ -4,3 +4,4 @@ node_modules/
 vendor/prismjs/
 jsdoc/
 coverage/
+dev/dist/

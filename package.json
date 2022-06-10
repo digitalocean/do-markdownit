@@ -10,11 +10,12 @@
   "homepage": "https://github.com/digitalocean/do-markdownit#readme",
   "bugs": "https://github.com/digitalocean/do-markdownit/issues",
   "scripts": {
-    "lint": "eslint \"{*,@(modifiers|rules|script|util)/**/*}.js\"",
+    "lint": "eslint \"{*,@(modifiers|rules|script|util|dev)/**/*}.js\" --ignore-pattern \"dev/dist/**/*\"",
     "lint:fix": "npm run lint -- --fix",
     "jsdoc": "jsdoc -c .jsdoc.json",
     "test": "jest",
-    "postinstall": "node script/prism.js"
+    "postinstall": "node script/prism.js",
+    "dev": "webpack serve --config dev/webpack.config.js"
   },
   "author": "DigitalOcean",
   "license": "Apache-2.0",
@@ -27,10 +28,14 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsdoc": "^38.0.6",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
     "jsdoc": "^3.6.10",
     "jsdoc-tsimport-plugin": "^1.0.5",
-    "markdown-it": "^12.3.2"
+    "markdown-it": "^12.3.2",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "htmlparser2": "^7.2.0",
