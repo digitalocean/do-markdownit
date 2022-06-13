@@ -1,6 +1,11 @@
 {
   "extends": "stylelint-config-standard-scss",
   "rules": {
-    "indentation": 4
+    "alpha-value-notation": "number",
+    "color-function-notation": "legacy",
+    "color-hex-length": "long",
+    "indentation": 4,
+    "no-descending-specificity": null,
+    "no-invalid-position-at-import-rule": null
   }
 }

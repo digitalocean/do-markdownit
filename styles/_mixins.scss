@@ -63,7 +63,7 @@ limitations under the License.
             }
         }
 
-        &.line_numbers {
+        &.line_numbers { /* stylelint-disable-line selector-class-pattern */
             code {
                 ol {
                     li {
