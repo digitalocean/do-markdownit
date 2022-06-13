@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import 'theme';
+@import "theme";
 
-$calloutsClass: 'callout' !default;
-$calloutsLabelClass: 'callout-label' !default;
+$calloutsClass: "callout" !default;
+$calloutsLabelClass: "callout-label" !default;
 
 // Callouts
 .#{$calloutsClass} {

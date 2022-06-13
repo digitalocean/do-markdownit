@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import 'theme';
+@import "theme";
 
-$codeLabelClass: 'code-label' !default;
+$codeLabelClass: "code-label" !default;
 
 // Code labels
 .#{$codeLabelClass} {

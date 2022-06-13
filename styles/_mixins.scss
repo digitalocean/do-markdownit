@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import 'theme';
+@import "theme";
 
 @mixin button {
     background: transparent;
@@ -159,7 +159,7 @@ limitations under the License.
     }
 }
 
-@mixin mQ($size, $limit: 'max', $unit: 'px') {
+@mixin mQ($size, $limit: "max", $unit: "px") {
     @media only screen and (#{$limit}-width: #{$size}#{$unit}) {
         @content;
     }

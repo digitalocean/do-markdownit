@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import '../theme';
-@import '../mixins';
+@import "../theme";
+@import "../mixins";
 
 // DigitalOcean-usage-specific code environment styling
 pre {
     // Environments use light-mode base
-    &[class*='environment-'] {
+    &[class*="environment-"] {
         > code {
             @include prismThemePunctuation($gray6);
             @include prismThemeComment($gray5);

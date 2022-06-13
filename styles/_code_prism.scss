@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import 'theme';
-@import 'mixins';
+@import "theme";
+@import "mixins";
 
 // Prism
 pre {
-    &[class*='language-'] {
+    &[class*="language-"] {
         > code {
             @include prismThemePunctuation($gray9);
             @include prismThemeComment($gray8);
