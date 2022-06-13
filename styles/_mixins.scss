@@ -43,7 +43,7 @@ limitations under the License.
     }
 }
 
-@mixin codeBlockTheme($background, $text) {
+@mixin code-block-theme($background, $text) {
     background: $background;
     color: $text;
 
@@ -77,7 +77,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemePunctuation($color) {
+@mixin prism-theme-punctuation($color) {
     &.language-css,
     &.style {
         .token {
@@ -97,7 +97,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemeComment($color) {
+@mixin prism-theme-comment($color) {
     .token {
         &.comment,
         &.prolog,
@@ -108,7 +108,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemeSelector($color) {
+@mixin prism-theme-selector($color) {
     .token {
         &.atrule,
         &.property,
@@ -127,7 +127,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemeVariable($color) {
+@mixin prism-theme-variable($color) {
     .token {
         &.boolean,
         &.attr-name,
@@ -139,7 +139,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemeFunction($color) {
+@mixin prism-theme-function($color) {
     .token {
         &.attr-value,
         &.function,
@@ -149,7 +149,7 @@ limitations under the License.
     }
 }
 
-@mixin prismThemeNumber($color) {
+@mixin prism-theme-number($color) {
     .token {
         &.regex,
         &.number,
@@ -159,7 +159,7 @@ limitations under the License.
     }
 }
 
-@mixin mQ($size, $limit: "max", $unit: "px") {
+@mixin mq($size, $limit: "max", $unit: "px") {
     @media only screen and (#{$limit}-width: #{$size}#{$unit}) {
         @content;
     }

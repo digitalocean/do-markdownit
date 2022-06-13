@@ -30,7 +30,7 @@ code {
 
 // Code blocks
 pre {
-    @include codeBlockTheme($gray2, $white);
+    @include code-block-theme($gray2, $white);
 
     border-radius: 16px;
     display: block;

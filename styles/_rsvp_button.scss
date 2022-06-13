@@ -16,9 +16,9 @@ limitations under the License.
 
 @import "mixins";
 
-$rsvpButtonClass: "rsvp" !default;
+$rsvp-button-class: "rsvp" !default;
 
 // RSVP button
-.#{$rsvpButtonClass} {
+.#{$rsvp-button-class} {
     @include button;
 }

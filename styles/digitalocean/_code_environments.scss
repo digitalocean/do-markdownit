@@ -22,12 +22,12 @@ pre {
     // Environments use light-mode base
     &[class*="environment-"] {
         > code {
-            @include prismThemePunctuation($gray6);
-            @include prismThemeComment($gray5);
-            @include prismThemeSelector($blue2);
-            @include prismThemeVariable(#08966b);
-            @include prismThemeFunction(#e0276a);
-            @include prismThemeNumber(#225196);
+            @include prism-theme-punctuation($gray6);
+            @include prism-theme-comment($gray5);
+            @include prism-theme-selector($blue2);
+            @include prism-theme-variable(#08966b);
+            @include prism-theme-function(#e0276a);
+            @include prism-theme-number(#225196);
         }
 
         .secondary-code-label {
@@ -44,22 +44,22 @@ pre {
     }
 
     &.environment-local {
-        @include codeBlockTheme($gray8, $gray4);
+        @include code-block-theme($gray8, $gray4);
     }
 
     &.environment-second {
-        @include codeBlockTheme(rgba($blue5, 0.5), $blue1);
+        @include code-block-theme(rgba($blue5, 0.5), $blue1);
     }
 
     &.environment-third {
-        @include codeBlockTheme(rgba($red5, 0.5), $red1);
+        @include code-block-theme(rgba($red5, 0.5), $red1);
     }
 
     &.environment-fourth {
-        @include codeBlockTheme(rgba($green5, 0.5), $green1);
+        @include code-block-theme(rgba($green5, 0.5), $green1);
     }
 
     &.environment-fifth {
-        @include codeBlockTheme(rgba($fuchsia5, 0.5), $fuchsia1);
+        @include code-block-theme(rgba($fuchsia5, 0.5), $fuchsia1);
     }
 }

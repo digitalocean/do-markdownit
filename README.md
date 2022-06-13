@@ -822,28 +822,29 @@ a block using the `:global` pseudo-selector to ensure the classes inside aren't 
 }
 ```
 
-If you're importing this as a global style without a parent, you will need to set `$rootTextStyles`
-to `false` to prevent the default text styling that uses a `& {` selector from being loaded:
+If you're importing this as a context where there will be no parent selector, you will need to set
+`$root-text-styles` to `false` to prevent the default text styling that uses a `& {` selector from
+being loaded:
 
 _Importing the styles globally is not recommended, as these Markdown styles may collide with other
 parts of your document._
 
 ```scss
-$rootTextStyles: false;
+$root-text-styles: false;
 @import "@digitalocean/do-markdownit/styles";
 ```
 
 ### SCSS Variables
 
-| Variable                   | Default                | Usage                                                        | File                                                                |
-|----------------------------|------------------------|--------------------------------------------------------------|---------------------------------------------------------------------|
-| `$calloutsClass`           | `callout`              | The class name used for the `callout` plugin.                | [`_callouts.scss`](./styles/_callouts.scss)                         |
-| `$calloutsLabelClass`      | `callout-label`        | The class name used for labels in the `callout` plugin.      | [`_callouts.scss`](./styles/_callouts.scss)                         |
-| `$codeLabelClass`          | `code-label`           | The class name used for the `fence_label` plugin.            | [`_code_label.scss`](./styles/_code_label.scss)                     |
-| `$codeSecondaryLabelClass` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin.  | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
-| `$rsvpButtonClass`         | `rsvp`                 | The class name used for the `rsvp_button` plugin.            | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
-| `$terminalButtonClass`     | `terminal`             | The class name used for the `terminal_button` plugin.        | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
-| `$rootTextStyles`          | `true`                 | Enable or disable the `& {` selector for root text styles.   | [`_typography.scss`](./styles/_typography.scss)                     |
+| Variable                      | Default                | Usage                                                       | File                                                                |
+|-------------------------------|------------------------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| `$callouts-class`             | `callout`              | The class name used for the `callout` plugin.               | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$callouts-label-class`       | `callout-label`        | The class name used for labels in the `callout` plugin.     | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$code-label-class`           | `code-label`           | The class name used for the `fence_label` plugin.           | [`_code_label.scss`](./styles/_code_label.scss)                     |
+| `$code-secondary-label-class` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
+| `$rsvp-button-class`          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
+| `$terminal-button-class`      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
+| `$root-text-styles`           | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
 
 Alongside these variables used for controlling specific styles, there is also the
 [`_theme.scss`](./styles/_theme.scss) file that contains all the colors used by the package.

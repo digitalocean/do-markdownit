@@ -16,10 +16,10 @@ limitations under the License.
 
 @import "theme";
 
-$codeLabelClass: "code-label" !default;
+$code-label-class: "code-label" !default;
 
 // Code labels
-.#{$codeLabelClass} {
+.#{$code-label-class} {
     background-color: $gray7;
     border-radius: 16px 16px 0 0;
     color: $gray3;

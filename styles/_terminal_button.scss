@@ -16,9 +16,9 @@ limitations under the License.
 
 @import "mixins";
 
-$terminalButtonClass: "terminal" !default;
+$terminal-button-class: "terminal" !default;
 
 // Terminal button
-.#{$terminalButtonClass} {
+.#{$terminal-button-class} {
     @include button;
 }

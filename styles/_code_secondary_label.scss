@@ -16,13 +16,13 @@ limitations under the License.
 
 @import "theme";
 
-$codeSecondaryLabelClass: "secondary-code-label" !default;
+$code-secondary-label-class: "secondary-code-label" !default;
 
 // Code secondary labels
 pre {
     code {
-        .#{$codeSecondaryLabelClass} {
-            color: $blueRaspberry;
+        .#{$code-secondary-label-class} {
+            color: $blue-raspberry;
             margin: 0 0 4px;
         }
     }

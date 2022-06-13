@@ -21,12 +21,12 @@ limitations under the License.
 pre {
     &[class*="language-"] {
         > code {
-            @include prismThemePunctuation($gray9);
-            @include prismThemeComment($gray8);
-            @include prismThemeSelector($blue3);
-            @include prismThemeVariable(#29e3ab);
-            @include prismThemeFunction(#ff4084);
-            @include prismThemeNumber($blueRaspberry);
+            @include prism-theme-punctuation($gray9);
+            @include prism-theme-comment($gray8);
+            @include prism-theme-selector($blue3);
+            @include prism-theme-variable(#29e3ab);
+            @include prism-theme-function(#ff4084);
+            @include prism-theme-number($blue-raspberry);
 
             background: transparent;
 

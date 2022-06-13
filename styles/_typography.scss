@@ -17,10 +17,10 @@ limitations under the License.
 @import "theme";
 @import "mixins";
 
-$rootTextStyles: true !default;
+$root-text-styles: true !default;
 
 // Text
-@if $rootTextStyles {
+@if $root-text-styles {
     & {
         color: $gray4;
         font-size: 16px;
@@ -48,7 +48,7 @@ p {
 p {
     line-height: 1.5;
 
-    @include mQ($phone) {
+    @include mq($phone) {
         code {
             word-break: break-all;
         }
@@ -62,7 +62,7 @@ ul {
     margin-bottom: 1.7em;
     padding-left: 2.5em;
 
-    @include mQ($tablet) {
+    @include mq($tablet) {
         padding-left: 0;
     }
 }
@@ -80,8 +80,8 @@ a {
 
     &:hover,
     &:focus {
-        border-bottom-color: $blueHover;
-        color: $blueHover;
+        border-bottom-color: $blue-hover;
+        color: $blue-hover;
     }
 
     code {
