@@ -17,10 +17,14 @@ limitations under the License.
 @import 'theme';
 @import 'mixins';
 
+$rootTextStyles: true !default;
+
 // Text
-& {
-    color: $gray4;
-    font-size: 16px;
+@if $rootTextStyles {
+    & {
+        color: $gray4;
+        font-size: 16px;
+    }
 }
 
 h1,
