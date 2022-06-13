@@ -4,6 +4,7 @@
 
 - **Build Scripts:** <!-- Scripts relating to building, testing or CI -->
 - **Markdown-It Plugins:** <!-- Which part of the Markdown-It plugins? -->
+- **SCSS Styling:** <!-- Which part of the SCSS styling? -->
 - **PrismJS Integration:** <!-- Changes relating to PrismJS, the vendoring and HTML plugin -->
 - **Something else:** <!-- Say what it is, here! -->
 
