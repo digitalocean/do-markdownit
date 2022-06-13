@@ -792,6 +792,63 @@ Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.ja
 ```
 
 
+## Styles
+
+This package also includes a set of SCSS stylesheets aimed at providing standard styles for our
+usage of Markdown within the DigitalOcean community, styling the features provided by this package
+as well as styling for standard Markdown.
+
+These are broken up by component, and can be found in the [`styles`](./styles) directory. There is
+also a subdirectory within for [DigitalOcean-specific styles](./styles/digitalocean) (e.g. specific
+callout classes that we use).
+
+Example usage:
+
+```scss
+.markdown {
+    @import "@digitalocean/do-markdownit/styles";
+}
+```
+
+Note that if you're planning to use this in a way that will ultimately pass through Webpack's
+css-loader to produce CSS modules (such as Next.js SCSS module), you may need to wrap the import in
+a block using the `:global` pseudo-selector to ensure the classes inside aren't exported as well:
+
+```scss
+.markdown {
+    :global {
+        @import "@digitalocean/do-markdownit/styles";
+    }
+}
+```
+
+If you're importing this as a global style without a parent, you will need to set `$rootTextStyles`
+to `false` to prevent the default text styling that uses a `& {` selector from being loaded:
+
+_Importing the styles globally is not recommended, as these Markdown styles may collide with other
+parts of your document._
+
+```scss
+$rootTextStyles: false;
+@import "@digitalocean/do-markdownit/styles";
+```
+
+### SCSS Variables
+
+| Variable                   | Default                | Usage                                                        | File                                                                |
+|----------------------------|------------------------|--------------------------------------------------------------|---------------------------------------------------------------------|
+| `$calloutsClass`           | `callout`              | The class name used for the `callout` plugin.                | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$calloutsLabelClass`      | `callout-label`        | The class name used for labels in the `callout` plugin.      | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$codeLabelClass`          | `code-label`           | The class name used for the `fence_label` plugin.            | [`_code_label.scss`](./styles/_code_label.scss)                     |
+| `$codeSecondaryLabelClass` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin.  | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
+| `$rsvpButtonClass`         | `rsvp`                 | The class name used for the `rsvp_button` plugin.            | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
+| `$terminalButtonClass`     | `terminal`             | The class name used for the `terminal_button` plugin.        | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
+| `$rootTextStyles`          | `true`                 | Enable or disable the `& {` selector for root text styles.   | [`_typography.scss`](./styles/_typography.scss)                     |
+
+Alongside these variables used for controlling specific styles, there is also the
+[`_theme.scss`](./styles/_theme.scss) file that contains all the colors used by the package.
+
+
 ## Contributing
 
 ### Development
@@ -816,6 +873,9 @@ expected. As well as isolated tests, example usage of the plugin should be added
 be loaded in `index.js`).
 
 This repo makes use of Jest to run all the tests, and you can run the full suite with `npm test`.
+
+We also have the `styles` directory, which contains the SCSS files provided by the package to style
+all the custom functionality this plugin provides, as well as core Markdown styles.
 
 We also make use of ESLint to enforce a consistent style of code, as well as checking that JSDoc
 comments are present with valid types and descriptions. You can run the linter with `npm run lint`.
