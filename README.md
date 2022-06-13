@@ -858,6 +858,10 @@ To get started working with this repository, clone it locally first. Ensure that
 correct version of Node.js as specified in the `.nvmrc` file, and then install the dependencies
 following the lockfile by running `npm ci`.
 
+You can then start up the demo server by running `npm run dev`. This runs a barebones instance of
+Webpack with hot-reload enabled that provides a real-time input that renders to Markdown, using the
+plugins in this package as well as the SCSS styling.
+
 We have two key directories that contain plugins in this repository -- `modifiers` and `rules`.
 
 The `modifiers` directory contains plugins that modify the output of existing Markdown-It render
@@ -878,8 +882,12 @@ This repo makes use of Jest to run all the tests, and you can run the full suite
 We also have the `styles` directory, which contains the SCSS files provided by the package to style
 all the custom functionality this plugin provides, as well as core Markdown styles.
 
-We also make use of ESLint to enforce a consistent style of code, as well as checking that JSDoc
-comments are present with valid types and descriptions. You can run the linter with `npm run lint`.
+We also make use of ESLint and Stylelint to enforce a consistent style of code, as well as checking
+that JSDoc comments are present with valid types and descriptions. You can run the linter for both
+JS and SCSS with `npm run lint`, or using `npm run lint:js` and `npm run lint:scss` respectively.
+
+Both linters also support auto-fixing some issues, and this can be invoked with `npm run lint:fix`,
+or by using `npm run lint:fix:js` and `npm run lint:fix:scss` for the relevant files.
 
 ### Pull Requests & Issues
 
