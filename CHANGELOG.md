@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+## v1.1.0 - 3cc7209
+
 - (minor) Provide SCSS styling for Markdown
 - (patch) Add development setup using Webpack
 - (minor) Add support for embedding CanIUse data
