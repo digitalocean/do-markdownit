@@ -23,6 +23,7 @@ limitations under the License.
 const safeObject = require('../../util/safe_object');
 /**
  * Add support for [CanIUse](https://caniuse.com/) embeds in Markdown, as block syntax.
+ *
  * Uses https://caniuse.bitsofco.de/ to provide interactive embeds from CanIUse data.
  *
  * The basic syntax is `[caniuse <feature>]`. E.g. `[caniuse css-grid]`.

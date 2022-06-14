@@ -1,0 +1,51 @@
+/*
+Copyright 2022 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License") !default;
+you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+@import "theme";
+@import "mixins";
+
+// Inline code
+pre,
+code {
+    background-color: $gray8;
+    border-radius: 8px;
+    color: $gray3;
+    font-size: 14px;
+    line-height: 1.4em;
+    padding: 3px;
+}
+
+// Code blocks
+pre {
+    @include code-block-theme($gray2, $white);
+
+    border-radius: 16px;
+    display: block;
+    margin: 1em 0;
+    overflow: auto;
+    overflow-wrap: normal;
+    padding: 1em;
+    white-space: normal;
+    word-wrap: normal;
+
+    code {
+        background: 0;
+        border-radius: 0;
+        color: inherit;
+        padding: 0;
+        white-space: pre;
+    }
+}

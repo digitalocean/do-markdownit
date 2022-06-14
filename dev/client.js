@@ -16,6 +16,7 @@ limitations under the License.
 
 'use strict';
 
+require('./client.scss');
 const render = require('./render');
 
 document.addEventListener('DOMContentLoaded', () => {

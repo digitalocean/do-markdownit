@@ -40,7 +40,8 @@ The information under each heading should match the main JSDoc comment for each 
 
 ### highlight
 
-Add support for highlight markup across all Markdown, including inside code.
+<details>
+<summary>Add support for highlight markup across all Markdown, including inside code.</summary>
 
 The syntax for highlighting text is `<^>`. E.g. `<^>hello world<^>`.
 This syntax is treated as regular inline syntax, similar to bold or italics.
@@ -71,10 +72,12 @@ Pass options for this plugin as the `highlight` property of the `do-markdownit` 
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### user_mention
 
-Add support for mentioning users, using an `@` symbol. Wraps the mention in a link to the user.
+<details>
+<summary>Add support for mentioning users, using an `@` symbol. Wraps the mention in a link to the user.</summary>
 
 By default, any characters that are not a space or newline after an `@` symbol will be treated as a mention.
 
@@ -93,10 +96,12 @@ Set this property to `false` to disable this plugin.
 
 - `pattern` (`RexExp`, optional): A pattern to match user mentions, applied to the string after the `@` symbol.
 - `path` (`function(string): string`, optional): A function to get the URL path for a user mention.
+</details>
 
 ### html_comment
 
-Removes all HTML comments from Markdown.
+<details>
+<summary>Removes all HTML comments from Markdown.</summary>
 
 This treats HTML comments as Markdown syntax, so expects them to either be inline, or a full block.
 Comments that start inline and then span a block will not be removed.
@@ -119,10 +124,12 @@ Pass options for this plugin as the `html_comment` property of the `do-markdowni
 Set this property to `false` to disable this plugin.
 
 - `strict` (`boolean`, optional, defaults to `false`): If the end of a comment must be explicitly found.
+</details>
 
 ### callout
 
-Add support for callout embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for callout embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `<$>[<class>]<text><$>`. E.g. `<$>[hello]world<$>`.
 The class must be in square brackets, and must come immediately after the opening `<$>`.
@@ -145,11 +152,11 @@ The label cannot contain any newlines, but does support inline Markdown syntax.
 
 **Example HTML output:**
 
-    <div class="info">
+    <div class="callout info">
     <p>test</p>
     </div>
 
-    <div class="info">
+    <div class="callout info">
     <p class="callout-label">hello</p>
     <p>world</p>
     </div>
@@ -160,12 +167,14 @@ Pass options for this plugin as the `callout` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 - `allowedClasses` (`string[]`, optional): List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
-- `extraClasses` (`string[]`, optional, defaults to `[]`): List of extra classes to apply to a callout div, alongside the given class.
+- `extraClasses` (`string[]`, optional, defaults to `['callout']`): List of extra classes to apply to a callout div, alongside the given class.
 - `labelClass` (`string`, optional, defaults to `'callout-label'`): Class to use for the label.
+</details>
 
 ### rsvp_button
 
-Add support for RSVP buttons in Markdown, as inline syntax.
+<details>
+<summary>Add support for RSVP buttons in Markdown, as inline syntax.</summary>
 
 The basic syntax is `[rsvp_button <marketo id>]`. E.g. `[rsvp_button 12345]`.
 Optionally, a title can be set for the button in double quotes after the id. E.g. `[rsvp_button 12345 "My Button"]`.
@@ -191,10 +200,12 @@ Pass options for this plugin as the `rsvp_button` property of the `do-markdownit
 Set this property to `false` to disable this plugin.
 
 - `className` (`string`, optional, defaults to `'rsvp'`): Class to use for the button.
+</details>
 
 ### terminal_button
 
-Add support for terminal buttons in Markdown, as block syntax.
+<details>
+<summary>Add support for terminal buttons in Markdown, as block syntax.</summary>
 
 The basic syntax is `[terminal <image name>]`. E.g. `[terminal ubuntu:focal]`.
 An optional button title can be provided after the image name. E.g. `[terminal ubuntu:focal Start Terminal]`.
@@ -221,10 +232,12 @@ Pass options for this plugin as the `terminal_button` property of the `do-markdo
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### glob
 
-Add support for [glob](https://www.digitalocean.com/community/tools/glob) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="https://www.digitalocean.com/community/tools/glob">glob</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[glob <pattern> <strings>]`. E.g. `[glob *.js a.js b.js c.css]`.
 After the pattern, strings can be provided on a single line, or each separated by a newline.
@@ -259,10 +272,12 @@ Pass options for this plugin as the `glob` property of the `do-markdownit` plugi
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### dns
 
-Add support for [DNS lookup](https://www.digitalocean.com/community/tools/dns) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="https://www.digitalocean.com/community/tools/dns">DNS lookup</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[dns <domain>]`. E.g. `[dns digitalocean.com]`.
 After the domain, one or more space-separated DNS record types can be added. The default type is `A`.
@@ -294,10 +309,12 @@ Pass options for this plugin as the `dns` property of the `do-markdownit` plugin
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### asciinema
 
-Add support for [Asciinema](http://asciinema.org/) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="http://asciinema.org/">Asciinema</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[asciinema <id>]`. E.g. `[asciinema 325730]`.
 The cols and rows can optionally be set using `[asciinema <id> [cols] [rows]]`. E.g. `[asciinema 325730 100 50]`.
@@ -320,10 +337,12 @@ Pass options for this plugin as the `asciinema` property of the `do-markdownit` 
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### codepen
 
-Add support for [CodePen](https://codepen.io/) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="https://codepen.io/">CodePen</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[codepen <user> <hash>]`. E.g. `[codepen AlbertFeynman gjpgjN]`.
 After the user and hash, assorted space-separated flags can be added (in any combination/order):
@@ -361,10 +380,12 @@ Pass options for this plugin as the `codepen` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### glitch
 
-Add support for [Glitch](https://glitch.com/) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="https://glitch.com/">Glitch</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[glitch <slug>]`. E.g. `[glitch hello-digitalocean]`.
 After the slug, some space-separated flags can be added (in any combination/order):
@@ -402,10 +423,13 @@ Pass options for this plugin as the `glitch` property of the `do-markdownit` plu
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### caniuse
 
-Add support for [CanIUse](https://caniuse.com/) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="https://caniuse.com/">CanIUse</a> embeds in Markdown, as block syntax.</summary>
+
 Uses https://caniuse.bitsofco.de/ to provide interactive embeds from CanIUse data.
 
 The basic syntax is `[caniuse <feature>]`. E.g. `[caniuse css-grid]`.
@@ -446,10 +470,12 @@ Pass options for this plugin as the `caniuse` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### youtube
 
-Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
+<details>
+<summary>Add support for <a href="http://youtube.com/">YouTube</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[youtube <id>]`. E.g. `[youtube iom_nhYQIYk]`.
 Height and width can optionally be set using `[youtube <id> [height] [width]]`. E.g. `[youtube iom_nhYQIYk 380 560]`.
@@ -471,10 +497,12 @@ Pass options for this plugin as the `youtube` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### fence_label
 
-Add support for label markup at the start of a fence, translating to a label div before the fence.
+<details>
+<summary>Add support for label markup at the start of a fence, translating to a label div before the fence.</summary>
 
 Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
 
@@ -499,10 +527,12 @@ Pass options for this plugin as the `fence_label` property of the `do-markdownit
 Set this property to `false` to disable this plugin.
 
 - `className` (`string`, optional, defaults to `'code-label'`): Class name to use on the label div.
+</details>
 
 ### fence_secondary_label
 
-Add support for secondary label markup at the start of a fence, translating to a label div inside the fence.
+<details>
+<summary>Add support for secondary label markup at the start of a fence, translating to a label div inside the fence.</summary>
 
 Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
 
@@ -526,10 +556,12 @@ Pass options for this plugin as the `fence_secondary_label` property of the `do-
 Set this property to `false` to disable this plugin.
 
 - `className` (`string`, optional, defaults to `'secondary-code-label'`): Class name to use on the label div.
+</details>
 
 ### fence_environment
 
-Add support for environment markup at the start of a fence, translating to a class.
+<details>
+<summary>Add support for environment markup at the start of a fence, translating to a class.</summary>
 
 Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
 
@@ -554,10 +586,12 @@ Set this property to `false` to disable this plugin.
 
 - `allowedEnvironments` (`string[]`, optional): List of case-sensitive environments that are allowed. If not an array, all environments are allowed.
 - `extraClasses` (`string`, optional, defaults to `''`): String of extra classes to set when an environment is used.
+</details>
 
 ### fence_prefix
 
-Add support for a prefix to be set for each line on a fenced code block.
+<details>
+<summary>Add support for a prefix to be set for each line on a fenced code block.</summary>
 
 The prefix is set as part of the 'info' provided immediately after the opening fence.
 
@@ -598,10 +632,12 @@ Pass options for this plugin as the `fence_prefix` property of the `do-markdowni
 Set this property to `false` to disable this plugin.
 
 - `delimiter` (`string`, optional, defaults to `','`): String to split fence information on.
+</details>
 
 ### fence_pre_attrs
 
-Move all attributes from the opening `code` tag of a fenced code block to the `pre` tag.
+<details>
+<summary>Move all attributes from the opening `code` tag of a fenced code block to the `pre` tag.</summary>
 
 **Example Markdown input:**
 
@@ -622,10 +658,12 @@ Pass options for this plugin as the `fence_pre_attrs` property of the `do-markdo
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
+</details>
 
 ### fence_classes
 
-Filters classes on code and pre tags in fences.
+<details>
+<summary>Filters classes on code and pre tags in fences.</summary>
 
 **Example Markdown input:**
 
@@ -655,10 +693,12 @@ Pass options for this plugin as the `fence_classes` property of the `do-markdown
 Set this property to `false` to disable this plugin.
 
 - `allowedClasses` (`string[]`, optional): List of case-sensitive classes that are allowed. If not an array, all classes are allowed.
+</details>
 
 ### heading_id
 
-Apply Ids to all rendered headings and generate an array of headings.
+<details>
+<summary>Apply Ids to all rendered headings and generate an array of headings.</summary>
 
 Headings are available after a render via `md.headings`.
 Each item in the array is an object with the following properties:
@@ -682,10 +722,12 @@ Pass options for this plugin as the `heading_id` property of the `do-markdownit`
 Set this property to `false` to disable this plugin.
 
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
+</details>
 
 ### prismjs
 
-Apply PrismJS syntax highlighting to fenced code blocks, based on the language set in the fence info.
+<details>
+<summary>Apply PrismJS syntax highlighting to fenced code blocks, based on the language set in the fence info.</summary>
 
 This loads a custom PrismJS plugin to ensure that any existing HTML markup inside the code block is preserved.
 This plugin is similar to the default `keep-markup` plugin, but works in a non-browser environment.
@@ -711,6 +753,7 @@ Pass options for this plugin as the `prismjs` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 - `delimiter` (`string`, optional, defaults to `','`): String to split fence information on.
+</details>
 
 
 ## PrismJS
@@ -749,6 +792,64 @@ Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.ja
 ```
 
 
+## Styles
+
+This package also includes a set of SCSS stylesheets aimed at providing standard styles for our
+usage of Markdown within the DigitalOcean community, styling the features provided by this package
+as well as styling for standard Markdown.
+
+These are broken up by component, and can be found in the [`styles`](./styles) directory. There is
+also a subdirectory within for [DigitalOcean-specific styles](./styles/digitalocean) (e.g. specific
+callout classes that we use).
+
+Example usage:
+
+```scss
+.markdown {
+    @import "@digitalocean/do-markdownit/styles";
+}
+```
+
+Note that if you're planning to use this in a way that will ultimately pass through Webpack's
+css-loader to produce CSS modules (such as Next.js SCSS module), you may need to wrap the import in
+a block using the `:global` pseudo-selector to ensure the classes inside aren't exported as well:
+
+```scss
+.markdown {
+    :global {
+        @import "@digitalocean/do-markdownit/styles";
+    }
+}
+```
+
+If you're importing this as a context where there will be no parent selector, you will need to set
+`$root-text-styles` to `false` to prevent the default text styling that uses a `& {` selector from
+being loaded:
+
+_Importing the styles globally is not recommended, as these Markdown styles may collide with other
+parts of your document._
+
+```scss
+$root-text-styles: false;
+@import "@digitalocean/do-markdownit/styles";
+```
+
+### SCSS Variables
+
+| Variable                      | Default                | Usage                                                       | File                                                                |
+|-------------------------------|------------------------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| `$callouts-class`             | `callout`              | The class name used for the `callout` plugin.               | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$callouts-label-class`       | `callout-label`        | The class name used for labels in the `callout` plugin.     | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$code-label-class`           | `code-label`           | The class name used for the `fence_label` plugin.           | [`_code_label.scss`](./styles/_code_label.scss)                     |
+| `$code-secondary-label-class` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
+| `$rsvp-button-class`          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
+| `$terminal-button-class`      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
+| `$root-text-styles`           | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
+
+Alongside these variables used for controlling specific styles, there is also the
+[`_theme.scss`](./styles/_theme.scss) file that contains all the colors used by the package.
+
+
 ## Contributing
 
 ### Development
@@ -756,6 +857,10 @@ Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.ja
 To get started working with this repository, clone it locally first. Ensure that you have the
 correct version of Node.js as specified in the `.nvmrc` file, and then install the dependencies
 following the lockfile by running `npm ci`.
+
+You can then start up the demo server by running `npm run dev`. This runs a barebones instance of
+Webpack with hot-reload enabled that provides a real-time input that renders to Markdown, using the
+plugins in this package as well as the SCSS styling.
 
 We have two key directories that contain plugins in this repository -- `modifiers` and `rules`.
 
@@ -774,8 +879,15 @@ be loaded in `index.js`).
 
 This repo makes use of Jest to run all the tests, and you can run the full suite with `npm test`.
 
-We also make use of ESLint to enforce a consistent style of code, as well as checking that JSDoc
-comments are present with valid types and descriptions. You can run the linter with `npm run lint`.
+We also have the `styles` directory, which contains the SCSS files provided by the package to style
+all the custom functionality this plugin provides, as well as core Markdown styles.
+
+We also make use of ESLint and Stylelint to enforce a consistent style of code, as well as checking
+that JSDoc comments are present with valid types and descriptions. You can run the linter for both
+JS and SCSS with `npm run lint`, or using `npm run lint:js` and `npm run lint:scss` respectively.
+
+Both linters also support auto-fixing some issues, and this can be invoked with `npm run lint:fix`,
+or by using `npm run lint:fix:js` and `npm run lint:fix:scss` for the relevant files.
 
 ### Pull Requests & Issues
 
