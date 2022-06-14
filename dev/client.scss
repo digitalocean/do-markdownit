@@ -21,8 +21,8 @@ body {
 }
 
 #app {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(384px, 1fr));
 }
 
 #textbox,
@@ -41,16 +41,4 @@ body {
     @import "../styles/digitalocean";
 
     overflow: auto;
-}
-
-@media only screen and (min-width: 768px) {
-    #app {
-        display: flex;
-        flex-flow: row nowrap;
-    }
-
-    #textbox,
-    #output {
-        flex-basis: 50%;
-    }
 }
