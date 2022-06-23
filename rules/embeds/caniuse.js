@@ -126,6 +126,8 @@ module.exports = md => {
      * @private
      */
     const canIUseScriptRule = state => {
+        if (state.inlineMode) return;
+
         // Check if we need to inject the script
         if (state.env.caniuse && state.env.caniuse.tokenized && !state.env.caniuse.injected) {
             // Set that we've injected it

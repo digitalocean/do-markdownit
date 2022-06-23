@@ -132,6 +132,8 @@ module.exports = md => {
      * @private
      */
     const codepenScriptRule = state => {
+        if (state.inlineMode) return;
+
         // Check if we need to inject the script
         if (state.env.codepen && state.env.codepen.tokenized && !state.env.codepen.injected) {
             // Set that we've injected it
