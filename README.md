@@ -126,6 +126,31 @@ Set this property to `false` to disable this plugin.
 - `strict` (`boolean`, optional, defaults to `false`): If the end of a comment must be explicitly found.
 </details>
 
+### image_caption
+
+<details>
+<summary>Wrap singleton images that have title text in a figure with a rendered caption.</summary>
+
+**Example Markdown input:**
+
+    ![alt text](test.png "title text")
+
+    ![alt text](test.png "title text _with Markdown_")
+
+**Example HTML output:**
+
+    <figure><img src="test.png" alt="alt text"><figcaption>title text</figcaption></figure>
+
+    <figure><img src="test.png" alt="alt text"><figcaption>title text <em>with Markdown</em></figcaption></figure>
+
+**Options:**
+
+Pass options for this plugin as the `image_caption` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### callout
 
 <details>
