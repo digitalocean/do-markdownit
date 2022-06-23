@@ -10,6 +10,9 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Render captions for singleton images with titles
+
+
 ## v1.1.0 - 3cc7209
 
 - (minor) Provide SCSS styling for Markdown
