@@ -17,9 +17,32 @@ limitations under the License.
 @import "theme";
 
 // Images
-img {
+img,
+figure {
     border: solid 2px $gray8;
+    border-radius: 16px;
     display: block;
-    margin: 1em auto;
+    margin: 1rem auto;
     max-width: 100%;
+}
+
+// Figures
+figure {
+    overflow: hidden;
+    padding: 1rem;
+
+    img {
+        border: none;
+        border-radius: 0;
+        margin: 0 auto;
+    }
+
+    figcaption {
+        border-top: solid 1px $gray8;
+        background: $gray9;
+        font-size: 0.9em;
+        text-align: center;
+        padding: 1rem;
+        margin: 1rem -1rem -1rem;
+    }
 }
