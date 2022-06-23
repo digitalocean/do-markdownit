@@ -19,21 +19,46 @@ limitations under the License.
 require('./client.scss');
 const render = require('./render');
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', event => {
     const textbox = document.getElementById('textbox');
     const output = document.getElementById('output');
 
     /**
      * Handle the textbox being updated.
-     * Resizes that textbox to match the input, renders the input to HTML.
      */
     const update = () => {
+        // Resize textbox to match input
         textbox.style.overflowY = 'hidden';
         textbox.style.height = 'auto';
         textbox.style.height = `${textbox.scrollHeight}px`;
+
+        // Render the Markdown to HTML
         output.innerHTML = render(textbox.value);
+
+        // Ensure scripts are loaded
+        Array.from(output.querySelectorAll('script')).forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
     };
 
+    // Monkey-patch addEventListener to short-circuit future DOMContentLoaded handlers
+    const addEventListener = document.addEventListener.bind(document);
+
+    /**
+     * Register a new event listener on the document.
+     * Immediately executes DOMContentLoaded listeners, as well as registering them.
+     *
+     * @type {typeof addEventListener}
+     */
+    document.addEventListener = (type, listener, options) => {
+        if (type === 'DOMContentLoaded') listener(event);
+        addEventListener(type, listener, options);
+    };
+
+    // Listen for updates, and do an initial render
     textbox.addEventListener('input', update);
     update();
 });
