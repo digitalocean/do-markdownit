@@ -121,6 +121,8 @@ module.exports = md => {
      * @private
      */
     const globScriptRule = state => {
+        if (state.inlineMode) return;
+
         // Check if we need to inject the script
         if (state.env.glob && state.env.glob.tokenized && !state.env.glob.injected) {
             // Set that we've injected it

@@ -106,6 +106,8 @@ module.exports = md => {
      * @private
      */
     const dnsScriptRule = state => {
+        if (state.inlineMode) return;
+
         // Check if we need to inject the script
         if (state.env.dns && state.env.dns.tokenized && !state.env.dns.injected) {
             // Set that we've injected it
