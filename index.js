@@ -75,6 +75,10 @@ module.exports = (md, options) => {
         md.use(require('./rules/image_caption'), safeObject(optsObj.image_caption));
     }
 
+    if (optsObj.table_wrapper !== false) {
+        md.use(require('./rules/table_wrapper'), safeObject(optsObj.table_wrapper));
+    }
+
     // Register embeds
 
     if (optsObj.callout !== false) {
