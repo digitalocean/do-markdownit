@@ -16,7 +16,9 @@ limitations under the License.
 
 @import "theme";
 
-.table-wrapper {
+$table-wrapper-class: "table-wrapper" !default;
+
+.#{$table-wrapper-class} {
   overflow-x: auto;
   width: 100%;
 
