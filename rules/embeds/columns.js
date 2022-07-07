@@ -63,7 +63,7 @@ module.exports = (md, options) => {
      * Find a column block within the given lines, starting at the first line, returning the closing index.
      *
      * @param {string[]} lines Lines of Markdown to parse.
-     * @return {false|number}
+     * @returns {false|number}
      * @private
      */
     const findColumn = lines => {
@@ -74,9 +74,9 @@ module.exports = (md, options) => {
         // Attempt to find the closing bracket for this, allowing bracket pairs inside
         let closingIndex = -1;
         let open = 0;
-        for (let i = 1; i < lines.length; i++) {
+        for (let i = 1; i < lines.length; i += 1) {
             // If we found an opening bracket that isn't closed on the same line, increase the open count
-            if (lines[i][0] === '[' && lines[i][lines[i].length - 1] !== ']') open++;
+            if (lines[i][0] === '[' && lines[i][lines[i].length - 1] !== ']') open += 1;
 
             // If we found a closing bracket, check if we're at the same level as the opening bracket
             if (lines[i] === ']') {
@@ -84,7 +84,7 @@ module.exports = (md, options) => {
                     closingIndex = i;
                     break;
                 }
-                open--;
+                open -= 1;
             }
         }
 
@@ -111,7 +111,7 @@ module.exports = (md, options) => {
         // Find adjacent columns starting from
         const columns = [];
         let nextLine = 0;
-        while (true) {
+        while (true) { // eslint-disable-line no-constant-condition
             const column = findColumn(currentLines.slice(nextLine));
             if (column === false) break;
 
@@ -120,7 +120,7 @@ module.exports = (md, options) => {
             nextLine += column + 1;
 
             // Skip a single blank line between columns
-            if (currentLines[nextLine] === '') nextLine++;
+            if (currentLines[nextLine] === '') nextLine += 1;
         }
 
         // If we found less than two columns, don't do anything
