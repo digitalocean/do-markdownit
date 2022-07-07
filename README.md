@@ -259,6 +259,43 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### columns
+
+<details>
+<summary>Add support for columns in Markdown, as block syntax.</summary>
+
+To declare a column, wrap content with `[column` on the line before, and `]` on a new line at the end.
+Two or more columns must be adjacent to each other to be parsed as a set of columns.
+
+**Example Markdown input:**
+
+    [column
+    Content for the first column
+    ]
+    [column
+    Content for the second column
+    ]
+
+**Example HTML output:**
+
+    <div class="columns">
+    <div class="column">
+    <p>Content for the first column</p>
+    </div>
+    <div class="column">
+    <p>Content for the second column</p>
+    </div>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `columns` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `outerClassName` (`string`, optional, defaults to `'columns'`): Class to use for the outer columns container.
+- `innerClassName` (`string`, optional, defaults to `'column'`): Class to use for the inner column container.
+</details>
+
 ### glob
 
 <details>
@@ -861,15 +898,21 @@ $root-text-styles: false;
 
 ### SCSS Variables
 
-| Variable                      | Default                | Usage                                                       | File                                                                |
-|-------------------------------|------------------------|-------------------------------------------------------------|---------------------------------------------------------------------|
-| `$callouts-class`             | `callout`              | The class name used for the `callout` plugin.               | [`_callouts.scss`](./styles/_callouts.scss)                         |
-| `$callouts-label-class`       | `callout-label`        | The class name used for labels in the `callout` plugin.     | [`_callouts.scss`](./styles/_callouts.scss)                         |
-| `$code-label-class`           | `code-label`           | The class name used for the `fence_label` plugin.           | [`_code_label.scss`](./styles/_code_label.scss)                     |
-| `$code-secondary-label-class` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
-| `$rsvp-button-class`          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
-| `$terminal-button-class`      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
-| `$root-text-styles`           | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
+<!--
+Variables listed here should be sorted based on the filename, and then by variable name.
+-->
+
+| Variable                                 | Default                | Usage                                                       | File                                                                |
+|------------------------------------------|------------------------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| `$callouts-class` _(string)_             | `callout`              | The class name used for the `callout` plugin.               | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$callouts-label-class` _(string)_       | `callout-label`        | The class name used for labels in the `callout` plugin.     | [`_callouts.scss`](./styles/_callouts.scss)                         |
+| `$code-label-class` _(string)_           | `code-label`           | The class name used for the `fence_label` plugin.           | [`_code_label.scss`](./styles/_code_label.scss)                     |
+| `$code-secondary-label-class` _(string)_ | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
+| `$columns-inner-class` _(string)_        | `column`               | The inner class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
+| `$columns-outer-class` _(string)_        | `columns`              | The outer class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
+| `$rsvp-button-class` _(string)_          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
+| `$terminal-button-class` _(string)_      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
+| `$root-text-styles` _(boolean)_          | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
 
 Alongside these variables used for controlling specific styles, there is also the
 [`_theme.scss`](./styles/_theme.scss) file that contains all the colors used by the package.
