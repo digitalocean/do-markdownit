@@ -20,6 +20,14 @@ limitations under the License.
  * @module rules/embeds/columns
  */
 
+const safeObject = require('../../util/safe_object');
+
+/**
+ * @typedef {Object} ColumnsOptions
+ * @property {string} [outerClassName='columns'] Class to use for the outer columns container.
+ * @property {string} [innerClassName='column'] Class to use for the inner column container.
+ */
+
 /**
  * Add support for columns in Markdown, as block syntax.
  *
@@ -43,9 +51,14 @@ limitations under the License.
  * </div>
  * </div>
  *
- * @type {import('markdown-it').PluginSimple}
+ * @type {import('markdown-it').PluginWithOptions<ColumnsOptions>}
  */
-module.exports = md => {
+module.exports = (md, options) => {
+    // Get the correct options
+    const optsObj = safeObject(options);
+    const outerClassName = typeof optsObj.outerClassName === 'string' ? optsObj.outerClassName : 'columns';
+    const innerClassName = typeof optsObj.innerClassName === 'string' ? optsObj.innerClassName : 'column';
+
     /**
      * Find a column block within the given lines, starting at the first line, returning the closing index.
      *
@@ -54,7 +67,7 @@ module.exports = md => {
      * @private
      */
     const findColumn = lines => {
-        // Perform some non-regex checks for speed
+        // Perform some basic checks to ensure the column is valid
         if (lines.length < 3) return false; // [column + content + ]
         if (lines[0] !== '[column') return false;
 
@@ -74,9 +87,8 @@ module.exports = md => {
                 open--;
             }
         }
-        if (closingIndex === -1) return false;
 
-        return closingIndex;
+        return closingIndex === -1 ? false : closingIndex;
     };
 
     /**
@@ -118,7 +130,7 @@ module.exports = md => {
         const tokenContainerOpen = state.push('columns', 'div', 1);
         tokenContainerOpen.block = true;
         tokenContainerOpen.map = [ startLine, startLine + columns[columns.length - 1][1] ];
-        tokenContainerOpen.attrSet('class', 'columns');
+        tokenContainerOpen.attrSet('class', outerClassName);
 
         for (const column of columns) {
             // Ensure we only tokenize the content of the column
@@ -132,7 +144,7 @@ module.exports = md => {
             tokenOpen.block = true;
             tokenOpen.map = [ startLine + column[0], startLine + column[1] ];
             tokenOpen.markup = currentLines[0];
-            tokenOpen.attrSet('class', 'column');
+            tokenOpen.attrSet('class', innerClassName);
 
             // Process the content of the column as block content
             state.md.block.tokenize(state, startLine + column[0] + 1, startLine + column[1]);
