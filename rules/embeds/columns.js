@@ -47,6 +47,39 @@ limitations under the License.
  */
 module.exports = md => {
     /**
+     * Find a column block within the given lines, starting at the first line, returning the closing index.
+     *
+     * @param {string[]} lines Lines of Markdown to parse.
+     * @return {false|number}
+     * @private
+     */
+    const findColumn = lines => {
+        // Perform some non-regex checks for speed
+        if (lines.length < 3) return false; // [column + content + ]
+        if (lines[0] !== '[column') return false;
+
+        // Attempt to find the closing bracket for this, allowing bracket pairs inside
+        let closingIndex = -1;
+        let open = 0;
+        for (let i = 1; i < lines.length; i++) {
+            // If we found an opening bracket that isn't closed on the same line, increase the open count
+            if (lines[i][0] === '[' && lines[i][lines[i].length - 1] !== ']') open++;
+
+            // If we found a closing bracket, check if we're at the same level as the opening bracket
+            if (lines[i] === ']') {
+                if (open === 0) {
+                    closingIndex = i;
+                    break;
+                }
+                open--;
+            }
+        }
+        if (closingIndex === -1) return false;
+
+        return closingIndex;
+    };
+
+    /**
      * Parsing rule for column markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
@@ -63,56 +96,63 @@ module.exports = md => {
             return state.src.substring(pos, max);
         });
 
-        // Perform some non-regex checks for speed
-        if (currentLines.length < 3) return false; // [column + content + ]
-        if (currentLines[0] !== '[column') return false;
+        // Find adjacent columns starting from
+        const columns = [];
+        let nextLine = 0;
+        while (true) {
+            const column = findColumn(currentLines.slice(nextLine));
+            if (column === false) break;
 
-        // Attempt to find the closing bracket for this, allowing bracket pairs inside
-        let closingIndex = -1;
-        let open = 0;
-        for (let i = 1; i < currentLines.length; i++) {
-            // If we found an opening bracket that isn't closed on the same line, increase the open count
-            if (currentLines[i][0] === '[' && currentLines[i][currentLines[i].length - 1] !== ']') open++;
+            // Add the column to the list
+            columns.push([ nextLine, nextLine + column ]);
+            nextLine += column + 1;
 
-            // If we found a closing bracket, check if we're at the same level as the opening bracket
-            if (currentLines[i] === ']') {
-                if (open === 0) {
-                    closingIndex = i;
-                    break;
-                }
-                open--;
-            }
+            // Skip a single blank line between columns
+            if (currentLines[nextLine] === '') nextLine++;
         }
-        if (closingIndex === -1) return false;
 
-        // TODO: Check there are more columns immediately after the closing bracket
+        // If we found less than two columns, don't do anything
+        if (columns.length < 2) return false;
 
-        // Ensure we only tokenize the content of the column
-        const nextLine = startLine + closingIndex;
-        const oldParentType = state.parentType;
-        const oldLineMax = state.lineMax;
-        state.parentType = 'column';
-        state.lineMax = nextLine;
+        // Create the outer columns container
+        const tokenContainerOpen = state.push('columns', 'div', 1);
+        tokenContainerOpen.block = true;
+        tokenContainerOpen.map = [ startLine, startLine + columns[columns.length - 1][1] ];
+        tokenContainerOpen.attrSet('class', 'columns');
 
-        // Add the opening token to state
-        const tokenOpen = state.push('column', 'div', 1);
-        tokenOpen.attrSet('class', 'column');
-        tokenOpen.block = true;
-        tokenOpen.markup = currentLines[0];
-        tokenOpen.map = [ startLine, nextLine ];
+        for (const column of columns) {
+            // Ensure we only tokenize the content of the column
+            const oldParentType = state.parentType;
+            const oldLineMax = state.lineMax;
+            state.parentType = 'column';
+            state.lineMax = startLine + column[1];
 
-        // Process the content of the column as block content
-        state.md.block.tokenize(state, startLine + 1, nextLine);
+            // Add the opening token to state
+            const tokenOpen = state.push('column', 'div', 1);
+            tokenOpen.block = true;
+            tokenOpen.map = [ startLine + column[0], startLine + column[1] ];
+            tokenOpen.markup = currentLines[0];
+            tokenOpen.attrSet('class', 'column');
 
-        // Add the opening token to state
-        const tokenClose = state.push('column', 'div', -1);
-        tokenClose.markup = ']';
-        tokenClose.block  = true;
+            // Process the content of the column as block content
+            state.md.block.tokenize(state, startLine + column[0] + 1, startLine + column[1]);
 
-        // Update the parser to continue on
-        state.parentType = oldParentType;
-        state.lineMax = oldLineMax;
-        state.line = nextLine + 1;
+            // Add the closing token to state
+            const tokenClose = state.push('column', 'div', -1);
+            tokenClose.block = true;
+            tokenClose.markup = ']';
+
+            // Reset the parser to continue on
+            state.parentType = oldParentType;
+            state.lineMax = oldLineMax;
+        }
+
+        // Add the closing token to state
+        const tokenContainerClose = state.push('columns', 'div', -1);
+        tokenContainerClose.block = true;
+
+        // Move the parser past this content
+        state.line = startLine + columns[columns.length - 1][1] + 1;
 
         // Done
         return true;

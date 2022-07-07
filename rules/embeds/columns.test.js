@@ -19,5 +19,9 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./columns'));
 
 it('handles columns (not inline)', () => {
-    expect(md.render('[column\ncontent\n]\noutside')).toBe(``);
+    expect(md.render('[column\ncontent\n]\n[column\ncontent\n]\noutside')).toBe(``);
+});
+
+it('handles columns with an extra linebreak between', () => {
+    expect(md.render('[column\ncontent\n]\n\n[column\ncontent\n]\noutside')).toBe(``);
 });
