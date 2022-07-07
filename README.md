@@ -151,6 +151,39 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### table_wrapper
+
+<details>
+<summary>Add wrapper element around Markdown `tables` for better controlled overflow.</summary>
+
+No new syntax added. This just wraps normal Markdown `| a |` tables with a `div` that has a default
+class of `table-wrapper`.
+
+**Example Markdown input:**
+
+    | a |
+    |---|
+
+**Example HTML output:**
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>a</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `table_wrapper` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### callout
 
 <details>
@@ -869,6 +902,7 @@ $root-text-styles: false;
 | `$code-secondary-label-class` | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
 | `$rsvp-button-class`          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
 | `$terminal-button-class`      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
+| `$table-wrapper-class`        | `table-wrapper`        | The class name used for the `table_wrapper` plugin.         | [`_table_wrapper.scss`](./styles/_table_wrapper.scss)               |
 | `$root-text-styles`           | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
 
 Alongside these variables used for controlling specific styles, there is also the
