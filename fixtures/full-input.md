@@ -192,7 +192,24 @@ You can also mention users by username:
 @MattIPv4
 
 
-## Step 4 — Embeds
+## Step 4 — Layout
+
+Columns allow you to customise the layout of your Markdown:
+
+[column
+Content inside a column is regular Markdown block content.
+
+> Any block or inline syntax can be used, including quotes.
+]
+
+[column
+Two or more columns adjacent to each other are needed to create a column layout.
+
+On desktop the columns will be evenly distributed in a single row, on tablets they will wrap naturally, and on mobile they will be in a single stack.
+]
+
+
+## Step 5 — Embeds
 
 ### YouTube
 
@@ -305,7 +322,7 @@ Setting a custom number of cols and rows for the Asciinema terminal:
 [asciinema 239367 50 20]
 
 
-## Step 5 — Tutorials
+## Step 6 — Tutorials
 
 Certain features of our Markdown engine are designed specifically for our tutorial content-types.
 These may not be enabled in all contexts in the DigitalOcean community, but are enabled by default in the do-markdownit plugin.
