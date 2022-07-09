@@ -32,6 +32,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
  * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
+ * @property {false|import('./rules/embeds/columns').ColumnsOptions} [columns] Disable columns, or set options for the feature.
  * @property {false} [glob] Disable glob embeds.
  * @property {false} [dns] Disable DNS lookup embeds.
  * @property {false} [asciinema] Disable Asciinema embeds.
@@ -92,6 +93,10 @@ module.exports = (md, options) => {
 
     if (optsObj.terminal_button !== false) {
         md.use(require('./rules/embeds/terminal_button'), safeObject(optsObj.terminal_button));
+    }
+
+    if (optsObj.columns !== false) {
+        md.use(require('./rules/embeds/columns'), safeObject(optsObj.columns));
     }
 
     if (optsObj.glob !== false) {
