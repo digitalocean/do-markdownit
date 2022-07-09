@@ -16,48 +16,41 @@ limitations under the License.
 
 @import "theme";
 
-$table-wrapper-class: "table-wrapper" !default;
-
-.#{$table-wrapper-class} {
-  overflow-x: auto;
-  width: 100%;
-
-  table {
-      border-collapse: collapse;
-      width: 100%;
-      
-      thead {
-          tr {
-              border-bottom: 1px dashed $gray7;
-              
-              th {
-                  color: $gray2;
-                  font-weight: 600;
-                  padding: 16px 8px;
-              }
-          }
-      }
-      
-      tbody {
-          tr {
-              border-bottom: 1px solid $gray7;
-              
-              td {
-                  color: $gray3;
-                  padding: 24px 8px;
-              }
-          }
-      }
-      
-      th,
-      td {
-          &:first-child {
-              padding-left: 0;
-          }
-          
-          &:last-child {
-              padding-right: 0;
-          }
-      }
-  }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    
+    thead {
+        tr {
+            border-bottom: 1px dashed $gray7;
+            
+            th {
+                color: $gray2;
+                font-weight: 600;
+                padding: 16px 8px;
+            }
+        }
+    }
+    
+    tbody {
+        tr {
+            border-bottom: 1px solid $gray7;
+            
+            td {
+                color: $gray3;
+                padding: 24px 8px;
+            }
+        }
+    }
+    
+    th,
+    td {
+        &:first-child {
+            padding-left: 0;
+        }
+        
+        &:last-child {
+            padding-right: 0;
+        }
+    }
 }

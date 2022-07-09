@@ -28,14 +28,26 @@ const safeObject = require('../util/safe_object');
  */
 
 /**
- * Wrap `tables` with a `div` with `table-wrapper` class.
+ * Add wrapper element around Markdown `tables` for better controlled overflow.
  *
+ * No new syntax added. This just wraps normal Markdown `| a |` tables with a `div` that has a default
+ * class of `table-wrapper`.
+ * 
  * @example
- * <table>...</table>
+ * | a |
+ * |---|
  *
- * <div class="table-wrapper"><table>...</table></div>
+ * <div class="table-wrapper">
+ *     <table>
+ *         <thead>
+ *             <tr>
+ *                 <th>a</th>
+ *             </tr>
+ *         </thead>
+ *     </table>
+ * </div>
  *
- * @type {import('markdown-it').PluginSimple}
+ * @type {import('markdown-it').PluginWithOptions<TableWrapperOptions>}
  */
 module.exports = (md, options) => {
     const optsObj = safeObject(options);

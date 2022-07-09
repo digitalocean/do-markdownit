@@ -181,7 +181,7 @@ class of `table-wrapper`.
 Pass options for this plugin as the `table_wrapper` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
-_No options are available for this plugin._
+- `className` (`string`, optional, defaults to `'table-wrapper'`): Class to use for the table wrapper.
 </details>
 
 ### callout
