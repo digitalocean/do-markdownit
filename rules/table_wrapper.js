@@ -32,7 +32,7 @@ const safeObject = require('../util/safe_object');
  *
  * No new syntax added. This just wraps normal Markdown `| a |` tables with a `div` that has a default
  * class of `table-wrapper`.
- * 
+ *
  * @example
  * | a |
  * |---|

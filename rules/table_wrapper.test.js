@@ -19,11 +19,11 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./table_wrapper'));
 
 it('wraps a table with a `div` with the default `table-wrapper` class', () => {
-    expect(md.render("| a |\n|---|")).toBe("<div class=\"table-wrapper\"><table>\n<thead>\n<tr>\n<th>a</th>\n</tr>\n</thead>\n</table>\n</div>");
+    expect(md.render('| a |\n|---|')).toBe('<div class="table-wrapper"><table>\n<thead>\n<tr>\n<th>a</th>\n</tr>\n</thead>\n</table>\n</div>');
 });
 
-const mdCustomClass = require('markdown-it')().use(require('./table_wrapper'), { className: 'custom-wrapper-clas' });
+const mdCustomClass = require('markdown-it')().use(require('./table_wrapper'), { className: 'custom-wrapper-class' });
 
 it('wraps a table with a `div` with `custom-wrapper-class` class', () => {
-    expect(mdCustomClass.render("| a |\n|---|")).toBe("<div class=\"custom-wrapper-class\"><table>\n<thead>\n<tr>\n<th>a</th>\n</tr>\n</thead>\n</table>\n</div>");
+    expect(mdCustomClass.render('| a |\n|---|')).toBe('<div class="custom-wrapper-class"><table>\n<thead>\n<tr>\n<th>a</th>\n</tr>\n</thead>\n</table>\n</div>');
 });

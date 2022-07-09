@@ -19,11 +19,11 @@ limitations under the License.
 table {
     border-collapse: collapse;
     width: 100%;
-    
+
     thead {
         tr {
             border-bottom: 1px dashed $gray7;
-            
+
             th {
                 color: $gray2;
                 font-weight: 600;
@@ -31,24 +31,24 @@ table {
             }
         }
     }
-    
+
     tbody {
         tr {
             border-bottom: 1px solid $gray7;
-            
+
             td {
                 color: $gray3;
                 padding: 24px 8px;
             }
         }
     }
-    
+
     th,
     td {
         &:first-child {
             padding-left: 0;
         }
-        
+
         &:last-child {
             padding-right: 0;
         }
