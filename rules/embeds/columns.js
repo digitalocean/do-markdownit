@@ -21,6 +21,7 @@ limitations under the License.
  */
 
 const safeObject = require('../../util/safe_object');
+const blockLines = require('../../util/block_lines');
 
 /**
  * @typedef {Object} ColumnsOptions
@@ -102,11 +103,7 @@ module.exports = (md, options) => {
         if (silent) return false;
 
         // Get current string to consider (current line to end)
-        const currentLines = Array.from({ length: endLine - startLine }, (_, i) => {
-            const pos = state.bMarks[startLine + i] + state.tShift[startLine + i];
-            const max = state.eMarks[startLine + i];
-            return state.src.substring(pos, max);
-        });
+        const currentLines = blockLines(state, startLine, endLine);
 
         // Find adjacent columns starting from
         const columns = [];
