@@ -208,6 +208,21 @@ Two or more columns adjacent to each other are needed to create a column layout.
 On desktop the columns will be evenly distributed in a single row, on tablets they will wrap naturally, and on mobile they will be in a single stack.
 ]
 
+[details Content can be hidden using `details`.
+Inside the details block you can use any block or inline syntax.
+
+You could hide the solution to a problem:
+```js
+// Write a message to console
+console.log('Hello, world!');
+```
+]
+
+[details open You can also have the details block open by default.
+Pass `open` as the first argument to the summary section to do this.
+
+_You can also pass `closed`, though this is the same as not passing anything before the summary._
+]
 
 ## Step 5 — Embeds
 
