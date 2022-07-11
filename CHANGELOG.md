@@ -10,6 +10,7 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add styling for Markdown tables
 - (minor) Add syntax for columns to customise layout
 - (minor) Render captions for singleton images with titles
 

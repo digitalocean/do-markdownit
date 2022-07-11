@@ -151,6 +151,39 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### table_wrapper
+
+<details>
+<summary>Add wrapper element around Markdown `tables` for better controlled overflow.</summary>
+
+No new syntax added. This just wraps normal Markdown `| a |` tables with a `div` that has a default
+class of `table-wrapper`.
+
+**Example Markdown input:**
+
+    | a |
+    |---|
+
+**Example HTML output:**
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>a</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `table_wrapper` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `className` (`string`, optional, defaults to `'table-wrapper'`): Class to use for the table wrapper.
+</details>
+
 ### callout
 
 <details>
@@ -911,6 +944,7 @@ Variables listed here should be sorted based on the filename, and then by variab
 | `$columns-inner-class` _(string)_        | `column`               | The inner class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
 | `$columns-outer-class` _(string)_        | `columns`              | The outer class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
 | `$rsvp-button-class` _(string)_          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
+| `$table-wrapper-class` _(string)_        | `table-wrapper`        | The class name used for the `table_wrapper` plugin.         | [`_table_wrapper.scss`](./styles/_table_wrapper.scss)               |
 | `$terminal-button-class` _(string)_      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |
 | `$root-text-styles` _(boolean)_          | `true`                 | Enable or disable the `& {` selector for root text styles.  | [`_typography.scss`](./styles/_typography.scss)                     |
 
