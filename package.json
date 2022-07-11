@@ -32,12 +32,12 @@
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^38.1.6",
+    "eslint-plugin-jsdoc": "^39.3.3",
     "html-webpack-plugin": "^5.5.0",
-    "jest": "^27.5.1",
+    "jest": "^28.1.2",
     "jsdoc": "^3.6.10",
     "jsdoc-tsimport-plugin": "^1.0.5",
-    "markdown-it": "^12.3.2",
+    "markdown-it": "^13.0.1",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
@@ -48,8 +48,8 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "htmlparser2": "^7.2.0",
+    "htmlparser2": "^8.0.1",
     "prismjs": "^1.28.0",
-    "slimdom": "^3.2.0"
+    "slimdom": "^4.0.1"
   }
 }
