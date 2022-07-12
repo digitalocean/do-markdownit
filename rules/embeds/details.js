@@ -24,7 +24,7 @@ const blockLines = require('../../util/block_lines');
 const findBlockEmbed = require('../../util/find_block_embed');
 
 /**
- * Add support for details in Markdown, as block syntax.
+ * Add support for expandable details in Markdown, as block syntax.
  *
  * To create an expandable details section, use `[details` followed by a summary.
  * Content for the expanded section should be provided on lines after, closed with `]` on a new line.
