@@ -21,6 +21,8 @@ limitations under the License.
  */
 
 const safeObject = require('../../util/safe_object');
+const blockLines = require('../../util/block_lines');
+const findBlockEmbed = require('../../util/find_block_embed');
 
 /**
  * @typedef {Object} ColumnsOptions
@@ -60,38 +62,6 @@ module.exports = (md, options) => {
     const innerClassName = typeof optsObj.innerClassName === 'string' ? optsObj.innerClassName : 'column';
 
     /**
-     * Find a column block within the given lines, starting at the first line, returning the closing index.
-     *
-     * @param {string[]} lines Lines of Markdown to parse.
-     * @returns {false|number}
-     * @private
-     */
-    const findColumn = lines => {
-        // Perform some basic checks to ensure the column is valid
-        if (lines.length < 3) return false; // [column + content + ]
-        if (lines[0] !== '[column') return false;
-
-        // Attempt to find the closing bracket for this, allowing bracket pairs inside
-        let closingIndex = -1;
-        let open = 0;
-        for (let i = 1; i < lines.length; i += 1) {
-            // If we found an opening bracket that isn't closed on the same line, increase the open count
-            if (lines[i][0] === '[' && lines[i][lines[i].length - 1] !== ']') open += 1;
-
-            // If we found a closing bracket, check if we're at the same level as the opening bracket
-            if (lines[i] === ']') {
-                if (open === 0) {
-                    closingIndex = i;
-                    break;
-                }
-                open -= 1;
-            }
-        }
-
-        return closingIndex === -1 ? false : closingIndex;
-    };
-
-    /**
      * Parsing rule for column markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
@@ -102,17 +72,13 @@ module.exports = (md, options) => {
         if (silent) return false;
 
         // Get current string to consider (current line to end)
-        const currentLines = Array.from({ length: endLine - startLine }, (_, i) => {
-            const pos = state.bMarks[startLine + i] + state.tShift[startLine + i];
-            const max = state.eMarks[startLine + i];
-            return state.src.substring(pos, max);
-        });
+        const currentLines = blockLines(state, startLine, endLine);
 
         // Find adjacent columns starting from
         const columns = [];
         let nextLine = 0;
         while (true) { // eslint-disable-line no-constant-condition
-            const column = findColumn(currentLines.slice(nextLine));
+            const column = findBlockEmbed(currentLines.slice(nextLine), 'column');
             if (column === false) break;
 
             // Add the column to the list

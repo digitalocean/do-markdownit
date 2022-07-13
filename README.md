@@ -329,6 +329,44 @@ Set this property to `false` to disable this plugin.
 - `innerClassName` (`string`, optional, defaults to `'column'`): Class to use for the inner column container.
 </details>
 
+### details
+
+<details>
+<summary>Add support for expandable details in Markdown, as block syntax.</summary>
+
+To create an expandable details section, use `[details` followed by a summary.
+Content for the expanded section should be provided on lines after, closed with `]` on a new line.
+
+**Example Markdown input:**
+
+    [details This is hidden content
+    Content for inside the expanded section
+    ]
+
+    [details open This section is *open* by default
+    Content for inside the expanded section
+    ]
+
+**Example HTML output:**
+
+    <details>
+    <summary>This is hidden content</summary>
+    <p>Content for inside the expanded section</p>
+    </details>
+
+    <details open>
+    <summary>This section is <em>open</em> by default</summary>
+    <p>Content for inside the expanded section</p>
+    </details>
+
+**Options:**
+
+Pass options for this plugin as the `details` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### glob
 
 <details>

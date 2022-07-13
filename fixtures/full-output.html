@@ -219,6 +219,19 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <p>On desktop the columns will be evenly distributed in a single row, on tablets they will wrap naturally, and on mobile they will be in a single stack.</p>
 </div>
 </div>
+<details>
+<summary>Content can be hidden using <code>details</code>.</summary>
+<p>Inside the details block you can use any block or inline syntax.</p>
+<p>You could hide the solution to a problem:</p>
+<pre class="language-javascript"><code><span class="token comment">// Write a message to console</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello, world!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</details>
+<details open="">
+<summary>You can also have the details block open by default.</summary>
+<p>Pass <code>open</code> as the first argument to the summary section to do this.</p>
+<p><em>You can also pass <code>closed</code>, though this is the same as not passing anything before the summary.</em></p>
+</details>
 <h2 id="step-5-embeds">Step 5 — Embeds</h2>
 <h3 id="youtube">YouTube</h3>
 <p>Embedding a YouTube video (id, height, width):</p>

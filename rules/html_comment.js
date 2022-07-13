@@ -21,6 +21,7 @@ limitations under the License.
  */
 
 const safeObject = require('../util/safe_object');
+const blockLines = require('../util/block_lines');
 
 /**
  * @typedef {Object} HtmlCommentOptions
@@ -94,11 +95,7 @@ module.exports = (md, options) => {
         if (silent) return false;
 
         // Get current string to consider (current line to end)
-        const currentLines = Array.from({ length: endLine - startLine }, (_, i) => {
-            const pos = state.bMarks[startLine + i] + state.tShift[startLine + i];
-            const max = state.eMarks[startLine + i];
-            return state.src.substring(pos, max);
-        }).join('\n');
+        const currentLines = blockLines(state, startLine, endLine).join('\n');
 
         // Perform some non-regex checks for speed
         if (currentLines.length < 4) return false; // <!--
