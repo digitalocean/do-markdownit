@@ -34,7 +34,16 @@ module.exports = (lines, type) => {
     let open = 0;
     for (let i = 1; i < lines.length; i += 1) {
         // If we found an opening bracket that isn't closed on the same line, increase the open count
-        if (lines[i][0] === '[' && lines[i][lines[i].length - 1] !== ']') open += 1;
+        if (lines[i][0] === '[') {
+            let openLine = 1;
+            for (let j = 1; j < lines[i].length; j += 1) {
+                if (lines[i][j] === '[') openLine += 1;
+                if (lines[i][j] === ']') openLine -= 1;
+                if (openLine === 0) break;
+            }
+
+            if (openLine !== 0) open += 1;
+        }
 
         // If we found a closing bracket, check if we're at the same level as the opening bracket
         if (lines[i] === ']') {

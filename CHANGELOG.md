@@ -10,6 +10,7 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Fix block detection with links at start of line
 
 ## v1.2.0 - e4f2907
 

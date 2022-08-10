@@ -89,6 +89,33 @@ it('handles details with an extra single-line bracket pair inside', () => {
 `);
 });
 
+it('handles details with an extra single-line bracket pair with text after inside', () => {
+    expect(md.render('[details hello\nworld\n[test] after\n]')).toBe(`<details>
+<summary>hello</summary>
+<p>world
+[test] after</p>
+</details>
+`);
+});
+
+it('handles details with nested single-line bracket pairs inside', () => {
+    expect(md.render('[details hello\nworld\n[test [nested]]\n]')).toBe(`<details>
+<summary>hello</summary>
+<p>world
+[test [nested]]</p>
+</details>
+`);
+});
+
+it('handles details with nested single-line bracket pairs with text after inside', () => {
+    expect(md.render('[details hello\nworld\n[test [nested]] after\n]')).toBe(`<details>
+<summary>hello</summary>
+<p>world
+[test [nested]] after</p>
+</details>
+`);
+});
+
 it('handles details with an unclosed bracket pair inside (no embed)', () => {
     expect(md.render('[details hello\nworld\n[\ntest\n]')).toBe(`<p>[details hello
 world
