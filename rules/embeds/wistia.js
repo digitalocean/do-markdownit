@@ -17,33 +17,33 @@ limitations under the License.
 'use strict';
 
 /**
- * @module rules/embeds/youtube
+ * @module rules/embeds/wistia
  */
 
 /**
- * Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
+ * Add support for [Wistia](https://fast.wistia.net) embeds in Markdown, as block syntax.
  *
- * The basic syntax is `[youtube <id>]`. E.g., `[youtube iom_nhYQIYk]`.
- * Height and width can optionally be set using `[youtube <id> [height] [width]]`. E.g., `[youtube iom_nhYQIYk 380 560]`.
+ * The basic syntax is `[wistia <id>]`. E.g., `[wistia 7ld71zbvi6]`.
+ * Height and width can optionally be set using `[wistia <id> [height] [width]]`. E.g., `[wistia 7ld71zbvi6 380 560]`.
  * The default value for height is 270 and for width is 480.
  *
  * @example
- * [youtube iom_nhYQIYk]
+ * [wistia 7ld71zbvi6]
  *
- * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" frameborder="0" allowfullscreen>
- *     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
+ * <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
+ *     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
  * </iframe>
  *
  * @type {import('markdown-it').PluginSimple}
  */
 module.exports = md => {
     /**
-     * Parsing rule for YouTube markup.
+     * Parsing rule for Wistia markup.
      *
      * @type {import('markdown-it/lib/parser_block').RuleBlock}
      * @private
      */
-    const youtubeRule = (state, startLine, endLine, silent) => {
+    const wistiaRule = (state, startLine, endLine, silent) => {
         // If silent, don't replace
         if (silent) return false;
 
@@ -53,12 +53,12 @@ module.exports = md => {
         const currentLine = state.src.substring(pos, max);
 
         // Perform some non-regex checks for speed
-        if (currentLine.length < 11) return false; // [youtube a]
-        if (currentLine.slice(0, 9) !== '[youtube ') return false;
+        if (currentLine.length < 10) return false; // [wistia a]
+        if (currentLine.slice(0, 8) !== '[wistia ') return false;
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
-        // Check for youtube match
-        const match = currentLine.match(/^\[youtube (\S+?)(?: (\d+))?(?: (\d+))?\]$/);
+        // Check for wistia match
+        const match = currentLine.match(/^\[wistia (\S+?)(?: (\d+))?(?: (\d+))?\]$/);
         if (!match) return false;
 
         // Get the id
@@ -75,29 +75,29 @@ module.exports = md => {
         state.line = startLine + 1;
 
         // Add token to state
-        const token = state.push('youtube', 'youtube', 0);
+        const token = state.push('wistia', 'wistia', 0);
         token.block = true;
         token.markup = match[0];
-        token.youtube = { id, height, width };
+        token.wistia = { id, height, width };
 
         // Done
         return true;
     };
 
-    md.block.ruler.before('paragraph', 'youtube', youtubeRule);
+    md.block.ruler.before('paragraph', 'wistia', wistiaRule);
 
     /**
-     * Rendering rule for YouTube markup.
+     * Rendering rule for Wistia markup.
      *
      * @type {import('markdown-it/lib/renderer').RenderRule}
      * @private
      */
-    md.renderer.rules.youtube = (tokens, index) => {
+    md.renderer.rules.wistia = (tokens, index) => {
         const token = tokens[index];
 
         // Return the HTML
-        return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(token.youtube.id)}" class="youtube" height="${token.youtube.height}" width="${token.youtube.width}" frameborder="0" allowfullscreen>
-    <a href="https://www.youtube.com/watch?v=${encodeURIComponent(token.youtube.id)}" target="_blank">View YouTube video</a>
+        return `<iframe src="https://fast.wistia.net/embed/iframe/${encodeURIComponent(token.wistia.id)}" class="wistia" height="${token.wistia.height}" width="${token.wistia.width}" frameborder="0" allowfullscreen>
+    <a href="https://fast.wistia.net/embed/iframe/${encodeURIComponent(token.wistia.id)}" target="_blank">View Wistia video</a>
 </iframe>\n`;
     };
 };

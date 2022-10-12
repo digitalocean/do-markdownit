@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add Wistia embeds
+
 
 ## v1.2.1 - b4f0f23
 

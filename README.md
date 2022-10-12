@@ -620,13 +620,40 @@ The default value for height is 270, and for width is 480.
 
 **Example HTML output:**
 
-    <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="380" width="560" frameborder="0" allowfullscreen>
+    <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" frameborder="0" allowfullscreen>
         <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
     </iframe>
 
 **Options:**
 
 Pass options for this plugin as the `youtube` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
+### wistia
+
+<details>
+<summary>Add support for <a href="https://wistia.com/">Wistia</a> embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[wistia <id>]`. E.g. `[wistia 7ld71zbvi6]`.
+Height and width can optionally be set using `[wistia <id> [height] [width]]`. E.g. `[wistia 7ld71zbvi6 380 560]`.
+The default value for height is 270, and for width is 480.
+
+**Example Markdown input:**
+
+    [wistia 7ld71zbvi6]
+
+**Example HTML output:**
+
+    <iframe src="http://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
+        <a href="http://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
+    </iframe>
+
+**Options:**
+
+Pass options for this plugin as the `wistia` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
 _No options are available for this plugin._
