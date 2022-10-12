@@ -30,7 +30,7 @@ limitations under the License.
  * @example
  * [wistia 7ld71zbvi6]
  *
- * <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="380" width="560" frameborder="0" allowfullscreen>
+ * <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
  *     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
  * </iframe>
  *
