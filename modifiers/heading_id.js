@@ -67,6 +67,7 @@ const extractText = token => {
  * - `content`: The raw Markdown content of the heading (e.g. `My **Heading**`).
  * - `text`: The plain-text content of the heading (e.g. `My Heading`).
  * - `rendered`: The rendered HTML content of the heading (e.g. `My <strong>Heading</strong>`).
+ * - `level`: The heading level (e.g. `1`).
  *
  * @example
  * # Hello World!
@@ -95,6 +96,10 @@ module.exports = (md, options) => {
         const text = extractText(tokens[idx + 1]);
         const rendered = self.render([ tokens[idx + 1] ], opts, env);
 
+        // Get the level for the heading
+        const level = Number(token.tag.slice(1));
+        if (Number.isNaN(level)) throw new Error(`Invalid heading level: ${token.tag}`);
+
         // Generate an id if not already set
         if (!token.attrs) token.attrs = [];
         let idAttr = token.attrs.find(attr => attr[0] === 'id');
@@ -106,7 +111,7 @@ module.exports = (md, options) => {
         }
 
         // Expose the heading
-        md.headings.push({ slug: idAttr[1], content, text, rendered });
+        md.headings.push({ slug: idAttr[1], content, text, rendered, level });
 
         // Render as normal
         return typeof original === 'function'
