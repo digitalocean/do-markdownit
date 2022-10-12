@@ -867,6 +867,7 @@ Each item in the array is an object with the following properties:
 - `content`: The raw Markdown content of the heading (e.g. `My **Heading**`).
 - `text`: The plain-text content of the heading (e.g. `My Heading`).
 - `rendered`: The rendered HTML content of the heading (e.g. `My <strong>Heading</strong>`).
+- `level`: The heading level (e.g. `1`).
 
 **Example Markdown input:**
 

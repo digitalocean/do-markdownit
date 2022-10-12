@@ -30,7 +30,48 @@ it('exposes headings in an object after render', () => {
         content: 'Hello World!',
         text: 'Hello World!',
         rendered: 'Hello World!',
+        level: 1,
     } ]);
+});
+
+it('handles multiple headings', () => {
+    md.render('# Hello World!\n\n# This is a test');
+    expect(md.headings).toEqual([
+        {
+            slug: 'hello-world',
+            content: 'Hello World!',
+            text: 'Hello World!',
+            rendered: 'Hello World!',
+            level: 1,
+        },
+        {
+            slug: 'this-is-a-test',
+            content: 'This is a test',
+            text: 'This is a test',
+            rendered: 'This is a test',
+            level: 1,
+        },
+    ]);
+});
+
+it('handles headings of different levels', () => {
+    md.render('# Hello World!\n\n## This is a test');
+    expect(md.headings).toEqual([
+        {
+            slug: 'hello-world',
+            content: 'Hello World!',
+            text: 'Hello World!',
+            rendered: 'Hello World!',
+            level: 1,
+        },
+        {
+            slug: 'this-is-a-test',
+            content: 'This is a test',
+            text: 'This is a test',
+            rendered: 'This is a test',
+            level: 2,
+        },
+    ]);
 });
 
 it('handles inline markdown inside headings', () => {
@@ -40,6 +81,7 @@ it('handles inline markdown inside headings', () => {
         content: 'Hello **World**!',
         text: 'Hello World!',
         rendered: 'Hello <strong>World</strong>!',
+        level: 1,
     } ]);
 });
 
@@ -50,6 +92,7 @@ it('handles inline code inside headings', () => {
         content: 'Hello `World`!',
         text: 'Hello World!',
         rendered: 'Hello <code>World</code>!',
+        level: 1,
     } ]);
 });
 
@@ -61,6 +104,7 @@ it('resets exposed headings between repeat renders', () => {
         content: 'Testing',
         text: 'Testing',
         rendered: 'Testing',
+        level: 1,
     } ]);
 });
 
