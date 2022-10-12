@@ -10,6 +10,9 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.3.0 - 5daa1ad
+
 - (minor) Expose heading levels in heading_id
 - (minor) Add Wistia embeds
 
