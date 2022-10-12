@@ -632,7 +632,7 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
-### youtube
+### wistia
 
 <details>
 <summary>Add support for <a href="https://wistia.com/">Wistia</a> embeds in Markdown, as block syntax.</summary>
