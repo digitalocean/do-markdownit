@@ -41,6 +41,7 @@ const safeObject = require('./util/safe_object');
  * @property {false} [glitch] Disable Glitch embeds.
  * @property {false} [caniuse] Disable CanIUse embeds.
  * @property {false} [youtube] Disable YouTube embeds.
+ * @property {false} [wistia] Disable Wistia embeds.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_environment').FenceEnvironmentOptions} [fence_environment] Disable fence environments, or set options for the feature.
@@ -130,6 +131,10 @@ module.exports = (md, options) => {
 
     if (optsObj.youtube !== false) {
         md.use(require('./rules/embeds/youtube'), safeObject(optsObj.youtube));
+    }
+
+    if (optsObj.wistia !== false) {
+        md.use(require('./rules/embeds/wistia'), safeObject(optsObj.wistia));
     }
 
     // Register modifiers

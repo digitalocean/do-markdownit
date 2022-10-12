@@ -1,7 +1,7 @@
 /*
 Copyright 2022 DigitalOcean
 
-Licensed under the Apache License, Version 2.0 (the "License");
+Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
 
 You may obtain a copy of the License at
@@ -14,23 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Standard styling
-@import "typography";
-@import "images";
-@import "code";
-@import "tables";
-
-// Plugin styling
-@import "youtube";
-@import "wistia";
-@import "rsvp_button";
-@import "terminal_button";
-@import "columns";
-@import "details";
-@import "highlight";
-@import "callouts";
-@import "code_label";
-@import "code_prefix";
-@import "code_prism";
-@import "code_secondary_label";
-@import "table_wrapper";
+// Wistia embeds
+.wistia {
+    display: block;
+    margin: 1em auto;
+}

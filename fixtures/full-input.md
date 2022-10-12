@@ -232,6 +232,12 @@ Embedding a YouTube video (id, height, width):
 
 [youtube iom_nhYQIYk 225 400]
 
+### Wistia
+
+Embedding a Wistia video (id, height, width):
+
+[wistia 7ld71zbvi6 225 400]
+
 ### DNS
 
 Embedding DNS record lookups (hostname, record types...):
