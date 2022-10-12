@@ -23,9 +23,9 @@ limitations under the License.
 /**
  * Add support for [Wistia](https://fast.wistia.net) embeds in Markdown, as block syntax.
  *
- * The basic syntax is `[wistia <id>]`. E.g. `[wistia 7ld71zbvi6]`.
- * Height and width can optionally be set using `[wistia <id> [height] [width]]`. E.g. `[wistia 7ld71zbvi6 380 560]`.
- * The default value for height is 270, and for width is 480.
+ * The basic syntax is `[wistia <id>]`. E.g., `[wistia 7ld71zbvi6]`.
+ * Height and width can optionally be set using `[wistia <id> [height] [width]]`. E.g., `[wistia 7ld71zbvi6 380 560]`.
+ * The default value for height is 270 and for width is 480.
  *
  * @example
  * [wistia 7ld71zbvi6]
