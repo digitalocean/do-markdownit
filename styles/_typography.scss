@@ -24,6 +24,7 @@ $root-text-styles: true !default;
     & {
         color: $gray4;
         font-size: 16px;
+        position: relative;
         z-index: 0;
     }
 }
