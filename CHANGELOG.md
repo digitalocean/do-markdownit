@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Set position relative on root styles for z-index
+
 
 ## v1.3.1 - c3b57ee
 
