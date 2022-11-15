@@ -620,7 +620,7 @@ The default value for height is 270, and for width is 480.
 
 **Example HTML output:**
 
-    <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" frameborder="0" allowfullscreen>
+    <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
         <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
     </iframe>
 
@@ -647,7 +647,7 @@ The default value for height is 270, and for width is 480.
 
 **Example HTML output:**
 
-    <iframe src="http://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
+    <iframe src="http://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
         <a href="http://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
     </iframe>
 

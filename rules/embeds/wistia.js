@@ -32,7 +32,7 @@ const reduceFraction = require('../../util/reduce_fraction');
  * @example
  * [wistia 7ld71zbvi6]
  *
- * <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
+ * <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
  *     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
  * </iframe>
  *

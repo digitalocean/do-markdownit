@@ -32,7 +32,7 @@ const reduceFraction = require('../../util/reduce_fraction');
  * @example
  * [youtube iom_nhYQIYk]
  *
- * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" frameborder="0" allowfullscreen>
+ * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
  *     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
  * </iframe>
  *
