@@ -30,7 +30,7 @@ details {
     &[open] {
         summary {
             border-bottom: 1px solid $gray8;
-            padding: 0 0 1em;
+            padding: 0 1em 1em 0;
             margin: 0 0 1em;
 
             &::after {
@@ -43,6 +43,7 @@ details {
     summary {
         cursor: pointer;
         list-style: none;
+        padding: 0 1em 0 0;
         position: relative;
 
         &::-webkit-details-marker,

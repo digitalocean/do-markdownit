@@ -19,7 +19,7 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./wistia'));
 
 it('handles wistia embeds (not inline)', () => {
-    expect(md.render('[wistia 7ld71zbvi6 380 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="380" width="560" frameborder="0" allowfullscreen>
+    expect(md.render('[wistia 7ld71zbvi6 280 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="280" width="560" style="aspect-ratio: 2/1" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
 </iframe>
 `);
@@ -36,28 +36,28 @@ it('handles wistia embeds that are unclosed (no embed)', () => {
 });
 
 it('handles wistia embeds without width', () => {
-    expect(md.render('[wistia 7ld71zbvi6 380]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="380" width="480" frameborder="0" allowfullscreen>
+    expect(md.render('[wistia 7ld71zbvi6 240]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="240" width="480" style="aspect-ratio: 2/1" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
 </iframe>
 `);
 });
 
 it('handles wistia embeds without width or height', () => {
-    expect(md.render('[wistia 7ld71zbvi6]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" frameborder="0" allowfullscreen>
+    expect(md.render('[wistia 7ld71zbvi6]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
 </iframe>
 `);
 });
 
 it('handles wistia embeds attempting html injection', () => {
-    expect(md.render('[wistia <script>alert();</script> 380 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/%3Cscript%3Ealert()%3B%3C%2Fscript%3E" class="wistia" height="380" width="560" frameborder="0" allowfullscreen>
+    expect(md.render('[wistia <script>alert();</script> 280 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/%3Cscript%3Ealert()%3B%3C%2Fscript%3E" class="wistia" height="280" width="560" style="aspect-ratio: 2/1" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/%3Cscript%3Ealert()%3B%3C%2Fscript%3E" target="_blank">View Wistia video</a>
 </iframe>
 `);
 });
 
 it('handles wistia embeds attempting url manipulation', () => {
-    expect(md.render('[wistia a/../../b 380 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/a%2F..%2F..%2Fb" class="wistia" height="380" width="560" frameborder="0" allowfullscreen>
+    expect(md.render('[wistia a/../../b 280 560]')).toBe(`<iframe src="https://fast.wistia.net/embed/iframe/a%2F..%2F..%2Fb" class="wistia" height="280" width="560" style="aspect-ratio: 2/1" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/a%2F..%2F..%2Fb" target="_blank">View Wistia video</a>
 </iframe>
 `);

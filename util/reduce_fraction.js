@@ -14,38 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-*,
-::after,
-::before {
-    box-sizing: border-box;
-}
+'use strict';
 
-html,
-body {
-    padding: 0;
-    margin: 0;
-}
+/**
+ * Reduce a fraction to its lowest terms.
+ *
+ * @param {number} numerator Numerator of the fraction.
+ * @param {number} denominator Denominator of the fraction.
+ * @returns {number[]}
+ */
+module.exports = (numerator, denominator) => {
+    let a = numerator;
+    let b = denominator;
+    let temp;
 
-#app {
-    background: #ffffff;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 384px), 1fr));
-}
+    while (b) {
+        temp = a % b;
+        a = b;
+        b = temp;
+    }
 
-#textbox,
-#output {
-    padding: 1rem;
-    margin: 0;
-}
-
-#textbox {
-    border: none;
-    background: rgba(0, 0, 0, 0.025);
-}
-
-#output {
-    @import "../styles";
-    @import "../styles/digitalocean";
-
-    overflow: auto;
-}
+    return [ numerator / a, denominator / a ];
+};

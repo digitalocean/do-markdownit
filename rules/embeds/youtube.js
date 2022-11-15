@@ -20,6 +20,8 @@ limitations under the License.
  * @module rules/embeds/youtube
  */
 
+const reduceFraction = require('../../util/reduce_fraction');
+
 /**
  * Add support for [YouTube](http://youtube.com/) embeds in Markdown, as block syntax.
  *
@@ -30,7 +32,7 @@ limitations under the License.
  * @example
  * [youtube iom_nhYQIYk]
  *
- * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" frameborder="0" allowfullscreen>
+ * <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
  *     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
  * </iframe>
  *
@@ -95,8 +97,11 @@ module.exports = md => {
     md.renderer.rules.youtube = (tokens, index) => {
         const token = tokens[index];
 
+        // Determine the aspect ratio
+        const aspectRatio = reduceFraction(token.youtube.width, token.youtube.height).join('/');
+
         // Return the HTML
-        return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(token.youtube.id)}" class="youtube" height="${token.youtube.height}" width="${token.youtube.width}" frameborder="0" allowfullscreen>
+        return `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(token.youtube.id)}" class="youtube" height="${token.youtube.height}" width="${token.youtube.width}" style="aspect-ratio: ${aspectRatio}" frameborder="0" allowfullscreen>
     <a href="https://www.youtube.com/watch?v=${encodeURIComponent(token.youtube.id)}" target="_blank">View YouTube video</a>
 </iframe>\n`;
     };
