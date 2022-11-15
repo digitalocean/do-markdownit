@@ -60,17 +60,18 @@ p {
 // Lists
 ol,
 ul {
-    list-style: disc;
+    list-style-type: disc;
     margin-bottom: 1.7em;
     padding-left: 2.5em;
 
     @include mq($tablet) {
+        list-style-position: inside;
         padding-left: 0;
     }
 }
 
 ol {
-    list-style: decimal;
+    list-style-type: decimal;
 }
 
 // Links
