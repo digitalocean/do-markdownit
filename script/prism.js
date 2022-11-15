@@ -87,20 +87,18 @@ fs.writeFileSync(
  */
 const template = source => `const component = Prism => {\n\t${source.replace(/\n/g, '\n\t')}\n};\n\nif (typeof module !== 'undefined' && module.exports) {\n\tmodule.exports = component;\n} else {\n\tcomponent(Prism);\n}\n`;
 
-/**
- * Template to wrap a minified Prism component to export when in a module context.
- *
- * @param {string} source Source code of the component.
- * @returns {string}
- * @private
- */
-const templateMin = source => `const component=Prism=>{${source}};typeof module!='undefined'&&module.exports?module.exports=component:component(Prism);\n`;
-
 // Patch all the components (except autoloader) + plugins to export functions
 const components = getFilesInDir(path.join(base, 'components')).filter(f => f !== autoloader && f.endsWith('.js'));
 const plugins = getFilesInDir(path.join(base, 'plugins')).filter(f => f.endsWith('.js'));
 for (const file of components.concat(plugins)) {
-    fs.writeFileSync(file, (file.endsWith('.min.js') ? templateMin : template)(fs.readFileSync(file, 'utf8').trim()));
+    // Remove minified versions
+    if (file.endsWith('.min.js')) {
+        fs.unlinkSync(file);
+        continue;
+    }
+
+    // Patch the unminified version
+    fs.writeFileSync(file, template(fs.readFileSync(file, 'utf8').trim()));
 }
 
 console.info('Prism patched successfully!');

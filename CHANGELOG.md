@@ -11,6 +11,7 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 - (patch) Set aspect-ratio on YouTube/Wistia, responsiveness fixes
+- (patch) Remove minified versions of patched Prism files
 
 
 ## v1.3.2 - a395a43
