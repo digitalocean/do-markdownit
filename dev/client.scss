@@ -29,7 +29,7 @@ body {
 #app {
     background: #ffffff;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(384px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 384px), 1fr));
 }
 
 #textbox,
