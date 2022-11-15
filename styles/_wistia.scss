@@ -17,5 +17,7 @@ limitations under the License.
 // Wistia embeds
 .wistia {
     display: block;
+    height: auto;
     margin: 1em auto;
+    max-width: 100%;
 }

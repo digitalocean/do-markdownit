@@ -20,6 +20,8 @@ limitations under the License.
  * @module rules/embeds/wistia
  */
 
+const reduceFraction = require('../../util/reduce_fraction');
+
 /**
  * Add support for [Wistia](https://fast.wistia.net) embeds in Markdown, as block syntax.
  *
@@ -95,8 +97,11 @@ module.exports = md => {
     md.renderer.rules.wistia = (tokens, index) => {
         const token = tokens[index];
 
+        // Determine the aspect ratio
+        const aspectRatio = reduceFraction(token.wistia.width, token.wistia.height).join('/');
+
         // Return the HTML
-        return `<iframe src="https://fast.wistia.net/embed/iframe/${encodeURIComponent(token.wistia.id)}" class="wistia" height="${token.wistia.height}" width="${token.wistia.width}" frameborder="0" allowfullscreen>
+        return `<iframe src="https://fast.wistia.net/embed/iframe/${encodeURIComponent(token.wistia.id)}" class="wistia" height="${token.wistia.height}" width="${token.wistia.width}" style="aspect-ratio: ${aspectRatio}" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/${encodeURIComponent(token.wistia.id)}" target="_blank">View Wistia video</a>
 </iframe>\n`;
     };
