@@ -238,11 +238,15 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <iframe src="https://www.youtube.com/embed/iom_nhYQIYk" class="youtube" height="225" width="400" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
     <a href="https://www.youtube.com/watch?v=iom_nhYQIYk" target="_blank">View YouTube video</a>
 </iframe>
+<p><em>Both the width and height are optional, with the defaults being 480 and 270 respectively.</em><br>
+<em>The width/height set are treated as maximums – the video will scale down to fit the available space, maintaining the aspect ratio.</em></p>
 <h3 id="wistia">Wistia</h3>
 <p>Embedding a Wistia video (id, height, width):</p>
 <iframe src="https://fast.wistia.net/embed/iframe/7ld71zbvi6" class="wistia" height="225" width="400" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
     <a href="https://fast.wistia.net/embed/iframe/7ld71zbvi6" target="_blank">View Wistia video</a>
 </iframe>
+<p><em>As with the YouTube embed, both the width and height are optional and have the same defaults.</em><br>
+<em>The same behaviour applies to the width/height set, with responsive scaling.</em></p>
 <h3 id="dns">DNS</h3>
 <p>Embedding DNS record lookups (hostname, record types…):</p>
 <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
@@ -264,73 +268,39 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </a>
 </div>
 <h3 id="codepen">CodePen</h3>
-<p>Embedding a CodePen example (username, pen ID, flags…):</p>
+<p>To provide code examples, you could embed a CodePen with a username and pen ID:</p>
 <p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
-<p>Setting a custom height for the CodePen:</p>
-<p class="codepen" data-height="512" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 512px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
-<p>Enabling dark mode on a CodePen embed:</p>
-<p class="codepen" data-height="256" data-theme-id="dark" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
-<p>Setting the CodePen embed to only run when clicked:</p>
-<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="MattCowley" data-slug-hash="vwPzeX" data-preview="true" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
-<p>Changing the default tab of a CodePen embed (can be html, css, or js):</p>
-<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
-<p>Making the CodePen editable by the user (requires a Pro CodePen account):</p>
-<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="chriscoyier" data-slug-hash="Yxzjdz" data-editable="true" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/Yxzjdz">Yxzjdz by chriscoyier</a> (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
-<p>Combining different CodePen embed flags together is also supported:</p>
-<p class="codepen" data-height="384" data-theme-id="dark" data-default-tab="css" data-user="MattCowley" data-slug-hash="vwPzeX" style="height: 384px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-    <span>See the Pen <a href="https://codepen.io/MattCowley/pen/vwPzeX">vwPzeX by MattCowley</a> (<a href="https://codepen.io/MattCowley">@MattCowley</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
-</p>
+<p>CodePen embeds can be customized with many flags after the username and ID:</p>
+<ul>
+<li>Pass any integer value to set a custom height for the embed (e.g. <code>[codepen MattCowley vwPzeX 512]</code>)</li>
+<li>Pass <code>dark</code> to switch the embed to using dark mode (e.g. <code>[codepen MattCowley vwPzeX dark]</code>)</li>
+<li>Pass <code>lazy</code> to enable lazy loading (click to run) for the embed (e.g. <code>[codepen MattCowley vwPzeX lazy]</code>)</li>
+<li>Pass one of <code>html</code>, <code>css</code>, or <code>js</code> to change the default tab that is shown (e.g. <code>[codepen MattCowley vwPzeX css]</code>)</li>
+<li>Pass <code>editable</code> to enable the user to edit the embed (e.g. <code>[codepen chriscoyier Yxzjdz editable]</code>)<br>
+<em>(Note: The embedded pen must be from a user with CodePen Pro for this to work)</em></li>
+</ul>
+<p>These flags can be combined in any order to create a custom CodePen embed.
+For example, <code>[codepen MattCowley vwPzeX dark css 384]</code> would create a dark mode embed that shows the CSS tab by default, with a height of 384px.</p>
 <h3 id="glitch">Glitch</h3>
-<p>Embedding a Glitch project (slug, flags…):</p>
+<p>Alternatively, you may want to embed a code example from Glitch with a project slug:</p>
 <div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
     <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
         <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
     </iframe>
 </div>
-<p>Setting a custom height for the Glitch project:</p>
-<div class="glitch-embed-wrap" style="height: 512px; width: 100%;">
-    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
-        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
-    </iframe>
-</div>
-<p>Showing the Glitch project code by default:</p>
-<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
-    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
-        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
-    </iframe>
-</div>
-<p>Hiding the file tree by default when showing the Glitch project code:</p>
-<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
-    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&sidebarCollapsed=true" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
-        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
-    </iframe>
-</div>
-<p>Setting a default file to show, and highlighting lines in the file:</p>
-<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
-    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?previewSize=0&path=src%2Fapp.jsx&highlights=15%2C25" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
-        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
-    </iframe>
-</div>
-<p>Removing the author attribution from the Glitch embed:</p>
-<div class="glitch-embed-wrap" style="height: 256px; width: 100%;">
-    <iframe src="https://glitch.com/embed/#!/embed/hello-digitalocean?attributionHidden=true&previewSize=100" title="hello-digitalocean on Glitch" allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen" allowFullScreen style="height: 100%; width: 100%; border: 0;">
-        <a href="https://glitch.com/edit/#!/hello-digitalocean" target="_blank">View hello-digitalocean on Glitch</a>
-    </iframe>
-</div>
+<p>Similar to CodePen embeds, a set of optional flags can be passed as the slug to customize the embed:</p>
+<ul>
+<li>Pass any integer value to set a custom height for the embed (e.g. <code>[glitch hello-digitalocean 512]</code>)</li>
+<li>Pass <code>code</code> to show the project code by default in the embed (e.g. <code>[glitch hello-digitalocean code]</code>)</li>
+<li>Pass <code>notree</code> to hide the file tree by default when showing the project code (e.g. <code>[glitch hello-digitalocean code notree]</code>)</li>
+<li>Pass <code>path=...</code> to set a default file to show when showing the project code (e.g. <code>[glitch hello-digitalocean code path=src/app.jsx]</code>)</li>
+<li>Pass <code>highlights=...</code> to set lines to highlight when showing the project code (e.g. <code>[glitch hello-digitalocean code path=src/app.jsx highlights=15,25]</code>)</li>
+<li>Pass <code>noattr</code> to remove the author attribution from the embed (e.g. <code>[glitch hello-digitalocean noattr]</code>)</li>
+</ul>
 <h3 id="can-i-use">Can I Use</h3>
-<p>Embedding usage information from Can I Use (feature slug, flags…):</p>
+<p>If you’re writing web-related content, you may want to embed a Can I Use table for a feature:</p>
 <p class="ciu_embed" data-feature="css-grid" data-periods="future_1,current,past_1" data-accessible-colours="false">
     <picture>
         <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
@@ -338,37 +308,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
     </picture>
 </p>
-<p>Control how many previous browser versions are listed (0-5):</p>
-<p class="ciu_embed" data-feature="css-grid" data-periods="future_1,current,past_1,past_2,past_3,past_4,past_5" data-accessible-colours="false">
-    <picture>
-        <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
-        <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
-        <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
-    </picture>
-</p>
-<p>Control how many future browser versions are listed (0-3):</p>
-<p class="ciu_embed" data-feature="css-grid" data-periods="future_3,future_2,future_1,current,past_1" data-accessible-colours="false">
-    <picture>
-        <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
-        <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
-        <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
-    </picture>
-</p>
-<p>Enable the accessible color scheme by default:</p>
-<p class="ciu_embed" data-feature="css-grid" data-periods="future_1,current,past_1" data-accessible-colours="true">
-    <picture>
-        <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
-        <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
-        <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
-    </picture>
-</p>
+<p>Some optional flags can also be set for this embed:</p>
+<ul>
+<li>Pass <code>past=...</code> to set how many previous browser versions are listed (0-5) (e.g. <code>[caniuse css-grid past=5]</code>)</li>
+<li>Pass <code>future=...</code> to set how many future browser versions are listed (0-3) (e.g. <code>[caniuse css-grid future=3]</code>)</li>
+<li>Pass <code>accessible</code> to switch to the accessible color scheme by default (e.g. <code>[caniuse css-grid accessible]</code>)</li>
+</ul>
 <h3 id="asciinema">Asciinema</h3>
-<p>Embedding a terminal recording from Asciinema:</p>
-<script src="https://asciinema.org/a/239367.js" id="asciicast-239367" async data-cols="80" data-rows="24"></script>
-<noscript>
-    <a href="https://asciinema.org/a/239367" target="_blank">View asciinema recording</a>
-</noscript>
-<p>Setting a custom number of cols and rows for the Asciinema terminal:</p>
+<p>Embedding a terminal recording from Asciinema (id, cols, rows):</p>
 <script src="https://asciinema.org/a/239367.js" id="asciicast-239367" async data-cols="50" data-rows="20"></script>
 <noscript>
     <a href="https://asciinema.org/a/239367" target="_blank">View asciinema recording</a>
