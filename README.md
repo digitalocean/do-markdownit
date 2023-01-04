@@ -659,6 +659,31 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### underline
+
+<details>
+<summary>Add support for underline markup across all Markdown.</summary>
+
+The syntax for underline text is `__`. E.g. `__hello world__`.
+This replaces the default behaviour for the syntax, which would be bold.
+This syntax is treated as regular inline syntax, similar to bold or italics.
+
+**Example Markdown input:**
+
+    __test__
+
+**Example HTML output:**
+
+    <p><u>test</u></p>
+
+**Options:**
+
+Pass options for this plugin as the `underline` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### fence_label
 
 <details>

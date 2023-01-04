@@ -11,6 +11,7 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 - (patch) Reduce embed count in demo content, list supported flags
+- (minor) Add modifier to enable underline syntax
 
 
 ## v1.3.3 - 21ac6ca

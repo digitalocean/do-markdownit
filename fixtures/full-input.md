@@ -17,7 +17,7 @@ Before you begin this guide you'll need the following:
 
 ## Step 1 — Basic Markdown
 
-This is _italics_, this is **bold**, and this is ~~strikethrough~~.
+This is _italics_, this is **bold**, this is __underline__, and this is ~~strikethrough~~.
 
 - This is a list item.
 - This list is unordered.

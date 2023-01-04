@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ const safeObject = require('./util/safe_object');
  * @property {false} [caniuse] Disable CanIUse embeds.
  * @property {false} [youtube] Disable YouTube embeds.
  * @property {false} [wistia] Disable Wistia embeds.
+ * @property {false} [underline] Disable underline syntax.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_environment').FenceEnvironmentOptions} [fence_environment] Disable fence environments, or set options for the feature.
@@ -138,6 +139,10 @@ module.exports = (md, options) => {
     }
 
     // Register modifiers
+
+    if (optsObj.underline !== false) {
+        md.use(require('./modifiers/underline'), safeObject(optsObj.underline));
+    }
 
     if (optsObj.fence_label !== false) {
         md.use(require('./modifiers/fence_label'), safeObject(optsObj.fence_label));
