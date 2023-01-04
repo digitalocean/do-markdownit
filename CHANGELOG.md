@@ -10,6 +10,8 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add modifier to enable underline syntax
+
 
 ## v1.3.3 - 21ac6ca
 
