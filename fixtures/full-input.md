@@ -232,11 +232,17 @@ Embedding a YouTube video (id, height, width):
 
 [youtube iom_nhYQIYk 225 400]
 
+_Both the width and height are optional, with the defaults being 480 and 270 respectively._\
+_The width/height set are treated as maximums -- the video will scale down to fit the available space, maintaining the aspect ratio._
+
 ### Wistia
 
 Embedding a Wistia video (id, height, width):
 
 [wistia 7ld71zbvi6 225 400]
+
+_As with the YouTube embed, both the width and height are optional and have the same defaults._\
+_The same behaviour applies to the width/height set, with responsive scaling._
 
 ### DNS
 
@@ -260,85 +266,52 @@ f.md]
 
 ### CodePen
 
-Embedding a CodePen example (username, pen ID, flags...):
+To provide code examples, you could embed a CodePen with a username and pen ID:
 
 [codepen MattCowley vwPzeX]
 
-Setting a custom height for the CodePen:
+CodePen embeds can be customized with many flags after the username and ID:
 
-[codepen MattCowley vwPzeX 512]
+- Pass any integer value to set a custom height for the embed (e.g. `[codepen MattCowley vwPzeX 512]`)
+- Pass `dark` to switch the embed to using dark mode (e.g. `[codepen MattCowley vwPzeX dark]`)
+- Pass `lazy` to enable lazy loading (click to run) for the embed (e.g. `[codepen MattCowley vwPzeX lazy]`)
+- Pass one of `html`, `css`, or `js` to change the default tab that is shown (e.g. `[codepen MattCowley vwPzeX css]`)
+- Pass `editable` to enable the user to edit the embed (e.g. `[codepen chriscoyier Yxzjdz editable]`)\
+  _(Note: The embedded pen must be from a user with CodePen Pro for this to work)_
 
-Enabling dark mode on a CodePen embed:
-
-[codepen MattCowley vwPzeX dark]
-
-Setting the CodePen embed to only run when clicked:
-
-[codepen MattCowley vwPzeX lazy]
-
-Changing the default tab of a CodePen embed (can be html, css, or js):
-
-[codepen MattCowley vwPzeX css]
-
-Making the CodePen editable by the user (requires a Pro CodePen account):
-
-[codepen chriscoyier Yxzjdz editable]
-
-Combining different CodePen embed flags together is also supported:
-
-[codepen MattCowley vwPzeX dark css 384]
+These flags can be combined in any order to create a custom CodePen embed.
+For example, `[codepen MattCowley vwPzeX dark css 384]` would create a dark mode embed that shows the CSS tab by default, with a height of 384px.
 
 ### Glitch
 
-Embedding a Glitch project (slug, flags...):
+Alternatively, you may want to embed a code example from Glitch with a project slug:
 
 [glitch hello-digitalocean]
 
-Setting a custom height for the Glitch project:
+Similar to CodePen embeds, a set of optional flags can be passed as the slug to customize the embed:
 
-[glitch hello-digitalocean 512]
-
-Showing the Glitch project code by default:
-
-[glitch hello-digitalocean code]
-
-Hiding the file tree by default when showing the Glitch project code:
-
-[glitch hello-digitalocean code notree]
-
-Setting a default file to show, and highlighting lines in the file:
-
-[glitch hello-digitalocean code path=src/app.jsx highlights=15,25]
-
-Removing the author attribution from the Glitch embed:
-
-[glitch hello-digitalocean noattr]
+- Pass any integer value to set a custom height for the embed (e.g. `[glitch hello-digitalocean 512]`)
+- Pass `code` to show the project code by default in the embed (e.g. `[glitch hello-digitalocean code]`)
+- Pass `notree` to hide the file tree by default when showing the project code (e.g. `[glitch hello-digitalocean code notree]`)
+- Pass `path=...` to set a default file to show when showing the project code (e.g. `[glitch hello-digitalocean code path=src/app.jsx]`)
+- Pass `highlights=...` to set lines to highlight when showing the project code (e.g. `[glitch hello-digitalocean code path=src/app.jsx highlights=15,25]`)
+- Pass `noattr` to remove the author attribution from the embed (e.g. `[glitch hello-digitalocean noattr]`)
 
 ### Can I Use
 
-Embedding usage information from Can I Use (feature slug, flags...):
+If you're writing web-related content, you may want to embed a Can I Use table for a feature:
 
 [caniuse css-grid]
 
-Control how many previous browser versions are listed (0-5):
+Some optional flags can also be set for this embed:
 
-[caniuse css-grid past=5]
-
-Control how many future browser versions are listed (0-3):
-
-[caniuse css-grid future=3]
-
-Enable the accessible color scheme by default:
-
-[caniuse css-grid accessible]
+- Pass `past=...` to set how many previous browser versions are listed (0-5) (e.g. `[caniuse css-grid past=5]`)
+- Pass `future=...` to set how many future browser versions are listed (0-3) (e.g. `[caniuse css-grid future=3]`)
+- Pass `accessible` to switch to the accessible color scheme by default (e.g. `[caniuse css-grid accessible]`)
 
 ### Asciinema
 
-Embedding a terminal recording from Asciinema:
-
-[asciinema 239367]
-
-Setting a custom number of cols and rows for the Asciinema terminal:
+Embedding a terminal recording from Asciinema (id, cols, rows):
 
 [asciinema 239367 50 20]
 
