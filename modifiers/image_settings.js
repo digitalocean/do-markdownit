@@ -32,13 +32,13 @@ const regexEscape = require('../util/regex_escape');
  * Add support for defining settings on images, such as size and alignment.
  *
  * The syntax for this is `{ width=<width> height=<height> align=<alignment> }`, at the end of the image.
- * E.g. `![alt](test.png "title"){ width=100 height=200 align=center }`.
+ * E.g. `![alt](test.png "title"){ width=100 height=200 align=left }`.
  * All settings are optional, and the order does not matter.
  *
- * By default, the width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+ * By default, the width and height can be plain number (`100`), pixels (`100px`), or percentage (`100%`).
  * Other units can be supported by passing an array of unit strings via the `sizeUnits` option.
  *
- * Alignment can be one of `left`, or `right`.
+ * Alignment can be left unset, or can be either `left` or `right`.
  *
  * @example
  * ![alt](test.png "title"){ width=100 height=200 align=left }
