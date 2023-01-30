@@ -910,6 +910,31 @@ Set this property to `false` to disable this plugin.
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
 </details>
 
+### image_size
+
+<details>
+<summary>Add support for setting sizes on images.</summary>
+
+The syntax for this is `=[width]x[height]`, at the end of the image. E.g. `![alt](test.png "title" =100x200)`.
+Either the width or height can be set, or both. E.g. `![alt](test.png "title" =100x)` or `![alt](test.png "title" =x200)`.
+The width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+
+**Example Markdown input:**
+
+    ![alt](test.png "title" =100x200)
+
+**Example HTML output:**
+
+    <p><img src="test.png" alt="alt" title="title" width="100" height="200"></p>
+
+**Options:**
+
+Pass options for this plugin as the `image_size` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### prismjs
 
 <details>
