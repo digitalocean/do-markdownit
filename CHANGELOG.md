@@ -10,7 +10,7 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
-- (minor) Add syntax for setting image sizes
+- (minor) Add syntax for defining settings on images, such as size and alignment
 - (patch) Dependency updates
 
 

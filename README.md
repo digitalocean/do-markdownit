@@ -910,29 +910,34 @@ Set this property to `false` to disable this plugin.
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
 </details>
 
-### image_size
+### image_settings
 
 <details>
-<summary>Add support for setting sizes on images.</summary>
+<summary>Add support for defining settings on images, such as size and alignment.</summary>
 
-The syntax for this is `=[width]x[height]`, at the end of the image. E.g. `![alt](test.png "title" =100x200)`.
-Either the width or height can be set, or both. E.g. `![alt](test.png "title" =100x)` or `![alt](test.png "title" =x200)`.
-The width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+The syntax for this is `{ width=<width> height=<height> align=<alignment> }`, at the end of the image.
+E.g. `![alt](test.png "title"){ width=100 height=200 align=center }`.
+All settings are optional, and the order does not matter.
+
+By default, the width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+Other units can be supported by passing an array of unit strings via the `sizeUnits` option.
+
+Alignment can be one of `left`, or `right`.
 
 **Example Markdown input:**
 
-    ![alt](test.png "title" =100x200)
+    ![alt](test.png "title"){ width=100 height=200 align=left }
 
 **Example HTML output:**
 
-    <p><img src="test.png" alt="alt" title="title" width="100" height="200"></p>
+    <p><img src="test.png" alt="alt" title="title" width="100" height="200" align="left"></p>
 
 **Options:**
 
-Pass options for this plugin as the `image_size` property of the `do-markdownit` plugin options.
+Pass options for this plugin as the `image_settings` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
-- `units` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
+- `sizeUnits` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
 </details>
 
 ### prismjs
