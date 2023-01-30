@@ -26,6 +26,10 @@ it('handles an image with a size (width + height)', () => {
     expect(md.renderInline('![](test.png =100x200)')).toBe('<img src="test.png" alt="" width="100" height="200">');
 });
 
+it('handles an image with a size (width + height) with a unit', () => {
+    expect(md.renderInline('![](test.png =100pxx200px)')).toBe('<img src="test.png" alt="" width="100px" height="200px">');
+});
+
 it('handles an image with a size (width only)', () => {
     expect(md.renderInline('![](test.png =100x)')).toBe('<img src="test.png" alt="" width="100">');
 });
@@ -44,4 +48,24 @@ it('handles an image with an invalid size (no x)', () => {
 
 it('handles an image with an invalid size (bad unit)', () => {
     expect(md.renderInline('![](test.png =10emx20em)')).toBe('![](test.png =10emx20em)');
+});
+
+const mdNoUnit = require('markdown-it')().use(require('./image_size'), { units: [ '' ] });
+
+it('handles an image with a size (width + height) with no unit, with no units allowed', () => {
+    expect(mdNoUnit.renderInline('![](test.png =100x200)')).toBe('<img src="test.png" alt="" width="100" height="200">');
+});
+
+it('handles an image with a size (width + height) with a unit, with no units allowed', () => {
+    expect(mdNoUnit.renderInline('![](test.png =100pxx200px)')).toBe('![](test.png =100pxx200px)');
+});
+
+const mdCustomUnit = require('markdown-it')().use(require('./image_size'), { units: [ 'em' ] });
+
+it('handles an image with a size (width + height) with no unit, with a custom unit allowed', () => {
+    expect(mdCustomUnit.renderInline('![](test.png =100x200)')).toBe('![](test.png =100x200)');
+});
+
+it('handles an image with a size (width + height) with a custom unit, with a custom unit allowed', () => {
+    expect(mdCustomUnit.renderInline('![](test.png =100emx200em)')).toBe('<img src="test.png" alt="" width="100em" height="200em">');
 });

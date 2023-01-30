@@ -20,21 +20,38 @@ limitations under the License.
  * @module modifiers/image_size
  */
 
+const safeObject = require('../util/safe_object');
+const regexEscape = require('../util/regex_escape');
+
+/**
+ * @typedef {Object} ImageSizeOptions
+ * @property {string[]} [units=['', 'px', '%']] Image size units to allow.
+ */
+
 /**
  * Add support for setting sizes on images.
  *
  * The syntax for this is `=[width]x[height]`, at the end of the image. E.g. `![alt](test.png "title" =100x200)`.
  * Either the width or height can be set, or both. E.g. `![alt](test.png "title" =100x)` or `![alt](test.png "title" =x200)`.
- * The width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+ *
+ * By default, the width and height can be plain number (`100`), or pixels (`100px`), or percentage (`100%`).
+ * Other units can be supported by passing an array of unit strings via the `units` option.
  *
  * @example
  * ![alt](test.png "title" =100x200)
  *
  * <p><img src="test.png" alt="alt" title="title" width="100" height="200"></p>
  *
- * @type {import('markdown-it').PluginSimple}
+ * @type {import('markdown-it').PluginWithOptions<ImageSizeOptions>}
  */
-module.exports = md => {
+module.exports = (md, options) => {
+    // Get the correct options
+    const optsObj = safeObject(options);
+    const units = Array.isArray(optsObj.units) && optsObj.units.length ? optsObj.units : [ '', 'px', '%' ];
+    const nonEmptyUnits = units.filter(unit => unit !== '');
+    const unitPattern = `\\d+${nonEmptyUnits.length ? `(?:${nonEmptyUnits.map(regexEscape).join('|')})${units.includes('') ? '?' : ''}` : ''}`;
+    const pattern = `^=(${unitPattern})?x(${unitPattern})?`;
+
     /**
      * @typedef {Object} ParsedLinkTitle
      * @private
@@ -74,11 +91,8 @@ module.exports = md => {
 
         // If the next character is a `=`, then we might have a size
         if (pos < max && str[pos] === '=') {
-            // See if we can parse a size
-            const remaining = str.slice(pos, max);
-            const match = remaining.match(/^=(\d+(?:px|%)?)?x(\d+(?:px|%)?)?/);
-
-            // If we don't have a match, then we're in a bad state, return a not-ok result
+            // See if we can parse a size, otherwise return a non-ok result
+            const match = str.slice(pos, max).match(pattern);
             if (!match) return { ok: false, pos: 0, lines: 0, str: '' };
 
             // Store the size in the extra object

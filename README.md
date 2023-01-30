@@ -932,7 +932,7 @@ The width and height can be plain number (`100`), or pixels (`100px`), or percen
 Pass options for this plugin as the `image_size` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
-_No options are available for this plugin._
+- `units` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
 </details>
 
 ### prismjs
