@@ -45,12 +45,12 @@ module.exports = md => {
      */
 
     /**
-     * @typedef {function} ParseLinkTitle
+     * @typedef {Function} ParseLinkTitle
      * @private
      * @param {string} str String to parse.
      * @param {number} pos Position to start parsing at.
      * @param {number} max Maximum position to parse to.
-     * @return {ParsedLinkTitle}
+     * @returns {ParsedLinkTitle}
      */
 
     /**
@@ -58,7 +58,7 @@ module.exports = md => {
      *
      * @param {ParseLinkTitle} original Original parse function (`parseLinkTitle`).
      * @param {Object} extra Mutable object to store extra size information.
-     * @return {ParseLinkTitle}
+     * @returns {ParseLinkTitle}
      * @private
      */
     const parseLinkTitleAndSize = (original, extra) => (str, start, max) => {
@@ -67,7 +67,7 @@ module.exports = md => {
 
         // Skip any spaces immediately after the title
         let pos = result.ok ? result.pos : start;
-        for (; pos < max; pos++) {
+        for (; pos < max; pos += 1) {
             const code = str.charCodeAt(pos);
             if (!md.utils.isSpace(code) && code !== 0x0A) break;
         }
@@ -96,7 +96,7 @@ module.exports = md => {
      * Wrap the link parsing rule to allow for parsing size syntax after the title.
      *
      * @param {import('markdown-it/lib/parser_inline').RuleInline} original Original parse function (`image`).
-     * @return {import('markdown-it/lib/parser_inline').RuleInline}
+     * @returns {import('markdown-it/lib/parser_inline').RuleInline}
      * @private
      */
     const imageWithSize = original => (state, silent) => {
@@ -105,18 +105,45 @@ module.exports = md => {
 
         // Modify how this rule parses link titles, so we can extra the size too
         const proxiedHelpers = new Proxy(state.md.helpers, {
+            /**
+             * Get the property from the original helpers object, unless `parseLinkTitle`, then use our wrapper.
+             *
+             * @template T
+             * @param {Object} target Target object (the original helpers object).
+             * @param {string} prop Property name.
+             * @returns {T}
+             * @private
+             */
             get: (target, prop) => {
                 if (prop === 'parseLinkTitle') return parseLinkTitleAndSize(target[prop], extra);
                 return target[prop];
             },
         });
         const proxiedMd = new Proxy(state.md, {
+            /**
+             * Get the property from the original MD object, unless `helpers`, then use our proxy.
+             *
+             * @template T
+             * @param {Object} target Target object (the original MD object).
+             * @param {string} prop Property name.
+             * @returns {T}
+             * @private
+             */
             get: (target, prop) => {
                 if (prop === 'helpers') return proxiedHelpers;
                 return target[prop];
             },
         });
         const proxiedState = new Proxy(state, {
+            /**
+             * Get the property from the original state object, unless `md`, then use our proxy.
+             *
+             * @template T
+             * @param {Object} target Target object (the original state object).
+             * @param {string} prop Property name.
+             * @returns {T}
+             * @private
+             */
             get: (target, prop) => {
                 if (prop === 'md') return proxiedMd;
                 return target[prop];
@@ -137,5 +164,6 @@ module.exports = md => {
         return originalResult;
     };
 
+    // eslint-disable-next-line no-underscore-dangle
     md.inline.ruler.at('image', imageWithSize(md.inline.ruler.__rules__.find(rule => rule.name === 'image').fn));
 };
