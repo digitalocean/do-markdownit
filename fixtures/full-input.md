@@ -36,6 +36,10 @@ Here's how to include an image with alt text and a title:
 
 ![Alt text for screen readers](https://assets.digitalocean.com/logos/DO_Logo_horizontal_blue.png "DigitalOcean Logo")
 
+_We also support some extra syntax for setting the width/height of images. You can provide pixels (`200`/`200px`), or a percentage (`50%`). You can set one of the width (`=100x`) or the height (`=x200`), or both._
+
+![](https://assets.digitalocean.com/public/mascot.png =200x131)
+
 Use horizontal rules to break up long sections:
 
 ---

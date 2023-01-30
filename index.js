@@ -50,6 +50,7 @@ const safeObject = require('./util/safe_object');
  * @property {false} [fence_pre_attrs] Disable fence pre attributes.
  * @property {false|import('./modifiers/fence_classes').FenceClassesOptions} [fence_classes] Disable fence class filtering, or set options for the feature.
  * @property {false|import('./modifiers/heading_id').HeadingIdOptions} [heading_id] Disable Ids on headings, or set options for the feature.
+ * @property {false} [image_size] Disable image size syntax.
  * @property {false|import('./modifiers/prismjs').PrismJsOptions} [prismjs] Disable Prism highlighting, or set options for the feature.
  */
 
@@ -170,6 +171,10 @@ module.exports = (md, options) => {
 
     if (optsObj.heading_id !== false) {
         md.use(require('./modifiers/heading_id'), safeObject(optsObj.heading_id));
+    }
+
+    if (optsObj.image_size !== false) {
+        md.use(require('./modifiers/image_size'), safeObject(optsObj.image_size));
     }
 
     if (optsObj.prismjs !== false) {
