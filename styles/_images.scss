@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -26,10 +26,32 @@ figure {
     max-width: 100%;
 }
 
+img {
+    &[align="left"] {
+        float: unset;
+        margin-left: 0;
+    }
+
+    &[align="right"] {
+        float: unset;
+        margin-right: 0;
+    }
+}
+
 // Figures
 figure {
     overflow: hidden;
     padding: 1rem;
+
+    &:has(img[align="left"]) {
+        margin-left: 0;
+        width: fit-content;
+    }
+
+    &:has(img[align="right"]) {
+        margin-right: 0;
+        width: fit-content;
+    }
 
     img {
         border: none;
