@@ -16,6 +16,8 @@ limitations under the License.
 
 'use strict';
 
+const Token = require('markdown-it/lib/token');
+
 /**
  * @module modifiers/heading_id
  */
@@ -108,6 +110,16 @@ module.exports = (md, options) => {
                 ? optsObj.sluggify(content)
                 : sluggify(content) ];
             token.attrs.push(idAttr);
+        }
+
+        if (optsObj.hashLink) {
+            const linkOpen = new Token('link_open', 'a', 1);
+            linkOpen.attrs = [ [ 'class', 'hash-anchor' ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
+            const linkContent = new Token('text', '', 0);
+            linkContent.content = '#';
+            const linkClose = new Token('link_close', 'a', -1);
+
+            tokens[idx + 1].children.unshift(linkOpen, linkContent, linkClose);
         }
 
         // Expose the heading

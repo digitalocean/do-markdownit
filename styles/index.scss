@@ -34,3 +34,8 @@ limitations under the License.
 @import "code_prism";
 @import "code_secondary_label";
 @import "table_wrapper";
+
+.hash-anchor {
+    display: inline-block;
+    margin-right: .5em;
+}
