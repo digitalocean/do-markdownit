@@ -910,6 +910,36 @@ Set this property to `false` to disable this plugin.
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
 </details>
 
+### image_settings
+
+<details>
+<summary>Add support for defining settings on images, such as size and alignment.</summary>
+
+The syntax for this is `{ width=<width> height=<height> align=<alignment> }`, at the end of the image markup.
+E.g. `![alt](test.png "title"){ width=100 height=200 align=left }`.
+All settings are optional, and the order does not matter.
+
+By default, the width and height can be plain number (`100`), pixels (`100px`), or percentage (`100%`).
+Other units can be supported by passing an array of unit strings via the `sizeUnits` option.
+
+Alignment can be left unset, which will center the image, or can be set to either `left` or `right`.
+
+**Example Markdown input:**
+
+    ![alt](test.png "title"){ width=100 height=200 align=left }
+
+**Example HTML output:**
+
+    <p><img src="test.png" alt="alt" title="title" width="100" height="200" align="left"></p>
+
+**Options:**
+
+Pass options for this plugin as the `image_settings` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `sizeUnits` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
+</details>
+
 ### prismjs
 
 <details>
