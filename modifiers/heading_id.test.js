@@ -122,3 +122,12 @@ it('supports a custom sluggify function', () => {
     expect(mdSluggify.render('# Hello World!')).toBe(`<h1 id="helloworld">Hello World!</h1>
 `);
 });
+
+const mdHashLink = require('markdown-it')().use(require('./heading_id'), {
+    hashLink: true,
+});
+
+it('supports generating a hashlink', () => {
+    expect(mdHashLink.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
+`);
+});

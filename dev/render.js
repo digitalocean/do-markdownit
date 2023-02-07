@@ -33,9 +33,6 @@ const md = require('markdown-it')({
     callout: {
         allowedClasses: [ 'note', 'warning', 'info', 'draft' ],
     },
-    heading_id: {
-        hashLink: true,
-    },
 });
 
 /**

@@ -16,8 +16,6 @@ limitations under the License.
 
 'use strict';
 
-const Token = require('markdown-it/lib/token');
-
 /**
  * @module modifiers/heading_id
  */
@@ -26,6 +24,7 @@ const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} HeadingIdOptions
+ * @property {boolean} [hashLink=false] Generate markup for a hashlink
  * @property {function(string): string} [sluggify] Custom function to convert heading content to a slug Id.
  */
 
@@ -112,13 +111,17 @@ module.exports = (md, options) => {
             token.attrs.push(idAttr);
         }
 
-        if (optsObj.hashLink) {
+        // Generate hash link if option is set
+        if (optsObj.hashLink && level <= 3) {
+            // Grab the constructor from current token
+            const Token = token.constructor;
+            // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
             linkOpen.attrs = [ [ 'class', 'hash-anchor' ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
             const linkContent = new Token('text', '', 0);
-            linkContent.content = '#';
             const linkClose = new Token('link_close', 'a', -1);
 
+            // Inject hash link tokens before heading content
             tokens[idx + 1].children.unshift(linkOpen, linkContent, linkClose);
         }
 
