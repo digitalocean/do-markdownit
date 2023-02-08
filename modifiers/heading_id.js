@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,14 @@ const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} HeadingIdOptions
+ * @property {HashLinkOptions} [hashLink] Override default hash link options.
  * @property {function(string): string} [sluggify] Custom function to convert heading content to a slug Id.
+ */
+
+/**
+ * @typedef {Object} HashLinkOptions
+ * @property {number} [maxLevel=3] Max heading level to generate hash links for.
+ * @property {string} [class='hash-anchor'] Class name to use on the hash link.
  */
 
 /**
@@ -80,6 +87,24 @@ module.exports = (md, options) => {
     // Get the correct options
     const optsObj = safeObject(options);
 
+    // Set default hashLink options
+    const hashLinkOpts = {
+        class: 'hash-anchor',
+        maxLevel: 3,
+    };
+
+    // Check if hashLink is set in options
+    if (typeof optsObj.hashLink !== 'undefined') {
+        // Check if class is set in hashLink options
+        if (typeof optsObj.hashLink.class !== 'undefined') {
+            hashLinkOpts.class = optsObj.hashLink.class;
+        }
+        // Check if maxLevel is set in hashLink options
+        if (typeof optsObj.hashLink.maxLevel !== 'undefined') {
+            hashLinkOpts.maxLevel = optsObj.hashLink.maxLevel;
+        }
+    }
+
     /**
      * Wrap the heading render function to inject slug Ids and track all headings.
      *
@@ -108,6 +133,20 @@ module.exports = (md, options) => {
                 ? optsObj.sluggify(content)
                 : sluggify(content) ];
             token.attrs.push(idAttr);
+        }
+
+        // Generate hash link if option is set
+        if (optsObj.hashLink !== false && level <= hashLinkOpts.maxLevel) {
+            // Grab the constructor from current token
+            const Token = token.constructor;
+            // Generate tokens for hash link
+            const linkOpen = new Token('link_open', 'a', 1);
+            linkOpen.attrs = [ [ 'class', hashLinkOpts.class ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
+            const linkContent = new Token('text', '', 0);
+            const linkClose = new Token('link_close', 'a', -1);
+
+            // Inject hash link tokens before heading content
+            tokens[idx + 1].children.unshift(linkOpen, linkContent, linkClose);
         }
 
         // Expose the heading
