@@ -900,7 +900,7 @@ Each item in the array is an object with the following properties:
 
 **Example HTML output:**
 
-    <h1 id="hello-world">Hello World!</h1>
+    <h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
 
 **Options:**
 
@@ -908,6 +908,9 @@ Pass options for this plugin as the `heading_id` property of the `do-markdownit`
 Set this property to `false` to disable this plugin.
 
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
+- `hashLink` Set this property to `false` to disable this feature.
+    - `maxLevel` (`number`, optional, defaults to `3`): Max number of heading levels to generate a hash link.
+    - `class` (`string`, optional, defaults to `hash-anchor`): Class name to use on the anchor tag.
 </details>
 
 ### image_settings
@@ -1064,6 +1067,7 @@ Variables listed here should be sorted based on the filename, and then by variab
 | `$code-secondary-label-class` _(string)_ | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
 | `$columns-inner-class` _(string)_        | `column`               | The inner class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
 | `$columns-outer-class` _(string)_        | `columns`              | The outer class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
+| `$hash-anchor-class` _(string)_          | `hash-anchor`          | The anchor class name used for the `heading_id` plugin.     | [`_heading-id.scss`](./styles/_heading_id.scss)                     |
 | `$rsvp-button-class` _(string)_          | `rsvp`                 | The class name used for the `rsvp_button` plugin.           | [`_rsvp_button.scss`](./styles/_rsvp_button.scss)                   |
 | `$table-wrapper-class` _(string)_        | `table-wrapper`        | The class name used for the `table_wrapper` plugin.         | [`_table_wrapper.scss`](./styles/_table_wrapper.scss)               |
 | `$terminal-button-class` _(string)_      | `terminal`             | The class name used for the `terminal_button` plugin.       | [`_terminal_button.scss`](./styles/_terminal_button.scss)           |

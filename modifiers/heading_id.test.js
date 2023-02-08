@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./heading_id'));
 
 it('injects id attributes on headings', () => {
-    expect(md.render('# Hello World!')).toBe(`<h1 id="hello-world">Hello World!</h1>
+    expect(md.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
 `);
 });
 
@@ -119,15 +119,42 @@ const mdSluggify = require('markdown-it')().use(require('./heading_id'), {
 });
 
 it('supports a custom sluggify function', () => {
-    expect(mdSluggify.render('# Hello World!')).toBe(`<h1 id="helloworld">Hello World!</h1>
+    expect(mdSluggify.render('# Hello World!')).toBe(`<h1 id="helloworld"><a class="hash-anchor" href="#helloworld" aria-hidden="true"></a>Hello World!</h1>
 `);
 });
 
-const mdHashLink = require('markdown-it')().use(require('./heading_id'), {
-    hashLink: true,
+const mdDisableHashLink = require('markdown-it')().use(require('./heading_id'), {
+    hashLink: false,
 });
 
-it('supports generating a hashlink', () => {
-    expect(mdHashLink.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
+it('supports disabling hash links feature', () => {
+    expect(mdDisableHashLink.render('# Hello World!')).toBe(`<h1 id="hello-world">Hello World!</h1>
+`);
+});
+
+const mdMaxHashLinkLevel = require('markdown-it')().use(require('./heading_id'), {
+    hashLink: {
+        maxLevel: 5,
+    },
+});
+
+it('supports adjusting what level of headings generate hash links', () => {
+    expect(mdMaxHashLinkLevel.render('##### Hello World!')).toBe(`<h5 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h5>
+`);
+});
+
+const mdCustomAnchorClass = require('markdown-it')().use(require('./heading_id'), {
+    hashLink: {
+        class: 'custom-anchor',
+    },
+});
+
+it('supports changing class name for anchor in hash link', () => {
+    expect(mdCustomAnchorClass.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="custom-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
+`);
+});
+
+it('supports rendering heading without anchor above maxLevel', () => {
+    expect(md.render('#### Hello World!')).toBe(`<h4 id="hello-world">Hello World!</h4>
 `);
 });

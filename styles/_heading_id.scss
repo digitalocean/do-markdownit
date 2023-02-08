@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-@import "theme";
+$hash-anchor-class: "hash-anchor" !default;
 
-.hash-anchor {
+.#{$hash-anchor-class} {
     margin-right: 0.5em;
 
     &::before {
