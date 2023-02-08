@@ -14,10 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+@import "theme";
+
 $hash-anchor-class: "hash-anchor" !default;
 
 .#{$hash-anchor-class} {
+    border-bottom: none;
+    color: $gray5;
     margin-right: 0.5em;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: $gray3;
+    }
 
     &::before {
         content: "#";

@@ -30,8 +30,8 @@ const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} HashLinkOptions
- * @property {number} maxLevel Max number of heading levels to generate a hash link.
- * @property {string} class Class name to use on the hash link.
+ * @property {number} [maxLevel=3] Max heading level to generate hash links for.
+ * @property {string} [class='hash-anchor'] Class name to use on the hash link.
  */
 
 /**

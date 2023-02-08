@@ -909,7 +909,7 @@ Set this property to `false` to disable this plugin.
 
 - `sluggify` (`function(string): string`, optional): Custom function to convert heading content to a slug Id.
 - `hashLink` Set this property to `false` to disable this feature.
-    - `maxLevel` (`number`, optional, defaults to `3`): Max number of heading levels to generate a hash link.
+    - `maxLevel` (`number`, optional, defaults to `3`): Max heading level to generate hash links for.
     - `class` (`string`, optional, defaults to `hash-anchor`): Class name to use on the anchor tag.
 </details>
 

@@ -10,9 +10,9 @@ Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add hash links to heading_id plugin
 - (minor) Add syntax for defining settings on images, such as size and alignment
 - (patch) Dependency updates
-- (minor) Add hash links to heading_id plugin
 
 
 ## v1.4.0 - 1d4c368

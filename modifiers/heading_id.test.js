@@ -108,6 +108,11 @@ it('resets exposed headings between repeat renders', () => {
     } ]);
 });
 
+it('supports rendering heading without anchor above maxLevel', () => {
+    expect(md.render('#### Hello World!')).toBe(`<h4 id="hello-world">Hello World!</h4>
+`);
+});
+
 const mdSluggify = require('markdown-it')().use(require('./heading_id'), {
     /**
      * Custom sluggify function, forcing lowercase and only allowing alpha chars.
@@ -151,10 +156,5 @@ const mdCustomAnchorClass = require('markdown-it')().use(require('./heading_id')
 
 it('supports changing class name for anchor in hash link', () => {
     expect(mdCustomAnchorClass.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="custom-anchor" href="#hello-world" aria-hidden="true"></a>Hello World!</h1>
-`);
-});
-
-it('supports rendering heading without anchor above maxLevel', () => {
-    expect(md.render('#### Hello World!')).toBe(`<h4 id="hello-world">Hello World!</h4>
 `);
 });
