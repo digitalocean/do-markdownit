@@ -485,10 +485,12 @@ After the user and hash, assorted space-separated flags can be added (in any com
 - Add `html` to set the CodePen embed to default to the HTML tab.
 - Add `css` to set the CodePen embed to default to the CSS tab.
 - Add `js` to set the CodePen embed to default to the JavaScript tab.
+- Add `result` to set the CodePen embed to default to the Result tab (default, can be combined with other tabs).
 - Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
 - Add any set of digits to set the height of the embed (in pixels).
 
-If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
+Note that tabs cannot be combined, other than with `result`.
+If two or more tabs are selected, `html` will be preferred, followed by `css`, then `js`.
 
 **Example Markdown input:**
 

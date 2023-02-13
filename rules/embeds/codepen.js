@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33,10 +33,12 @@ const safeObject = require('../../util/safe_object');
  * - Add `html` to set the CodePen embed to default to the HTML tab.
  * - Add `css` to set the CodePen embed to default to the CSS tab.
  * - Add `js` to set the CodePen embed to default to the JavaScript tab.
+ * - Add `result` to set the CodePen embed to default to the Result tab (default, can be combined with other tabs).
  * - Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
  * - Add any set of digits to set the height of the embed (in pixels).
  *
- * If any two or more of `html`, `css`, and `js` are added, HTML will be preferred, followed by CSS, then JavaScript.
+ * Note that tabs cannot be combined, other than with `result`.
+ * If two or more tabs are selected, `html` will be preferred, followed by `css`, then `js`.
  *
  * @example
  * [codepen AlbertFeynman gjpgjN]
@@ -76,7 +78,9 @@ module.exports = md => {
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
         // Check for codepen match
-        const match = currentLine.match(/^\[codepen (\S+) (\S+)((?: (?:lazy|dark|html|css|js|editable|\d+))*)\]$/);
+        const tabs = [ 'html', 'css', 'js', 'result' ];
+        const settings = [ 'lazy', 'dark', 'editable' ];
+        const match = currentLine.match(`^\\[codepen (\\S+) (\\S+)((?: (?:${tabs.concat(settings).join('|')}|\\d+))*)\\]$`);
         if (!match) return false;
 
         // Get the user
@@ -103,8 +107,11 @@ module.exports = md => {
         // Defines if the embed should be editable
         const editable = flags.includes('editable');
 
-        // Defines the default tab
-        const tab = [ 'html', 'css', 'js' ].find(t => flags.includes(t)) || 'result';
+        // Defines the default tab (preferring based on the order in the tabs array)
+        let tab = tabs.find(t => flags.includes(t)) || 'result';
+
+        // If the result tab was request, it can be combined with any other tab
+        if (flags.includes('result') && tab !== 'result') tab = `${tab},result`;
 
         // Update the pos for the parser
         state.line = startLine + 1;
