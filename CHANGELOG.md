@@ -1,11 +1,18 @@
 # Changelog
 
+do-markdownit follows [Semantic Versioning](https://semver.org). Note that any new features to the
+plugin will be shipped as minor releases, in that they are adding new functionality to the plugin.
+New features will be enabled by default, and may change how your input Markdown is parsed. Any
+breaking changes to the options supported by the plugin will be shipped as a breaking change.
+
 ## Unreleased changes
 
 <!--
 All changes being submitted through PRs should be added to this section.
-Please add a new list item to the end of this section with a summary of the change.
+Please add a new list item to the top of this section with a summary of the change.
 Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
+
+Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
