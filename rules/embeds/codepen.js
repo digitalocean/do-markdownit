@@ -29,16 +29,16 @@ const safeObject = require('../../util/safe_object');
  * After the user and hash, assorted space-separated flags can be added (in any combination/order):
  *
  * - Add `lazy` to set the CodePen embed to not run until the user interacts with it.
- * - Add `dark` to set the CodePen embed to use dark mode.
- * - Add `html` to set the CodePen embed to default to the HTML tab.
- * - Add `css` to set the CodePen embed to default to the CSS tab.
- * - Add `js` to set the CodePen embed to default to the JavaScript tab.
+ * - Add `light` or `dark` to set the CodePen embed theme (default is `light`).
+ * - Add `html`, `css`, or `js` to set the default tab for the CodePen embed.
  * - Add `result` to set the CodePen embed to default to the Result tab (default, can be combined with other tabs).
  * - Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
  * - Add any set of digits to set the height of the embed (in pixels).
  *
- * Note that tabs cannot be combined, other than with `result`.
- * If two or more tabs are selected, `html` will be preferred, followed by `css`, then `js`.
+ * If two or more tabs are selected (excluded `result`), `html` will be preferred, followed by `css`, then `js`.
+ * If the `result` tab is selected, it can be combined with any other tab to generate a split view.
+ *
+ * If both `light` and `dark` are selected, `dark` will be preferred.
  *
  * @example
  * [codepen AlbertFeynman gjpgjN]

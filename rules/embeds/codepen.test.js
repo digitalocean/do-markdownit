@@ -132,7 +132,7 @@ it('handles codepen embeds with js and result tab flags', () => {
 `);
 });
 
-it('handles codepen embeds with html, css and result tab flags (preferring html)', () => {
+it('handles codepen embeds with html, css and result tab flags (preferring html with result)', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN css html result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
@@ -140,7 +140,7 @@ it('handles codepen embeds with html, css and result tab flags (preferring html)
 `);
 });
 
-it('handles codepen embeds with html, css, js and result tab flags (preferring html)', () => {
+it('handles codepen embeds with html, css, js and result tab flags (preferring html with result)', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN css js html result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
