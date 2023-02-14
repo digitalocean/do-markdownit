@@ -52,8 +52,24 @@ it('handles codepen embeds with the lazy flag', () => {
 `);
 });
 
+it('handles codepen embeds with the light theme flag', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN light]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
 it('handles codepen embeds with the dark theme flag', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN dark]')).toBe(`<p class="codepen" data-height="256" data-theme-id="dark" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with the light and dark theme flag (preferring dark)', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN light dark]')).toBe(`<p class="codepen" data-height="256" data-theme-id="dark" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
 <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>

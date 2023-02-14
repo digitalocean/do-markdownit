@@ -79,7 +79,7 @@ module.exports = md => {
 
         // Check for codepen match
         const tabs = [ 'html', 'css', 'js', 'result' ];
-        const settings = [ 'lazy', 'dark', 'editable' ];
+        const settings = [ 'lazy', 'light', 'dark', 'editable' ];
         const match = currentLine.match(`^\\[codepen (\\S+) (\\S+)((?: (?:${tabs.concat(settings).join('|')}|\\d+))*)\\]$`);
         if (!match) return false;
 
