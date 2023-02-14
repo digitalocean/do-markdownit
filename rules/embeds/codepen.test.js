@@ -84,7 +84,7 @@ it('handles codepen embeds with js tab flag', () => {
 `);
 });
 
-it('handles codepen embeds with two tab flags (preferring html, then css, then js)', () => {
+it('handles codepen embeds with html and css tab flags (preferring html)', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN css html]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
@@ -92,8 +92,56 @@ it('handles codepen embeds with two tab flags (preferring html, then css, then j
 `);
 });
 
-it('handles codepen embeds with three tab flags (preferring html, then css, then js)', () => {
+it('handles codepen embeds with html, css and js tab flags (preferring html)', () => {
     expect(md.render('[codepen AlbertFeynman gjpgjN css js html]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with result tab flag', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with html and result tab flags', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN html result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with css and result tab flags', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN css result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="css,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with js and result tab flags', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN js result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="js,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with html, css and result tab flags (preferring html)', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN css html result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
+</p>
+<script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
+`);
+});
+
+it('handles codepen embeds with html, css, js and result tab flags (preferring html)', () => {
+    expect(md.render('[codepen AlbertFeynman gjpgjN css js html result]')).toBe(`<p class="codepen" data-height="256" data-theme-id="light" data-default-tab="html,result" data-user="AlbertFeynman" data-slug-hash="gjpgjN" style="height: 256px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
     <span>See the Pen <a href="https://codepen.io/AlbertFeynman/pen/gjpgjN">gjpgjN by AlbertFeynman</a> (<a href="https://codepen.io/AlbertFeynman">@AlbertFeynman</a>) on <a href='https://codepen.io'>CodePen</a>.</span>
 </p>
 <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
