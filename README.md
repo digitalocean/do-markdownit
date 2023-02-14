@@ -659,6 +659,53 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### twitter
+
+<details>
+<summary>Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[twitter <tweet>]`. E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
+After the tweet, assorted space-separated flags can be added (in any combination/order):
+
+- Add `light` or `dark` to set the card theme (default is `light`).
+- Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
+- Add any set of digits to set the width of the embed (in pixels, between 250 and 550, default is 550).
+
+If two or more alignments are selected, `left` will be preferred, followed by `center`, then `right`.
+
+If both `light` and `dark` are selected, `dark` will be preferred.
+
+If a width outside the range of 250-550 is selected, a clamped value will be used.
+
+**Example Markdown input:**
+
+    [twitter https://twitter.com/MattIPv4/status/1576415168426573825]
+
+    [twitter https://twitter.com/MattIPv4/status/1576415168426573825 left 400 dark]
+
+**Example HTML output:**
+
+    <div class="twitter">
+        <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+            <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+        </blockquote>
+    </div>
+
+    <div class="twitter" align="left">
+        <blockquote class="twitter-tweet" data-dnt="true" data-width="400" data-theme="dark">
+            <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+        </blockquote>
+    </div>
+    <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+**Options:**
+
+Pass options for this plugin as the `twitter` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### underline
 
 <details>
@@ -1136,4 +1183,4 @@ behave in the pull request, through example Markdown syntax and what the resulta
 
 This plugin is licensed under the [Apache License 2.0](LICENSE).
 
-Copyright 2022 DigitalOcean.
+Copyright 2023 DigitalOcean.
