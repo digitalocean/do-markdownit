@@ -28,8 +28,6 @@ it('handles twitter embeds (not inline)', () => {
 `);
 });
 
-// TODO: Test URL variants
-
 it('handles twitter embeds with no link (no embed)', () => {
     expect(md.render('[twitter  ]')).toBe(`<p>[twitter  ]</p>
 `);
@@ -37,6 +35,76 @@ it('handles twitter embeds with no link (no embed)', () => {
 
 it('handles twitter embeds that are unclosed (no embed)', () => {
     expect(md.render('[twitter https://twitter.com/MattIPv4/status/1576415168426573825')).toBe(`<p>[twitter https://twitter.com/MattIPv4/status/1576415168426573825</p>
+`);
+});
+
+it('handles twitter embeds with http', () => {
+    expect(md.render('[twitter http://twitter.com/MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with no https:', () => {
+    expect(md.render('[twitter //twitter.com/MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with no https://', () => {
+    expect(md.render('[twitter twitter.com/MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with https://www.twitter.com', () => {
+    expect(md.render('[twitter https://www.twitter.com/MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with www.twitter.com', () => {
+    expect(md.render('[twitter www.twitter.com/MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with no domain', () => {
+    expect(md.render('[twitter MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds with no domain, but a leading slash', () => {
+    expect(md.render('[twitter /MattIPv4/status/1576415168426573825]')).toBe(`<div class="twitter">
+    <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
+        <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+    </blockquote>
+</div>
+<script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
 `);
 });
 
@@ -167,5 +235,15 @@ it('handles twitter embeds with multiple flags combined (dark, left alignment, c
     </blockquote>
 </div>
 <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+`);
+});
+
+it('handles twitter embeds attempting html injection', () => {
+    expect(md.render('[twitter https://twitter.com/<script>alert();</script>/status/12345]')).toBe(`<p>[twitter https://twitter.com/&lt;script&gt;alert();&lt;/script&gt;/status/12345]</p>
+`);
+});
+
+it('handles twitter embeds attempting url manipulation', () => {
+    expect(md.render('[twitter https://twitter.com/../status/12345]')).toBe(`<p>[twitter https://twitter.com/../status/12345]</p>
 `);
 });
