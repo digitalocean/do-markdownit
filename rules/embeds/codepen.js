@@ -110,7 +110,7 @@ module.exports = md => {
         // Defines the default tab (preferring based on the order in the tabs array)
         let tab = tabs.find(t => flags.includes(t)) || 'result';
 
-        // If the result tab was request, it can be combined with any other tab
+        // If the result tab was requested, it can be combined with any other tab
         if (flags.includes('result') && tab !== 'result') tab = `${tab},result`;
 
         // Update the pos for the parser
