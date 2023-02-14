@@ -487,7 +487,7 @@ After the user and hash, assorted space-separated flags can be added (in any com
 - Add `editable` to set the CodePen embed to allow the code to be edited (requires the embedded user to be Pro).
 - Add any set of digits to set the height of the embed (in pixels).
 
-If two or more tabs are selected (excluded `result`), `html` will be preferred, followed by `css`, then `js`.
+If two or more tabs are selected (excluding `result`), `html` will be preferred, followed by `css`, then `js`.
 If the `result` tab is selected, it can be combined with any other tab to generate a split view.
 
 If both `light` and `dark` are selected, `dark` will be preferred.
