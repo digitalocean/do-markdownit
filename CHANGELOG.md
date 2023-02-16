@@ -17,6 +17,7 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add Twitter embeds
 - (minor) Add result tab flag to CodePen embeds
 - (docs) Update CHANGELOG notes, add keywords, ignore Jest config for NPM
 - (minor) Add hash links to heading_id plugin
