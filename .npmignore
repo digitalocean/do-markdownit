@@ -3,6 +3,7 @@
 
 # Exclude all tests (though we do include the fixtures as demo content)
 *.test.js
+jest.config.js
 
 # Exclude all development files
 dev/

@@ -280,6 +280,7 @@ CodePen embeds can be customized with many flags after the username and ID:
 - Pass `dark` to switch the embed to using dark mode (e.g. `[codepen MattCowley vwPzeX dark]`)
 - Pass `lazy` to enable lazy loading (click to run) for the embed (e.g. `[codepen MattCowley vwPzeX lazy]`)
 - Pass one of `html`, `css`, or `js` to change the default tab that is shown (e.g. `[codepen MattCowley vwPzeX css]`)
+- Pass `result` to show the result of the pen. This is the default tab, but can be combined with other tabs as well (e.g. `[codepen MattCowley vwPzeX html result]`)
 - Pass `editable` to enable the user to edit the embed (e.g. `[codepen chriscoyier Yxzjdz editable]`)\
   _(Note: The embedded pen must be from a user with CodePen Pro for this to work)_
 
