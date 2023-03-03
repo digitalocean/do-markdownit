@@ -17,6 +17,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Dependency updates
+
 
 ## v1.5.0 - c7be411
 
