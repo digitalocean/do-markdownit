@@ -248,6 +248,15 @@ Embedding a Wistia video (id, height, width):
 _As with the YouTube embed, both the width and height are optional and have the same defaults._\
 _The same behaviour applies to the width/height set, with responsive scaling._
 
+### Vimeo
+
+Embedding a Vimeo video (url, height, width):
+
+[vimeo https://player.vimeo.com/video/329272793 225 400]
+
+_As with the YouTube embed, both the width and height are optional and have the same defaults._\
+_The same behaviour applies to the width/height set, with responsive scaling._
+
 ### DNS
 
 Embedding DNS record lookups (hostname, record types...):
