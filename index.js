@@ -141,7 +141,6 @@ module.exports = (md, options) => {
         md.use(require('./rules/embeds/wistia'), safeObject(optsObj.wistia));
     }
 
-
     if (optsObj.vimeo !== false) {
         md.use(require('./rules/embeds/vimeo'), safeObject(optsObj.vimeo));
     }
