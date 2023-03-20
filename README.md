@@ -661,6 +661,34 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+
+### vimeo
+
+<details>
+<summary>Add support for <a href="https://vimeo.com/">Vimeo</a> embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[vimeo <url>]`. E.g. `[vimeo https://player.vimeo.com/video/329272793]`.
+Height and width can optionally be set using `[vimeo <url> [height] [width]]`. E.g. `[vimeo https://player.vimeo.com/video/329272793 380 560]`.
+The default value for height is 270, and for width is 480.
+
+**Example Markdown input:**
+
+    [vimeo https://player.vimeo.com/video/329272793]
+
+**Example HTML output:**
+
+    <iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+        <a href="https://player.vimeo.com/video/329272793" target="_blank">View vimeo video</a>
+    </iframe>
+
+**Options:**
+
+Pass options for this plugin as the `vimeo` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### twitter
 
 <details>
