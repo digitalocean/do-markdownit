@@ -692,7 +692,7 @@ _No options are available for this plugin._
 ### twitter
 
 <details>
-<summary>Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax.</summary>
+<summary>Add support for <a href="https://twitter.com/">Twitter</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[twitter <tweet>]`. E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
 After the tweet, assorted space-separated flags can be added (in any combination/order):

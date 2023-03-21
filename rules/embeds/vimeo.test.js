@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32,6 +32,48 @@ it('handles vimeo embeds with no id (no embed)', () => {
 
 it('handles vimeo embeds that are unclosed (no embed)', () => {
     expect(md.render('[vimeo https://player.vimeo.com/video/329272793')).toBe(`<p>[vimeo https://player.vimeo.com/video/329272793</p>
+`);
+});
+
+it('handles vimeo embeds with http', () => {
+    expect(md.render('[vimeo http://player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
+`);
+});
+
+it('handles vimeo embeds with no https:', () => {
+    expect(md.render('[vimeo //player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
+`);
+});
+
+it('handles vimeo embeds with no https://', () => {
+    expect(md.render('[vimeo player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
+`);
+});
+
+it('handles vimeo embeds with https://www.player.vimeo.com', () => {
+    expect(md.render('[vimeo https://www.player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
+`);
+});
+
+it('handles vimeo embeds with www.player.vimeo.com', () => {
+    expect(md.render('[vimeo www.player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
+`);
+});
+
+it('handles vimeo embeds with just the video ID', () => {
+    expect(md.render('[vimeo 329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
+</iframe>
 `);
 });
 

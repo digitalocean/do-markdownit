@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ module.exports = md => {
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
         // Check for vimeo match
-        const match = currentLine.match(/^\[vimeo (?:https?:\/\/(?:www\.)?player\.vimeo\.com?)\/video\/(\d+)?(?: (\d+))?(?: (\d+))?\]$/);
+        const match = currentLine.match(/^\[vimeo (?:(?:(?:https?:)?\/\/)?(?:www\.)?player\.vimeo\.com\/video\/)?(\d+)?(?: (\d+))?(?: (\d+))?]$/);
         if (!match) return false;
 
         // Get the id from the url
