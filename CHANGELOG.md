@@ -17,6 +17,7 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add Instagram embeds
 
 ## v1.5.1 - 2f1f346
 

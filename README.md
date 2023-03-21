@@ -708,6 +708,54 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### instagram
+
+<details>
+<summary>Add support for <a href="https://instagram.com/">Instagram</a> embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[instagram <post>]`. E.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS]`.
+After the post, assorted space-separated flags can be added (in any combination/order):
+
+- Add `caption` to include caption under the post.
+- Add any set of digits to set the width of the embed (in pixels, between 250 and 550, default is 540).
+
+If a width outside the range of 250-550 is selected, a clamped value will be used.
+
+**Example Markdown input:**
+
+    [instagram https://www.instagram.com/p/CkQuv3_LRgS]
+
+    [instagram https://www.instagram.com/p/CkQuv3_LRgS caption 400]
+
+**Example HTML output:**
+
+    <div class="instagram">
+        <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS"
+            data-instgrm-version="14">
+                <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
+        </blockquote>
+    </div>
+
+    <div class="instagram">
+        <blockquote class="instagram-media"
+            style="width: 400px;"
+            data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS"
+            data-instgrm-version="14"
+            data-instgrm-captioned>
+                <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
+        </blockquote>
+    </div>
+    <script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+
+**Options:**
+
+Pass options for this plugin as the `instagram` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### underline
 
 <details>
