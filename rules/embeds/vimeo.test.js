@@ -56,20 +56,6 @@ it('handles vimeo embeds with no https://', () => {
 `);
 });
 
-it('handles vimeo embeds with https://www.player.vimeo.com', () => {
-    expect(md.render('[vimeo https://www.player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
-    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
-</iframe>
-`);
-});
-
-it('handles vimeo embeds with www.player.vimeo.com', () => {
-    expect(md.render('[vimeo www.player.vimeo.com/video/329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
-    <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>
-</iframe>
-`);
-});
-
 it('handles vimeo embeds with just the video ID', () => {
     expect(md.render('[vimeo 329272793]')).toBe(`<iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
     <a href="https://player.vimeo.com/video/329272793" target="_blank">View Vimeo video</a>

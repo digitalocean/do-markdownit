@@ -60,7 +60,7 @@ module.exports = md => {
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
         // Check for vimeo match
-        const match = currentLine.match(/^\[vimeo (?:(?:(?:https?:)?\/\/)?(?:www\.)?player\.vimeo\.com\/video\/)?(\d+)?(?: (\d+))?(?: (\d+))?]$/);
+        const match = currentLine.match(/^\[vimeo (?:(?:(?:https?:)?\/\/)?player\.vimeo\.com\/video\/)?(\d+)?(?: (\d+))?(?: (\d+))?]$/);
         if (!match) return false;
 
         // Get the id from the url
