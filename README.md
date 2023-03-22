@@ -661,10 +661,38 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+
+### vimeo
+
+<details>
+<summary>Add support for <a href="https://vimeo.com/">Vimeo</a> embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[vimeo <url>]`. E.g. `[vimeo https://player.vimeo.com/video/329272793]`.
+Height and width can optionally be set using `[vimeo <url> [height] [width]]`. E.g. `[vimeo https://player.vimeo.com/video/329272793 380 560]`.
+The default value for height is 270, and for width is 480.
+
+**Example Markdown input:**
+
+    [vimeo https://player.vimeo.com/video/329272793]
+
+**Example HTML output:**
+
+    <iframe src="https://player.vimeo.com/video/329272793" class="vimeo" height="270" width="480" style="aspect-ratio: 16/9" frameborder="0" allowfullscreen>
+        <a href="https://player.vimeo.com/video/329272793" target="_blank">View vimeo video</a>
+    </iframe>
+
+**Options:**
+
+Pass options for this plugin as the `vimeo` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### twitter
 
 <details>
-<summary>Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax.</summary>
+<summary>Add support for <a href="https://twitter.com/">Twitter</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[twitter <tweet>]`. E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
 After the tweet, assorted space-separated flags can be added (in any combination/order):
