@@ -30,7 +30,7 @@ const safeObject = require('../../util/safe_object');
  *
  * - Add `caption` to include caption under the post.
  * - Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
- * - Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 540).
+ * - Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 326 not enforced here, but provided by Instagram's embed.js).
  *
  * If two or more alignments are selected, `left` will be preferred, followed by `center`, then `right`.
  *
@@ -58,7 +58,7 @@ const safeObject = require('../../util/safe_object');
  *          <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
  *     </blockquote>
  * </div>
- * <script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+ * <script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
  *
  * @type {import('markdown-it').PluginSimple}
  */
@@ -79,7 +79,7 @@ module.exports = md => {
         const currentLine = state.src.substring(pos, max);
 
         // Perform some non-regex checks for speed
-        if (currentLine.length < 13) return false; // [instagram a/p/b]
+        if (currentLine.length < 13) return false; // [instagram a]
         if (currentLine.slice(0, 11) !== '[instagram ') return false;
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
@@ -141,7 +141,7 @@ module.exports = md => {
 
             // Inject the token
             const token = new state.Token('html_block', '', 0);
-            token.content = '<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>\n';
+            token.content = '<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>\n';
             state.tokens.push(token);
         }
     };

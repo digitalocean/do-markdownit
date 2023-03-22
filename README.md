@@ -745,15 +745,18 @@ The basic syntax is `[instagram <post>]`. E.g. `[instagram https://www.instagram
 After the post, assorted space-separated flags can be added (in any combination/order):
 
 - Add `caption` to include caption under the post.
-- Add any set of digits to set the width of the embed (in pixels, between 250 and 550, default is 540).
+- Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
+- Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 326 not enforced here, but provided by Instagram's embed.js).
 
-If a width outside the range of 250-550 is selected, a clamped value will be used.
+If two or more alignments are selected, `left` will be preferred, followed by `center`, then `right`.
+
+If a width outside the range of 326-550 is selected, a clamped value will be used.
 
 **Example Markdown input:**
 
     [instagram https://www.instagram.com/p/CkQuv3_LRgS]
 
-    [instagram https://www.instagram.com/p/CkQuv3_LRgS caption 400]
+    [instagram https://www.instagram.com/p/CkQuv3_LRgS left caption 400]
 
 **Example HTML output:**
 
@@ -765,7 +768,7 @@ If a width outside the range of 250-550 is selected, a clamped value will be use
         </blockquote>
     </div>
 
-    <div class="instagram">
+    <div class="instagram" align="left">
         <blockquote class="instagram-media"
             style="width: 400px;"
             data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS"
@@ -774,7 +777,7 @@ If a width outside the range of 250-550 is selected, a clamped value will be use
                 <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
         </blockquote>
     </div>
-    <script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+    <script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 
 **Options:**
 

@@ -24,7 +24,7 @@ it('handles instagram embeds (not inline)', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -44,7 +44,7 @@ it('handles instagram embeds with http', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -54,7 +54,7 @@ it('handles instagram embeds with no https:', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -64,7 +64,7 @@ it('handles instagram embeds with no https://', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -74,7 +74,7 @@ it('handles instagram embeds with https://www.instagram.com', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -84,7 +84,7 @@ it('handles instagram embeds with www.instagram.com', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -94,7 +94,7 @@ it('handles instagram embeds with only post id', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -104,7 +104,7 @@ it('handles instagram embeds with only post id and a leading slash', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -114,7 +114,7 @@ it('handles instagram embeds with a custom width', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -124,7 +124,7 @@ it('handles instagram embeds with a custom width that is too large', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -134,7 +134,7 @@ it('handles instagram embeds with a custom width that is too small', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -144,7 +144,7 @@ it('handles instagram embeds with the caption flag', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -154,7 +154,7 @@ it('handles instagram embeds with the left alignment', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -164,7 +164,7 @@ it('handles instagram embeds with the right alignment', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -174,7 +174,7 @@ it('handles instagram embeds with the center alignment', () => {
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -184,7 +184,7 @@ it('handles instagram embeds with the left and right alignment (preferring left)
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -194,7 +194,7 @@ it('handles instagram embeds with the center and right alignment (preferring cen
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -204,7 +204,7 @@ it('handles instagram embeds with the left, center and right alignment (preferri
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
@@ -214,7 +214,7 @@ it('handles instagram embeds with multiple flags combined (caption, left alignme
         <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
     </blockquote>
 </div>
-<script async defer src="//www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
 `);
 });
 
