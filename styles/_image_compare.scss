@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// imageCompare embeds
-.imageCompare {
+// image_compare embeds
+.image-compare {
     position: relative;
 }
 
@@ -26,14 +26,17 @@ limitations under the License.
     position: absolute;
     width: 100%;
 }
+
 .image-left {
     clip-path: polygon(0% 0%, var(--value) 0%, var(--value) 100%, 0% 100%);
     margin: 0;
 }
+
 .image-right {
     clip-path: polygon(100% 0%, var(--value) 0%, var(--value) 100%, 100% 100%);
     margin: 0;
 }
+
 .control-arrow {
     width: 30px;
     height: 30px;
@@ -43,6 +46,7 @@ limitations under the License.
     color: #ffffff;
     z-index: 90;
 }
+
 .control {
     background-color: transparent;
     box-sizing: border-box;
@@ -54,6 +58,7 @@ limitations under the License.
     width: 100%;
     z-index: 100;
 }
+
 .control::-moz-range-thumb {
     background-color: #ffffff;
     border: none;
@@ -61,6 +66,7 @@ limitations under the License.
     height: 100%;
     width: 2px;
 }
+
 .control::-webkit-slider-thumb {
     background-color: #ffffff;
     border: none;
@@ -68,20 +74,22 @@ limitations under the License.
     height: 100%;
     width: 2px;
 }
+
 .control::-moz-range-track {
     background: transparent;
     background-size: 100%;
     box-sizing: border-box;
 }
+
 .control::-webkit-slider-runnable-track {
     background: transparent;
     background-size: 100%;
     box-sizing: border-box;
     height: 100%;
 }
+
 .control,
 .control::-webkit-slider-runnable-track,
 .control::-webkit-slider-thumb {
-    -webkit-appearance: none;
     appearance: none;
 }

@@ -30,7 +30,7 @@ limitations under the License.
  * @example
  * [image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]
  *
- * <div class="imageCompare" style="--value:50%; height: 500px; width: 500px;">
+ * <div class="image-compare" style="--value:50%; height: 500px; width: 500px;">
  *     <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
  *     <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
  *     <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
@@ -103,7 +103,7 @@ module.exports = md => {
         const token = tokens[index];
 
         // Return the HTML
-        return `<div class="imageCompare" style="--value:50%; height: ${token.image_compare.height}px; width: ${token.image_compare.width}px;">
+        return `<div class="image-compare" style="--value:50%; height: ${token.image_compare.height}px; width: ${token.image_compare.width}px;">
     <img class="image-left" src="${token.image_compare.imageLeft}" alt="Image left"/>
     <img class="image-right" src="${token.image_compare.imageRight}" alt="Image right"/>
     <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', \`\${this.value}%\`)" />

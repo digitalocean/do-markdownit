@@ -741,17 +741,17 @@ _No options are available for this plugin._
 <details>
 <summary>Add support for Image Comparison in Markdown, as block syntax.</summary>
 
-The basic syntax is `[imageCompare <url1> <url2>]`. E.g., `[imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg]`.
-Height and width can optionally be set using `[vimeo <url1> <url2> [height] [width]]`. E.g., `[imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg 500 560]`.
+The basic syntax is `[image_compare <url1> <url2>]`. E.g., `[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]`.
+Height and width can optionally be set using `[image_compare <url1> <url2> [height] [width]]`. E.g., `[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg 500 560]`.
 The default value for height is 500 and for width is 500.
 
 **Example Markdown input:**
 
-    [imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg]
+    [image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]
 
 **Example HTML output:**
 
-    <div class="imageCompare" style="--value:50%; height: 500px; width: 500px;">
+    <div class="image-compare" style="--value:50%; height: 500px; width: 500px;">
         <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
         <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
         <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />

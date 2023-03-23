@@ -19,7 +19,7 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./image_compare'));
 
 it('handles image compare embeds (not inline)', () => {
-    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg 400 400]')).toBe(`<div class="imageCompare" style="--value:50%; height: 400px; width: 400px;">
+    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg 400 400]')).toBe(`<div class="image-compare" style="--value:50%; height: 400px; width: 400px;">
     <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
     <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
     <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', \`\${this.value}%\`)" />
@@ -39,7 +39,7 @@ it('handles image compare embeds that are unclosed (no embed)', () => {
 });
 
 it('handles image compare embeds without width', () => {
-    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg 400]')).toBe(`<div class="imageCompare" style="--value:50%; height: 400px; width: 500px;">
+    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg 400]')).toBe(`<div class="image-compare" style="--value:50%; height: 400px; width: 500px;">
     <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
     <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
     <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', \`\${this.value}%\`)" />
@@ -49,7 +49,7 @@ it('handles image compare embeds without width', () => {
 });
 
 it('handles image compare embeds without width or height', () => {
-    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]')).toBe(`<div class="imageCompare" style="--value:50%; height: 500px; width: 500px;">
+    expect(md.render('[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]')).toBe(`<div class="image-compare" style="--value:50%; height: 500px; width: 500px;">
     <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
     <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
     <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', \`\${this.value}%\`)" />
