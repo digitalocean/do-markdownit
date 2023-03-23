@@ -746,7 +746,7 @@ After the post, assorted space-separated flags can be added (in any combination/
 
 - Add `caption` to include caption under the post.
 - Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
-- Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 326 not enforced here, but provided by Instagram's embed.js).
+- Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 326 as set by Instagram's embed.js).
 
 If two or more alignments are selected, `left` will be preferred, followed by `center`, then `right`.
 
