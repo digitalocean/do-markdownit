@@ -349,7 +349,8 @@ You can also embed a post from Instagram by passing the URL for the post:
 
 Like a few other embeds, you can also pass optional flags to customize the embed:
 
-- Pass any integer value (between 250 and 550) to set a custom width for the embed (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]`)
+- Pass any integer value (between 326 and 550) to set a custom width for the embed (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]`)
+- Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
 - Pass `caption` to include caption under the post (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]`)
 
 

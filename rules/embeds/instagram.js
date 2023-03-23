@@ -58,7 +58,7 @@ const safeObject = require('../../util/safe_object');
  *          <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
  *     </blockquote>
  * </div>
- * <script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
+ * <script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()></script>
  *
  * @type {import('markdown-it').PluginSimple}
  */
@@ -141,7 +141,7 @@ module.exports = md => {
 
             // Inject the token
             const token = new state.Token('html_block', '', 0);
-            token.content = '<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>\n';
+            token.content = '<script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()"></script>\n';
             state.tokens.push(token);
         }
     };

@@ -352,7 +352,8 @@ For example, <code>[codepen MattCowley vwPzeX dark css 384]</code> would create 
 </div>
 <p>Like a few other embeds, you can also pass optional flags to customize the embed:</p>
 <ul>
-<li>Pass any integer value (between 250 and 550) to set a custom width for the embed (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]</code>)</li>
+<li>Pass any integer value (between 326 and 550) to set a custom width for the embed (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]</code>)</li>
+<li>Add <code>left</code>, <code>center</code>, or <code>right</code> to set the alignment of the embed (default is <code>left</code>).</li>
 <li>Pass <code>caption</code> to include caption under the post (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]</code>)</li>
 </ul>
 <h2 id="step-6-tutorials"><a class="hash-anchor" href="#step-6-tutorials" aria-hidden="true"></a>Step 6 — Tutorials</h2>
@@ -369,4 +370,4 @@ These may not be enabled in all contexts in the DigitalOcean community, but are 
 <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
 <script async defer src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed@v1.3.0/public/caniuse-embed.min.js" type="text/javascript"></script>
 <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
-<script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()"></script>

@@ -777,7 +777,7 @@ If a width outside the range of 326-550 is selected, a clamped value will be use
                 <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
         </blockquote>
     </div>
-    <script async defer src="https://www.instagram.com/embed.js" type="text/javascript"></script>
+    <script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()"></script>
 
 **Options:**
 
