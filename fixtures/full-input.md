@@ -341,6 +341,13 @@ Like a few other embeds, you can also pass optional flags to customize the embed
 - Pass `light` or `dark` to switch the theme of the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 dark]`)
 - Pass `left`, `center`, or `right` to align the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 left]`)
 
+### Image compare
+
+Compare two images side by side. (url1, url2, height, width)
+
+[image_compare https://rb.gy/jykhuo https://rb.gy/zt5afg]
+
+_Both the width and height are optional, with the defaults being 500 for both._\
 
 ## Step 6 — Tutorials
 

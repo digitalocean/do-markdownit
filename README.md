@@ -736,6 +736,36 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### image_compare
+
+<details>
+<summary>Add support for Image Comparison in Markdown, as block syntax.</summary>
+
+The basic syntax is `[imageCompare <url1> <url2>]`. E.g., `[imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg]`.
+Height and width can optionally be set using `[vimeo <url1> <url2> [height] [width]]`. E.g., `[imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg 500 560]`.
+The default value for height is 500 and for width is 500.
+
+**Example Markdown input:**
+
+    [imageCompare https://rb.gy/jykhuo https://rb.gy/zt5afg]
+
+**Example HTML output:**
+
+    <div class="imageCompare" style="--value:50%; height: 500px; width: 500px;">
+        <img class="image-left" src="https://rb.gy/jykhuo" alt="Image left"/>
+        <img class="image-right" src="https://rb.gy/zt5afg" alt="Image right"/>
+        <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
+        <svg class="control-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504.3 273.6c4.9-4.5 7.7-10.9 7.7-17.6s-2.8-13-7.7-17.6l-112-104c-7-6.5-17.2-8.2-25.9-4.4s-14.4 12.5-14.4 22l0 56-192 0 0-56c0-9.5-5.7-18.2-14.4-22s-18.9-2.1-25.9 4.4l-112 104C2.8 243 0 249.3 0 256s2.8 13 7.7 17.6l112 104c7 6.5 17.2 8.2 25.9 4.4s14.4-12.5 14.4-22l0-56 192 0 0 56c0 9.5 5.7 18.2 14.4 22s18.9 2.1 25.9-4.4l112-104z"/></svg>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `image_compare` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### underline
 
 <details>

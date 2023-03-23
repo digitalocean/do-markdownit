@@ -149,6 +149,10 @@ module.exports = (md, options) => {
         md.use(require('./rules/embeds/twitter'), safeObject(optsObj.twitter));
     }
 
+    if (optsObj.imageCompare !== false) {
+        md.use(require('./rules/embeds/image_compare'), safeObject(optsObj.imageCompare));
+    }
+
     // Register modifiers
 
     if (optsObj.underline !== false) {
