@@ -343,6 +343,19 @@ For example, <code>[codepen MattCowley vwPzeX dark css 384]</code> would create 
 <li>Pass <code>light</code> or <code>dark</code> to switch the theme of the embed (e.g. <code>[twitter https://twitter.com/MattIPv4/status/1576415168426573825 dark]</code>)</li>
 <li>Pass <code>left</code>, <code>center</code>, or <code>right</code> to align the embed (e.g. <code>[twitter https://twitter.com/MattIPv4/status/1576415168426573825 left]</code>)</li>
 </ul>
+<h3 id="instagram"><a class="hash-anchor" href="#instagram" aria-hidden="true"></a>Instagram</h3>
+<p>You can also embed a post from Instagram by passing the URL for the post:</p>
+<div class="instagram">
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS" data-instgrm-version="14">
+        <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
+    </blockquote>
+</div>
+<p>Like a few other embeds, you can also pass optional flags to customize the embed:</p>
+<ul>
+<li>Pass any integer value (between 326 and 550) to set a custom width for the embed (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]</code>)</li>
+<li>Add <code>left</code>, <code>center</code>, or <code>right</code> to set the alignment of the embed (default is <code>left</code>).</li>
+<li>Pass <code>caption</code> to include caption under the post (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]</code>)</li>
+</ul>
 <h3 id="image-compare"><a class="hash-anchor" href="#image-compare" aria-hidden="true"></a>Image compare</h3>
 <p>Compare two images side by side (url1, url2, height, width):</p>
 <div class="image-compare" style="--value:50%; height: 270px; width: 480px;">
@@ -366,3 +379,4 @@ These may not be enabled in all contexts in the DigitalOcean community, but are 
 <script async defer src="https://static.codepen.io/assets/embed/ei.js" type="text/javascript"></script>
 <script async defer src="https://cdn.jsdelivr.net/gh/ireade/caniuse-embed@v1.3.0/public/caniuse-embed.min.js" type="text/javascript"></script>
 <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()"></script>

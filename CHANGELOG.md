@@ -18,6 +18,7 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 - (minor) Add Image Compare embeds
+- (minor) Add Instagram embeds
 - (minor) Add Vimeo embeds
 
 

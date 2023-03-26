@@ -341,6 +341,18 @@ Like a few other embeds, you can also pass optional flags to customize the embed
 - Pass `light` or `dark` to switch the theme of the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 dark]`)
 - Pass `left`, `center`, or `right` to align the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 left]`)
 
+### Instagram
+
+You can also embed a post from Instagram by passing the URL for the post:
+
+[instagram https://www.instagram.com/p/CkQuv3_LRgS]
+
+Like a few other embeds, you can also pass optional flags to customize the embed:
+
+- Pass any integer value (between 326 and 550) to set a custom width for the embed (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS 400]`)
+- Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
+- Pass `caption` to include caption under the post (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]`)
+
 ### Image compare
 
 Compare two images side by side (url1, url2, height, width):
