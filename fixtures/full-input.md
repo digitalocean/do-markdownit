@@ -341,6 +341,13 @@ Like a few other embeds, you can also pass optional flags to customize the embed
 - Pass `light` or `dark` to switch the theme of the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 dark]`)
 - Pass `left`, `center`, or `right` to align the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 left]`)
 
+### Slideshow
+
+You can also embed Slideshow (url1, url2, ..., url<n>, height, width):
+
+[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
+
+_Both the width and height are optional, with the defaults being 480 and 270 respectively._
 
 ## Step 6 — Tutorials
 
