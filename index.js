@@ -44,7 +44,8 @@ const safeObject = require('./util/safe_object');
  * @property {false} [wistia] Disable Wistia embeds.
  * @property {false} [vimeo] Disable Vimeo embeds.
  * @property {false} [twitter] Disable Twitter embeds.
- * @property {false} [slidshow] Disable Slideshow embeds.
+ * @property {false} [instagram] Disable Instagram embeds.
+ * @property {false} [slideshow] Disable Slideshow embeds.
  * @property {false} [underline] Disable underline syntax.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
@@ -148,6 +149,10 @@ module.exports = (md, options) => {
 
     if (optsObj.twitter !== false) {
         md.use(require('./rules/embeds/twitter'), safeObject(optsObj.twitter));
+    }
+
+    if (optsObj.instagram !== false) {
+        md.use(require('./rules/embeds/instagram'), safeObject(optsObj.instagram));
     }
 
     if (optsObj.slideshow !== false) {

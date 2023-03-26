@@ -736,6 +736,57 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### instagram
+
+<details>
+<summary>Add support for <a href="https://instagram.com/">Instagram</a> embeds in Markdown, as block syntax.</summary>
+
+The basic syntax is `[instagram <post>]`. E.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS]`.
+After the post, assorted space-separated flags can be added (in any combination/order):
+
+- Add `caption` to include caption under the post.
+- Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
+- Add any set of digits to set the width of the embed (in pixels, between 326 and 550, default is 326 as set by Instagram's embed.js).
+
+If two or more alignments are selected, `left` will be preferred, followed by `center`, then `right`.
+
+If a width outside the range of 326-550 is selected, a clamped value will be used.
+
+**Example Markdown input:**
+
+    [instagram https://www.instagram.com/p/CkQuv3_LRgS]
+
+    [instagram https://www.instagram.com/p/CkQuv3_LRgS left caption 400]
+
+**Example HTML output:**
+
+    <div class="instagram">
+        <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS"
+            data-instgrm-version="14">
+                <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
+        </blockquote>
+    </div>
+
+    <div class="instagram" align="left">
+        <blockquote class="instagram-media"
+            style="width: 400px;"
+            data-instgrm-permalink="https://www.instagram.com/p/CkQuv3_LRgS"
+            data-instgrm-version="14"
+            data-instgrm-captioned>
+                <a href="https://instagram.com/p/CkQuv3_LRgS">View post</a>
+        </blockquote>
+    </div>
+    <script async defer src="https://www.instagram.com/embed.js" type="text/javascript" onload="window.instgrm && window.instgrm.Embeds.process()"></script>
+
+**Options:**
+
+Pass options for this plugin as the `instagram` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### slideshow
 
 <details>
