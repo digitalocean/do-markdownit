@@ -64,8 +64,26 @@ it('handles slideshow embeds without width', () => {
 `);
 });
 
-it('handles slideshow embeds with height and width in random places', () => {
-    expect(md.render('[slideshow 400 https://assets.digitalocean.com/banners/python.png 500 https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 500px;">
+it('handles slideshow embeds with height between urls', () => {
+    expect(md.render('[slideshow https://assets.digitalocean.com/banners/python.png 400 https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 480px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+<div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
+</div>
+`);
+});
+
+it('handles slideshow embeds with height before urls', () => {
+    expect(md.render('[slideshow 400 https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 480px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+<div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
+</div>
+`);
+});
+
+it('handles slideshow embeds with height and width between urls', () => {
+    expect(md.render('[slideshow https://assets.digitalocean.com/banners/python.png 400 500 https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 500px;">
 <div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 500)()">&#8249;</div>
 <div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 500)()">&#8250;</div>
 <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
@@ -73,10 +91,19 @@ it('handles slideshow embeds with height and width in random places', () => {
 `);
 });
 
-it('handles slideshow embeds with height anywhere in the options', () => {
-    expect(md.render('[slideshow https://assets.digitalocean.com/banners/python.png 400 https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 480px;">
-<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
-<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+it('handles slideshow embeds with height and width before urls', () => {
+    expect(md.render('[slideshow 400 500 https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 500px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 500)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 500)()">&#8250;</div>
+<div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
+</div>
+`);
+});
+
+it('handles slideshow embeds with height and width in random places', () => {
+    expect(md.render('[slideshow 400 https://assets.digitalocean.com/banners/python.png 500 https://assets.digitalocean.com/banners/javascript.png]')).toBe(`<div class="slideshow" style="height: 400px; width: 500px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 500)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 500)()">&#8250;</div>
 <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
 </div>
 `);
