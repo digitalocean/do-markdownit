@@ -353,6 +353,13 @@ Like a few other embeds, you can also pass optional flags to customize the embed
 - Add `left`, `center`, or `right` to set the alignment of the embed (default is `left`).
 - Pass `caption` to include caption under the post (e.g. `[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]`)
 
+### Slideshow
+
+You can also embed Slideshow (url1, url2, ...urls, height, width):
+
+[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]
+
+_Both the width and height are optional, with the defaults being 480 and 270 respectively._
 
 ## Step 6 — Tutorials
 
