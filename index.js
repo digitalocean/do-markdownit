@@ -45,7 +45,7 @@ const safeObject = require('./util/safe_object');
  * @property {false} [vimeo] Disable Vimeo embeds.
  * @property {false} [twitter] Disable Twitter embeds.
  * @property {false} [instagram] Disable Instagram embeds.
- * @property {false} [compare] Disable Compare embeds.
+ * @property {false} [compare] Disable Image Compare embeds.
  * @property {false} [underline] Disable underline syntax.
  * @property {false|import('./modifiers/fence_label').FenceLabelOptions} [fence_label] Disable fence labels, or set options for the feature.
  * @property {false|import('./modifiers/fence_secondary_label').FenceSecondaryLabelOptions} [fence_secondary_label] Disable fence secondary labels, or set options for the feature.
