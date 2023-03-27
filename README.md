@@ -792,20 +792,20 @@ _No options are available for this plugin._
 <details>
 <summary>Add support for Slideshow in Markdown, as block syntax.</summary>
 
-The basic syntax is `[slideshow <url1> <url2>]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]`.
-Height and width can optionally be set using `[slideshow <url1> <url2> [height] [width]]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png 380 560]`.
+The basic syntax is `[slideshow <url1> <url2> <...urls>]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]`.
+Height and width can optionally be set using `[slideshow <url1> <url2> <...urls> [height] [width]]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png 380 560]`.
 The default value for height is 270 and for width is 480.
 
 **Example Markdown input:**
 
-    [slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
+    [slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]
 
 **Example HTML output:**
 
     <div class="slideshow" style="height: 270px; width: 480px;">
         <div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
         <div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
-        <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
+        <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /><img src="https://assets.digitalocean.com/banners/nodejs.png" alt="Slide #3" /></div>
     </div>
 
 **Options:**

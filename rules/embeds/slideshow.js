@@ -1,9 +1,12 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
+
 You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,18 +23,18 @@ limitations under the License.
 /**
  * Add support for Slideshow in Markdown, as block syntax.
  *
- * The basic syntax is `[slideshow <url1> <url2>]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]`.
- * Height and width can optionally be set using `[slideshow <url1> <url2> [height] [width]]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png 380 560]`.
+ * The basic syntax is `[slideshow <url1> <url2> <...urls>]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]`.
+ * Height and width can optionally be set using `[slideshow <url1> <url2> <...urls> [height] [width]]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png 380 560]`.
  * The default value for height is 270 and for width is 480.
  *
  * @example
  *
- * [slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
+ * [slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]
  *
  * <div class="slideshow" style="height: 270px; width: 480px;">
  *      <div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
  *      <div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
- *      <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /></div>
+ *      <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /><img src="https://assets.digitalocean.com/banners/nodejs.png" alt="Slide #3" /></div>
  * </div>
  *
  * @type {import('markdown-it').PluginSimple}

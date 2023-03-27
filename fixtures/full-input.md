@@ -355,9 +355,9 @@ Like a few other embeds, you can also pass optional flags to customize the embed
 
 ### Slideshow
 
-You can also embed Slideshow (url1, url2, ..., url<n>, height, width):
+You can also embed Slideshow (url1, url2, ...urls, height, width):
 
-[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
+[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]
 
 _Both the width and height are optional, with the defaults being 480 and 270 respectively._
 
