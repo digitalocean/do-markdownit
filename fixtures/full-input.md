@@ -359,7 +359,7 @@ Compare two images side by side (url1, url2, height, width):
 
 [compare https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
 
-_Both the width and height are optional, with the defaults being 500 for both._
+_Both the width and height are optional, with the defaults being 480 and 270 respectively._
 
 ## Step 6 — Tutorials
 
