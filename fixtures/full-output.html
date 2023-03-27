@@ -356,6 +356,14 @@ For example, <code>[codepen MattCowley vwPzeX dark css 384]</code> would create 
 <li>Add <code>left</code>, <code>center</code>, or <code>right</code> to set the alignment of the embed (default is <code>left</code>).</li>
 <li>Pass <code>caption</code> to include caption under the post (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]</code>)</li>
 </ul>
+<h3 id="slideshow"><a class="hash-anchor" href="#slideshow" aria-hidden="true"></a>Slideshow</h3>
+<p>You can also embed Slideshow (url1, url2, …urls, height, width):</p>
+<div class="slideshow" style="height: 270px; width: 480px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+<div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /><img src="https://assets.digitalocean.com/banners/nodejs.png" alt="Slide #3" /></div>
+</div>
+<p><em>Both the width and height are optional, with the defaults being 480 and 270 respectively.</em></p>
 <h3 id="image-compare"><a class="hash-anchor" href="#image-compare" aria-hidden="true"></a>Image compare</h3>
 <p>Compare two images side by side (url1, url2, height, width):</p>
 <div class="image-compare" style="--value:50%; height: 270px; width: 480px;">
