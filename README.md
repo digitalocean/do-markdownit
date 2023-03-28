@@ -1178,6 +1178,30 @@ require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/pr
 Prism.highlightAll();
 ```
 
+## limit_tokens
+
+<details>
+<summary>Filters and transforms tokens in the token stream.</summary>
+
+**Options:**
+
+Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `allowedTokens` (`array`): A list Markdown tokens that should render
+- `transformTokens` (`object`): An object where the keys are Markdown tokens that should be transformed.
+The transformation is done base on the value which is an `object` with two keys: `type` and `htmlTag`.
+</details>
+
+```js
+const Prism = require('@digitalocean/do-markdownit/vendor/prismjs');
+
+require('@digitalocean/do-markdownit/vendor/prismjs/plugins/toolbar/prism-toolbar')(Prism);
+require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard')(Prism);
+
+Prism.highlightAll();
+```
+
 ### Keep HTML plugin
 
 Alongside the modified version of Prism, this package also includes a custom Prism plugin designed
