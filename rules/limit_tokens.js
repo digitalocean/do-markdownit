@@ -44,6 +44,7 @@ module.exports = (md, options) => {
      *
      * @param {token[]} tokens The list of tokens to be filtered/transformed.
      * @returns {token[]}
+     * @private
      */
     const doFiltering = tokens => tokens.reduce((newStream, token) => {
         let newToken;

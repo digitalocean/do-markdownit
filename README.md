@@ -1209,7 +1209,7 @@ Set this property to `false` to disable this plugin.
 
 - `allowedTokens` (`array`): A list of Markdown tokens that should render
 - `transformTokens` (`object`): An object where the keys are Markdown tokens that should be transformed.
-  The transformation is done based on the value which is an `function` that expects a Markdown token as a param
+  The transformation is done based on the value which is a `function` that expects a [Markdown token](https://markdown-it.github.io/markdown-it/#Token) as a param
 and returns the transformed token.
 </details>
 

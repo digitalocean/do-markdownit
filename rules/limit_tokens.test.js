@@ -17,72 +17,59 @@ limitations under the License.
 'use strict';
 
 /**
- *
  * @typedef {import('markdown-it/lib/token').Token} token
  */
 
-const fs = require('fs');
-const path = require('path');
-
-const mdEmpty = require('markdown-it')().use(require('..'), {
-    limit_tokens: {
-        allowedTokens: [],
-        transformTokens: {},
-    },
+const mdEmpty = require('markdown-it')().use(require('./limit_tokens'), {
+    allowedTokens: [],
+    transformTokens: {},
 });
 
 it('does not render any tokens by default', () => {
-    const input = fs.readFileSync(path.join(__dirname, '../fixtures', 'full-input.md'), 'utf8');
-    expect(mdEmpty.render(input)).toBe('');
+    expect(mdEmpty.render('[Hello world](https://test.com)')).toBe('');
 });
 
-const mdSomeAllowed = require('markdown-it')().use(require('..'), {
-    limit_tokens: {
-        allowedTokens: [ 'caniuse' ],
-        transformTokens: {},
-    },
+const mdSomeAllowed = require('markdown-it')().use(require('./limit_tokens'), {
+    allowedTokens: [ 'link_open', 'link_close', 'inline', 'text' ],
+    transformTokens: {},
 });
 
 it('does render allowed tokens', () => {
-    expect(mdSomeAllowed.render('[caniuse css-grid]')).toBe(`<p class="ciu_embed" data-feature="css-grid" data-periods="future_1,current,past_1" data-accessible-colours="false">
-    <picture>
-        <source type="image/webp" srcset="https://caniuse.bitsofco.de/image/css-grid.webp" />
-        <source type="image/png" srcset="https://caniuse.bitsofco.de/image/css-grid.png" />
-        <img src="https://caniuse.bitsofco.de/image/css-grid.jpg" alt="Data on support for the css-grid feature across the major browsers from caniuse.com" />
-    </picture>
-</p>
-`);
+    expect(mdSomeAllowed.render('[Hello world](https://test.com)')).toBe('<a href="https://test.com">Hello world</a>');
 });
 
-const mdTransform = require('markdown-it')().use(require('..'), {
-    limit_tokens: {
-        allowedTokens: [ 'inline', 'text' ],
-        transformTokens: {
-            /**
-             * Function to do the transformation
-             *
-             * @param {token} token The token to transform.
-             * @returns {token}
-             *
-             */
-            paragraph_open: token => new token.constructor(
-                'link_open',
-                'a',
-                token.nesting,
-            ),
-            /**
-             * Function to do the transformation
-             *
-             * @param {token} token The token to transform.
-             * @returns {token}
-             *
-             */
-            paragraph_close: token => new token.constructor(
-                'link_close',
-                'a',
-                token.nesting,
-            ),
-        },
+it('only renders allowed tokens', () => {
+    expect(mdSomeAllowed.render('[Hello world](https://test.com) **this will not be bold** _this will not be italic_'))
+        .toBe('<a href="https://test.com">Hello world</a> this will not be bold this will not be italic');
+});
+
+const mdTransform = require('markdown-it')().use(require('./limit_tokens'), {
+    allowedTokens: [ 'inline', 'text' ],
+    transformTokens: {
+        /**
+         * Function to do the transformation
+         *
+         * @param {token} token The token to transform.
+         * @returns {token}
+         *
+         */
+        paragraph_open: token => new token.constructor(
+            'link_open',
+            'a',
+            token.nesting,
+        ),
+        /**
+         * Function to do the transformation
+         *
+         * @param {token} token The token to transform.
+         * @returns {token}
+         *
+         */
+        paragraph_close: token => new token.constructor(
+            'link_close',
+            'a',
+            token.nesting,
+        ),
     },
 });
 
