@@ -31,7 +31,7 @@ md.render('# Hello, world!\n\n<$>[info]do-markdownit is loaded!<$>');
 ## Plugin Features & Options
 
 do-markdownit is composed of a set of individual plugins, with the ability to disable each if
-needed, and many having specific options that can be set. All plugins are enabled by default.
+needed, and many having specific options that can be set. All plugins are enabled by default, except limit_tokens.
 
 <!--
 The headings below should match the order they are loaded in the plugin.
@@ -1178,30 +1178,6 @@ require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/pr
 Prism.highlightAll();
 ```
 
-## limit_tokens
-
-<details>
-<summary>Filters and transforms tokens in the token stream.</summary>
-
-**Options:**
-
-Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
-Set this property to `false` to disable this plugin.
-
-- `allowedTokens` (`array`): A list Markdown tokens that should render
-- `transformTokens` (`object`): An object where the keys are Markdown tokens that should be transformed.
-The transformation is done base on the value which is an `object` with two keys: `type` and `htmlTag`.
-</details>
-
-```js
-const Prism = require('@digitalocean/do-markdownit/vendor/prismjs');
-
-require('@digitalocean/do-markdownit/vendor/prismjs/plugins/toolbar/prism-toolbar')(Prism);
-require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard')(Prism);
-
-Prism.highlightAll();
-```
-
 ### Keep HTML plugin
 
 Alongside the modified version of Prism, this package also includes a custom Prism plugin designed
@@ -1220,6 +1196,22 @@ require('@digitalocean/do-markdownit/util/prism_keep_html')(Prism);
 
 Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.javascript, 'javascript');
 ```
+
+## limit_tokens
+
+<details>
+<summary>Filters and transforms tokens in the token stream.</summary>
+
+**Options:**
+
+Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `allowedTokens` (`array`): A list of Markdown tokens that should render
+- `transformTokens` (`object`): An object where the keys are Markdown tokens that should be transformed.
+  The transformation is done based on the value which is an `function` that expects a Markdown token as a param
+and returns the transformed token.
+</details>
 
 
 ## Styles

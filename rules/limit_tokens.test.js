@@ -16,6 +16,11 @@ limitations under the License.
 
 'use strict';
 
+/**
+ *
+ * @typedef {import('markdown-it/lib/token').Token} token
+ */
+
 const fs = require('fs');
 const path = require('path');
 
@@ -53,14 +58,30 @@ const mdTransform = require('markdown-it')().use(require('..'), {
     limit_tokens: {
         allowedTokens: [ 'inline', 'text' ],
         transformTokens: {
-            paragraph_open: {
-                type: 'link_open',
-                htmlTag: 'a',
-            },
-            paragraph_close: {
-                type: 'link_close',
-                htmlTag: 'a',
-            },
+            /**
+             * Function to do the transformation
+             *
+             * @param {token} token The token to transform.
+             * @returns {token}
+             *
+             */
+            paragraph_open: token => new token.constructor(
+                'link_open',
+                'a',
+                token.nesting,
+            ),
+            /**
+             * Function to do the transformation
+             *
+             * @param {token} token The token to transform.
+             * @returns {token}
+             *
+             */
+            paragraph_close: token => new token.constructor(
+                'link_close',
+                'a',
+                token.nesting,
+            ),
         },
     },
 });

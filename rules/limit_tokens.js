@@ -17,15 +17,17 @@ limitations under the License.
 'use strict';
 
 /**
- * @module modifiers/limit_tokens
+ * @module rules/limit_tokens
+ *
+ * @typedef {import('markdown-it/lib/token').Token} token
  */
 
 const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} LimitTokensOptions
- * @property {string[]} [allowedTokens] List of MD tokens allowed to render.
- * @property {Object} [transformTokens] List of MD tokens to transform into something else.
+ * @property {token.type[]} [allowedTokens] List of MD tokens allowed to render.
+ * @property {Object<string, function(token): token>} [transformTokens] List of MD tokens to transform into something else.
  */
 
 /**
@@ -40,25 +42,19 @@ module.exports = (md, options) => {
     /**
      * Helper function that does the actual filtering/transforming of tokens.
      *
-     * @param {import('markdown-it/lib/token').Token[]} tokens The list of tokens to be filtered/transformed
-     * @returns {import('markdown-it/lib/token').Token[]}
+     * @param {token[]} tokens The list of tokens to be filtered/transformed.
+     * @returns {token[]}
      */
     const doFiltering = tokens => tokens.reduce((newStream, token) => {
         let newToken;
-        // Check if current token is in the allowed list
+        // Check if the current token is in the allowed list
         if (optsObj.allowedTokens.includes(token.type)) {
             newToken = token;
         }
 
-        // Check if current token is in the transformation list
-        const transformOptions = optsObj.transformTokens[token.type];
-        if (transformOptions) {
-            newToken = new token.constructor(
-                transformOptions.type,
-                transformOptions.htmlTag,
-                token.nesting,
-            );
-            newToken.content = token.content;
+        // Check if the current token is in the transformation list
+        if (Object.keys(optsObj.transformTokens).includes(token.type)) {
+            newToken = optsObj.transformTokens[token.type](token);
         }
 
         if (newToken) {
