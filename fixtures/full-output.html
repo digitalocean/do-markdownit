@@ -356,6 +356,23 @@ For example, <code>[codepen MattCowley vwPzeX dark css 384]</code> would create 
 <li>Add <code>left</code>, <code>center</code>, or <code>right</code> to set the alignment of the embed (default is <code>left</code>).</li>
 <li>Pass <code>caption</code> to include caption under the post (e.g. <code>[instagram https://www.instagram.com/p/CkQuv3_LRgS caption]</code>)</li>
 </ul>
+<h3 id="slideshow"><a class="hash-anchor" href="#slideshow" aria-hidden="true"></a>Slideshow</h3>
+<p>You can also embed Slideshow (url1, url2, …urls, height, width):</p>
+<div class="slideshow" style="height: 270px; width: 480px;">
+<div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
+<div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+<div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /><img src="https://assets.digitalocean.com/banners/nodejs.png" alt="Slide #3" /></div>
+</div>
+<p><em>Both the width and height are optional, with the defaults being 480 and 270 respectively.</em></p>
+<h3 id="image-compare"><a class="hash-anchor" href="#image-compare" aria-hidden="true"></a>Image compare</h3>
+<p>Compare two images side by side (url1, url2, height, width):</p>
+<div class="image-compare" style="--value:50%; height: 270px; width: 480px;">
+    <img class="image-left" src="https://assets.digitalocean.com/banners/python.png" alt="Image left"/>
+    <img class="image-right" src="https://assets.digitalocean.com/banners/javascript.png" alt="Image right"/>
+    <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
+    <svg class="control-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504.3 273.6c4.9-4.5 7.7-10.9 7.7-17.6s-2.8-13-7.7-17.6l-112-104c-7-6.5-17.2-8.2-25.9-4.4s-14.4 12.5-14.4 22l0 56-192 0 0-56c0-9.5-5.7-18.2-14.4-22s-18.9-2.1-25.9 4.4l-112 104C2.8 243 0 249.3 0 256s2.8 13 7.7 17.6l112 104c7 6.5 17.2 8.2 25.9 4.4s14.4-12.5 14.4-22l0-56 192 0 0 56c0 9.5 5.7 18.2 14.4 22s18.9 2.1 25.9-4.4l112-104z"/></svg>
+</div>
+<p><em>Both the width and height are optional, with the defaults being 480 and 270 respectively.</em></p>
 <h2 id="step-6-tutorials"><a class="hash-anchor" href="#step-6-tutorials" aria-hidden="true"></a>Step 6 — Tutorials</h2>
 <p>Certain features of our Markdown engine are designed specifically for our tutorial content-types.
 These may not be enabled in all contexts in the DigitalOcean community, but are enabled by default in the do-markdownit plugin.</p>

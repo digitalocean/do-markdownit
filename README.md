@@ -787,6 +787,65 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### slideshow
+
+<details>
+<summary>Add support for Slideshow in Markdown, as block syntax.</summary>
+
+The basic syntax is `[slideshow <url1> <url2> <...urls>]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]`.
+Height and width can optionally be set using `[slideshow <url1> <url2> <...urls> [height] [width]]`. E.g., `[slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png 380 560]`.
+The default value for height is 270 and for width is 480.
+
+**Example Markdown input:**
+
+    [slideshow https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png https://assets.digitalocean.com/banners/nodejs.png]
+
+**Example HTML output:**
+
+    <div class="slideshow" style="height: 270px; width: 480px;">
+        <div class="action left" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft -= 480)()">&#8249;</div>
+        <div class="action right" onclick="(() => this.parentNode.getElementsByClassName('slides')[0].scrollLeft += 480)()">&#8250;</div>
+        <div class="slides"><img src="https://assets.digitalocean.com/banners/python.png" alt="Slide #1" /><img src="https://assets.digitalocean.com/banners/javascript.png" alt="Slide #2" /><img src="https://assets.digitalocean.com/banners/nodejs.png" alt="Slide #3" /></div>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `slideshow` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
+### compare
+
+<details>
+<summary>Add support for Image Comparison in Markdown, as block syntax.</summary>
+
+The basic syntax is `[compare <url1> <url2>]`. E.g., `[compare https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]`.
+Height and width can optionally be set using `[compare <url1> <url2> [height] [width]]`. E.g., `[compare https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png 500 560]`.
+The default value for height is 270 and for width is 480.
+
+**Example Markdown input:**
+
+    [compare https://assets.digitalocean.com/banners/python.png https://assets.digitalocean.com/banners/javascript.png]
+
+**Example HTML output:**
+
+    <div class="image-compare" style="--value:50%; height: 270px; width: 480px;">
+        <img class="image-left" src="https://assets.digitalocean.com/banners/python.png" alt="Image left"/>
+        <img class="image-right" src="https://assets.digitalocean.com/banners/javascript.png" alt="Image right"/>
+        <input type="range" class="control" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
+        <svg class="control-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504.3 273.6c4.9-4.5 7.7-10.9 7.7-17.6s-2.8-13-7.7-17.6l-112-104c-7-6.5-17.2-8.2-25.9-4.4s-14.4 12.5-14.4 22l0 56-192 0 0-56c0-9.5-5.7-18.2-14.4-22s-18.9-2.1-25.9 4.4l-112 104C2.8 243 0 249.3 0 256s2.8 13 7.7 17.6l112 104c7 6.5 17.2 8.2 25.9 4.4s14.4-12.5 14.4-22l0-56 192 0 0 56c0 9.5 5.7 18.2 14.4 22s18.9 2.1 25.9-4.4l112-104z"/></svg>
+    </div>
+
+**Options:**
+
+Pass options for this plugin as the `compare` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### underline
 
 <details>
