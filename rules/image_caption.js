@@ -69,7 +69,10 @@ module.exports = md => {
 
             // Inject the caption, treating the title as inline Markdown
             token.children.push(new state.Token('figcaption_open', 'figcaption', 1));
-            token.children.push(...md.parseInline(title, state.env)[0].children);
+            const parsedTitle = md.parseInline(title, state.env);
+            if (parsedTitle.length) {
+                token.children.push(...parsedTitle[0].children);
+            }
             token.children.push(new state.Token('figcaption_close', 'figcaption', -1));
             token.children[0].attrs = token.children[0].attrs.filter(([ attr ]) => attr !== 'title');
         }

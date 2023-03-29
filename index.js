@@ -57,6 +57,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./modifiers/heading_id').HeadingIdOptions} [heading_id] Disable Ids on headings, or set options for the feature.
  * @property {false|import('./modifiers/image_settings').ImageSettingsOptions} [image_settings] Disable image settings syntax, or set options for the feature.
  * @property {false|import('./modifiers/prismjs').PrismJsOptions} [prismjs] Disable Prism highlighting, or set options for the feature.
+ * @property {false|import('./rules/limit_tokens').LimitTokensOptions} [limit_tokens] Disable token filtering, or set options for the feature.
  */
 
 /**
@@ -204,5 +205,9 @@ module.exports = (md, options) => {
 
     if (optsObj.prismjs !== false) {
         md.use(require('./modifiers/prismjs'), safeObject(optsObj.prismjs));
+    }
+
+    if (optsObj.limit_tokens && optsObj.limit_tokens !== false) {
+        md.use(require('./rules/limit_tokens'), safeObject(optsObj.limit_tokens));
     }
 };
