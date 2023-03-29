@@ -18,16 +18,18 @@ limitations under the License.
 
 /**
  * @module rules/limit_tokens
- *
- * @typedef {import('markdown-it/lib/token').Token} token
+ */
+
+/**
+ * @typedef {import('markdown-it/lib/token').Token} Token
  */
 
 const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} LimitTokensOptions
- * @property {token.type[]} [allowedTokens] List of MD tokens allowed to render.
- * @property {Object<string, function(token): token>} [transformTokens] List of MD tokens to transform into something else.
+ * @property {Token.type[]} [allowedTokens] List of MD tokens allowed to render.
+ * @property {Object<string, function(Token): Token>} [transformTokens] List of MD tokens to transform into something else.
  */
 
 /**
@@ -42,27 +44,22 @@ module.exports = (md, options) => {
     /**
      * Helper function that does the actual filtering/transforming of tokens.
      *
-     * @param {token[]} tokens The list of tokens to be filtered/transformed.
-     * @returns {token[]}
+     * @param {Token[]} tokens The list of tokens to be filtered/transformed.
+     * @returns {Token[]}
      * @private
      */
     const doFiltering = tokens => tokens.reduce((newStream, token) => {
         let newToken;
         // Check if the current token is in the allowed list
-        if (optsObj.allowedTokens.includes(token.type)) {
-            newToken = token;
-        }
+        if (optsObj.allowedTokens.includes(token.type)) newToken = token;
 
         // Check if the current token is in the transformation list
-        if (Object.keys(optsObj.transformTokens).includes(token.type)) {
+        if (Object.prototype.hasOwnProperty.call(optsObj.transformTokens, token.type)) {
             newToken = optsObj.transformTokens[token.type](token);
         }
 
         if (newToken) {
-            if (token.children) {
-                newToken.children = doFiltering(token.children);
-            }
-
+            if (token.children) newToken.children = doFiltering(token.children);
             newStream.push(newToken);
         }
 

@@ -1207,9 +1207,9 @@ Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.ja
 Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
 Set this property to `false` to disable this plugin.
 
-- `allowedTokens` (`array`): A list of Markdown tokens that should render
-- `transformTokens` (`object`): An object where the keys are Markdown tokens that should be transformed.
-  The transformation is done based on the value which is a `function` that expects a [Markdown token](https://markdown-it.github.io/markdown-it/#Token) as a param
+- `allowedTokens` (`string[]`): A list of Markdown tokens that should render
+- `transformTokens` (`Object<string, function(Token): Token>`): An object where the keys are Markdown tokens that should be transformed.
+  The transformation is done based on the value which is a function that expects a [Markdown token](https://markdown-it.github.io/markdown-it/#Token) as a param
 and returns the transformed token.
 </details>
 
