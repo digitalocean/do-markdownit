@@ -17,6 +17,9 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.6.0 - 03138f3
+
 - (minor) Add Limit tokens plugin
 - (minor) Add Image Compare embeds
 - (minor) Add Slideshow embeds
