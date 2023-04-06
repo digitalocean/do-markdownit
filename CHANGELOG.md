@@ -17,6 +17,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Replace Slimdom with htmlparser2-related packages
+
 
 ## v1.6.0 - 03138f3
 
