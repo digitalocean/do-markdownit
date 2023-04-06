@@ -33,11 +33,12 @@ const domRemoveEmpty = node => {
  * Find the leaf node of a given node.
  *
  * @param {import('domhandler').Node} node Node to find leaf for.
- * @return {import('domhandler').Node}
+ * @returns {import('domhandler').Node}
  * @private
  */
 const domLeaf = node => {
     let workingNode = node;
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const children = getChildren(workingNode);
         if (children.length === 0) return workingNode;
@@ -50,7 +51,7 @@ const domLeaf = node => {
  *
  * @param {import('domhandler').Node} node Node to check for child.
  * @param {import('domhandler').Node} child Node to check for.
- * @return {boolean}
+ * @returns {boolean}
  * @private
  */
 const domContains = (node, child) => {

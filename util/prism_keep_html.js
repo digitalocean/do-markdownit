@@ -103,13 +103,13 @@ const plugin = Prism => {
             /**
              * Remove the top of the stack when a tag is closed, tracking the close position in the text.
              *
+             * @param {string} name Name of the closed tag.
              * @private
              */
             onclosetag: name => {
                 // Remove the node from the stack
                 const node = stack.pop();
-                if (node.name !== name)
-                    throw new Error(`Unexpected closing tag in code, expecting </${node.name}> but got </${name}>`);
+                if (node.name !== name) throw new Error(`Unexpected closing tag in code, expecting </${node.name}> but got </${name}>`);
                 node.close = text.length;
                 allNodes.push(node);
             },
@@ -145,10 +145,16 @@ const plugin = Prism => {
      * @private
      */
     const parseAndInsertNodes = (html, nodes) => {
-        // Parse the HTML, tracking text nodes
-        let pos = 0;
+        // Create the DOM handler, tracking nodes based on plain-text position
         const handler = new DomHandler();
         const { ontext } = handler;
+        let pos = 0;
+
+        /**
+         * Process any text encountered, tracking the position of the nodes we want to inject.
+         *
+         * @param {string} value Plain-text to track.
+         */
         handler.ontext = value => {
             ontext.call(handler, value);
 
@@ -168,13 +174,15 @@ const plugin = Prism => {
 
             pos += value.length;
         };
+
+        // Run the parser against the HTML
         const parser = new Parser(handler);
         parser.write(html);
         parser.end();
 
         // Inject our preserved HTML
         nodes.forEach(node => {
-            if (!node.openNode || !node.closeNode) throw new Error('Untracked node:\n' + JSON.stringify(node));
+            if (!node.openNode || !node.closeNode) throw new Error(`Untracked node: ${JSON.stringify(node)}`);
 
             // Apply the offset to each and get the ancestor
             // Very loosely equivalent to creating a DOM Level 2 Range
