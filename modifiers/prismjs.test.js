@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ it('handles a code fence with a language (adding the class to the pre + highligh
 });
 
 it('handles a code fence with a language alias', () => {
-    expect(md.render('```js\nconsole.log("test");\n```')).toBe(`<pre class="language-javascript"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    expect(md.render('```js\nconsole.log("test");\n```')).toBe(`<pre class="language-javascript"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;test&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 `);
 });
@@ -48,6 +48,7 @@ describe('HTML preservation', () => {
     const mdHtml = require('markdown-it')()
         .use(require('../rules/highlight'))
         .use(require('./fence_label'))
+        .use(require('./fence_prefix'))
         .use(require('./prismjs'));
 
     it('handles a token at the start of the code block', () => {
@@ -75,7 +76,7 @@ describe('HTML preservation', () => {
     });
 
     it('handles HTML inside a token in the code block', () => {
-        expect(mdHtml.render('```js\nreturn \'hello <^>world<^>\';\n```')).toBe(`<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span> <span class="token string">'hello <mark>world</mark>'</span><span class="token punctuation">;</span>
+        expect(mdHtml.render('```js\nreturn \'hello <^>world<^>\';\n```')).toBe(`<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span> <span class="token string">&apos;hello <mark>world</mark>&apos;</span><span class="token punctuation">;</span>
 </code></pre>
 `);
     });
@@ -103,6 +104,15 @@ describe('HTML preservation', () => {
     it('handles HTML outside the code block', () => {
         expect(mdHtml.render('```typescript\n[label test/hello/world.ts]\nconst test: number = 1;\n```')).toBe(`<div class="code-label" title="test/hello/world.ts">test/hello/world.ts</div>
 <pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> test<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre>
+`);
+    });
+
+    it('handles HTML wrapping each line', () => {
+        expect(mdHtml.render('```javascript,line_numbers\nconst test = \'hello\';\nconst other = \'world\';\nconsole.log(test, other);\n```')).toBe(`<pre class="language-javascript"><code class="prefixed line_numbers language-javascript"><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">&apos;hello&apos;</span><span class="token punctuation">;</span>
+</li><li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">&apos;world&apos;</span><span class="token punctuation">;</span>
+</li><li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</li></ol>
 </code></pre>
 `);
     });

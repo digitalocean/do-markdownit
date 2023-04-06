@@ -25,7 +25,7 @@ const { textContent, getChildren, removeElement, append, appendChild, prependChi
  * @private
  */
 const domRemoveEmpty = node => {
-    for (const child of getChildren(node)) domRemoveEmpty(child);
+    for (const child of [ ...getChildren(node) ]) domRemoveEmpty(child);
     if (textContent(node) === '') removeElement(node);
 };
 
