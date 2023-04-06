@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,8 +20,10 @@ limitations under the License.
  * @module util/prism_keep_html
  */
 
-const htmlparser2 = require('htmlparser2');
-const slimdom = require('slimdom');
+const { Parser } = require('htmlparser2');
+const { DomHandler, Element } = require('domhandler');
+const { prepend, appendChild } = require('domutils');
+const domserializer = require('dom-serializer').default;
 
 const {
     domOffsetNode,
@@ -49,9 +51,9 @@ const plugin = Prism => {
      * @property {number} open Position at which the node opens in the plain text.
      * @property {number} close Position at which the node closes in the plain text.
      * @property {number} depth Depth of the node in the tree.
-     * @property {Node} [openNode] Node in which this node opens, when injecting.
+     * @property {import('domhandler').Node} [openNode] Node in which this node opens, when injecting.
      * @property {number} [openPos] Position at which this node opens in the open node.
-     * @property {Node} [closeNode] Node in which this node closes, when injecting.
+     * @property {import('domhandler').Node} [closeNode] Node in which this node closes, when injecting.
      * @property {number} [closePos] Position at which this node closes in the close node.
      * @private
      */
@@ -72,7 +74,7 @@ const plugin = Prism => {
         const stack = [];
 
         // Parse the HTML
-        const parser = new htmlparser2.Parser({
+        const parser = new Parser({
             /**
              * Add opened tags to the stack, tracking their start position in the text and depth in the stack.
              *
@@ -103,10 +105,11 @@ const plugin = Prism => {
              *
              * @private
              */
-            onclosetag: () => {
-                // TODO: Compare closed tag name to the top of the stack, error if not equal
+            onclosetag: name => {
                 // Remove the node from the stack
                 const node = stack.pop();
+                if (node.name !== name)
+                    throw new Error(`Unexpected closing tag in code, expecting </${node.name}> but got </${name}>`);
                 node.close = text.length;
                 allNodes.push(node);
             },
@@ -115,7 +118,7 @@ const plugin = Prism => {
         parser.end();
 
         // Handle bad input HTML
-        if (stack.length) throw new Error('Unclosed tag in code');
+        if (stack.length) throw new Error(`Unclosed tag(s) in code: ${stack.map(node => `<${node.name}>`).join(', ')}`);
 
         // Filter out token nodes, and sort by depth
         const nodes = allNodes
@@ -142,80 +145,47 @@ const plugin = Prism => {
      * @private
      */
     const parseAndInsertNodes = (html, nodes) => {
-        // Create an empty DOM
-        const document = new slimdom.Document();
-        const root = document.createElement('root');
-        let current = document.appendChild(root);
-
-        // Parse the highlighted code into the DOM
+        // Parse the HTML, tracking text nodes
         let pos = 0;
-        const parserPost = new htmlparser2.Parser({
-            /**
-             * Add opened tags to the DOM, updating the current node we're in.
-             *
-             * @param {string} name Name of the opened tag.
-             * @param {Object} attributes Attributes of the opened tag.
-             * @private
-             */
-            onopentag: (name, attributes) => {
-                const node = document.createElement(name);
-                Object.entries(attributes).forEach(([ key, value ]) => node.setAttribute(key, value));
-                current.appendChild(node);
-                current = node;
-            },
-            /**
-             * Add any plain-text encountered to the DOM, updating any nodes to be inserted that fall within this text.
-             *
-             * @param {string} value Plain-text to add to the DOM.
-             * @private
-             */
-            ontext: value => {
-                const text = document.createTextNode(value);
-                current.appendChild(text);
+        const handler = new DomHandler();
+        const { ontext } = handler;
+        handler.ontext = value => {
+            ontext.call(handler, value);
 
-                nodes.forEach(node => {
-                    // If this node starts within the text, track that
-                    if (!node.openNode && pos + value.length > node.open) {
-                        node.openNode = text;
-                        node.openPos = node.open - pos;
-                    }
+            nodes.forEach(node => {
+                // If this node starts within the text, track that
+                if (!node.openNode && pos + value.length > node.open) {
+                    node.openNode = handler.lastNode;
+                    node.openPos = node.open - pos;
+                }
 
-                    // If this node ends within the text, or at the end of it, track that
-                    if (!node.closeNode && pos + value.length >= node.close) {
-                        node.closeNode = text;
-                        node.closePos = node.close - pos;
-                    }
-                });
+                // If this node ends within the text, or at the end of it, track that
+                if (!node.closeNode && pos + value.length >= node.close) {
+                    node.closeNode = handler.lastNode;
+                    node.closePos = node.close - pos;
+                }
+            });
 
-                pos += value.length;
-            },
-            /**
-             * Use the parent as the current node we're in when a tag is closed.
-             *
-             * @private
-             */
-            onclosetag: () => {
-                // TODO: Compare closed tag name to the current node, error if not equal
-                current = current.parentNode;
-            },
-        });
-        parserPost.write(html);
-        parserPost.end();
+            pos += value.length;
+        };
+        const parser = new Parser(handler);
+        parser.write(html);
+        parser.end();
 
         // Inject our preserved HTML
         nodes.forEach(node => {
-            if (!node.openNode || !node.closeNode) throw new Error('Untracked node');
+            if (!node.openNode || !node.closeNode) throw new Error('Untracked node:\n' + JSON.stringify(node));
 
             // Apply the offset to each and get the ancestor
             // Very loosely equivalent to creating a DOM Level 2 Range
-            const { node: openNode, offset: openPos } = domOffsetNode(node.openNode, node.openPos, root, true);
-            let { node: closeNode, offset: closePos } = domOffsetNode(node.closeNode, node.closePos, root);
+            const { node: openNode, offset: openPos } = domOffsetNode(node.openNode, node.openPos, handler.root, true);
+            let { node: closeNode, offset: closePos } = domOffsetNode(node.closeNode, node.closePos, handler.root);
             let ancestor = domCommonAncestor(openNode, closeNode);
 
             // Split the DOM and get the middle
             // Very loosely equivalent to using DOM Level 2 Range#extractContents
             const splitOpen = domSplit(ancestor, openNode, openPos);
-            ({ node: closeNode, offset: closePos } = domOffsetNode(closeNode, closePos, root)); // Update based on open split
+            ({ node: closeNode, offset: closePos } = domOffsetNode(closeNode, closePos, handler.root)); // Update based on open split
             const splitClose = domSplit(ancestor, closeNode, closePos);
             const middle = splitOpen.right.filter(n => splitClose.left.includes(n));
 
@@ -223,7 +193,7 @@ const plugin = Prism => {
             if (!middle.length) return;
 
             // If the middle is the whole of the parent, use the parent
-            while (ancestor !== root
+            while (ancestor !== handler.root
             && middle[0].parentNode === middle[middle.length - 1].parentNode
             && domPreviousSiblingsEmpty(middle[0])
             && domNextSiblingsEmpty(middle[middle.length - 1])) {
@@ -234,17 +204,16 @@ const plugin = Prism => {
             }
 
             // Wrap the middle
-            const wrap = document.createElement(node.name);
-            Object.entries(node.attributes).forEach(([ key, value ]) => wrap.setAttribute(key, value));
-            ancestor.insertBefore(wrap, middle[0]);
-            middle.forEach(middleNode => wrap.appendChild(middleNode));
+            const wrap = new Element(node.name, node.attributes);
+            prepend(middle[0], wrap);
+            middle.forEach(middleNode => appendChild(wrap, middleNode));
         });
 
         // Clean out any empty elements from splitting
-        domRemoveEmpty(root);
+        domRemoveEmpty(handler.root);
 
         // Done
-        return root.innerHTML;
+        return domserializer(handler.root);
     };
 
     /**
