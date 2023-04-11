@@ -70,8 +70,10 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "dom-serializer": "^2.0.0",
+    "domhandler": "^5.0.3",
+    "domutils": "^3.0.1",
     "htmlparser2": "^8.0.1",
-    "prismjs": "^1.29.0",
-    "slimdom": "^4.1.1"
+    "prismjs": "^1.29.0"
   }
 }
