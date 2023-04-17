@@ -117,7 +117,7 @@ module.exports = (md, options) => {
     const click = () => [
         'onclick',
         // eslint-disable-next-line no-template-curly-in-string
-        'navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${this.getAttribute("href").slice(1)}`);',
+        'navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${this.href.slice(1)}`);',
     ];
 
     /**
