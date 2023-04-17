@@ -21,8 +21,15 @@ $hash-anchor-class: "hash-anchor" !default;
 .#{$hash-anchor-class} {
     border-bottom: none;
     color: $gray5;
-    margin-right: 0.5em;
     text-decoration: none;
+
+    &:first-child {
+        margin-right: 0.5em;
+    }
+
+    &:last-child {
+        margin-left: 0.5em;
+    }
 
     &:hover,
     &:focus {
