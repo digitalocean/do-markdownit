@@ -150,26 +150,23 @@ module.exports = (md, options) => {
             token.attrs.push(idAttr);
         }
 
-        // If linkHeading is set, wrap the heading in a link
-        if (optsObj.hashLink !== false && hashLinkOpts.linkHeading) {
-            // Grab the constructor from current token
-            const Token = token.constructor;
-
-            // Generate tokens for hash link
-            const linkOpen = new Token('link_open', 'a', 1);
-            linkOpen.attrs = [ [ 'href', `#${idAttr[1]}` ] ];
-            if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
-            const linkClose = new Token('link_close', 'a', -1);
-
-            // Inject hash link tokens
-            tokens[idx + 1].children.unshift(linkOpen);
-            tokens[idx + 1].children.push(linkClose);
-        }
-
         // Generate hash link if option is set
         if (optsObj.hashLink !== false && level <= hashLinkOpts.maxLevel) {
             // Grab the constructor from current token
             const Token = token.constructor;
+
+            // If linkHeading is set, wrap the heading in a link
+            if (hashLinkOpts.linkHeading) {
+                // Generate tokens for hash link
+                const linkOpen = new Token('link_open', 'a', 1);
+                linkOpen.attrs = [ [ 'href', `#${idAttr[1]}` ] ];
+                if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
+                const linkClose = new Token('link_close', 'a', -1);
+
+                // Inject hash link tokens
+                tokens[idx + 1].children.unshift(linkOpen);
+                tokens[idx + 1].children.push(linkClose);
+            }
 
             // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
