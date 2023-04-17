@@ -34,6 +34,7 @@ const safeObject = require('../util/safe_object');
  * @property {string} [class='hash-anchor'] Class name to use on the hash link.
  * @property {'before'|'after'} [position='before'] Position of the hash link relative to the heading.
  * @property {boolean} [linkHeading=true] Whether to link the heading text to the hash link.
+ * @property {boolean} [clipboard=true] Whether to write the hash link to the clipboard on click.
  */
 
 /**
@@ -95,6 +96,7 @@ module.exports = (md, options) => {
         maxLevel: 3,
         position: 'before',
         linkHeading: true,
+        clipboard: true,
     };
 
     // Apply hashLink options if set to valid values
@@ -103,7 +105,20 @@ module.exports = (md, options) => {
         if (typeof optsObj.hashLink.maxLevel === 'number') hashLinkOpts.maxLevel = optsObj.hashLink.maxLevel;
         if ([ 'before', 'after' ].includes(optsObj.hashLink.position)) hashLinkOpts.position = optsObj.hashLink.position;
         if (typeof optsObj.hashLink.linkHeading === 'boolean') hashLinkOpts.linkHeading = optsObj.hashLink.linkHeading;
+        if (typeof optsObj.hashLink.clipboard === 'boolean') hashLinkOpts.clipboard = optsObj.hashLink.clipboard;
     }
+
+    /**
+     * Get the onclick attribute for the hash link.
+     *
+     * @returns {string[]}
+     * @private
+     */
+    const click = () => [
+        'onclick',
+        // eslint-disable-next-line no-template-curly-in-string
+        'navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${this.getAttribute("href").slice(1)}`);',
+    ];
 
     /**
      * Wrap the heading render function to inject slug Ids and track all headings.
@@ -143,6 +158,7 @@ module.exports = (md, options) => {
             // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
             linkOpen.attrs = [ [ 'href', `#${idAttr[1]}` ] ];
+            if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
             const linkClose = new Token('link_close', 'a', -1);
 
             // Inject hash link tokens
@@ -158,6 +174,7 @@ module.exports = (md, options) => {
             // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
             linkOpen.attrs = [ [ 'class', hashLinkOpts.class ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
+            if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
             const linkContent = new Token('text', '', 0);
             const linkClose = new Token('link_close', 'a', -1);
 
