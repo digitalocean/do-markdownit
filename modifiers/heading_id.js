@@ -32,6 +32,9 @@ const safeObject = require('../util/safe_object');
  * @typedef {Object} HashLinkOptions
  * @property {number} [maxLevel=3] Max heading level to generate hash links for.
  * @property {string} [class='hash-anchor'] Class name to use on the hash link.
+ * @property {'before'|'after'} [position='before'] Position of the hash link relative to the heading.
+ * @property {boolean} [linkHeading=true] Whether to link the heading text to the hash link.
+ * @property {boolean} [clipboard=true] Whether to write the hash link to the clipboard on click.
  */
 
 /**
@@ -91,19 +94,31 @@ module.exports = (md, options) => {
     const hashLinkOpts = {
         class: 'hash-anchor',
         maxLevel: 3,
+        position: 'before',
+        linkHeading: true,
+        clipboard: true,
     };
 
-    // Check if hashLink is set in options
-    if (typeof optsObj.hashLink !== 'undefined') {
-        // Check if class is set in hashLink options
-        if (typeof optsObj.hashLink.class !== 'undefined') {
-            hashLinkOpts.class = optsObj.hashLink.class;
-        }
-        // Check if maxLevel is set in hashLink options
-        if (typeof optsObj.hashLink.maxLevel !== 'undefined') {
-            hashLinkOpts.maxLevel = optsObj.hashLink.maxLevel;
-        }
+    // Apply hashLink options if set to valid values
+    if (typeof optsObj.hashLink === 'object' && optsObj.hashLink !== null) {
+        if (typeof optsObj.hashLink.class === 'string') hashLinkOpts.class = optsObj.hashLink.class;
+        if (typeof optsObj.hashLink.maxLevel === 'number') hashLinkOpts.maxLevel = optsObj.hashLink.maxLevel;
+        if ([ 'before', 'after' ].includes(optsObj.hashLink.position)) hashLinkOpts.position = optsObj.hashLink.position;
+        if (typeof optsObj.hashLink.linkHeading === 'boolean') hashLinkOpts.linkHeading = optsObj.hashLink.linkHeading;
+        if (typeof optsObj.hashLink.clipboard === 'boolean') hashLinkOpts.clipboard = optsObj.hashLink.clipboard;
     }
+
+    /**
+     * Get the onclick attribute for the hash link.
+     *
+     * @returns {string[]}
+     * @private
+     */
+    const click = () => [
+        'onclick',
+        // eslint-disable-next-line no-template-curly-in-string
+        'navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${this.href.slice(1)}`);',
+    ];
 
     /**
      * Wrap the heading render function to inject slug Ids and track all headings.
@@ -139,14 +154,30 @@ module.exports = (md, options) => {
         if (optsObj.hashLink !== false && level <= hashLinkOpts.maxLevel) {
             // Grab the constructor from current token
             const Token = token.constructor;
+
+            // If linkHeading is set, wrap the heading in a link
+            if (hashLinkOpts.linkHeading) {
+                // Generate tokens for hash link
+                const linkOpen = new Token('link_open', 'a', 1);
+                linkOpen.attrs = [ [ 'href', `#${idAttr[1]}` ] ];
+                if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
+                const linkClose = new Token('link_close', 'a', -1);
+
+                // Inject hash link tokens
+                tokens[idx + 1].children.unshift(linkOpen);
+                tokens[idx + 1].children.push(linkClose);
+            }
+
             // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
             linkOpen.attrs = [ [ 'class', hashLinkOpts.class ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
+            if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
             const linkContent = new Token('text', '', 0);
             const linkClose = new Token('link_close', 'a', -1);
 
-            // Inject hash link tokens before heading content
-            tokens[idx + 1].children.unshift(linkOpen, linkContent, linkClose);
+            // Inject hash link tokens
+            if (hashLinkOpts.position === 'before') tokens[idx + 1].children.unshift(linkOpen, linkContent, linkClose);
+            else tokens[idx + 1].children.push(linkOpen, linkContent, linkClose);
         }
 
         // Expose the heading
