@@ -17,7 +17,7 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
-- (docs) Fix README heading ordering
+- (docs) Fix README heading ordering, add missing heading_id opts
 - (minor) Hash link position, heading link + clipboard settings
 
 

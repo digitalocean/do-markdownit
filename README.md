@@ -1098,6 +1098,9 @@ Set this property to `false` to disable this plugin.
 - `hashLink` Set this property to `false` to disable this feature.
     - `maxLevel` (`number`, optional, defaults to `3`): Max heading level to generate hash links for.
     - `class` (`string`, optional, defaults to `hash-anchor`): Class name to use on the anchor tag.
+    - `position` (`'before'|'after'`, optional, defaults to `before`): Position of the anchor tag relative to the heading.
+    - `linkHeading` (`boolean`, optional, defaults to `true`): Whether to link the heading text to the hash link.
+    - `clipboard` (`boolean`, optional, defaults to `true`): Whether to write the hash link to the clipboard on click.
 </details>
 
 ### image_settings
