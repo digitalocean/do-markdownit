@@ -1161,6 +1161,22 @@ Set this property to `false` to disable this plugin.
 - `delimiter` (`string`, optional, defaults to `','`): String to split fence information on.
 </details>
 
+### limit_tokens
+
+<details>
+<summary>Filters and transforms tokens in the token stream.</summary>
+
+**Options:**
+
+Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
+This plugin is disabled by default, pass an object to enable it.
+
+- `allowedTokens` (`string[]`): A list of Markdown tokens that should render
+- `transformTokens` (`Object<string, function(Token): Token>`): An object where the keys are Markdown tokens that should be transformed.
+  The transformation is done based on the value which is a function that expects a [Markdown token](https://markdown-it.github.io/markdown-it/#Token) as a param
+  and returns the transformed token.
+</details>
+
 
 ## PrismJS
 
@@ -1196,22 +1212,6 @@ require('@digitalocean/do-markdownit/util/prism_keep_html')(Prism);
 
 Prism.highlight('console.log("<mark>Hello, world!</mark>");', Prism.languages.javascript, 'javascript');
 ```
-
-## limit_tokens
-
-<details>
-<summary>Filters and transforms tokens in the token stream.</summary>
-
-**Options:**
-
-Pass options for this plugin as the `limit_tokens` property of the `do-markdownit` plugin options.
-Set this property to `false` to disable this plugin.
-
-- `allowedTokens` (`string[]`): A list of Markdown tokens that should render
-- `transformTokens` (`Object<string, function(Token): Token>`): An object where the keys are Markdown tokens that should be transformed.
-  The transformation is done based on the value which is a function that expects a [Markdown token](https://markdown-it.github.io/markdown-it/#Token) as a param
-and returns the transformed token.
-</details>
 
 
 ## Styles
