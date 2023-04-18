@@ -19,7 +19,7 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./heading_id'));
 
 it('injects id attributes on headings', () => {
-    expect(md.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);">Hello World!</a></h1>
+    expect(md.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(this.href);">Hello World!</a></h1>
 `);
 });
 
@@ -124,7 +124,7 @@ const mdSluggify = require('markdown-it')().use(require('./heading_id'), {
 });
 
 it('supports a custom sluggify function', () => {
-    expect(mdSluggify.render('# Hello World!')).toBe(`<h1 id="helloworld"><a class="hash-anchor" href="#helloworld" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a><a href="#helloworld" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);">Hello World!</a></h1>
+    expect(mdSluggify.render('# Hello World!')).toBe(`<h1 id="helloworld"><a class="hash-anchor" href="#helloworld" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a><a href="#helloworld" onclick="navigator.clipboard.writeText(this.href);">Hello World!</a></h1>
 `);
 });
 
@@ -144,7 +144,7 @@ const mdMaxHashLinkLevel = require('markdown-it')().use(require('./heading_id'),
 });
 
 it('supports adjusting what level of headings generate hash links', () => {
-    expect(mdMaxHashLinkLevel.render('##### Hello World!')).toBe(`<h5 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);">Hello World!</a></h5>
+    expect(mdMaxHashLinkLevel.render('##### Hello World!')).toBe(`<h5 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(this.href);">Hello World!</a></h5>
 `);
 });
 
@@ -155,7 +155,7 @@ const mdCustomAnchorClass = require('markdown-it')().use(require('./heading_id')
 });
 
 it('supports changing class name for anchor in hash link', () => {
-    expect(mdCustomAnchorClass.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="custom-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);">Hello World!</a></h1>
+    expect(mdCustomAnchorClass.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="custom-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a><a href="#hello-world" onclick="navigator.clipboard.writeText(this.href);">Hello World!</a></h1>
 `);
 });
 
@@ -166,7 +166,7 @@ const mdHashLinkAfter = require('markdown-it')().use(require('./heading_id'), {
 });
 
 it('supports placing hash link after heading', () => {
-    expect(mdHashLinkAfter.render('# Hello World!')).toBe(`<h1 id="hello-world"><a href="#hello-world" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);">Hello World!</a><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a></h1>
+    expect(mdHashLinkAfter.render('# Hello World!')).toBe(`<h1 id="hello-world"><a href="#hello-world" onclick="navigator.clipboard.writeText(this.href);">Hello World!</a><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a></h1>
 `);
 });
 
@@ -177,7 +177,7 @@ const mdNoHeadingLink = require('markdown-it')().use(require('./heading_id'), {
 });
 
 it('supports disabling link on heading', () => {
-    expect(mdNoHeadingLink.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(\`\${window.location.origin}\${window.location.pathname}#\${this.href.slice(1)}\`);"></a>Hello World!</h1>
+    expect(mdNoHeadingLink.render('# Hello World!')).toBe(`<h1 id="hello-world"><a class="hash-anchor" href="#hello-world" aria-hidden="true" onclick="navigator.clipboard.writeText(this.href);"></a>Hello World!</h1>
 `);
 });
 

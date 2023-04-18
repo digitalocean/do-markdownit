@@ -109,18 +109,6 @@ module.exports = (md, options) => {
     }
 
     /**
-     * Get the onclick attribute for the hash link.
-     *
-     * @returns {string[]}
-     * @private
-     */
-    const click = () => [
-        'onclick',
-        // eslint-disable-next-line no-template-curly-in-string
-        'navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${this.href.slice(1)}`);',
-    ];
-
-    /**
      * Wrap the heading render function to inject slug Ids and track all headings.
      *
      * @param {import('markdown-it/lib/renderer').RenderRule} [original] Original render function. Defaults to `renderToken`.
@@ -160,7 +148,7 @@ module.exports = (md, options) => {
                 // Generate tokens for hash link
                 const linkOpen = new Token('link_open', 'a', 1);
                 linkOpen.attrs = [ [ 'href', `#${idAttr[1]}` ] ];
-                if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
+                if (hashLinkOpts.clipboard) linkOpen.attrs.push([ 'onclick', 'navigator.clipboard.writeText(this.href);' ]);
                 const linkClose = new Token('link_close', 'a', -1);
 
                 // Inject hash link tokens
@@ -171,7 +159,7 @@ module.exports = (md, options) => {
             // Generate tokens for hash link
             const linkOpen = new Token('link_open', 'a', 1);
             linkOpen.attrs = [ [ 'class', hashLinkOpts.class ], [ 'href', `#${idAttr[1]}` ], [ 'aria-hidden', true ] ];
-            if (hashLinkOpts.clipboard) linkOpen.attrs.push(click());
+            if (hashLinkOpts.clipboard) linkOpen.attrs.push([ 'onclick', 'navigator.clipboard.writeText(this.href);' ]);
             const linkContent = new Token('text', '', 0);
             const linkClose = new Token('link_close', 'a', -1);
 
