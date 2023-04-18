@@ -17,6 +17,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Fix clipboard write in heading_id hash links
+
 
 ## v1.7.0 - 4847d9ae
 
