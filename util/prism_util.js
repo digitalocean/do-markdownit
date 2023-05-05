@@ -90,7 +90,7 @@ const restrictWebpack = langs => {
     const withDependencies = dedupe(langs.map(lang => [ lang, ...getDependencies(lang) ]).flat());
     return new ContextReplacementPlugin(
         /@digitalocean[/\\]do-markdownit[/\\]vendor[/\\]prismjs[/\\]components$/,
-        new RegExp(`prism-(${[ 'core', ...withDependencies.map(dep => regexEscape(dep)) ].join('|')})\\.js$`),
+        new RegExp(`prism-(${[ 'core', ...withDependencies.map(dep => regexEscape(dep)) ].join('|')})(\\.js)?$`),
     );
 };
 
