@@ -33,6 +33,15 @@ const { languages: languagesData } = require('../vendor/prismjs/components');
 const dedupe = arr => Array.from(new Set(arr));
 
 /**
+ * Ensure a value is an array, wrapping it if it is not.
+ *
+ * @param {any|any[]} val Value to ensure is an array.
+ * @returns {any[]}
+ * @private
+ */
+const array = val => (Array.isArray(val) ? val : [ val ]);
+
+/**
  * All languages that Prism supports.
  *
  * @type {Readonly<Set<string>>}
@@ -45,7 +54,7 @@ const languages = Object.freeze(new Set(Object.keys(languagesData).filter(lang =
  * @type {Readonly<Map<string, string>>}
  */
 const languageAliases = Object.freeze(Object.entries(languagesData).reduce((aliases, [ lang, { alias } ]) => {
-    if (alias) (Array.isArray(alias) ? alias : [ alias ]).forEach(a => { aliases.set(a, lang); });
+    if (alias) array(alias).forEach(a => { aliases.set(a, lang); });
     return aliases;
 }, new Map()));
 
@@ -58,16 +67,7 @@ const languageAliases = Object.freeze(Object.entries(languagesData).reduce((alia
 const getDependencies = lang => {
     if (!languages.has(lang)) throw new Error(`Unknown Prism language: ${lang}`);
 
-    const required = languagesData[lang].require || [];
-    const modify = languagesData[lang].modify || [];
-    const dependencies = [
-        ...(Array.isArray(required)
-            ? required
-            : [ required ]),
-        ...(Array.isArray(modify)
-            ? modify
-            : [ modify ]),
-    ];
+    const dependencies = [ ...array(languagesData[lang].require || []), ...array(languagesData[lang].modify || []) ];
     return dedupe([
         ...dependencies,
         ...dependencies.map(dep => getDependencies(dep)).flat(),
@@ -77,6 +77,7 @@ const getDependencies = lang => {
 /**
  * Plugin to restrict the languages that are bundled for Prism.
  *
+ * Automatically resolves and includes all dependencies for the given languages.
  * This plugin requires that Webpack is installed as a dependency with `ContextReplacementPlugin` available.
  *
  * @param {string[]} langs Prism languages to restrict to.
