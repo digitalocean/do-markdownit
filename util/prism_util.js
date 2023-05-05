@@ -62,16 +62,17 @@ const languageAliases = Object.freeze(Object.entries(languagesData).reduce((alia
  * Get all language dependencies for a Prism given language.
  *
  * @param {string} lang Prism language name to get dependencies for.
+ * @param {boolean} [optional=true] Whether to include optional dependencies.
  * @returns {string[]}
  */
-const getDependencies = lang => {
+const getDependencies = (lang, optional = true) => {
     if (!languages.has(lang)) throw new Error(`Unknown Prism language: ${lang}`);
 
-    const dependencies = [ ...array(languagesData[lang].require || []), ...array(languagesData[lang].modify || []) ];
     return dedupe([
-        ...dependencies,
-        ...dependencies.map(dep => getDependencies(dep)).flat(),
-    ]);
+        array(languagesData[lang].require || []),
+        optional ? array(languagesData[lang].optional || []) : [],
+        array(languagesData[lang].modify || []),
+    ].reduce((acc, deps) => [ ...acc, ...deps.flatMap(dep => getDependencies(dep)), ...deps ], []));
 };
 
 /**
@@ -88,7 +89,7 @@ const restrictWebpack = langs => {
     // eslint-disable-next-line import/no-extraneous-dependencies
     const { ContextReplacementPlugin } = require('webpack');
 
-    const withDependencies = dedupe(langs.map(lang => [ lang, ...getDependencies(lang) ]).flat());
+    const withDependencies = dedupe(langs.flatMap(lang => [ lang, ...getDependencies(lang) ]));
     return new ContextReplacementPlugin(
         /@digitalocean[/\\]do-markdownit[/\\]vendor[/\\]prismjs[/\\]components$/,
         new RegExp(`prism-(${[ 'core', ...withDependencies.map(dep => regexEscape(dep)) ].join('|')})(\\.js)?$`),
