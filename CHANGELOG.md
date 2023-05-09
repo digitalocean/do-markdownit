@@ -17,6 +17,7 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Dependency updates
 - (patch) Isolate Prism webpack logic in own file
 - (minor) Add util to restrict Prism bundle in Webpack
 
