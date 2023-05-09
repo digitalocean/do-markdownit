@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,23 +21,16 @@ limitations under the License.
  */
 
 const Prism = require('../vendor/prismjs');
-const components = require('../vendor/prismjs/components');
 
 const safeObject = require('../util/safe_object');
 const findTagOpen = require('../util/find_tag_open');
 const findAttr = require('../util/find_attr');
+const { languages, languageAliases, getDependencies } = require('../util/prism_util');
 
 /**
  * @typedef {Object} PrismJsOptions
  * @property {string} [delimiter=','] String to split fence information on.
  */
-
-// Get languages that Prism supports
-const languages = new Set(Object.keys(components.languages).filter(lang => lang !== 'meta'));
-const languageAliases = Object.entries(components.languages).reduce((aliases, [ lang, { alias } ]) => {
-    if (alias) (Array.isArray(alias) ? alias : [ alias ]).forEach(a => { aliases[a] = lang; });
-    return aliases;
-}, {});
 
 /**
  * Helper to load in a language if not yet loaded.
@@ -47,8 +40,12 @@ const languageAliases = Object.entries(components.languages).reduce((aliases, [ 
  */
 const loadLanguage = language => {
     if (language in Prism.languages) return;
-    // eslint-disable-next-line import/no-dynamic-require
-    require(`../vendor/prismjs/components/prism-${language}`)(Prism);
+    try {
+        // eslint-disable-next-line import/no-dynamic-require
+        require(`../vendor/prismjs/components/prism-${language}`)(Prism);
+    } catch (err) {
+        console.error('Failed to load Prism language', language, err);
+    }
 };
 
 // Load our HTML plugin
@@ -156,7 +153,7 @@ module.exports = (md, options) => {
             const tokenInfo = (token.info || '').split(optsObj.delimiter || ',');
             const language = tokenInfo.map(info => {
                 const clean = info.toLowerCase().trim();
-                return { clean: languageAliases[clean] || clean, original: info };
+                return { clean: languageAliases.get(clean) || clean, original: info };
             }).find(({ clean }) => languages.has(clean));
 
             // If no language, return original
@@ -166,9 +163,11 @@ module.exports = (md, options) => {
             const { before, inside, after } = extractCodeBlock(rendered, language);
 
             // Load requirements for language
-            const comp = components.languages[language.clean];
-            if (comp.require) (Array.isArray(comp.require) ? comp.require : [ comp.require ]).forEach(loadLanguage);
+            getDependencies(language.clean).forEach(loadLanguage);
             loadLanguage(language.clean);
+
+            // If we failed to load the language (it's a dynamic require), return original
+            if (!(language.clean in Prism.languages)) return rendered;
 
             // Highlight the code with Prism
             const highlighted = Prism.highlight(inside, Prism.languages[language.clean], language.clean);

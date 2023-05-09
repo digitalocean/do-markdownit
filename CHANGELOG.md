@@ -17,6 +17,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add util to restrict Prism bundle in Webpack
+
 
 ## v1.7.1 - ddeb4ff6
 

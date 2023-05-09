@@ -1197,6 +1197,43 @@ require('@digitalocean/do-markdownit/vendor/prismjs/plugins/copy-to-clipboard/pr
 Prism.highlightAll();
 ```
 
+### Reducing bundle size
+
+PrismJS is a large library that includes a *lot* of language definitions. By default, we use a
+dynamic require statement that allows for any language to be loaded for Prism. For bundlers like
+Webpack, this will result in a very large chunk being generated that contains all the possible
+languages that could be used -- these will all be in a single chunk as they need to be consumed
+synchronously in the plugin, so a dynamic async import is not possible.
+
+To reduce the size of the bundle you generate, you may wish to restrict what language definitions
+are included. You can do this by restricting what files from
+`@digitalocean/do-markdownit/vendor/prismjs/components` are included in the bundle --
+`prism-core.js` is the only "required" file, all others are language definitions.
+
+We expose two utilities in the `util/prism_util.js` file to help with this. First is the
+`getDependencies` method which takes a PrismJS language and will return all the language
+dependencies that also need to be loaded for it. For Webpack users specifically, we also expose a
+`restrictWebpack` method that takes an array of PrismJS languages to include and returns a Webpack
+plugin you can include to restrict the paths included in the bundle.
+
+```js
+const { getDependencies } = require('@digitalocean/do-markdownit/util/prism_util');
+
+console.log(getDependencies('javascript')); // [ 'clike', 'regex', 'markup' ]
+console.log(getDependencies('javascript', false)); // [ 'clike', 'markup' ]
+```
+
+```js
+const { restrictWebpack } = require('@digitalocean/do-markdownit/util/prism_util');
+
+module.exports = {
+  // ...
+  plugins: [
+    restrictWebpack([ 'javascript', 'nginx' ]),
+  ],
+};
+```
+
 ### Keep HTML plugin
 
 Alongside the modified version of Prism, this package also includes a custom Prism plugin designed
