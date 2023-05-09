@@ -1210,11 +1210,11 @@ are included. You can do this by restricting what files from
 `@digitalocean/do-markdownit/vendor/prismjs/components` are included in the bundle --
 `prism-core.js` is the only "required" file, all others are language definitions.
 
-We expose two utilities in the `util/prism_util.js` file to help with this. First is the
-`getDependencies` method which takes a PrismJS language and will return all the language
-dependencies that also need to be loaded for it. For Webpack users specifically, we also expose a
-`restrictWebpack` method that takes an array of PrismJS languages to include and returns a Webpack
-plugin you can include to restrict the paths included in the bundle.
+We expose two utilities to help with this. First is the `getDependencies` method in
+`util/prism_util.js` which takes a PrismJS language and will return all the language dependencies
+that also need to be loaded for it. For Webpack users specifically, we also expose a
+method in `util/prism_webpack.js` that takes an array of PrismJS languages to include and
+returns a Webpack plugin you can include to restrict the paths included in the bundle.
 
 ```js
 const { getDependencies } = require('@digitalocean/do-markdownit/util/prism_util');
@@ -1224,7 +1224,7 @@ console.log(getDependencies('javascript', false)); // [ 'clike', 'markup' ]
 ```
 
 ```js
-const { restrictWebpack } = require('@digitalocean/do-markdownit/util/prism_util');
+const restrictWebpack = require('@digitalocean/do-markdownit/util/prism_webpack');
 
 module.exports = {
   // ...
