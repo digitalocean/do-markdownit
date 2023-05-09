@@ -21,7 +21,7 @@ limitations under the License.
  */
 
 const safeObject = require('../util/safe_object');
-const regexEscape = require('../util/regex_escape');
+const { regexEscape } = require('../util/helpers');
 
 /**
  * @typedef {Object} ImageSettingsOptions

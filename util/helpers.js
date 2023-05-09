@@ -17,9 +17,28 @@ limitations under the License.
 'use strict';
 
 /**
+ * Deduplicate an array.
+ *
+ * @param {any[]} arr Array to deduplicate.
+ * @returns {any[]}
+ * @private
+ */
+module.exports.dedupeArray = arr => Array.from(new Set(arr));
+
+/**
+ * Ensure a value is an array, wrapping it if it is not.
+ *
+ * @param {any|any[]} val Value to ensure is an array.
+ * @returns {any[]}
+ * @private
+ */
+module.exports.alwaysArray = val => (Array.isArray(val) ? val : [ val ]);
+
+/**
  * Escape a string for use in a RegExp.
  *
  * @param {string} string String to escape.
  * @returns {string}
+ * @private
  */
-module.exports = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+module.exports.regexEscape = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string

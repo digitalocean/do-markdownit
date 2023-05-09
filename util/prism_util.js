@@ -20,26 +20,8 @@ limitations under the License.
  * @module util/prism_util
  */
 
-const regexEscape = require('./regex_escape');
 const { languages: languagesData } = require('../vendor/prismjs/components');
-
-/**
- * Deduplicate an array.
- *
- * @param {any[]} arr Array to deduplicate.
- * @returns {any[]}
- * @private
- */
-const dedupe = arr => Array.from(new Set(arr));
-
-/**
- * Ensure a value is an array, wrapping it if it is not.
- *
- * @param {any|any[]} val Value to ensure is an array.
- * @returns {any[]}
- * @private
- */
-const array = val => (Array.isArray(val) ? val : [ val ]);
+const { dedupeArray, alwaysArray } = require('./helpers');
 
 /**
  * All languages that Prism supports.
@@ -54,7 +36,7 @@ const languages = Object.freeze(new Set(Object.keys(languagesData).filter(lang =
  * @type {Readonly<Map<string, string>>}
  */
 const languageAliases = Object.freeze(Object.entries(languagesData).reduce((aliases, [ lang, { alias } ]) => {
-    if (alias) array(alias).forEach(a => { aliases.set(a, lang); });
+    if (alias) alwaysArray(alias).forEach(a => { aliases.set(a, lang); });
     return aliases;
 }, new Map()));
 
@@ -68,37 +50,15 @@ const languageAliases = Object.freeze(Object.entries(languagesData).reduce((alia
 const getDependencies = (lang, optional = true) => {
     if (!languages.has(lang)) throw new Error(`Unknown Prism language: ${lang}`);
 
-    return dedupe([
-        array(languagesData[lang].require || []),
-        optional ? array(languagesData[lang].optional || []) : [],
-        array(languagesData[lang].modify || []),
+    return dedupeArray([
+        alwaysArray(languagesData[lang].require || []),
+        optional ? alwaysArray(languagesData[lang].optional || []) : [],
+        alwaysArray(languagesData[lang].modify || []),
     ].reduce((acc, deps) => [ ...acc, ...deps.flatMap(dep => getDependencies(dep)), ...deps ], []));
-};
-
-/**
- * Plugin to restrict the languages that are bundled for Prism.
- *
- * Automatically resolves and includes all dependencies for the given languages.
- * This plugin requires that Webpack is installed as a dependency with `ContextReplacementPlugin` available.
- *
- * @param {string[]} langs Prism languages to restrict to.
- * @returns {import('webpack').Plugin}
- */
-const restrictWebpack = langs => {
-    // Webpack is not a dependency, so we only load it here if the user uses this
-    // eslint-disable-next-line import/no-extraneous-dependencies
-    const { ContextReplacementPlugin } = require('webpack');
-
-    const withDependencies = dedupe(langs.flatMap(lang => [ lang, ...getDependencies(lang) ]));
-    return new ContextReplacementPlugin(
-        /@digitalocean[/\\]do-markdownit[/\\]vendor[/\\]prismjs[/\\]components$/,
-        new RegExp(`prism-(${[ 'core', ...withDependencies.map(dep => regexEscape(dep)) ].join('|')})(\\.js)?$`),
-    );
 };
 
 module.exports = {
     languages,
     languageAliases,
     getDependencies,
-    restrictWebpack,
 };
