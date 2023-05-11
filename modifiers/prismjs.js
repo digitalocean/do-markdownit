@@ -33,18 +33,26 @@ const { languages, languageAliases, getDependencies } = require('../util/prism_u
  */
 
 /**
- * Helper to load in a language if not yet loaded.
+ * Track which Prism components have been loaded.
  *
- * @param {string} language Prism language name to be loaded.
+ * @type {Set<string>}
+ */
+const loaded = new Set();
+
+/**
+ * Helper to load in a Prism component if not yet loaded.
+ *
+ * @param {string} component Prism component name to be loaded.
  * @private
  */
-const loadLanguage = language => {
-    if (language in Prism.languages) return;
+const loadComponent = component => {
+    if (loaded.has(component)) return;
     try {
         // eslint-disable-next-line import/no-dynamic-require
-        require(`../vendor/prismjs/components/prism-${language}`)(Prism);
+        require(`../vendor/prismjs/components/prism-${component}`)(Prism);
+        loaded.add(component);
     } catch (err) {
-        console.error('Failed to load Prism language', language, err);
+        console.error('Failed to load Prism component', component, err);
     }
 };
 
@@ -163,8 +171,8 @@ module.exports = (md, options) => {
             const { before, inside, after } = extractCodeBlock(rendered, language);
 
             // Load requirements for language
-            getDependencies(language.clean).forEach(loadLanguage);
-            loadLanguage(language.clean);
+            getDependencies(language.clean).forEach(loadComponent);
+            loadComponent(language.clean);
 
             // If we failed to load the language (it's a dynamic require), return original
             if (!(language.clean in Prism.languages)) return rendered;

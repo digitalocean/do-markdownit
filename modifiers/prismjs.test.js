@@ -32,6 +32,14 @@ it('handles a code fence with a language alias', () => {
 `);
 });
 
+it('does not repeatedly load a modifier component', () => {
+    const error = jest.spyOn(global.console, 'error');
+    md.render('```ts\nconsole.log("test");\n```\n\n```ts\nconsole.log("test");\n```');
+    expect(error).not.toHaveBeenCalledWith(expect.stringContaining('Failed to load Prism component'), 'js-templates', expect.anything());
+    error.mockReset();
+    error.mockRestore();
+});
+
 it('does not pollute global scope', () => {
     global.window = {}; /* global window */
     expect(window).not.toBeUndefined();
