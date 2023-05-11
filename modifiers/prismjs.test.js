@@ -33,6 +33,10 @@ it('handles a code fence with a language alias', () => {
 });
 
 it('does not repeatedly load a modifier component', () => {
+    // Reset modules in case the modifier was already loaded
+    jest.resetModules();
+
+    // Mock the modifier to track how many times it is called
     const callCount = jest.fn();
     jest.doMock('../vendor/prismjs/components/prism-js-templates', () => {
         const actual = jest.requireActual('../vendor/prismjs/components/prism-js-templates');
@@ -42,11 +46,13 @@ it('does not repeatedly load a modifier component', () => {
         };
     });
 
-    const mdTemp = require('markdown-it')().use(require('./prismjs'), { logging: true });
+    // Process some Markdown that uses a language with the modifier twice
+    const mdTemp = require('markdown-it')().use(require('./prismjs'));
     mdTemp.render('```ts\nconsole.log("test");\n```\n\n```ts\nconsole.log("test");\n```');
     expect(callCount).toHaveBeenCalledTimes(1);
 
-    jest.resetModules();
+    // Clean up the mock
+    jest.dontMock('../vendor/prismjs/components/prism-js-templates');
 });
 
 it('does not pollute global scope', () => {
@@ -61,30 +67,64 @@ it('does not pollute global scope', () => {
 });
 
 describe('Error logging', () => {
-    const mdNoLogging = require('markdown-it')().use(require('./prismjs'), { logging: false });
-
     it('does log errors when logging is enabled', () => {
-        const error = jest.spyOn(global.console, 'error');
-        jest.doMock('../vendor/prismjs/components/prism-typescript', () => { throw new Error('test'); });
+        // Reset modules in case the language was already loaded
+        jest.resetModules();
 
-        md.render('```ts\nconsole.log("test");\n```');
+        // Mock the language to track how many times it is called, and to throw an error
+        const callCount = jest.fn();
+        jest.doMock('../vendor/prismjs/components/prism-typescript', () => {
+            return () => {
+                callCount();
+                throw new Error('test');
+            };
+        });
+
+        // Spy on console.error to check that it is called
+        const error = jest.spyOn(global.console, 'error');
+
+        // Process some Markdown that uses the language
+        const mdTemp = require('markdown-it')().use(require('./prismjs'), { logging: true });
+        mdTemp.render('```ts\nconsole.log("test");\n```');
+
+        // Check the mock was called and the error was logged
+        expect(callCount).toHaveBeenCalledTimes(1);
         expect(error).toHaveBeenCalledWith('Failed to load Prism component', 'typescript', expect.any(Error));
 
+        // Clean up the mocks
         error.mockReset();
         error.mockRestore();
-        jest.resetModules();
+        jest.dontMock('../vendor/prismjs/components/prism-typescript');
     });
 
     it('does not log errors when logging is disabled', () => {
-        const error = jest.spyOn(global.console, 'error');
-        jest.doMock('../vendor/prismjs/components/prism-typescript', () => { throw new Error('test'); });
+        // Reset modules in case the language was already loaded
+        jest.resetModules();
 
-        mdNoLogging.render('```ts\nconsole.log("test");\n```');
+        // Mock the component to track how many times it is called, and to throw an error
+        const callCount = jest.fn();
+        jest.doMock('../vendor/prismjs/components/prism-typescript', () => {
+            return () => {
+                callCount();
+                throw new Error('test');
+            };
+        });
+
+        // Spy on console.error to check that it is called
+        const error = jest.spyOn(global.console, 'error');
+
+        // Process some Markdown that uses the language
+        const mdTemp = require('markdown-it')().use(require('./prismjs'));
+        mdTemp.render('```ts\nconsole.log("test");\n```');
+
+        // Check the mock was called and the error was logged
+        expect(callCount).toHaveBeenCalledTimes(1);
         expect(error).not.toHaveBeenCalled();
 
+        // Clean up the mocks
         error.mockReset();
         error.mockRestore();
-        jest.resetModules();
+        jest.dontMock('../vendor/prismjs/components/prism-typescript');
     });
 });
 
