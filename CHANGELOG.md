@@ -18,6 +18,7 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 
+- (minor) Allow logging for Prism to be toggled
 - (patch) Manually track loaded Prism components
 
 # v1.8.0 - aaf8532

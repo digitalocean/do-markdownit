@@ -30,6 +30,7 @@ const { languages, languageAliases, getDependencies } = require('../util/prism_u
 /**
  * @typedef {Object} PrismJsOptions
  * @property {string} [delimiter=','] String to split fence information on.
+ * @property {boolean} [logging=false] Whether to log errors to the console.
  */
 
 /**
@@ -43,16 +44,17 @@ const loaded = new Set();
  * Helper to load in a Prism component if not yet loaded.
  *
  * @param {string} component Prism component name to be loaded.
+ * @param {boolean} logging Whether to log errors to the console.
  * @private
  */
-const loadComponent = component => {
+const loadComponent = (component, logging) => {
     if (loaded.has(component)) return;
     try {
         // eslint-disable-next-line import/no-dynamic-require
         require(`../vendor/prismjs/components/prism-${component}`)(Prism);
         loaded.add(component);
     } catch (err) {
-        console.error('Failed to load Prism component', component, err);
+        if (logging) console.error('Failed to load Prism component', component, err);
     }
 };
 
@@ -171,8 +173,8 @@ module.exports = (md, options) => {
             const { before, inside, after } = extractCodeBlock(rendered, language);
 
             // Load requirements for language
-            getDependencies(language.clean).forEach(loadComponent);
-            loadComponent(language.clean);
+            getDependencies(language.clean).forEach(dep => loadComponent(dep, !!optsObj.logging));
+            loadComponent(language.clean, !!optsObj.logging);
 
             // If we failed to load the language (it's a dynamic require), return original
             if (!(language.clean in Prism.languages)) return rendered;
@@ -184,7 +186,7 @@ module.exports = (md, options) => {
             return `${before}${highlighted}${after}`;
         } catch (err) {
             // Fallback to no Prism if render fails
-            console.error('Bad Prism render occurred', err);
+            if (optsObj.logging) console.error('Bad Prism render occurred', err);
             return rendered;
         }
     };
