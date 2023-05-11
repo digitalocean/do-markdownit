@@ -18,6 +18,8 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 
+- (patch) Manually track loaded Prism components
+
 # v1.8.0 - aaf8532
 
 - (patch) Dependency updates
