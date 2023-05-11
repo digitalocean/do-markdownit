@@ -73,11 +73,9 @@ describe('Error logging', () => {
 
         // Mock the language to track how many times it is called, and to throw an error
         const callCount = jest.fn();
-        jest.doMock('../vendor/prismjs/components/prism-typescript', () => {
-            return () => {
-                callCount();
-                throw new Error('test');
-            };
+        jest.doMock('../vendor/prismjs/components/prism-typescript', () => () => {
+            callCount();
+            throw new Error('test');
         });
 
         // Spy on console.error to check that it is called
@@ -103,11 +101,9 @@ describe('Error logging', () => {
 
         // Mock the component to track how many times it is called, and to throw an error
         const callCount = jest.fn();
-        jest.doMock('../vendor/prismjs/components/prism-typescript', () => {
-            return () => {
-                callCount();
-                throw new Error('test');
-            };
+        jest.doMock('../vendor/prismjs/components/prism-typescript', () => () => {
+            callCount();
+            throw new Error('test');
         });
 
         // Spy on console.error to check that it is called
