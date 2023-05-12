@@ -18,8 +18,11 @@ See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
 
+# v1.9.0 - 5515d0c
+
 - (minor) Allow logging for Prism to be toggled
 - (patch) Manually track loaded Prism components
+
 
 # v1.8.0 - aaf8532
 
