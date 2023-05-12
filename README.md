@@ -1162,6 +1162,7 @@ Pass options for this plugin as the `prismjs` property of the `do-markdownit` pl
 Set this property to `false` to disable this plugin.
 
 - `delimiter` (`string`, optional, defaults to `','`): String to split fence information on.
+- `logging` (`boolean`, optional, defaults to `false`): Whether to log errors to the console.
 </details>
 
 ### limit_tokens
