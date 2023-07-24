@@ -8,8 +8,9 @@ jest.config.js
 # Exclude all development files
 dev/
 
-# Exclude the vendored PrismJS files
+# Exclude the vendored PrismJS files (and types)
 vendor/prismjs/
+types/vendor/prismjs/
 
 # Exclude generated files
 jsdoc/

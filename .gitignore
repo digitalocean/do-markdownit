@@ -1,7 +1,18 @@
-.DS_Store
+# Exclude IDEs
 .idea/
-node_modules/
+.vscode/
+
+# Exclude the vendored PrismJS files
 vendor/prismjs/
+
+# Exclude macOS metadata
+.DS_Store
+
+# Exclude Node.js dependencies
+node_modules/
+
+# Exclude generated files
 jsdoc/
+types/
 coverage/
 dev/dist/
