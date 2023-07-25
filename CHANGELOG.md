@@ -5,6 +5,7 @@ plugin will be shipped as minor releases, in that they are adding new functional
 New features will be enabled by default, and may change how your input Markdown is parsed. Any
 breaking changes to the options supported by the plugin will be shipped as a breaking change.
 
+
 ## Unreleased changes
 
 <!--
@@ -17,14 +18,17 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Generate TypeScript definitions for package
+- (patch) Dependency updates
 
-# v1.9.0 - 5515d0c
+
+## v1.9.0 - 5515d0c
 
 - (minor) Allow logging for Prism to be toggled
 - (patch) Manually track loaded Prism components
 
 
-# v1.8.0 - aaf8532
+## v1.8.0 - aaf8532
 
 - (patch) Dependency updates
 - (patch) Isolate Prism webpack logic in own file

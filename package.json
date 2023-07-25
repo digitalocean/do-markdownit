@@ -25,6 +25,7 @@
     "prism"
   ],
   "main": "index.js",
+  "types": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalocean/do-markdownit.git"
@@ -39,8 +40,10 @@
     "lint:scss": "stylelint \"@(styles|dev)/**/*.scss\"",
     "lint:scss:fix": "npm run lint:scss -- --fix",
     "jsdoc": "jsdoc -c .jsdoc.json",
+    "types": "tsc index.js --declaration --allowJs --emitDeclarationOnly --outDir types --lib dom --lib webworker",
     "test": "jest",
     "postinstall": "node script/prism.js",
+    "prepublishOnly": "npm run types",
     "dev": "webpack serve --config dev/webpack.config.js"
   },
   "author": "DigitalOcean",
@@ -50,6 +53,7 @@
   },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
+    "@types/node": "18.14.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -65,6 +69,7 @@
     "style-loader": "^3.3.2",
     "stylelint": "^15.6.1",
     "stylelint-config-standard-scss": "^9.0.0",
+    "typescript": "^5.1.6",
     "webpack": "^5.82.0",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
