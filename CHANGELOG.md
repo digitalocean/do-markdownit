@@ -18,6 +18,9 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.10.0 - 578e09b
+
 - (patch) Dependency updates
 - (minor) Generate TypeScript definitions for package
 - (patch) Dependency updates
