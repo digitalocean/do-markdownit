@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ pre {
     // Environments use light-mode base
     &[class*="environment-"] {
         > code {
-            @include prism-theme-punctuation($gray6);
-            @include prism-theme-comment($gray5);
-            @include prism-theme-selector($blue2);
-            @include prism-theme-variable(#08966b);
-            @include prism-theme-function(#e0276a);
-            @include prism-theme-number(#225196);
+            @include prism-theme-punctuation($code-text);
+            @include prism-theme-comment($code-text);
+            @include prism-theme-selector($code-selector);
+            @include prism-theme-variable($code-variable);
+            @include prism-theme-function($code-function);
+            @include prism-theme-number($code-number);
         }
 
         .secondary-code-label {
@@ -35,7 +35,7 @@ pre {
         }
 
         mark {
-            background: rgba($highlight, 0.35);
+            background: $code-highlight;
 
             mark {
                 background: none;
@@ -44,22 +44,22 @@ pre {
     }
 
     &.environment-local {
-        @include code-block-theme($gray8, $gray4);
+        @include code-block-theme($code-background, $code-text);
     }
 
     &.environment-second {
-        @include code-block-theme(rgba($blue5, 0.5), $blue1);
+        @include code-block-theme($code-secondary, $code-text);
     }
 
     &.environment-third {
-        @include code-block-theme(rgba($red5, 0.5), $red1);
+        @include code-block-theme($code-tertiary, $code-text);
     }
 
     &.environment-fourth {
-        @include code-block-theme(rgba($green5, 0.5), $green1);
+        @include code-block-theme($code-quaternary, $code-text);
     }
 
     &.environment-fifth {
-        @include code-block-theme(rgba($fuchsia5, 0.5), $fuchsia1);
+        @include code-block-theme($code-quinary, $code-text);
     }
 }

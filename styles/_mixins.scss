@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -38,17 +38,17 @@ limitations under the License.
     &:not(:disabled) {
         &:hover,
         &:focus {
-            background: $blue5;
+            background: $blue3;
         }
     }
 }
 
-@mixin code-block-theme($background, $text) {
-    background: $background;
-    color: $text;
+@mixin code-block-theme($code-background, $code-text) {
+    background: $code-background;
+    color: $code-text;
 
     code {
-        color: $text;
+        color: $code-text;
     }
 
     // Prefixes
@@ -57,7 +57,7 @@ limitations under the License.
             ol {
                 li {
                     &::before {
-                        color: $text;
+                        color: $code-text;
                     }
                 }
             }
@@ -68,7 +68,7 @@ limitations under the License.
                 ol {
                     li {
                         &::before {
-                            border-right-color: rgba($text, 0.5);
+                            border-right-color: rgba($code-text, 0.5);
                         }
                     }
                 }

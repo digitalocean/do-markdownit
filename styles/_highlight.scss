@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -18,12 +18,12 @@ limitations under the License.
 
 // Highlight
 mark {
-    background: rgba($highlight, 0.35);
-    border-radius: 8px;
+    background: rgba($honeydew, 0.30);;
+    border-radius: 2px;
     color: inherit;
     display: inline;
     line-height: calc(1.4em + 1px);
-    padding: 0 2px;
+    padding: 2px 6px;
 
     // Ignore any nested highlighting
     mark {
@@ -38,7 +38,7 @@ mark {
 pre {
     code {
         mark {
-            background: rgba($highlight-dark, 0.35);
+            background: $code-highlight-dark;
 
             mark {
                 background: none;

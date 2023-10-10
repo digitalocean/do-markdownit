@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ $code-secondary-label-class: "secondary-code-label" !default;
 pre {
     code {
         .#{$code-secondary-label-class} {
-            color: $blue-raspberry;
+            color: $lake2;
             margin: 0 0 4px;
         }
     }

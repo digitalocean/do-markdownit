@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@ limitations under the License.
 // DigitalOcean-usage-specific callout styling
 .callout {
     &.note {
-        background-color: $green5;
-        color: $green1;
+        background-color: $kiwi3;
+        color: $gray1;
     }
 
     &.warning {
-        background-color: $red5;
-        color: $red1;
+        background-color: $tulip2;
+        color: $gray1;
     }
 
     &.info {
-        background-color: $blue5;
-        color: $blue1;
+        background-color: $blue3;
+        color: $gray1;
     }
 
     &.draft {
-        background-color: $fuchsia4;
-        color: $fuchsia1;
+        background-color: $fuchsia3;
+        color: $gray1;
     }
 }
