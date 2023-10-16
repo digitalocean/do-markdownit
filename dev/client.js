@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,6 +18,11 @@ limitations under the License.
 
 require('./client.scss');
 const render = require('./render');
+
+const Prism = require('../vendor/prismjs/prism');
+require('../vendor/prismjs/plugins/keep-markup/prism-keep-markup')(Prism);
+require('../vendor/prismjs/plugins/toolbar/prism-toolbar')(Prism);
+require('../vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard')(Prism);
 
 document.addEventListener('DOMContentLoaded', event => {
     const textbox = document.getElementById('textbox');
@@ -42,6 +47,9 @@ document.addEventListener('DOMContentLoaded', event => {
             newScript.appendChild(document.createTextNode(oldScript.innerHTML));
             oldScript.parentNode.replaceChild(newScript, oldScript);
         });
+
+        // Run Prism on the output
+        Prism.highlightAllUnder(output);
     };
 
     // Monkey-patch addEventListener to short-circuit future DOMContentLoaded handlers
