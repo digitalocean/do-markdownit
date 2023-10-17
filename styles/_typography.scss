@@ -54,9 +54,15 @@ h4,
 h5,
 h6 {
     a {
-        border-bottom: none;
+        background-size: 0 0;
         color: inherit;
         text-decoration: none;
+
+        &:hover,
+        &:focus {
+            color: $gray1;
+            background-size: 0 0;
+        }
     }
 }
 
@@ -89,15 +95,20 @@ ol {
 
 // Links
 a {
-    border-bottom: 1px solid $blue2;
+    background: linear-gradient($blue2, $blue2) bottom repeat-x;
+    background-size: 1px 1px;
+    border-bottom: none;
     color: $blue2;
     text-decoration: none;
-    transition: color 0.25s, border-bottom-color 0.25s;
+    transition:
+        background 300ms ease-in-out,
+        color 300ms ease-in-out;
 
     &:hover,
     &:focus {
-        border-bottom-color: $blue-hover;
-        color: $blue-hover;
+        background: linear-gradient($blue1, $blue1) bottom repeat-x;
+        background-size: 100% 100%;
+        color: $white;
     }
 
     code {

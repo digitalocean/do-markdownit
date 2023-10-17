@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -24,20 +24,20 @@ code {
     border-radius: 8px;
     color: $gray3;
     font-size: 14px;
-    line-height: 1.4em;
+    line-height: 22px;
     padding: 3px;
 }
 
 // Code blocks
 pre {
-    @include code-block-theme($gray2, $white);
+    @include code-block-theme($code-background-dark, $code-text-dark);
 
     border-radius: 16px;
     display: block;
     margin: 1em 0;
     overflow: auto;
     overflow-wrap: normal;
-    padding: 1em;
+    padding: 24px;
     white-space: normal;
     word-wrap: normal;
 

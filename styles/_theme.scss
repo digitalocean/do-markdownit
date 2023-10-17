@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -14,87 +14,172 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Neutral Colors
 $black: #000000 !default;
-$white: #ffffff !default;
+$neutral1: #000C79 !default;
+$neutral2: #40499B !default;
+$neutral3: #696FB0 !default;
+$neutral4: #D9DBEB !default;
+$neutral5: #F9FAFE !default;
+$white: #FFFFFF !default;
 
-// Grays
-$gray1: #000c2b !default;
-$gray2: #081b4b !default;
-$gray3: #24335a !default;
-$gray4: #4d5b7c !default;
-$gray5: #8a96b5 !default;
-$gray6: #aab3ca !default;
-$gray7: #d6dcea !default;
-$gray8: #e3e8f4 !default;
-$gray9: #eff2fb !default;
-$gray10: #f9fafe !default;
+// Gray Colors
+$gray1: #000C2A !default;
+$gray2: #081B4B !default;
+$gray3: #24335A !default;
+$gray4: #4D5B7C !default;
+$gray5: #8A96B5 !default;
+$gray6: #A9B3CA !default;
+$gray7: #D6DCEA !default;
+$gray8: #E3E8F4 !default;
+$gray9: #EFF2FB !default;
+$gray10: #F9FAFE !default;
 
-// Blues
-$blue1: #002c9b !default;
-$blue2: #0069ff !default;
-$blue3: #4994ff !default;
-$blue4: #92bfff !default;
-$blue5: #c8dfff !default;
-$blue6: #e4f2f9 !default;
-$blue-hover: #1253fa !default;
+// Blue Colors
+$blue1: #1433D6 !default;
+$blue2: #0069FF !default;
+$blue3: #C6E3FF !default;
 
-// Purples
-$purple1: #32087a !default;
-$purple2: #6414ee !default;
-$purple3: #9c64ff !default;
-$purple4: #d8c1ff !default;
-$purple5: #eadeff !default;
+// Purple Colors
+$purple1: #300091 !default;
+$purple2: #6414EE !default;
+$purple3: #A8A4EE !default;
 
-// Fuchsias
-$fuchsia1: #660066 !default;
-$fuchsia2: #ff1eff !default;
-$fuchsia3: #ff8cff !default;
-$fuchsia4: #ffc0ff !default;
-$fuchsia5: #ffdeff !default;
+// Green Colors
+$green1: #006650 !default;
+$green2: #00C483 !default;
+$green3: #8CE4DA !default;
 
-// Reds
-$red1: #820800 !default;
-$red2: #ff3a2e !default;
-$red3: #ff8c84 !default;
-$red4: #ffbcb7 !default;
-$red5: #ffe2e0 !default;
+// Teal Colors
+$teal1: #006375 !default;
+$teal2: #00AFCE !default;
+$teal3: #B1E4F1 !default;
 
-// Oranges
-$orange1: #783200 !default;
-$orange2: #ff720e !default;
-$orange3: #ff9950 !default;
-$orange4: #ffcba6 !default;
-$orange5: #ffebdd !default;
+// Fuchsia Colors
+$fuchsia1: #8917A6 !default;
+$fuchsia2: #CA64DD !default;
+$fuchsia3: #EBBFEB !default;
 
-// Greens
-$green1: #005955 !default;
-$green2: #00a099 !default;
-$green3: #33cfc8 !default;
-$green4: #98dfdc !default;
-$green5: #d4efee !default;
+// Custom Colors
+$honeydew: #FFC001 !default;
+$pear: #D7E200 !default;
+$lime: #80D34A !default;
+$green-apple: #00D688 !default;
+$plum: #6414EE !default;
+$dragon-fruit: #B458FC !default;
+$raspberry: #FF4C6C !default;
+$orange: #FF720E !default;
 
-// Teals
-$teal1: #00455b !default;
-$teal2: #00bfff !default;
-$teal3: #7bdeff !default;
-$teal4: #9adef4 !default;
-$teal5: #cfeaf3 !default;
+// Vivid Sky Colors
+$vivid-sky1: #0BE1FF !default;
+$vivid-sky2: #75EEFF !default;
+$vivid-sky3: #B5F6FF !default;
+$vivid-sky4: #F4FEFF !default;
 
-// Code
-$honeydew: #ffc001 !default;
-$pear: #d7e200 !default;
-$lime: #80d34a !default;
-$green-apple: #00d688 !default;
-$aqua: #01d0c0 !default;
-$blue-raspberry: #00c6ff !default;
-$blueberry: #2a82ff !default;
-$dragonfruit: #b458fc !default;
-$raspberry: #e681ff !default;
-$strawberry: #ff4c6c !default;
+// Sea Green Colors
+$sea-green1: #00F4C8 !default;
+$sea-green2: #75FFE6 !default;
+$sea-green3: #B5FFF1 !default;
+$sea-green4: #F4FFFD !default;
 
-// Highlight
-$highlight: #f2c94c !default;
-$highlight-dark: #41fff4 !default;
+// Guppie Green Colors
+$guppie-green1: #0BFF8A !default;
+$guppie-green2: #75FFBD !default;
+$guppie-green3: #B5FFDB !default;
+$guppie-green4: #F4FFFA !default;
+
+// Kiwi Colors
+$kiwi1: #80D34A !default;
+$kiwi2: #B1E490 !default;
+$kiwi3: #D5F0C3 !default;
+$kiwi4: #F9FDF6 !default;
+
+// Bitter Lemon Colors
+$bitter-lemon1: #D4DF00 !default;
+$bitter-lemon2: #F3FF0B !default;
+$bitter-lemon3: #FBFFB5 !default;
+$bitter-lemon4: #FEFFF4 !default;
+
+// Metallic Yellow Colors
+$metallic-yellow1: #FFC90B !default;
+$metallic-yellow2: #FFE175 !default;
+$metallic-yellow3: #FFEFB5 !default;
+$metallic-yellow4: #FFFDF4 !default;
+
+// Spray Tan Colors
+$spraytan1: #FFA14A !default;
+$spraytan2: #FFB775 !default;
+$spraytan3: #FFD8B5 !default;
+$spraytan4: #FFF9F4 !default;
+
+// Tulip Colors
+$tulip1: #FF928A !default;
+$tulip2: #FFBAB5 !default;
+$tulip3: #FFE1DF !default;
+$tulip4: #FFF5F4 !default;
+
+// Pink Elephants Colors
+$pink-elephants1: #FF9FEA !default;
+$pink-elephants2: #FFB5EF !default;
+$pink-elephants3: #FFCAF3 !default;
+$pink-elephants4: #FFF4FD !default;
+
+// Lavender Colors
+$lavender1: #E88AFF !default;
+$lavender2: #F0B5FF !default;
+$lavender3: #F9DFFF !default;
+$lavender4: #FDF4FF !default;
+
+// Lilac Colors
+$lilac1: #BBA7F7 !default;
+$lilac2: #D9CEFB !default;
+$lilac3: #E8E2FC !default;
+$lilac4: #F7F5FE !default;
+
+// Jordy Blue Colors
+$jordy-blue1: #8AABFF !default;
+$jordy-blue2: #CAD9FF !default;
+$jordy-blue3: #DFE8FF !default;
+$jordy-blue4: #F4F7FF !default;
+
+// Lake Colors
+$lake1: #4ABEFF !default;
+$lake2: #9FDDFF !default;
+$lake3: #CAECFF !default;
+$lake4: #F4FBFF !default;
+
+// Mustard Colors
+$mustard1: #FFE50B !default;
+$mustard2: #FFF075 !default;
+$mustard3: #FFF7B5 !default;
+$mustard4: #FFFEF4 !default;
+
+// Code Block Backgrounds Colors
+$code-secondary: #F4FBFF !default;
+$code-tertiary: #FFF9F4 !default;
+$code-quaternary: #F9FDF6 !default;
+$code-quinary: #FFF4FD !default;
+
+// Code Block Light Colors
+$code-background: #F7F8FB !default;
+$code-text: #11192E !default;
+$code-highlight: #E3E8F4 !default;
+$code-selector: #0F2FDA !default;
+$code-function: #7300B9 !default;
+$code-number: #00507D !default;
+$code-variable: #00573A !default;
+
+// Code Block Dark Colors
+$code-background-dark: #11192E !default;
+$code-text-dark: #F7F8FB !default;
+$code-highlight-dark: #29334D !default;
+$code-selector-dark: #9FDDFF !default;
+$code-function-dark: #FFAF8C !default;
+$code-number-dark: #0BE1FF !default;
+$code-variable-dark: #B1E490 !default;
+
+// Accent Colors
+$card-stroke: rgba(17, 25, 46, 0.1) !default;
 
 // Breakpoints
 $small-phone: 320 !default;
