@@ -8,7 +8,6 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 ## Unreleased changes
 
-- (minor) New design system colors
 <!--
 All changes being submitted through PRs should be added to this section.
 Please add a new list item to the top of this section with a summary of the change.
@@ -18,6 +17,11 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+
+
+## v1.11.0 - 900599c
+
+- (minor) New design system colors
 
 
 ## v1.10.0 - 578e09b
