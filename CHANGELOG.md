@@ -8,6 +8,7 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 ## Unreleased changes
 
+- (minor) Add border to code block
 <!--
 All changes being submitted through PRs should be added to this section.
 Please add a new list item to the top of this section with a summary of the change.
