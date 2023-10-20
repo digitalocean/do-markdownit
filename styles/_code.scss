@@ -33,6 +33,7 @@ pre {
     @include code-block-theme($code-background-dark, $code-text-dark);
 
     border-radius: 16px;
+    box-shadow: inset 0 0 0 2px $card-stroke;
     display: block;
     margin: 1em 0;
     overflow: auto;
