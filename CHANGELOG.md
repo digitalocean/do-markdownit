@@ -18,6 +18,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Mark markdown-it as a peer dependency
+
 
 ## v1.12.0 - d1542c7
 
