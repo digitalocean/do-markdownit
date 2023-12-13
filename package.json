@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@types/markdown-it": "^13.0.7",
-    "@types/node": "18.17.0",
+    "@types/node": "~20.10.4",
     "css-loader": "^6.8.1",
     "eslint": "^8.45.0",
     "eslint-config-airbnb-base": "^15.0.0",
