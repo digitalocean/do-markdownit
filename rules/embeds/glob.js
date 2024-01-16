@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ module.exports = md => {
         if (closingMark === -1) return false;
 
         // Check for glob match
-        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+?(?:(?: .+?)+|(?:\n.+?)+))\](?:$|\n)/);
+        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+?(?:(?: [^ \n]+?)+|(?:\n.+?)+))\](?:$|\n)/);
         if (!match) return false;
 
         // Get the full strings
