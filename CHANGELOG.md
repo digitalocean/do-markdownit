@@ -18,6 +18,9 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.12.1 - 39a3836
+
 - (patch) Fix ReDoS in glob embed rule regex
 - (patch) Dependency updates
 - (patch) Mark markdown-it as a peer dependency
