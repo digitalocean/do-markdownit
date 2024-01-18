@@ -149,9 +149,9 @@ module.exports = md => {
         const tests = token.glob.tests.map((x, i) => `data-glob-test-${i}="${md.utils.escapeHtml(x)}"`).join(' ');
 
         // Construct the fallback URL
-        const url = new URL('https://www.digitalocean.com/community/tools/glob');
-        url.searchParams.append('glob', token.glob.glob);
-        token.glob.tests.forEach(x => url.searchParams.append('tests', x));
+        // Don't use URL#searchParams because it is very slow for large numbers of params
+        // https://twitter.com/MattIPv4/status/1748102513646047584
+        const url = `https://www.digitalocean.com/community/tools/glob?glob=${encodeURIComponent(token.glob.glob)}${token.glob.tests.map(x => `&tests=${encodeURIComponent(x)}`).join('')}`;
 
         // Return the HTML
         return `<div data-glob-tool-embed data-glob-string="${md.utils.escapeHtml(token.glob.glob)}" ${tests}>
