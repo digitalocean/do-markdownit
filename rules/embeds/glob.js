@@ -78,7 +78,9 @@ module.exports = md => {
         if (closingMark === -1) return false;
 
         // Check for glob match
-        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+?(?:(?: [^ \n]+?)+|(?:\n.+?)+))\](?:$|\n)/);
+        // .+(?:\n.+)+ allows for a glob with spaces on the first line, and then tests separated by newlines
+        // [^ \n]+(?: [^ \n]+)+ allows for a glob with no spaces on the first line, and then tests separated by spaces
+        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+(?:\n.+)+|[^ \n]+(?: [^ \n]+)+)\](?:$|\n)/);
         if (!match) return false;
 
         // Get the full strings
