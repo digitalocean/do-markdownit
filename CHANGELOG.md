@@ -18,6 +18,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Avoid slowdown from `URL#searchParams` in glob embed
+
 
 ## v1.12.1 - 39a3836
 
