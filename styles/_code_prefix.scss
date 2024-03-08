@@ -50,7 +50,52 @@ pre {
 
                         &::before {
                             border-right: 1px solid rgba($white, 0.5);
+                            direction: rtl;
                             padding-right: 5px;
+                        }
+                    }
+                }
+            }
+            &.line-number-width-2 {
+                code {
+                    ol {
+                        li {
+                            &::before {
+                                width: 3ch;
+                            }
+                        }
+                    }
+                }
+            }
+            &.line-number-width-3 {
+                code {
+                    ol {
+                        li {
+                            &::before {
+                                width: 4ch;
+                            }
+                        }
+                    }
+                }
+            }
+            &.line-number-width-4 {
+                code {
+                    ol {
+                        li {
+                            &::before {
+                                width: 5ch;
+                            }
+                        }
+                    }
+                }
+            }
+            &.line-number-width-5 {
+                code {
+                    ol {
+                        li {
+                            &::before {
+                                width: 6ch;
+                            }
                         }
                     }
                 }
