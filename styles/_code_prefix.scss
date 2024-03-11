@@ -50,8 +50,8 @@ pre {
 
                         &::before {
                             border-right: 1px solid rgba($white, 0.5);
-                            direction: rtl;
                             padding-right: 5px;
+                            text-align: right;
                             width: 2ch;
                         }
 

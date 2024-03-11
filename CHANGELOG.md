@@ -8,7 +8,7 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 ## Unreleased changes
 
-- (minor) Align code-block line numbers to the right.
+- (patch) Align code-block line numbers to the right.
 <!--
 All changes being submitted through PRs should be added to this section.
 Please add a new list item to the top of this section with a summary of the change.
