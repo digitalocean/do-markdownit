@@ -77,13 +77,6 @@ module.exports = (md, options) => {
 
         // Extract the class attribute
         const classes = tag.slice(classPos.start + 7, classPos.end - 1).split(' ');
-
-        // Calculate and append line number width class if needed.
-        const lineNumberDigitCount = (content.match(/<li/g) || []).length.toString().length;
-        if (lineNumberDigitCount > 1) {
-            classes.push(`line-number-width-${lineNumberDigitCount}`);
-        }
-
         const permitted = classes.filter(cls => optsObj.allowedClasses.includes(cls));
 
         // Generate the new tag

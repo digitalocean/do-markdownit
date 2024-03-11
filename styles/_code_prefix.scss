@@ -52,54 +52,27 @@ pre {
                             border-right: 1px solid rgba($white, 0.5);
                             direction: rtl;
                             padding-right: 5px;
+                            width: 2ch;
                         }
-                    }
-                }
-            }
 
-            &.line-number-width-2 {
-                code {
-                    ol {
-                        li {
-                            &::before {
-                                width: 3ch;
-                            }
+                        &:first-child:nth-last-child(n + 10)::before,
+                        &:first-child:nth-last-child(n + 10) ~ li::before {
+                            width: 3ch;
                         }
-                    }
-                }
-            }
 
-            &.line-number-width-3 {
-                code {
-                    ol {
-                        li {
-                            &::before {
-                                width: 4ch;
-                            }
+                        &:first-child:nth-last-child(n + 100)::before,
+                        &:first-child:nth-last-child(n + 100) ~ li::before {
+                            width: 4ch;
                         }
-                    }
-                }
-            }
 
-            &.line-number-width-4 {
-                code {
-                    ol {
-                        li {
-                            &::before {
-                                width: 5ch;
-                            }
+                        &:first-child:nth-last-child(n + 1000)::before,
+                        &:first-child:nth-last-child(n + 1000) ~ li::before {
+                            width: 5ch;
                         }
-                    }
-                }
-            }
 
-            &.line-number-width-5 {
-                code {
-                    ol {
-                        li {
-                            &::before {
-                                width: 6ch;
-                            }
+                        &:first-child:nth-last-child(n + 10000)::before,
+                        &:first-child:nth-last-child(n + 10000) ~ li::before {
+                            width: 6ch;
                         }
                     }
                 }

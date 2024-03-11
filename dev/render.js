@@ -27,7 +27,6 @@ const md = require('markdown-it')({
     fence_classes: {
         allowedClasses: [
             'prefixed', 'line_numbers', 'command', 'super_user', 'custom_prefix',
-            'line-number-width-2', 'line-number-width-3', 'line-number-width-4', 'line-number-width-5',
             ...[ 'local', 'second', 'third', 'fourth', 'fifth' ].map(env => `environment-${env}`),
         ],
     },
