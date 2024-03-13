@@ -10,15 +10,19 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 <!--
 All changes being submitted through PRs should be added to this section.
-Please add a new list item to the top of this section with a summary of the change.
-Each list item should be prefixed with `(patch)` or `(minor)` or `(major)`.
 
+Please add a new list item below this comment with a summary of the change,
+leaving two line-breaks between the final item and the next heading.
+
+Each list item should be prefixed with `(patch)`, `(minor)`, or `(major)`.
 Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (docs) Update PUBLISH + CHANGELOG instructions for new versions
 - (patch) Align code-block line numbers to the right
+
 
 ## v1.12.2 - 081867e
 
