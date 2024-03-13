@@ -18,6 +18,7 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (patch) Align code-block line numbers to the right
 
 ## v1.12.2 - 081867e
 
