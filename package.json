@@ -1,6 +1,6 @@
 {
   "name": "@digitalocean/do-markdownit",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "description": "Markdown-It plugin for the DigitalOcean Community.",
   "keywords": [
     "markdown",
