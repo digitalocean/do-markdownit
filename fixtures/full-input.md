@@ -64,7 +64,7 @@ Rich transformations are also applied:
 
 ## Step 2 — Code
 
-This is `inline code`. This is a <^>variable<^>. This is an `in-line code <^>variable<^>`.
+This is `inline code`. This is a <^>variable<^>. This is an `in-line code <^>variable<^>`. You can also have [`code` in links](https://www.digitalocean.com).
 
 Here's a configuration file with a label:
 
