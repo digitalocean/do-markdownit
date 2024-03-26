@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -109,11 +109,14 @@ a {
         background: linear-gradient($blue1, $blue1) bottom repeat-x;
         background-size: 100% 100%;
         color: $white;
+
+        code {
+            color: $white;
+        }
     }
 
     code {
-        position: relative;
-        z-index: -1;
+        transition: color 300ms ease-in-out;
     }
 }
 
