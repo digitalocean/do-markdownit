@@ -109,13 +109,17 @@ a {
         color: $white;
 
         code {
-            background: linear-gradient($blue1, $blue1) center calc(100% - 0.2em + 0.5px) / 100% calc(100% - (0.2em * 2)) no-repeat, linear-gradient($gray8, $gray8);
+            background:
+                linear-gradient($blue2, $blue2) center calc(100% - 0.2em + 0.5px) / 100% 1px no-repeat,
+                linear-gradient($gray8, $gray8) center top / 100% 0% no-repeat;
             color: $white;
         }
     }
 
     code {
-        background: linear-gradient($blue2, $blue2) center calc(100% - 0.2em + 0.5px) / 100% 1px no-repeat, linear-gradient($gray8, $gray8);
+        background:
+            linear-gradient($blue2, $blue2) center calc(100% - 0.2em + 0.5px) / 100% 1px no-repeat,
+            linear-gradient($gray8, $gray8) center top / 100% 100% no-repeat;
         transition:
             background 300ms ease-in-out,
             color 300ms ease-in-out;
