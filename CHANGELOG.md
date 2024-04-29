@@ -20,6 +20,9 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.12.6 - b59f604
+
 - (patch) Fix multi-line inline code styling
 
 
