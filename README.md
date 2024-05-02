@@ -1133,6 +1133,24 @@ Set this property to `false` to disable this plugin.
 - `sizeUnits` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
 </details>
 
+### link_attributes
+
+<details>
+<summary>Apply custom attributes to all links in the Markdown content.</summary>
+
+If an object is provided, the provided attributes are merged with the existing attributes.
+
+If a function is provided, the existing attributes are passed to it,
+ and the existing attributes are replaced (not merged) with the return value.
+
+**Options:**
+
+Pass options for this plugin as the `link_attributes` property of the `do-markdownit` plugin options.
+This plugin is disabled by default, pass an object to enable it.
+
+- `attributes` (`Object<string, string>|function(Object<string, string>): Object<string, string>`): Object or function to generate attributes for links.
+</details>
+
 ### prismjs
 
 <details>

@@ -20,6 +20,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add link attributes plugin
+
 
 ## v1.12.6 - b59f604
 
