@@ -20,6 +20,9 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.13.0 - 6056063
+
 - (patch) Dependency updates
 - (minor) Add link attributes plugin
 
