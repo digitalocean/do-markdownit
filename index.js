@@ -57,7 +57,8 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./modifiers/heading_id').HeadingIdOptions} [heading_id] Disable Ids on headings, or set options for the feature.
  * @property {false|import('./modifiers/image_settings').ImageSettingsOptions} [image_settings] Disable image settings syntax, or set options for the feature.
  * @property {false|import('./modifiers/prismjs').PrismJsOptions} [prismjs] Disable Prism highlighting, or set options for the feature.
- * @property {false|import('./rules/limit_tokens').LimitTokensOptions} [limit_tokens] Disable token filtering, or set options for the feature.
+ * @property {import('./modifiers/link_attributes').LinkAttributesOptions} [link_attributes] Enable custom link attributes by setting options for the feature.
+ * @property {import('./rules/limit_tokens').LimitTokensOptions} [limit_tokens] Enable token filtering by setting options for the feature.
  */
 
 /**
@@ -203,11 +204,17 @@ module.exports = (md, options) => {
         md.use(require('./modifiers/image_settings'), safeObject(optsObj.image_settings));
     }
 
+    if (optsObj.link_attributes) {
+        md.use(require('./modifiers/link_attributes'), safeObject(optsObj.link_attributes));
+    }
+
     if (optsObj.prismjs !== false) {
         md.use(require('./modifiers/prismjs'), safeObject(optsObj.prismjs));
     }
 
-    if (optsObj.limit_tokens && optsObj.limit_tokens !== false) {
+    // Limiting the token streams should be the last step
+
+    if (optsObj.limit_tokens) {
         md.use(require('./rules/limit_tokens'), safeObject(optsObj.limit_tokens));
     }
 };
