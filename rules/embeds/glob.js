@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -78,7 +78,9 @@ module.exports = md => {
         if (closingMark === -1) return false;
 
         // Check for glob match
-        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+?(?:(?: .+?)+|(?:\n.+?)+))\](?:$|\n)/);
+        // .+(?:\n.+)+ allows for a glob with spaces on the first line, and then tests separated by newlines
+        // [^ \n]+(?: [^ \n]+)+ allows for a glob with no spaces on the first line, and then tests separated by spaces
+        const match = currentLines.slice(0, closingMark + 3).match(/^\[glob (.+(?:\n.+)+|[^ \n]+(?: [^ \n]+)+)\](?:$|\n)/);
         if (!match) return false;
 
         // Get the full strings
@@ -147,9 +149,9 @@ module.exports = md => {
         const tests = token.glob.tests.map((x, i) => `data-glob-test-${i}="${md.utils.escapeHtml(x)}"`).join(' ');
 
         // Construct the fallback URL
-        const url = new URL('https://www.digitalocean.com/community/tools/glob');
-        url.searchParams.append('glob', token.glob.glob);
-        token.glob.tests.forEach(x => url.searchParams.append('tests', x));
+        // Don't use URL#searchParams because it is very slow for large numbers of params
+        // https://twitter.com/MattIPv4/status/1748102513646047584
+        const url = `https://www.digitalocean.com/community/tools/glob?glob=${encodeURIComponent(token.glob.glob)}${token.glob.tests.map(x => `&tests=${encodeURIComponent(x)}`).join('')}`;
 
         // Return the HTML
         return `<div data-glob-tool-embed data-glob-string="${md.utils.escapeHtml(token.glob.glob)}" ${tests}>

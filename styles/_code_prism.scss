@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -86,8 +86,8 @@ pre {
 
     > .toolbar {
         position: absolute;
-        right: 24px;
-        top: -40px;
+        right: 1.5em;
+        top: -2.5em;
         z-index: 3;
 
         > .toolbar-item {
@@ -108,11 +108,12 @@ pre {
             > a,
             > button {
                 background: $neutral3;
-                border-radius: 10px;
+                border-radius: 0.625em;
                 color: $white;
                 cursor: pointer;
-                padding: 6px 8px;
-                transition: color 0.25s, background 0.25s; 
+                line-height: 1;
+                padding: 0.375em 0.5em;
+                transition: color 0.25s, background 0.25s;
 
                 span {
                     color: $white;

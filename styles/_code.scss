@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -21,30 +21,31 @@ limitations under the License.
 pre,
 code {
     background-color: $gray8;
-    border-radius: 8px;
+    border-radius: 0.5em;
     color: $gray3;
-    font-size: 14px;
-    line-height: 22px;
-    padding: 3px;
+    font-size: 0.875em;
+    padding: 0.2em;
 }
 
 // Code blocks
 pre {
     @include code-block-theme($code-background-dark, $code-text-dark);
 
-    border-radius: 16px;
+    border-radius: 1em;
+    box-shadow: inset 0 0 0 0.125em $card-stroke;
     display: block;
     margin: 1em 0;
     overflow: auto;
     overflow-wrap: normal;
-    padding: 24px;
+    padding: 1.5em;
     white-space: normal;
     word-wrap: normal;
 
     code {
-        background: 0;
+        background: none;
         border-radius: 0;
         color: inherit;
+        font-size: 1em;
         padding: 0;
         white-space: pre;
     }
