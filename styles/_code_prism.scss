@@ -87,7 +87,8 @@ pre {
     > .toolbar {
         position: absolute;
         right: 24px;
-        top: 24px;
+        top: -40px;
+        z-index: 3;
 
         > .toolbar-item {
             display: inline-block;

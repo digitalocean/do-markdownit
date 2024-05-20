@@ -17,6 +17,13 @@ limitations under the License.
 @import "../theme";
 @import "../mixins";
 
+$code-label-class: "code-label" !default;
+
+.#{$code-label-class}:has(+ .code-toolbar > pre[class*="environment-"]) {
+    background: $gray9;
+    color: $gray4;
+}
+
 // DigitalOcean-usage-specific code environment styling
 pre {
     // Environments use light-mode base

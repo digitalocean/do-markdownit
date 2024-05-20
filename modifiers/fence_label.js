@@ -66,10 +66,10 @@ module.exports = (md, options) => {
         const name = (match && (match[2] || '').trim()) || null;
 
         // If no name, just return original
-        if (!name) return original(tokens, idx, opts, env, self);
+        // if (!name) return original(tokens, idx, opts, env, self);
 
         // Remove the label line
-        token.content = token.content.replace(match[0], match[1]);
+        // token.content = token.content.replace(match[0], match[1]);
 
         // Get the rendered content
         const content = original(tokens, idx, opts, env, self);
@@ -78,7 +78,7 @@ module.exports = (md, options) => {
         const className = optsObj.className || 'code-label';
 
         // Inject label and return
-        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name)}">${md.utils.escapeHtml(name)}</div>
+        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name) || ''}">${md.utils.escapeHtml(name) || ''}</div>
 ${content}`;
     };
 
