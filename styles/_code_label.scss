@@ -21,19 +21,19 @@ $code-label-class: "code-label" !default;
 // Code labels
 .#{$code-label-class}:has(+ .code-toolbar) {
     background-color: $code-highlight-dark;
-    border-radius: 16px 16px 0 0;
+    border-radius: 1em 1em 0 0;
     color: $white;
     display: flex;
-    padding: 12px 24px;
+    padding: 0.75em 1.5em;
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
     position: relative;
-    min-height: 52px;
+    min-height: 3.25em;
     z-index: 2;
 
     + pre {
-        border-radius: 0 0 16px 16px;
+        border-radius: 0 0 1em 1em;
         margin: 0 0 1em;
     }
 
@@ -42,7 +42,7 @@ $code-label-class: "code-label" !default;
         margin: 0 0 1em;
 
         pre {
-            border-radius: 0 0 16px 16px;
+            border-radius: 0 0 1em 1em;
         }
     }
 }
