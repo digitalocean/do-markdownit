@@ -76,7 +76,7 @@ module.exports = (md, options) => {
         const className = optsObj.className || 'code-label';
 
         // Inject label and return
-        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name) || ''}">${md.utils.escapeHtml(name) || ''}</div>
+        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name || '')}">${md.utils.escapeHtml(name || '')}</div>
 ${content}`;
     };
 
