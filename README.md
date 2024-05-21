@@ -196,7 +196,6 @@ Newlines are allowed in the text, as is any other Markdown syntax (both block an
 Callouts can also have a label set within them. The label should be in the format `[label <text>]`.
 The label must be on the first newline after the opening `<$>`.
 The label cannot contain any newlines, but does support inline Markdown syntax.
-The label will be rendered if a label is provided or if the code-block has a toolbar
 
 **Example Markdown input:**
 
