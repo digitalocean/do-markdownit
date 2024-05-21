@@ -19,8 +19,8 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
-- (minor) Move toolbar inside of code-label, show code-label when no label is provided
 
+- (minor) Use shared toolbar for code block label + buttons
 
 ## v1.13.0 - 6056063
 

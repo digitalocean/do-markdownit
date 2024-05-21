@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ const safeObject = require('../util/safe_object');
  */
 
 /**
- * Add support for label markup at the start of a fence, translating to a label div before the fence.
+ * Add support for label markup at the start of a fence, translating to a label div before the fence
+ * if there is a toolbar rendered or a label defined.
  *
  * Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
  *
