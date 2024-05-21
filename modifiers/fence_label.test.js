@@ -27,14 +27,16 @@ world
 });
 
 it('handles a code block with no label', () => {
-    expect(md.render('```\nhello\nworld\n```')).toBe(`<pre><code>hello
+    expect(md.render('```\nhello\nworld\n```')).toBe(`<div class="code-label" title=""></div>
+<pre><code>hello
 world
 </code></pre>
 `);
 });
 
 it('handles a code block with an empty label', () => {
-    expect(md.render('```\n[label  ]\nhello\nworld\n```')).toBe(`<pre><code>[label  ]
+    expect(md.render('```\n[label  ]\nhello\nworld\n```')).toBe(`<div class="code-label" title=""></div>
+<pre><code>[label  ]
 hello
 world
 </code></pre>

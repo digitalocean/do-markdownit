@@ -133,49 +133,57 @@ describe('HTML preservation', () => {
         .use(require('./prismjs'));
 
     it('handles a token at the start of the code block', () => {
-        expect(mdHtml.render('```js\nreturn;\n```')).toBe(`<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span><span class="token punctuation">;</span>
+        expect(mdHtml.render('```js\nreturn;\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span><span class="token punctuation">;</span>
 </code></pre>
 `);
     });
 
     it('handles plain-text at the start of the code block', () => {
-        expect(mdHtml.render('```js\nconsole.log;\n```')).toBe(`<pre class="language-javascript"><code class="language-js">console<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
+        expect(mdHtml.render('```js\nconsole.log;\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-javascript"><code class="language-js">console<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
 </code></pre>
 `);
     });
 
     it('handles nested tokens in the code block', () => {
-        expect(mdHtml.render('```nginx\nserver {}\n```')).toBe(`<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        expect(mdHtml.render('```nginx\nserver {}\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 </code></pre>
 `);
     });
 
     it('handles nested markup languages in the code block', () => {
-        expect(mdHtml.render('```php\na <?php b\n```')).toBe(`<pre class="language-php"><code class="language-php">a <span class="token php language-php"><span class="token delimiter important">&lt;?php</span> b
+        expect(mdHtml.render('```php\na <?php b\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-php"><code class="language-php">a <span class="token php language-php"><span class="token delimiter important">&lt;?php</span> b
 </span></code></pre>
 `);
     });
 
     it('handles HTML inside a token in the code block', () => {
-        expect(mdHtml.render('```js\nreturn \'hello <^>world<^>\';\n```')).toBe(`<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span> <span class="token string">&apos;hello <mark>world</mark>&apos;</span><span class="token punctuation">;</span>
+        expect(mdHtml.render('```js\nreturn \'hello <^>world<^>\';\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-javascript"><code class="language-js"><span class="token keyword">return</span> <span class="token string">&apos;hello <mark>world</mark>&apos;</span><span class="token punctuation">;</span>
 </code></pre>
 `);
     });
 
     it('handles HTML inside nested tokens in the code block', () => {
-        expect(mdHtml.render('```nginx\nserver { listen 80 <^>default_server<^>; }\n```')).toBe(`<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span> <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span> <mark>default_server</mark></span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        expect(mdHtml.render('```nginx\nserver { listen 80 <^>default_server<^>; }\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span> <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span> <mark>default_server</mark></span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 </code></pre>
 `);
     });
 
     it('handles HTML spanning tokens in the code block', () => {
-        expect(mdHtml.render('```nginx\nserver { li<^>sten 80 default_server<^>; }\n```')).toBe(`<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span> <span class="token directive"><span class="token keyword">li</span><mark><span class="token keyword">sten</span> <span class="token number">80</span> default_server</mark></span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        expect(mdHtml.render('```nginx\nserver { li<^>sten 80 default_server<^>; }\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span> <span class="token directive"><span class="token keyword">li</span><mark><span class="token keyword">sten</span> <span class="token number">80</span> default_server</mark></span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 </code></pre>
 `);
     });
 
     it('handles HTML spanning multi-line tokens in the code block', () => {
-        expect(mdHtml.render('```go\n<^>data := `<^>\n  <^>test<^>\n<^>`<^>\n```')).toBe(`<pre class="language-go"><code class="language-go"><mark>data <span class="token operator">:=</span> <span class="token string">\`</span></mark><span class="token string">
+        expect(mdHtml.render('```go\n<^>data := `<^>\n  <^>test<^>\n<^>`<^>\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-go"><code class="language-go"><mark>data <span class="token operator">:=</span> <span class="token string">\`</span></mark><span class="token string">
   <mark>test</mark>
 <mark>\`</mark></span>
 </code></pre>
@@ -190,7 +198,8 @@ describe('HTML preservation', () => {
     });
 
     it('handles HTML wrapping each line', () => {
-        expect(mdHtml.render('```javascript,line_numbers\nconst test = \'hello\';\nconst other = \'world\';\nconsole.log(test, other);\n```')).toBe(`<pre class="language-javascript"><code class="prefixed line_numbers language-javascript"><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">&apos;hello&apos;</span><span class="token punctuation">;</span>
+        expect(mdHtml.render('```javascript,line_numbers\nconst test = \'hello\';\nconst other = \'world\';\nconsole.log(test, other);\n```')).toBe(`<div class="code-label" title=""></div>
+<pre class="language-javascript"><code class="prefixed line_numbers language-javascript"><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">&apos;hello&apos;</span><span class="token punctuation">;</span>
 </li><li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">&apos;world&apos;</span><span class="token punctuation">;</span>
 </li><li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </li></ol>

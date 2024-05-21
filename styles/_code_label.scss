@@ -19,7 +19,8 @@ limitations under the License.
 $code-label-class: "code-label" !default;
 
 // Code labels
-.#{$code-label-class}:has(+ .code-toolbar) {
+.#{$code-label-class}:has(+ .code-toolbar),
+.#{$code-label-class}:not([title=""]) {
     background-color: $code-highlight-dark;
     border-radius: 1em 1em 0 0;
     color: $white;
