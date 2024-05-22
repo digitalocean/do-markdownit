@@ -28,7 +28,7 @@
   "types": "types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalocean/do-markdownit.git"
+    "url": "git+https://github.com/digitalocean/do-markdownit.git"
   },
   "homepage": "https://github.com/digitalocean/do-markdownit#readme",
   "bugs": "https://github.com/digitalocean/do-markdownit/issues",
