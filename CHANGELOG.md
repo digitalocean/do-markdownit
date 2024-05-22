@@ -20,7 +20,11 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+
+## v1.14.0 - 3a842c4
+
 - (minor) Use shared toolbar for code block label + buttons
+
 
 ## v1.13.0 - 6056063
 
