@@ -129,47 +129,58 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <span class="token punctuation">}</span>
 </code></pre>
 <p>Examples can have line numbers, and every code block has a ‘Copy’ button to copy just the code:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed line_numbers language-javascript"><code><ol><li data-prefix="1"><span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token string">&apos;hello&apos;</span><span class="token punctuation">;</span>
 </li><li data-prefix="2"><span class="token keyword">const</span> other <span class="token operator">=</span> <span class="token string">&apos;world&apos;</span><span class="token punctuation">;</span>
 </li><li data-prefix="3">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </li></ol>
 </code></pre>
 <p>Here’s output from a command with a secondary label:</p>
+<div class="code-label" title=""></div>
 <pre><code><div class="secondary-code-label" title="Output">Output</div>Could not connect to Redis at 127.0.0.1:6379: Connection refused
 </code></pre>
 <p>This is a non-root user command example:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed command language-bash"><code><ol><li data-prefix="&#x24;"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
 </li><li data-prefix="&#x24;"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3
 </li></ol>
 </code></pre>
 <p>This is a root command example:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed super_user language-bash"><code><ol><li data-prefix="#">adduser sammy
 </li><li data-prefix="#"><span class="token function">shutdown</span>
 </li></ol>
 </code></pre>
 <p>This is a custom prefix command example:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed custom_prefix language-bash"><code><ol><li data-prefix="mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span>
 </li><li data-prefix="mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span>
 </li></ol>
 </code></pre>
 <p>A custom prefix can contain a space by using <code>\s</code>:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed custom_prefix language-bash"><code><ol><li data-prefix="(my-server) mysql&gt;">FLUSH PRIVILEGES<span class="token punctuation">;</span>
 </li><li data-prefix="(my-server) mysql&gt;">SELECT * FROM articles<span class="token punctuation">;</span>
 </li></ol>
 </code></pre>
 <p>Indicate where commands are being run with environments:</p>
+<div class="code-label" title=""></div>
 <pre class="prefixed command environment-local language-bash"><code><ol><li data-prefix="&#x24;"><span class="token function">ssh</span> root@server_ip
 </li></ol>
 </code></pre>
+<div class="code-label" title=""></div>
 <pre class="prefixed command environment-second language-bash"><code><ol><li data-prefix="&#x24;"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Secondary server&quot;</span>
 </li></ol>
 </code></pre>
+<div class="code-label" title=""></div>
 <pre class="prefixed command environment-third language-bash"><code><ol><li data-prefix="&#x24;"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Tertiary server&quot;</span>
 </li></ol>
 </code></pre>
+<div class="code-label" title=""></div>
 <pre class="prefixed command environment-fourth language-bash"><code><ol><li data-prefix="&#x24;"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quaternary server&quot;</span>
 </li></ol>
 </code></pre>
+<div class="code-label" title=""></div>
 <pre class="prefixed command environment-fifth language-bash"><code><ol><li data-prefix="&#x24;"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Quinary server&quot;</span>
 </li></ol>
 </code></pre>
@@ -225,6 +236,7 @@ Please refer to our style and formatting guidelines for more detailed explanatio
 <summary>Content can be hidden using <code>details</code>.</summary>
 <p>Inside the details block you can use any block or inline syntax.</p>
 <p>You could hide the solution to a problem:</p>
+<div class="code-label" title=""></div>
 <pre class="language-javascript"><code><span class="token comment">// Write a message to console</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;Hello, world!&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>

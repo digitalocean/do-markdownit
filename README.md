@@ -874,7 +874,7 @@ _No options are available for this plugin._
 ### fence_label
 
 <details>
-<summary>Add support for label markup at the start of a fence, translating to a label div before the fence.</summary>
+<summary>Add support for label markup at the start of a fence, translating to a label div before the fence if there is a toolbar rendered or a label defined..</summary>
 
 Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
 

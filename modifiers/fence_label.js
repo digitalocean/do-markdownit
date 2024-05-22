@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ const safeObject = require('../util/safe_object');
  */
 
 /**
- * Add support for label markup at the start of a fence, translating to a label div before the fence.
+ * Add support for label markup at the start of a fence, translating to a label div before the fence
+ * if there is a toolbar rendered or a label defined.
  *
  * Markup must be at the start of the fence, though may be preceded by other metadata markup using square brackets.
  *
@@ -65,11 +66,8 @@ module.exports = (md, options) => {
         const match = token.content.match(/^((?:\[.+\]\n)*?)\[label (.+)\]\n/);
         const name = (match && (match[2] || '').trim()) || null;
 
-        // If no name, just return original
-        if (!name) return original(tokens, idx, opts, env, self);
-
         // Remove the label line
-        token.content = token.content.replace(match[0], match[1]);
+        if (match && name) token.content = token.content.replace(match[0], match[1]);
 
         // Get the rendered content
         const content = original(tokens, idx, opts, env, self);
@@ -78,7 +76,7 @@ module.exports = (md, options) => {
         const className = optsObj.className || 'code-label';
 
         // Inject label and return
-        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name)}">${md.utils.escapeHtml(name)}</div>
+        return `<div class="${md.utils.escapeHtml(className)}" title="${md.utils.escapeHtml(name || '')}">${md.utils.escapeHtml(name || '')}</div>
 ${content}`;
     };
 

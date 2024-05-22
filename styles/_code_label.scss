@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -19,20 +19,22 @@ limitations under the License.
 $code-label-class: "code-label" !default;
 
 // Code labels
-.#{$code-label-class} {
-    background-color: $gray7;
-    border-radius: 16px 16px 0 0;
-    color: $gray3;
-    display: block;
+.#{$code-label-class}:has(+ .code-toolbar),
+.#{$code-label-class}:not([title=""]) {
+    background-color: $code-highlight-dark;
+    border-radius: 1em 1em 0 0;
+    color: $white;
+    display: flex;
+    padding: 0.75em 1.5em;
+    justify-content: space-between;
+    align-items: center;
     font-size: 16px;
-    margin: 1em 0 0;
-    padding: 12px;
     position: relative;
-    text-align: center;
+    min-height: 3.25em;
     z-index: 2;
 
     + pre {
-        border-radius: 0 0 16px 16px;
+        border-radius: 0 0 1em 1em;
         margin: 0 0 1em;
     }
 
@@ -41,7 +43,7 @@ $code-label-class: "code-label" !default;
         margin: 0 0 1em;
 
         pre {
-            border-radius: 0 0 16px 16px;
+            border-radius: 0 0 1em 1em;
         }
     }
 }

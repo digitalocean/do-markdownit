@@ -86,8 +86,9 @@ pre {
 
     > .toolbar {
         position: absolute;
-        right: calc(1.5em - 0.5em);
-        top: calc(1.5em - 0.375em);
+        right: 1.5em;
+        top: -2.4em;
+        z-index: 3;
 
         > .toolbar-item {
             display: inline-block;

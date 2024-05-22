@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License") !default;
 you may not use this file except in compliance with the License.
@@ -16,6 +16,14 @@ limitations under the License.
 
 @import "../theme";
 @import "../mixins";
+
+$code-label-class: "code-label" !default;
+
+.#{$code-label-class}:has(+ .code-toolbar > pre[class*="environment-"]),
+.#{$code-label-class}:has(+ pre[class*="environment-"]) {
+    background: $gray9;
+    color: $gray4;
+}
 
 // DigitalOcean-usage-specific code environment styling
 pre {
