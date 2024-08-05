@@ -50,6 +50,10 @@ it('handles hightlight tags in code block', () => {
     expect(md.render('```\nhello\nworld\n<^>test<^>\n```')).toBe('<pre><code>hello\nworld\n<mark>test</mark>\n</code></pre>\n');
 });
 
+it("handles hightlight tags in code block with newline", () => {
+    expect(md.render("```js\n<^>const test = `hello<^>\nworld`;\n```")).toBe('<pre><code class="language-js"><mark>const test = `hello</mark>\nworld`;\n</code></pre>\n');
+});
+
 it('handles hightlight tags in code (inline)', () => {
     expect(md.renderInline('`<^>test<^>`')).toBe('<code><mark>test</mark></code>');
 });
