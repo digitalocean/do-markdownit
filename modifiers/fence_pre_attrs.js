@@ -47,6 +47,12 @@ module.exports = md => {
      */
     const render = original => (tokens, idx, opts, env, self) => {
         // Get the rendered content
+        
+        const token = tokens[idx];
+        if (token.info === 'mermaid') {
+			return `<pre class="environment-local"><code class="mermaid">${token.content}</code></pre>`;
+        }
+        
         const content = original(tokens, idx, opts, env, self);
 
         // Locate the pre tag
