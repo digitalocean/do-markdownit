@@ -20,6 +20,8 @@ Any non-code changes should be prefixed with `(docs)`.
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
 
+- (minor) Add Collapsible Heading plugin
+
 
 ## v1.14.0 - 3a842c4
 

@@ -167,6 +167,10 @@ module.exports = (md, options) => {
         md.use(require('./rules/embeds/compare'), safeObject(optsObj.compare));
     }
 
+    if (optsObj.collapsible_headings) {
+        md.use(require('./rules/collapsible_heading'), safeObject(optsObj.collapsible_headings));
+    }
+
     // Register modifiers
 
     if (optsObj.underline !== false) {
@@ -211,10 +215,6 @@ module.exports = (md, options) => {
 
     if (optsObj.prismjs !== false) {
         md.use(require('./modifiers/prismjs'), safeObject(optsObj.prismjs));
-    }
-
-    if (optsObj.collapsible_headings) {
-        md.use(require('./modifiers/collapsible_heading'), safeObject(optsObj.collapsible_headings));
     }
 
     // Limiting the token streams should be the last step

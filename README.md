@@ -1133,6 +1133,24 @@ Set this property to `false` to disable this plugin.
 - `sizeUnits` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
 </details>
 
+### collapsible_heading
+<details>
+<summary>Wrap specific headings in detail tag and make the content collapsible</summary>
+
+If an array of heading tags is provided, all those tags and the related content will be wrapped in a details tag, with the heading as the summary.
+
+Nesting multiple collapsible sections is supported.
+
+**Options:**
+
+Pass options for this plugin as the `collapsible_heading` property of the `do-markdownit` plugin options.
+This plugin is disabled by default, pass an object to enable it.
+
+- `levels` (`string[]`): List of heading tags to wrap (ex: `"h2"`).
+- `open` (`boolean`): Flag indicating if the wrapped sections should be expanded by default.
+
+</details>
+
 ### link_attributes
 
 <details>
