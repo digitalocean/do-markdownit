@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', event => {
         textbox.style.height = `${textbox.scrollHeight}px`;
 
         // Render the Markdown to HTML
+        console.log(render(textbox.value));
         output.innerHTML = render(textbox.value);
 
         // Ensure scripts are loaded

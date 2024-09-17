@@ -58,6 +58,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./modifiers/image_settings').ImageSettingsOptions} [image_settings] Disable image settings syntax, or set options for the feature.
  * @property {false|import('./modifiers/prismjs').PrismJsOptions} [prismjs] Disable Prism highlighting, or set options for the feature.
  * @property {import('./modifiers/link_attributes').LinkAttributesOptions} [link_attributes] Enable custom link attributes by setting options for the feature.
+ * @property {import('./modifiers/collapsible_headings').CollapsibleHeadingOptions} [collapsible_headings] Enable transforming headings into collapsible content.
  * @property {import('./rules/limit_tokens').LimitTokensOptions} [limit_tokens] Enable token filtering by setting options for the feature.
  */
 
@@ -210,6 +211,10 @@ module.exports = (md, options) => {
 
     if (optsObj.prismjs !== false) {
         md.use(require('./modifiers/prismjs'), safeObject(optsObj.prismjs));
+    }
+
+    if (optsObj.collapsible_headings) {
+        md.use(require('./modifiers/collapsible_heading'), safeObject(optsObj.collapsible_headings));
     }
 
     // Limiting the token streams should be the last step

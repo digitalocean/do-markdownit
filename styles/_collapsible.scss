@@ -18,21 +18,15 @@ limitations under the License.
 @import "theme";
 
 // Details
-details:not(.collapsible) {
-    background: $gray10;
-    border-radius: 16px;
-    padding: 1em;
-    margin: 1em 0;
+details.collapsible {
+    border-bottom: 1px solid $gray6;
+    padding: 32px 0;
 
     $size: 7;
     $border: 2;
 
     &[open] {
         > summary {
-            border-bottom: 1px solid $gray8;
-            padding: 0 1em 1em 0;
-            margin: 0 0 1em;
-
             &::after {
                 top: calc(50% - #{math.sqrt($size + $border) * 1px});
                 transform: translateY(-50%) rotate(225deg);
@@ -59,7 +53,7 @@ details:not(.collapsible) {
             right: 4px;
             width: $size * 1px;
             height: $size * 1px;
-            border: solid $gray5;
+            border: solid $gray4;
             border-width: 0 ($border * 1px) ($border * 1px) 0;
             transform: translateY(-50%) rotate(45deg);
         }
