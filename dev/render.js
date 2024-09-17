@@ -34,7 +34,7 @@ const md = require('markdown-it')({
         allowedClasses: [ 'note', 'warning', 'info', 'draft' ],
     },
     collapsible_headings: {
-        levels: [ 'h2', 'h3' ],
+        levels: [],
     },
 });
 
