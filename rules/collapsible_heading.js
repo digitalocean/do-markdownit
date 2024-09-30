@@ -17,26 +17,33 @@ limitations under the License.
 'use strict';
 
 /**
- * @module modifiers/link_attributes
+ * @module rules/collapsible_heading
  */
 
 const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} CollapsibleHeadingOptions
- * @property {string[]} [levels] List of headings to transform.
+ * @property {number[]} [levels] List of headings to transform.
  * @property {boolean} [open=true] Whether to collapse the content by default.
+ * @property {string} [className=collapsible] Class to use for collapsible sections.
  */
 
 /**
- * Add support for mentioning users, using an `@` symbol. Wraps the mention in a link to the user.
+ * Add support for collapsing headings.
  *
- * By default, any characters that are not a space or newline after an `@` symbol will be treated as a mention.
+ * When enabled this plugin wraps the specified headings and the content after in a collapsible section.
  *
  * @example
- * Hello @test
+ * # H1 header
+ * Test row
  *
- * <p>Hello <a href="/users/test">@test</a></p>
+ * <details class="collapsible">
+ * <summary>
+ * <h1>H1 header</h1>
+ * </summary>
+ * <p>Test row</p>
+ * </details>
  *
  * @type {import('markdown-it').PluginWithOptions<CollapsibleHeadingOptions>}
  */
@@ -51,11 +58,12 @@ module.exports = (md, options) => {
      * @private
      */
     const collapsibleHeading = state => {
+        // Track levels of collapsible headings that're open
         const collapsed = [];
         state.tokens = state.tokens.reduce((newTokens, token) => {
             if (token.type === 'heading_open') {
                 const headingLevel = Number(token.tag.replace('h', ''));
-                // Close all hanging collapsible sections.
+                // Close all open collapsible headings deeper than this
                 while (collapsed[collapsed.length - 1] >= headingLevel) {
                     // Close the previous detail element
                     const closeDetail = new state.Token('details', 'details', -1);
@@ -66,11 +74,11 @@ module.exports = (md, options) => {
                     collapsed.pop();
                 }
 
-                if (Array.isArray(optsObj.levels) && optsObj.levels.includes(token.tag)) {
+                if (Array.isArray(optsObj.levels) && optsObj.levels.includes(headingLevel)) {
                     // Create the outer details element
                     const openDetails = new state.Token('details', 'details', 1);
                     openDetails.block = true;
-                    openDetails.attrSet('class', 'collapsible');
+                    openDetails.attrSet('class', md.utils.escapeHtml(typeof optsObj.className === 'string' ? optsObj.className : 'collapsible'));
                     if (optsObj.open) openDetails.attrSet('open', '');
                     newTokens.push(openDetails);
 
@@ -82,13 +90,17 @@ module.exports = (md, options) => {
                     // Add the heading
                     newTokens.push(token);
 
+                    // Track that we have an open collapsible heading
                     collapsed.push(headingLevel);
 
                     return newTokens;
                 }
             }
 
-            if (token.type === 'heading_close' && Array.isArray(optsObj.levels) && optsObj.levels.includes(token.tag)) {
+            if (token.type === 'heading_close'
+                && Array.isArray(optsObj.levels)
+                && optsObj.levels.includes(Number(token.tag.replace('h', '')))
+            ) {
                 // Add the heading close
                 newTokens.push(token);
 

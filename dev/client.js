@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', event => {
         textbox.style.height = `${textbox.scrollHeight}px`;
 
         // Render the Markdown to HTML
-        console.log(render(textbox.value));
         output.innerHTML = render(textbox.value);
 
         // Ensure scripts are loaded

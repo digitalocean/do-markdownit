@@ -24,10 +24,24 @@ it('does not inject collapsible by default', () => {
 `);
 });
 
-const mdAllowed = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 'h1' ] });
+const mdAllowed = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 1 ] });
 
 it('only wraps specified headings', () => {
     expect(mdAllowed.render('# H1 header\nTest row\n\n## H2 header\nTest row')).toBe(`<details class="collapsible">
+<summary>
+<h1>H1 header</h1>
+</summary>
+<p>Test row</p>
+<h2>H2 header</h2>
+<p>Test row</p>
+</details>
+`);
+});
+
+const mdUsesClassName = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 1 ], className: 'test' });
+
+it('uses given classname', () => {
+    expect(mdUsesClassName.render('# H1 header\nTest row\n\n## H2 header\nTest row')).toBe(`<details class="test">
 <summary>
 <h1>H1 header</h1>
 </summary>
@@ -54,7 +68,7 @@ it('handles same level breaks correctly', () => {
 `);
 });
 
-const mdAllowedTwo = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 'h2' ] });
+const mdAllowedTwo = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 2 ] });
 
 it('handles different level breaks correctly', () => {
     expect(mdAllowedTwo.render('## H2 header\nTest row\n\n# H1 header\nTest row')).toBe(`<details class="collapsible">
@@ -68,7 +82,7 @@ it('handles different level breaks correctly', () => {
 `);
 });
 
-const mdDefaultOpen = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 'h2' ], open: true });
+const mdDefaultOpen = require('markdown-it')({ }).use(require('./collapsible_heading'), { levels: [ 2 ], open: true });
 
 it('renders the detail open by default', () => {
     expect(mdDefaultOpen.render('## H2 header\nTest row\n\n# H1 header\nTest row')).toBe(`<details class="collapsible" open="">
