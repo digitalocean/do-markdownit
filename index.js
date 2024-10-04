@@ -29,7 +29,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./rules/html_comment').HtmlCommentOptions} [html_comment] Disable HTML comment stripping, or set options for the feature.
  * @property {false} [image_caption] Disable image captions.
  * @property {false|import('./rules/table_wrapper').TableWrapperOptions} [table_wrapper] Disable table wrapper, or set options for the feature.
- * @property {import('./modifiers/collapsible_headings').CollapsibleHeadingOptions} [collapsible_headings] Enable transforming headings into collapsible content.
+ * @property {false|import('./modifiers/collapsible_headings').CollapsibleHeadingOptions} [collapsible_headings] Enable transforming headings into collapsible content.
  * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
  * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.

@@ -184,6 +184,40 @@ Set this property to `false` to disable this plugin.
 - `className` (`string`, optional, defaults to `'table-wrapper'`): Class to use for the table wrapper.
 </details>
 
+### collapsible_heading
+
+<details>
+<summary>Wrap specific headings in detail tag and make the content collapsible</summary>
+
+If an array of heading tags is provided, all those tags and the related content will be wrapped in a details tag, with the heading as the summary.
+
+Nesting multiple collapsible sections is supported.
+
+**Example Markdown input:**
+
+    # H1 header
+    Test row
+
+**Example HTML output:**
+
+    <details class="collapsible">
+        <summary>
+            <h1>H1 header</h1>
+        </summary>
+        <p>Test row</p>
+    </details>
+
+**Options:**
+
+Pass options for this plugin as the `collapsible_heading` property of the `do-markdownit` plugin options.
+This plugin is disabled by default, pass an object to enable it.
+
+- `levels` (`number[]`): List of heading tags to wrap (ex: `2`).
+- `open` (`boolean`): Flag indicating if the wrapped sections should be expanded by default.
+- `className` (`string`, optional, defaults to `'collapsible'`): Class name to use on the collapsed section.
+
+</details>
+
 ### callout
 
 <details>
@@ -1131,25 +1165,6 @@ Pass options for this plugin as the `image_settings` property of the `do-markdow
 Set this property to `false` to disable this plugin.
 
 - `sizeUnits` (`string[]`, optional, defaults to `['', 'px', '%']`): Image size units to allow.
-</details>
-
-### collapsible_heading
-<details>
-<summary>Wrap specific headings in detail tag and make the content collapsible</summary>
-
-If an array of heading tags is provided, all those tags and the related content will be wrapped in a details tag, with the heading as the summary.
-
-Nesting multiple collapsible sections is supported.
-
-**Options:**
-
-Pass options for this plugin as the `collapsible_heading` property of the `do-markdownit` plugin options.
-This plugin is disabled by default, pass an object to enable it.
-
-- `levels` (`number[]`): List of heading tags to wrap (ex: `2`).
-- `open` (`boolean`): Flag indicating if the wrapped sections should be expanded by default.
-- `className` (`string`, optional, defaults to `'collapsible'`): Class name to use on the collapsed section.
-
 </details>
 
 ### link_attributes

@@ -30,9 +30,11 @@ const safeObject = require('../util/safe_object');
  */
 
 /**
- * Add support for collapsing headings.
+ * Wrap specific headings in detail tag and make the content collapsible
  *
- * When enabled this plugin wraps the specified headings and the content after in a collapsible section.
+ * If an array of heading tags is provided, all those tags and the related content will be wrapped in a details tag, with the heading as the summary.
+ *
+ * Nesting multiple collapsible sections is supported.
  *
  * @example
  * # H1 header
@@ -79,7 +81,7 @@ module.exports = (md, options) => {
                     const openDetails = new state.Token('details', 'details', 1);
                     openDetails.block = true;
                     openDetails.attrSet('class', md.utils.escapeHtml(typeof optsObj.className === 'string' ? optsObj.className : 'collapsible'));
-                    if (optsObj.open) openDetails.attrSet('open', '');
+                    if (optsObj.open !== false) openDetails.attrSet('open', '');
                     newTokens.push(openDetails);
 
                     // Create the summary element
@@ -126,5 +128,5 @@ module.exports = (md, options) => {
         });
     };
 
-    md.core.ruler.push('collapsbile_heading', collapsibleHeading);
+    md.core.ruler.push('collapsible_heading', collapsibleHeading);
 };
