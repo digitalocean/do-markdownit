@@ -1,5 +1,5 @@
 /*
-Copyright 2022 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ const md = require('markdown-it')({
     callout: {
         allowedClasses: [ 'note', 'warning', 'info', 'draft' ],
     },
+    collapsible_headings: false,
 });
 
 /**
