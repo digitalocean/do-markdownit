@@ -93,7 +93,7 @@ module.exports = (md, options) => {
         md.use(require('./rules/table_wrapper'), safeObject(optsObj.table_wrapper));
     }
 
-    if (optsObj.collapsible_headings) {
+    if (optsObj.collapsible_headings !== false) {
         md.use(require('./rules/collapsible_heading'), safeObject(optsObj.collapsible_headings));
     }
 

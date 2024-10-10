@@ -33,9 +33,7 @@ const md = require('markdown-it')({
     callout: {
         allowedClasses: [ 'note', 'warning', 'info', 'draft' ],
     },
-    collapsible_headings: {
-        levels: [],
-    },
+    collapsible_headings: false,
 });
 
 /**

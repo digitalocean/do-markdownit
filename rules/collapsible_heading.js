@@ -24,7 +24,7 @@ const safeObject = require('../util/safe_object');
 
 /**
  * @typedef {Object} CollapsibleHeadingOptions
- * @property {number[]} [levels] List of headings to transform.
+ * @property {number[]} [levels=[1,2,3,4,5,6]] List of headings to transform.
  * @property {boolean} [open=true] Whether to collapse the content by default.
  * @property {string} [className=collapsible] Class to use for collapsible sections.
  */
@@ -52,6 +52,10 @@ const safeObject = require('../util/safe_object');
 module.exports = (md, options) => {
     // Get the correct options
     const optsObj = safeObject(options);
+
+    if (!Array.isArray(optsObj.levels) || !optsObj.levels.length) {
+        optsObj.levels = [ 1, 2, 3, 4, 5, 6 ];
+    }
 
     /**
      * Rule for inserting details around headings.
