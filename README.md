@@ -210,10 +210,10 @@ Nesting multiple collapsible sections is supported.
 **Options:**
 
 Pass options for this plugin as the `collapsible_heading` property of the `do-markdownit` plugin options.
-This plugin is disabled by default, pass an object to enable it.
+Set this property to `false` to disable this plugin.
 
-- `levels` (`number[]`): List of heading tags to wrap (ex: `2`).
-- `open` (`boolean`): Flag indicating if the wrapped sections should be expanded by default.
+- `levels` (`number[]`, optional, defaults to `[ 1, 2, 3, 4, 5, 6 ]`): List of heading tags to wrap (ex: `2`).
+- `open` (`boolean`, optional, defaults to `true`): Flag indicating if the wrapped sections should be expanded by default.
 - `className` (`string`, optional, defaults to `'collapsible'`): Class name to use on the collapsed section.
 
 </details>
