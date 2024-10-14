@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./rules/html_comment').HtmlCommentOptions} [html_comment] Disable HTML comment stripping, or set options for the feature.
  * @property {false} [image_caption] Disable image captions.
  * @property {false|import('./rules/table_wrapper').TableWrapperOptions} [table_wrapper] Disable table wrapper, or set options for the feature.
+ * @property {false|import('./modifiers/collapsible_headings').CollapsibleHeadingOptions} [collapsible_headings] Disable collapsible headings, or set options for the feature.
  * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
  * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
@@ -90,6 +91,10 @@ module.exports = (md, options) => {
 
     if (optsObj.table_wrapper !== false) {
         md.use(require('./rules/table_wrapper'), safeObject(optsObj.table_wrapper));
+    }
+
+    if (optsObj.collapsible_headings !== false) {
+        md.use(require('./rules/collapsible_heading'), safeObject(optsObj.collapsible_headings));
     }
 
     // Register embeds

@@ -184,6 +184,40 @@ Set this property to `false` to disable this plugin.
 - `className` (`string`, optional, defaults to `'table-wrapper'`): Class to use for the table wrapper.
 </details>
 
+### collapsible_heading
+
+<details>
+<summary>Wrap specific headings in detail tag and make the content collapsible</summary>
+
+If an array of heading tags is provided, all those tags and the related content will be wrapped in a details tag, with the heading as the summary.
+
+Nesting multiple collapsible sections is supported.
+
+**Example Markdown input:**
+
+    # H1 header
+    Test row
+
+**Example HTML output:**
+
+    <details class="collapsible">
+        <summary>
+            <h1>H1 header</h1>
+        </summary>
+        <p>Test row</p>
+    </details>
+
+**Options:**
+
+Pass options for this plugin as the `collapsible_heading` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+- `levels` (`number[]`, optional, defaults to `[ 1, 2, 3, 4, 5, 6 ]`): List of heading tags to wrap (ex: `2`).
+- `open` (`boolean`, optional, defaults to `true`): Flag indicating if the wrapped sections should be expanded by default.
+- `className` (`string`, optional, defaults to `'collapsible'`): Class name to use on the collapsed section.
+
+</details>
+
 ### callout
 
 <details>
@@ -1327,6 +1361,7 @@ Variables listed here should be sorted based on the filename, and then by variab
 | `$callouts-label-class` _(string)_       | `callout-label`        | The class name used for labels in the `callout` plugin.     | [`_callouts.scss`](./styles/_callouts.scss)                         |
 | `$code-label-class` _(string)_           | `code-label`           | The class name used for the `fence_label` plugin.           | [`_code_label.scss`](./styles/_code_label.scss)                     |
 | `$code-secondary-label-class` _(string)_ | `secondary-code-label` | The class name used for the `fence_secondary_label` plugin. | [`_code_secondary_label.scss`](./styles/_code_secondary_label.scss) |
+| `$collapsible-heading-class` _(string)_  | `collapsible`          | The class name used for the `collapsible_heading` plugin.   | [`_collapsible.scss`](./styles/_collapsible.scss)                   |
 | `$columns-inner-class` _(string)_        | `column`               | The inner class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
 | `$columns-outer-class` _(string)_        | `columns`              | The outer class name used for the `columns` plugin.         | [`_columns.scss`](./styles/_columns.scss)                           |
 | `$hash-anchor-class` _(string)_          | `hash-anchor`          | The anchor class name used for the `heading_id` plugin.     | [`_heading-id.scss`](./styles/_heading_id.scss)                     |
