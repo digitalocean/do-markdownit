@@ -18,43 +18,19 @@ limitations under the License.
 
 const md = require('markdown-it')().use(require('./collapsible_heading'));
 
-it('injects collapsibles by default for all headings', () => {
-    expect(md.render('# H1 header\nTest row\n\n## H2 header\nTest row\n\n### H3 header\nTest row\n\n#### H4 header\nTest row\n\n##### H5 header\nTest row\n\n###### H6 header\nTest row\n\n')).toBe(`<details class="collapsible" open="">
-<summary>
-<h1>H1 header</h1>
-</summary>
+it('does not injects collapsibles by default for all headings', () => {
+    expect(md.render('# H1 header\nTest row\n\n## H2 header\nTest row\n\n### H3 header\nTest row\n\n#### H4 header\nTest row\n\n##### H5 header\nTest row\n\n###### H6 header\nTest row\n\n')).toBe(`<h1>H1 header</h1>
 <p>Test row</p>
-<details class="collapsible" open="">
-<summary>
 <h2>H2 header</h2>
-</summary>
 <p>Test row</p>
-<details class="collapsible" open="">
-<summary>
 <h3>H3 header</h3>
-</summary>
 <p>Test row</p>
-<details class="collapsible" open="">
-<summary>
 <h4>H4 header</h4>
-</summary>
 <p>Test row</p>
-<details class="collapsible" open="">
-<summary>
 <h5>H5 header</h5>
-</summary>
 <p>Test row</p>
-<details class="collapsible" open="">
-<summary>
 <h6>H6 header</h6>
-</summary>
 <p>Test row</p>
-</details>
-</details>
-</details>
-</details>
-</details>
-</details>
 `);
 });
 
