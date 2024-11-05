@@ -50,6 +50,8 @@ const safeObject = require('../util/safe_object');
  * @type {import('markdown-it').PluginWithOptions<CollapsibleHeadingOptions>}
  */
 module.exports = (md, options) => {
+    if (!options) return;
+
     // Get the correct options
     const optsObj = safeObject(options);
 
