@@ -23,7 +23,7 @@ $columns-inner-class: "column" !default;
 .#{$columns-outer-class} {
     display: flex;
     flex-flow: row nowrap;
-    margin: -1em;
+    gap: 1.5rem;
 
     @include mq($tablet) {
         flex-flow: row wrap;
@@ -36,7 +36,6 @@ $columns-inner-class: "column" !default;
     .#{$columns-inner-class} {
         flex-basis: 100%;
         flex-grow: 1;
-        padding: 1em;
 
         @include mq($tablet) {
             flex-basis: auto;

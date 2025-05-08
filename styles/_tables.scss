@@ -25,9 +25,9 @@ table {
             border-bottom: 1px dashed $gray7;
 
             th {
-                color: $gray2;
-                font-weight: 600;
-                padding: 16px 8px;
+                color: $gray1;
+                font-weight: 700;
+                padding: 1rem 0.75rem;
             }
         }
     }
@@ -37,8 +37,8 @@ table {
             border-bottom: 1px solid $gray7;
 
             td {
-                color: $gray3;
-                padding: 24px 8px;
+                color: $gray4;
+                padding: 1.5rem 0.75rem;
             }
         }
     }

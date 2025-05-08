@@ -16,12 +16,12 @@ limitations under the License.
 
 .instagram {
     .instagram-media {
-        margin: 1rem auto !important;
+        margin-left: 0 !important;
     }
 
-    &[align="left"] {
+    &[align="center"] {
         .instagram-media {
-            margin-left: 0 !important;
+            margin: 1rem auto !important;
         }
     }
 

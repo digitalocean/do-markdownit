@@ -17,28 +17,28 @@ limitations under the License.
 @import "theme";
 
 @mixin button {
-    background: transparent;
-    border: 1px solid $blue2;
-    border-radius: 3px;
+    background: $blue2;
+    border: none;
+    border-radius: 2rem;
     box-sizing: border-box;
-    color: $blue2;
+    color: $white;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1;
-    padding: 8px 24px;
+    padding: 0.375rem 1rem;
     transition: background 0.25s ease;
 
     &:disabled {
-        border-color: $gray6;
-        color: $gray6;
+        background: $gray8;
+        color: $white;
         cursor: not-allowed;
     }
 
     &:not(:disabled) {
         &:hover,
         &:focus {
-            background: $blue3;
+            background: $blue1;
         }
     }
 }

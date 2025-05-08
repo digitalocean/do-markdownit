@@ -103,16 +103,17 @@ pre {
                 line-height: normal;
                 overflow: visible;
                 user-select: none;
+                user-select: none;
             }
 
             > a,
             > button {
                 background: $neutral3;
-                border-radius: 0.625em;
+                border-radius: 99px;
                 color: $white;
                 cursor: pointer;
                 line-height: 1;
-                padding: 0.375em 0.5em;
+                padding: 0.25rem 0.75rem;
                 transition: color 0.25s, background 0.25s;
 
                 span {
