@@ -22,13 +22,13 @@ $callouts-label-class: "callout-label" !default;
 // Callouts
 .#{$callouts-class} {
     background-color: $blue3;
-    border-radius: 1rem;
+    border-radius: $size8;
     color: $blue1;
     display: block;
     font-size: 0.9375rem;
     line-height: 1.5em;
-    margin: 0 0 1.5rem;
-    padding: 1.5rem;
+    margin: 0 0 $size12;
+    padding: $size12;
     position: relative;
     z-index: 0;
 
@@ -42,9 +42,9 @@ $callouts-label-class: "callout-label" !default;
 
     .#{$callouts-label-class} {
         background: rgba($black, 0.1);
-        border-radius: 1rem 1rem 0 0;
+        border-radius: $size8 $size8 0 0;
         font-size: 0.9375rem;
-        margin: -1.5rem -1.5rem 0;
-        padding: 1.5rem;
+        margin: (-$size12) (-$size12) 0;
+        padding: $size12;
     }
 }

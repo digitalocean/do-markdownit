@@ -19,10 +19,10 @@ limitations under the License.
 // Images
 img,
 figure {
-    border: solid 0.125rem $gray7;
-    border-radius: 1rem;
+    border: solid $size1 $gray7;
+    border-radius: $size8;
     display: block;
-    margin: 1rem auto;
+    margin: $size8 auto;
     max-width: 100%;
 }
 
@@ -41,7 +41,7 @@ img {
 // Figures
 figure {
     overflow: hidden;
-    padding: 2rem 2.5rem;
+    padding: $size16 $size20;
 
     &:has(img[align="left"]) {
         margin-left: 0;
@@ -60,11 +60,11 @@ figure {
     }
 
     figcaption {
-        border-top: solid 0.125rem $gray7;
+        border-top: solid $size1 $gray7;
         background: $neutral5;
-        font-size: 1rem;
+        font-size: $size8;
         text-align: center;
-        padding: 1.5rem 0.625rem;
-        margin: 2rem -2.5rem -2.5rem;
+        padding: $size12 $size5;
+        margin: $size16 (-$size20) (-$size20);
     }
 }

@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+@import "theme";
+
 .instagram {
     .instagram-media {
         margin-left: 0 !important;
@@ -21,7 +23,7 @@ limitations under the License.
 
     &[align="center"] {
         .instagram-media {
-            margin: 1rem auto !important;
+            margin: $size8 auto !important;
         }
     }
 
