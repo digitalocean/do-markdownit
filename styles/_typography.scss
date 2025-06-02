@@ -96,12 +96,14 @@ h5 {
 }
 
 h6 {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
 }
 
 p {
-    line-height: 1.5;
+    margin: 0.5rem 0;
+    line-height: 1.5rem;
 
     @include mq($phone) {
         code {
@@ -114,13 +116,17 @@ p {
 ol,
 ul {
     list-style-type: disc;
-    margin-bottom: 1.7rem;
+    margin-bottom: 1.5rem;
     padding-left: 2.5rem;
 
     @include mq($tablet) {
         list-style-position: inside;
         padding-left: 0;
     }
+
+    li {
+        margin-bottom: 0.5rem;
+    };
 }
 
 ol {

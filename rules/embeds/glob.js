@@ -154,7 +154,7 @@ module.exports = md => {
         const url = `https://www.digitalocean.com/community/tools/glob?glob=${encodeURIComponent(token.glob.glob)}${token.glob.tests.map(x => `&tests=${encodeURIComponent(x)}`).join('')}`;
 
         // Return the HTML
-        return `<div data-glob-tool-embed data-glob-string="${md.utils.escapeHtml(token.glob.glob)}" ${tests}>
+        return `<div class="tool-embed" data-glob-tool-embed data-glob-string="${md.utils.escapeHtml(token.glob.glob)}" ${tests}>
     <a href="${url.toString()}" target="_blank">
         Explore <code>${md.utils.escapeHtml(token.glob.glob)}</code> as a glob string in our glob testing tool
     </a>

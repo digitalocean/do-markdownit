@@ -136,7 +136,7 @@ module.exports = md => {
         url.searchParams.append('domain', token.dns.domain);
 
         // Return the HTML
-        return `<div data-dns-tool-embed data-dns-domain="${md.utils.escapeHtml(token.dns.domain)}" data-dns-types="${md.utils.escapeHtml(token.dns.types)}">
+        return `<div class="tool-embed" data-dns-tool-embed data-dns-domain="${md.utils.escapeHtml(token.dns.domain)}" data-dns-types="${md.utils.escapeHtml(token.dns.types)}">
     <a href="${url.toString()}" target="_blank">
         Perform a full DNS lookup for ${md.utils.escapeHtml(token.dns.domain)}
     </a>
