@@ -33,13 +33,13 @@ const safeObject = require('../../util/safe_object');
  *
  * [dns digitalocean.com A AAAA]
  *
- * <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
+ * <div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
  *     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
  *         Perform a full DNS lookup for digitalocean.com
  *     </a>
  * </div>
  *
- * <div data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
+ * <div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
  *     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
  *         Perform a full DNS lookup for digitalocean.com
  *     </a>
