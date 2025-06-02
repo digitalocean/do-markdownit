@@ -19,7 +19,7 @@ limitations under the License.
 const md = require('markdown-it')().use(require('./dns'));
 
 it('handles dns embeds (not inline)', () => {
-    expect(md.render('[dns digitalocean.com]')).toBe(`<div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
+    expect(md.render('[dns digitalocean.com]')).toBe(`<div class="tool-embed" data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>
@@ -39,7 +39,7 @@ it('handles dns embeds that are unclosed (no embed)', () => {
 });
 
 it('handles dns embeds with a single record', () => {
-    expect(md.render('[dns digitalocean.com MX]')).toBe(`<div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="MX">
+    expect(md.render('[dns digitalocean.com MX]')).toBe(`<div class="tool-embed" data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="MX">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>
@@ -49,7 +49,7 @@ it('handles dns embeds with a single record', () => {
 });
 
 it('handles dns embeds with multiple records', () => {
-    expect(md.render('[dns digitalocean.com A AAAA]')).toBe(`<div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
+    expect(md.render('[dns digitalocean.com A AAAA]')).toBe(`<div class="tool-embed" data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>
@@ -59,13 +59,13 @@ it('handles dns embeds with multiple records', () => {
 });
 
 it('only injects script once with multiple embeds', () => {
-    expect(md.render('[dns digitalocean.com A AAAA]\n\nhello\n\n[dns ondigitalocean.app A]')).toBe(`<div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
+    expect(md.render('[dns digitalocean.com A AAAA]\n\nhello\n\n[dns ondigitalocean.app A]')).toBe(`<div class="tool-embed" data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>
 </div>
 <p>hello</p>
-<div class='tool-embed' data-dns-tool-embed data-dns-domain="ondigitalocean.app" data-dns-types="A">
+<div class="tool-embed" data-dns-tool-embed data-dns-domain="ondigitalocean.app" data-dns-types="A">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=ondigitalocean.app" target="_blank">
         Perform a full DNS lookup for ondigitalocean.app
     </a>
@@ -75,7 +75,7 @@ it('only injects script once with multiple embeds', () => {
 });
 
 it('injects the script at the end of the document', () => {
-    expect(md.render('[dns digitalocean.com A AAAA]\n\nhello')).toBe(`<div class='tool-embed' data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
+    expect(md.render('[dns digitalocean.com A AAAA]\n\nhello')).toBe(`<div class="tool-embed" data-dns-tool-embed data-dns-domain="digitalocean.com" data-dns-types="A,AAAA">
     <a href="https://www.digitalocean.com/community/tools/dns?domain=digitalocean.com" target="_blank">
         Perform a full DNS lookup for digitalocean.com
     </a>

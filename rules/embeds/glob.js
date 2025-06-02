@@ -37,13 +37,13 @@ const blockLines = require('../../util/block_lines');
  * /a
  * /b]
  *
- * <div class='tool-embed' data-glob-tool-embed data-glob-string="*.js" data-glob-test-0="/">
+ * <div class="tool-embed" data-glob-tool-embed data-glob-string="*.js" data-glob-test-0="/">
  *     <a href="https://www.digitalocean.com/community/tools/glob?glob=*.js&tests=%2F" target="_blank">
  *         Explore <code>*.js</code> as a glob string in our glob testing tool
  *     </a>
  * </div>
  *
- * <div class='tool-embed' data-glob-tool-embed data-glob-string="* test.js" data-glob-test-0="/a" data-glob-test-1="/b">
+ * <div class="tool-embed" data-glob-tool-embed data-glob-string="* test.js" data-glob-test-0="/a" data-glob-test-1="/b">
  *     <a href="https://www.digitalocean.com/community/tools/glob?glob=*+test.js&tests=%2Fa&tests=%2Fb" target="_blank">
  *         Explore <code>* test.js</code> as a glob string in our glob testing tool
  *     </a>
