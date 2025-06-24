@@ -14,14 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+@import "theme";
+
 .instagram {
     .instagram-media {
-        margin: 1rem auto !important;
+        margin-left: 0 !important;
     }
 
-    &[align="left"] {
+    &[align="center"] {
         .instagram-media {
-            margin-left: 0 !important;
+            margin: $size8 auto !important;
         }
     }
 

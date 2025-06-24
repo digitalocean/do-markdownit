@@ -37,8 +37,8 @@ limitations under the License.
     }
 
     .control-arrow {
-        width: 30px;
-        height: 30px;
+        width: 1.875rem;
+        height: 1.875rem;
         position: absolute;
         top: 50%;
         left: calc(var(--value) - 13px);
@@ -63,7 +63,7 @@ limitations under the License.
         border: none;
         cursor: ew-resize;
         height: 100%;
-        width: 2px;
+        width: 0.125rem;
     }
 
     .control::-webkit-slider-thumb {
@@ -71,7 +71,7 @@ limitations under the License.
         border: none;
         cursor: ew-resize;
         height: 100%;
-        width: 2px;
+        width: 0.125rem;
     }
 
     .control::-moz-range-track {

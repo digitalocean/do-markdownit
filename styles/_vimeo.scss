@@ -16,8 +16,9 @@ limitations under the License.
 
 // Vimeo embeds
 .vimeo {
+    border-radius: 1em;
     display: block;
     height: auto;
-    margin: 1em auto;
+    overflow: hidden;
     max-width: 100%;
 }

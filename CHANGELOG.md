@@ -8,6 +8,8 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 ## Unreleased changes
 
+- (major) Update styling of markdown items
+
 <!--
 All changes being submitted through PRs should be added to this section.
 

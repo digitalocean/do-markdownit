@@ -34,7 +34,7 @@ pre {
                     &::before {
                         content: attr(data-prefix);
                         display: inline-block;
-                        margin: 0 10px 0 5px;
+                        margin: 0 0.625rem 0 0.25rem;
                         text-align: right;
                         user-select: none;
                     }
@@ -46,11 +46,11 @@ pre {
             code {
                 ol {
                     li {
-                        margin: 0 0 0 -5px;
+                        margin: 0 0 0 -0.25rem;
 
                         &::before {
                             border-right: 1px solid rgba($white, 0.5);
-                            padding-right: 5px;
+                            padding-right: 0.25rem;
                             text-align: right;
                             width: 2ch;
                         }

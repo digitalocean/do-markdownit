@@ -23,7 +23,7 @@ $root-text-styles: true !default;
 @if $root-text-styles {
     & {
         color: $gray4;
-        font-size: 16px;
+        font-size: 1rem;
         position: relative;
         z-index: 0;
     }
@@ -36,7 +36,7 @@ h4,
 h5,
 h6,
 p {
-    margin: 1em 0;
+    margin: 1.5rem 0;
 
     &:first-child {
         margin-top: 0;
@@ -66,8 +66,49 @@ h6 {
     }
 }
 
+// Specific heading styles
+h1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.1rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    letter-spacing: 0.1rem;
+}
+
+h3 {
+    font-size: 2.25rem;
+    line-height: 3rem;
+    letter-spacing: 0.1rem;
+}
+
+h4 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+}
+
+h5 {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+h6 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+h5 + p,
+h6 + p {
+    margin-top: 0.5rem;
+}
+
 p {
-    line-height: 1.5;
+    line-height: 1.5rem;
 
     @include mq($phone) {
         code {
@@ -80,13 +121,17 @@ p {
 ol,
 ul {
     list-style-type: disc;
-    margin-bottom: 1.7em;
-    padding-left: 2.5em;
+    margin-bottom: 1.5rem;
+    padding-left: 2.5rem;
 
     @include mq($tablet) {
         list-style-position: inside;
         padding-left: 0;
     }
+
+    li {
+        margin-bottom: 0.5rem;
+    };
 }
 
 ol {
@@ -110,16 +155,16 @@ a {
 
         code {
             background:
-                linear-gradient($blue2, $blue2) center calc(100% - 0.2em + 0.5px) / 100% 1px no-repeat,
-                linear-gradient($gray8, $gray8) center top / 100% 0% no-repeat;
+                linear-gradient($blue2, $blue2) center calc(100% - 0.25em) / 100% 1px no-repeat,
+                linear-gradient($code-highlight, $code-highlight) center top / 100% 0% no-repeat;
             color: $white;
         }
     }
 
     code {
         background:
-            linear-gradient($blue2, $blue2) center calc(100% - 0.2em + 0.5px) / 100% 1px no-repeat,
-            linear-gradient($gray8, $gray8) center top / 100% 100% no-repeat;
+            linear-gradient($blue2, $blue2) center calc(100% - 0.25em) / 100% 1px no-repeat,
+            linear-gradient($code-highlight, $code-highlight) center top / 100% 100% no-repeat;
         transition:
             background 300ms ease-in-out,
             color 300ms ease-in-out;
@@ -128,12 +173,13 @@ a {
 
 // Quotes
 blockquote {
-    border-left: 4px solid $gray7;
+    border-left: 0.125rem solid $gray5;
+    border-radius: 0.125rem;
     color: $gray5;
     display: block;
-    font-size: 18px;
-    margin: 0 0 1.25em 1.25em;
-    padding: 0 0 0 1.5em;
+    font-size: 1.125rem;
+    margin: 0 0 1.5rem 1.5rem;
+    padding: 0 0 0 1rem;
 
     a {
         border-bottom: 1px dotted $gray5;

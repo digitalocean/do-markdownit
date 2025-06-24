@@ -20,11 +20,12 @@ limitations under the License.
 // Inline code
 pre,
 code {
-    background-color: $gray8;
-    border-radius: 0.5em;
-    color: $gray3;
+    background-color: $code-highlight;
+    border-radius: 0.375rem;
+    color: $gray4;
     font-size: 0.875em;
-    padding: 0.2em;
+    padding: 0.25rem 0.375rem;
+    font-style: normal;
 }
 
 // Code blocks
@@ -37,7 +38,7 @@ pre {
     margin: 1em 0;
     overflow: auto;
     overflow-wrap: normal;
-    padding: 1.5em;
+    padding: 1.5rem;
     white-space: normal;
     word-wrap: normal;
 

@@ -22,22 +22,34 @@ $collapsible-heading-class: "collapsible" !default;
 // Details
 details:not(.#{$collapsible-heading-class}) {
     background: $gray10;
-    border-radius: 16px;
-    padding: 1em;
-    margin: 1em 0;
+    border: 1px solid $gray7;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
 
     $size: 7;
     $border: 2;
 
     &[open] {
-        > summary {
-            border-bottom: 1px solid $gray8;
+        >summary {
+            border-bottom: 1px solid $gray6;
             padding: 0 1em 1em 0;
             margin: 0 0 1em;
 
             &::after {
-                top: calc(50% - #{math.sqrt($size + $border) * 1px});
-                transform: translateY(-50%) rotate(225deg);
+                content: "−";
+            }
+        }
+
+        >p {
+            margin: 0 0 1em;
+
+            &:first-child {
+                margin: 0;
+            }
+        
+            &:last-child {
+                margin: 0;
             }
         }
     }
@@ -54,16 +66,11 @@ details:not(.#{$collapsible-heading-class}) {
         }
 
         &::after {
-            content: "";
+            content: "+";
             display: block;
             position: absolute;
-            top: 50%;
-            right: 4px;
-            width: $size * 1px;
-            height: $size * 1px;
-            border: solid $gray5;
-            border-width: 0 ($border * 1px) ($border * 1px) 0;
-            transform: translateY(-50%) rotate(45deg);
+            top: 0%;
+            right: 0;
         }
     }
 }
