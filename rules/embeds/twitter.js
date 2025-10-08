@@ -23,7 +23,7 @@ limitations under the License.
 const safeObject = require('../../util/safe_object');
 
 /**
- * Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax, supporting the legacy `twitter.com` or the new `x.com` domain.
+ * Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax.
  * Input may use either the legacy `twitter.com` or the new `x.com` domain; both are accepted.
  *
  * The basic syntax is `[twitter <tweet>]`.
