@@ -333,7 +333,7 @@ Embedding a terminal recording from Asciinema (id, cols, rows):
 
 You can also embed a tweet from Twitter by passing the URL for the tweet:
 
-[twitter https://twitter.com/MattIPv4/status/1576415168426573825]
+[twitter https://x.com/MattIPv4/status/1576415168426573825]
 
 Like a few other embeds, you can also pass optional flags to customize the embed:
 

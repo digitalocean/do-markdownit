@@ -23,9 +23,12 @@ limitations under the License.
 const safeObject = require('../../util/safe_object');
 
 /**
- * Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax.
+ * Add support for [Twitter](https://twitter.com/) embeds in Markdown, as block syntax, supporting the legacy `twitter.com` or the new `x.com` domain.
+ * Input may use either the legacy `twitter.com` or the new `x.com` domain; both are accepted.
  *
- * The basic syntax is `[twitter <tweet>]`. E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
+ * The basic syntax is `[twitter <tweet>]`.
+ * E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
+ * Rendered output always canonicalizes the link to `https://x.com/<user>/status/<id>`.
  * After the tweet, assorted space-separated flags can be added (in any combination/order):
  *
  * - Add `light` or `dark` to set the card theme (default is `light`).
@@ -39,19 +42,19 @@ const safeObject = require('../../util/safe_object');
  * If a width outside the range of 250-550 is selected, a clamped value will be used.
  *
  * @example
- * [twitter https://twitter.com/MattIPv4/status/1576415168426573825]
+ * [twitter https://twitter.com/MattIPv4/status/1576415168426573825] Or [twitter https://x.com/MattIPv4/status/1576415168426573825]
  *
- * [twitter https://twitter.com/MattIPv4/status/1576415168426573825 left 400 dark]
+ * [twitter https://twitter.com/MattIPv4/status/1576415168426573825 left 400 dark] Or [twitter https://x.com/MattIPv4/status/1576415168426573825 left 400 dark]
  *
  * <div class="twitter">
  *     <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
- *         <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+ *         <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
  *     </blockquote>
  * </div>
  *
  * <div class="twitter" align="left">
  *     <blockquote class="twitter-tweet" data-dnt="true" data-width="400" data-theme="dark">
- *         <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+ *         <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
  *     </blockquote>
  * </div>
  * <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
@@ -79,11 +82,11 @@ module.exports = md => {
         if (currentLine.slice(0, 9) !== '[twitter ') return false;
         if (currentLine[currentLine.length - 1] !== ']') return false;
 
-        // Check for Twitter match
-        // https://www.twitter.com/<user>/status/<id> (treat everything prior to <user> as optional, ish)
+        // Check for Twitter match (accept both twitter.com and x.com domains)
+        // https://www.twitter.com/<user>/status/<id> or https://www.x.com/<user>/status/<id> (treat everything prior to <user> as optional, ish)
         const alignment = [ 'left', 'center', 'right' ];
         const settings = [ 'light', 'dark' ];
-        const match = currentLine.match(`^\\[twitter (?:(?:(?:(?:https?:)?\\/\\/)?(?:www\\.)?twitter\\.com)?\\/)?(\\w+)\\/status\\/(\\d+)((?: (?:${alignment.concat(settings).join('|')}|\\d+))*)\\]$`);
+        const match = currentLine.match(`^\\[twitter (?:(?:(?:(?:https?:)?\\/\\/)?(?:www\\.)?(?:twitter|x)\\.com)?\\/)?(\\w+)\\/status\\/(\\d+)((?: (?:${alignment.concat(settings).join('|')}|\\d+))*)\\]$`);
         if (!match) return false;
 
         // Get the user
@@ -171,7 +174,7 @@ module.exports = md => {
         // Apply the alignment to the parent div, as Twitter does float-based alignment
         return `<div class="twitter"${attrAlign}>
     <blockquote class="twitter-tweet" data-dnt="true"${attrWidth}${attrTheme}>
-        <a href="https://twitter.com/${user}/status/${id}">View tweet by @${user}</a>
+    <a href="https://x.com/${user}/status/${id}">View tweet by @${user}</a>
     </blockquote>
 </div>\n`;
     };
