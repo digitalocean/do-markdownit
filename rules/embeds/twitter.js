@@ -174,7 +174,7 @@ module.exports = md => {
         // Apply the alignment to the parent div, as Twitter does float-based alignment
         return `<div class="twitter"${attrAlign}>
     <blockquote class="twitter-tweet" data-dnt="true"${attrWidth}${attrTheme}>
-    <a href="https://x.com/${user}/status/${id}">View tweet by @${user}</a>
+        <a href="https://x.com/${user}/status/${id}">View tweet by @${user}</a>
     </blockquote>
 </div>\n`;
     };
