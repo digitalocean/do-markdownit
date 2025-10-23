@@ -8,8 +8,6 @@ breaking changes to the options supported by the plugin will be shipped as a bre
 
 ## Unreleased changes
 
-- (major) Update styling of markdown items
-
 <!--
 All changes being submitted through PRs should be added to this section.
 
@@ -21,6 +19,12 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+
+## v1.17.0 - 9e3f120
+
+- (minor) DODX-13673: Added Embed Twitter support for domain x.com (#136)
+- (major) Update markdown styling (#133)
+
 
 ## v1.16.1 - de50141
 
