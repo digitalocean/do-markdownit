@@ -730,7 +730,7 @@ _No options are available for this plugin._
 
 The basic syntax is `[twitter <tweet>]`.
 E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
-Input may use either either `twitter.com` or `x.com` domain for the tweet.
+Input may use either `twitter.com` or `x.com` domain for the tweet.
 After the tweet, assorted space-separated flags can be added (in any combination/order):
 
 - Add `light` or `dark` to set the card theme (default is `light`).
