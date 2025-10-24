@@ -726,11 +726,11 @@ _No options are available for this plugin._
 ### twitter
 
 <details>
-<summary>Add support for <a href="https://x.com/">X</a> embeds in Markdown, as block syntax.</summary>
+<summary>Add support for <a href="https://twitter.com/">X</a> embeds in Markdown, as block syntax.</summary>
 
 The basic syntax is `[twitter <tweet>]`.
 E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
-Input may use either the legacy `twitter.com` or the new `x.com` domain; both are accepted.
+Input may use either `twitter.com` or `x.com` domain for the tweet.
 After the tweet, assorted space-separated flags can be added (in any combination/order):
 
 - Add `light` or `dark` to set the card theme (default is `light`).
@@ -753,13 +753,13 @@ If a width outside the range of 250-550 is selected, a clamped value will be use
 
     <div class="twitter">
         <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
-            <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+            <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
         </blockquote>
     </div>
 
     <div class="twitter" align="left">
         <blockquote class="twitter-tweet" data-dnt="true" data-width="400" data-theme="dark">
-            <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+            <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
         </blockquote>
     </div>
     <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>

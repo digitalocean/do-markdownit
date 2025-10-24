@@ -28,7 +28,7 @@ const safeObject = require('../../util/safe_object');
  *
  * The basic syntax is `[twitter <tweet>]`.
  * E.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825]`.
- * Rendered output always canonicalizes the link to `https://x.com/<user>/status/<id>`.
+ * Rendered output always canonicalizes the link to `https://twitter.com/<user>/status/<id>`.
  * After the tweet, assorted space-separated flags can be added (in any combination/order):
  *
  * - Add `light` or `dark` to set the card theme (default is `light`).
@@ -48,13 +48,13 @@ const safeObject = require('../../util/safe_object');
  *
  * <div class="twitter">
  *     <blockquote class="twitter-tweet" data-dnt="true" data-width="550" data-theme="light">
- *         <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+ *         <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
  *     </blockquote>
  * </div>
  *
  * <div class="twitter" align="left">
  *     <blockquote class="twitter-tweet" data-dnt="true" data-width="400" data-theme="dark">
- *         <a href="https://x.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
+ *         <a href="https://twitter.com/MattIPv4/status/1576415168426573825">View tweet by @MattIPv4</a>
  *     </blockquote>
  * </div>
  * <script async defer src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
@@ -174,7 +174,7 @@ module.exports = md => {
         // Apply the alignment to the parent div, as Twitter does float-based alignment
         return `<div class="twitter"${attrAlign}>
     <blockquote class="twitter-tweet" data-dnt="true"${attrWidth}${attrTheme}>
-        <a href="https://x.com/${user}/status/${id}">View tweet by @${user}</a>
+        <a href="https://twitter.com/${user}/status/${id}">View tweet by @${user}</a>
     </blockquote>
 </div>\n`;
     };
