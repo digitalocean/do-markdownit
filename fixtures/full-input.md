@@ -333,8 +333,9 @@ Embedding a terminal recording from Asciinema (id, cols, rows):
 
 You can also embed a tweet from Twitter by passing the URL for the tweet:
 
-[twitter https://x.com/MattIPv4/status/1576415168426573825]
+[twitter https://twitter.com/MattIPv4/status/1576415168426573825]
 
+Input may use either `twitter.com` or `x.com` domain
 Like a few other embeds, you can also pass optional flags to customize the embed:
 
 - Pass any integer value (between 250 and 550) to set a custom width for the embed (e.g. `[twitter https://twitter.com/MattIPv4/status/1576415168426573825 400]`)
