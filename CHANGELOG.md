@@ -19,6 +19,10 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+## v1.17.1 - 1488a1f
+
+- (patch) DODX-13917: Undo final Twitter Markdown URL to `twitter.com`, instead of `x.com`
+
 
 ## v1.17.0 - 9e3f120
 
