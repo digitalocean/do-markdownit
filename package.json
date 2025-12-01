@@ -42,7 +42,6 @@
     "jsdoc": "jsdoc -c .jsdoc.json",
     "types": "tsc index.js --declaration --allowJs --emitDeclarationOnly --outDir types --lib dom --lib webworker --skipLibCheck",
     "test": "jest",
-    "postinstall": "node script/prism.js",
     "prepublishOnly": "npm run types",
     "dev": "webpack serve --config dev/webpack.config.js"
   },
