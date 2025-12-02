@@ -19,6 +19,11 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+## v1.17.2 - 2c2ee34
+
+- (patch) DODX-14167/14152: Fix for npm, styling issue for Heading tags.
+
+
 ## v1.17.1 - 1488a1f
 
 - (patch) DODX-13917: Undo final Twitter Markdown URL to `twitter.com`, instead of `x.com`
