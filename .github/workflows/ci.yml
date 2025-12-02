@@ -15,7 +15,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci --ignore-scripts &&
+          npm run postinstall
 
       - name: Lint package
         run: npm run lint
@@ -32,7 +34,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci --ignore-scripts &&
+          npm run postinstall
 
       - name: Test package
         run: npm test

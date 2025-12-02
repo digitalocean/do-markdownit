@@ -1382,7 +1382,7 @@ Alongside these variables used for controlling specific styles, there is also th
 
 To get started working with this repository, clone it locally first. Ensure that you have the
 correct version of Node.js as specified in the `.nvmrc` file, and then install the dependencies
-following the lockfile by running `npm ci`.
+following the lockfile by running either: `npm ci` or `npm ci --ignore-scripts && npm run postinstall`.
 
 You can then start up the demo server by running `npm run dev`. This runs a barebones instance of
 Webpack with hot-reload enabled that provides a real-time input that renders to Markdown, using the
