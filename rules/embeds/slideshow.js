@@ -78,7 +78,11 @@ module.exports = md => {
         const width = Number(numbers[1]) || 480;
 
         // Get everything that is not a simple integer
-        const images = options.split(' ').filter(o => o && !Number.isInteger(parseInt(o, 10)));
+        // Filter out dangerous URL schemes (javascript:, vbscript:, file:, data:)
+        const badProto = /^(javascript|vbscript|file|data):/i;
+        const images = options.split(' ')
+            .filter(o => o && !Number.isInteger(parseInt(o, 10)))
+            .filter(url => !badProto.test(url.trim()));
         if (!images.length) {
             return false;
         }
