@@ -64,13 +64,16 @@ module.exports = md => {
         const match = currentLine.match(/^\[compare (\S+) (\S+)(?: (\d+))?(?: (\d+))?]$/);
         if (!match) return false;
 
+        // Validate URL schemes (block javascript:, vbscript:, file:, data:)
+        const badProto = /^(javascript|vbscript|file|data):/i;
+
         // Get the first image
         const imageLeft = match[1];
-        if (!imageLeft) return false;
+        if (!imageLeft || badProto.test(imageLeft.trim())) return false;
 
         // Get the second image
         const imageRight = match[2];
-        if (!imageRight) return false;
+        if (!imageRight || badProto.test(imageRight.trim())) return false;
 
         // Get the height
         const height = Number(match[3]) || 270;
