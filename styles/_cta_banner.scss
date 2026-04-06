@@ -82,7 +82,7 @@ limitations under the License.
     width: fit-content;
 
     &::before {
-        background: currentColor;
+        background: currentcolor;
         bottom: -2px;
         content: '';
         height: 2px;
@@ -107,6 +107,7 @@ limitations under the License.
     &:focus {
         background: none;
         color: $black;
+
         &::before {
             transform: scaleX(1);
         }
