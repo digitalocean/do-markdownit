@@ -19,6 +19,10 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+
+- (minor) Add CTA Banner plugin
+
+
 ## v1.17.2 - 2c2ee34
 
 - (patch) DODX-14167/14152: Fix for npm, styling issue for Heading tags.

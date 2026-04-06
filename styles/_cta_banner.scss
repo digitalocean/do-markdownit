@@ -1,0 +1,120 @@
+/*
+Copyright 2026 DigitalOcean
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+@import "mixins";
+@import "theme";
+
+// CTA banner (full-width)
+.cta-banner {
+    background-color: $jordy-blue3;
+
+    --cta-button-color: #{$blue3};
+    --cta-button-color-hover: #{$blue3};
+
+    border-radius: $size8;
+    color: $white;
+    display: block;
+    margin: 0 0 $size12;
+    padding: $size12;
+    width: 100%;
+}
+
+.cta-banner-inner {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    gap: $size8;
+    justify-content: space-between;
+}
+
+.cta-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: $size16;
+    justify-content: center;
+}
+
+.cta-banner-title {
+    color: $black;
+    font-size: $size10;
+    line-height: $size14;
+    margin: 0;
+    font-weight: 700;
+}
+
+.cta-banner-button {
+    @include button;
+
+    // Button background color can be customized via CSS variables.
+    background: var(--cta-button-color, $blue2);
+    display: inline-block;
+    text-decoration: none;
+
+    &:not(:disabled) {
+        &:hover,
+        &:focus {
+            background: color-mix(in srgb, var(--cta-button-color-hover, #{$blue2}) 50%, transparent);
+        }
+    }
+}
+
+.cta-banner-cta {
+    background: none;
+    color: $black;
+    display: inline-flex;
+    gap: $size4;
+    align-items: center;
+    font-weight: 700;
+    position: relative;
+    text-decoration: none;
+    width: fit-content;
+
+    &::before {
+        background: currentcolor;
+        bottom: -2px;
+        content: '';
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transform: scaleX(0);
+        transform-origin: 0 0;
+        transition: transform 200ms ease-in-out;
+        width: 100%;
+    }
+
+    &::after {
+        content: '→';
+        display: inline-block;
+        flex-shrink: 0;
+        transform: translateX(0) scale(1);
+        transition: transform 200ms ease-in-out;
+        transform-origin: 50% 50%;
+    }
+
+    &:hover,
+    &:focus {
+        background: none;
+        color: $black;
+
+        &::before {
+            transform: scaleX(1);
+        }
+
+        &::after {
+            transform: translateX(1px) scale(1.15);
+        }
+    }
+}
+
