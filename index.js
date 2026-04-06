@@ -33,6 +33,7 @@ const safeObject = require('./util/safe_object');
  * @property {false|import('./rules/embeds/callout').CalloutOptions} [callout] Disable callout block syntax, or set options for the feature.
  * @property {false|import('./rules/embeds/rsvp_button').RsvpButtonOptions} [rsvp_button] Disable RSVP buttons, or set options for the feature.
  * @property {false|import('./rules/embeds/terminal_button').TerminalButtonOptions} [terminal_button] Disable terminal buttons, or set options for the feature.
+ * @property {false} [cta_banner] Disable CTA banner block syntax.
  * @property {false|import('./rules/embeds/columns').ColumnsOptions} [columns] Disable columns, or set options for the feature.
  * @property {false} [details] Disable details.
  * @property {false} [glob] Disable glob embeds.
@@ -109,6 +110,10 @@ module.exports = (md, options) => {
 
     if (optsObj.terminal_button !== false) {
         md.use(require('./rules/embeds/terminal_button'), safeObject(optsObj.terminal_button));
+    }
+
+    if (optsObj.cta_banner !== false) {
+        md.use(require('./rules/embeds/cta_banner'), safeObject(optsObj.cta_banner));
     }
 
     if (optsObj.columns !== false) {

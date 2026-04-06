@@ -379,6 +379,16 @@ These may not be enabled in all contexts in the DigitalOcean community, but are 
 
 [terminal ubuntu:focal Terminal buttons are behind the `terminal` flag]
 
+CTA banner blocks support defaults from theme variables, plus optional color tokens and optional secondary CTA:
+
+[ctaBanner "Join our newsletter" "Subscribe now" "/newsletter"]
+
+[ctaBanner #CAD9FF "Build with DigitalOcean" "Start deploying" "/products" "#0069FF"]
+
+[ctaBanner #8AABFF "Need more examples?" "Read docs" "/docs" "View changelog" "/changelog"]
+
+[ctaBanner #8AABFF "Ready to get started?" "Create account" "/signup" "#1433D6" "Talk to sales" "/sales"]
+
 
 ## Conclusion
 

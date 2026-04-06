@@ -326,6 +326,47 @@ Set this property to `false` to disable this plugin.
 _No options are available for this plugin._
 </details>
 
+### cta_banner
+
+<details>
+<summary>Add support for CTA banners in Markdown, as block syntax.</summary>
+
+The basic syntax is `[ctaBanner "<title>" "<button_text>" "<button_link>"]`.
+
+Optionally, you can provide a background color as the first argument:
+- `[ctaBanner <background_color> "<title>" "<button_text>" "<button_link>"]`
+
+Optionally, you can also add:
+- `button_color` as the next quoted argument, and/or
+- `cta_text` and `cta_link` as the final quoted pair.
+
+Color values should be safe CSS colors (for example hex values like `#DFE8FF`).
+
+Defaults:
+- background color: `#DFE8FF`
+- button color: `#C6E3FF`
+
+**Example Markdown input:**
+
+    [ctaBanner #DFE8FF "Join now" "Sign up" "/signup" "#0069FF" "Learn more" "/learn"]
+
+**Example HTML output:**
+
+    <div class="cta-banner" style="background-color: #DFE8FF; --cta-button-color: #0069FF; --cta-button-color-hover: #0069FF;">
+        <div class="cta-banner-inner">
+            <h3 class="cta-banner-title">Join now</h3>
+            <a class="cta-banner-button" href="/signup">Sign up</a>
+            <a class="cta-banner-cta" href="/learn">Learn more</a>
+        </div>
+    </div>
+
+**Options:**
+Pass options for this plugin as the `cta_banner` property of the `do-markdownit` plugin options.
+Set this property to `false` to disable this plugin.
+
+_No options are available for this plugin._
+</details>
+
 ### columns
 
 <details>
