@@ -50,6 +50,14 @@ module.exports = (md, options) => {
     // Get the correct options
     const optsObj = safeObject(options);
 
+    let { allowedEnvironments } = optsObj;
+
+    if (typeof allowedEnvironments === 'string') {
+        allowedEnvironments = [ allowedEnvironments ];
+    } else if (!Array.isArray(allowedEnvironments)) {
+        allowedEnvironments = null;
+    }
+
     /**
      * Wrap the fence render function to detect environment markup and replace it with the correct class.
      *
@@ -66,7 +74,7 @@ module.exports = (md, options) => {
         const name = (match && (match[2] || '').trim()) || null;
 
         // If no environment, or not allowed, return the original
-        if (!name || (optsObj.allowedEnvironments && !optsObj.allowedEnvironments.includes(name))) {
+        if (!name || (allowedEnvironments && !allowedEnvironments.includes(name))) {
             return original(tokens, idx, opts, env, self);
         }
 

@@ -73,3 +73,19 @@ world
 </code></pre>
 `);
 });
+
+const mdStringAllowedEnvironments = require('markdown-it')().use(require('./fence_environment'), {
+    allowedEnvironments: 'production',
+});
+
+const mdCommaStringAllowedEnvironments = require('markdown-it')().use(require('./fence_environment'), {
+    allowedEnvironments: 'production,test',
+});
+
+it('handles a code block with an exact string allowed environment', () => {
+    expect(mdStringAllowedEnvironments.render('```\n[environment production]\nhello\n```')).toContain('environment-production');
+});
+
+it('does not treat string allowedEnvironments as a substring allow-list', () => {
+    expect(mdCommaStringAllowedEnvironments.render('```\n[environment pro]\nhello\n```')).not.toContain('environment-pro');
+});

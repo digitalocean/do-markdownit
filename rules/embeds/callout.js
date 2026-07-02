@@ -66,6 +66,14 @@ module.exports = (md, options) => {
     // Get the correct options
     const optsObj = safeObject(options);
 
+    let { allowedClasses } = optsObj;
+
+    if (typeof allowedClasses === 'string') {
+        allowedClasses = [ allowedClasses ];
+    } else if (!Array.isArray(allowedClasses)) {
+        allowedClasses = null;
+    }
+
     /**
      * Parsing rule for callout markup.
      *
@@ -96,7 +104,7 @@ module.exports = (md, options) => {
         if (!className) return false;
 
         // Check class name is allowed
-        if (optsObj.allowedClasses && !optsObj.allowedClasses.includes(className)) return false;
+        if (allowedClasses && !allowedClasses.includes(className)) return false;
 
         // Set the parent type
         const oldParentType = state.parentType;
