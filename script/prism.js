@@ -101,4 +101,26 @@ for (const file of components.concat(plugins)) {
     fs.writeFileSync(file, template(fs.readFileSync(file, 'utf8').trim()));
 }
 
+// Patch the markdown component to only register itself once per Prism instance.
+// The component registers hooks and defines the `markdown` grammar. Consumers
+// bundling several copies of do-markdownit (one per chunk or build target)
+// invoke the component once per copy against the same shared Prism singleton,
+// stacking its hooks each time. Guarding the whole body keeps registration —
+// and the grammar definition — idempotent.
+const markdownComponent = path.join(base, 'components', 'prism-markdown.js');
+fs.writeFileSync(
+    markdownComponent,
+    fs.readFileSync(markdownComponent, 'utf8')
+        .replace(
+            'const component = Prism => {',
+            [
+                'const component = Prism => {',
+                '\t// Guard against registering this component more than once on the same Prism',
+                '\t// instance — repeated registration stacks its hooks.',
+                '\tif (Prism.plugins.doMarkdownRegistered) return;',
+                '\tPrism.plugins.doMarkdownRegistered = true;',
+            ].join('\n'),
+        ),
+);
+
 console.info('Prism patched successfully!');
