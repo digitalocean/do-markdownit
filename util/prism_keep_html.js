@@ -86,15 +86,17 @@ const urlAttributes = new Set([ 'href', 'src', 'action', 'formaction' ]);
 /**
  * Check a URL value is safe to preserve.
  *
- * Only relative URLs and a small set of schemes are permitted. Whitespace is
- * stripped before the scheme check, matching how browsers resolve URLs.
+ * Only relative URLs and a small set of schemes are permitted. Whitespace and
+ * control characters are stripped before the scheme check, matching how
+ * browsers resolve URLs.
  *
  * @param {string} value URL value to check.
  * @returns {boolean}
  * @private
  */
 const isSafeUrl = value => {
-    const stripped = value.replace(/\s+/g, '');
+    // eslint-disable-next-line no-control-regex -- browsers drop control characters when resolving URLs, so they must not break up the scheme
+    const stripped = value.replace(/[\s\x00-\x1f\x7f]/g, '');
     if (/^[/#.?]/.test(stripped) || !/^[a-z][a-z0-9+.-]*:/i.test(stripped)) return true;
     return /^(https?|mailto):/i.test(stripped);
 };

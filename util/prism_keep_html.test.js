@@ -122,6 +122,9 @@ describe('keep-HTML tag and attribute allowlist', () => {
         expect(highlightRaw('<a href="javascript:alert(1)">Y</a>')).not.toContain('javascript:');
         expect(highlightRaw('<a href="JaVaScRiPt:alert(1)">Y</a>')).not.toMatch(/javascript/i);
         expect(highlightRaw('<a href="java\tscript:alert(1)">Y</a>')).not.toMatch(/javascript/i);
+        expect(highlightRaw('<a href="java\x00script:alert(1)">Y</a>')).not.toMatch(/javascript/i);
+        expect(highlightRaw('<a href="java\x01script:alert(1)">Y</a>')).not.toMatch(/javascript/i);
+        expect(highlightRaw('<a href="java\x7fscript:alert(1)">Y</a>')).not.toMatch(/javascript/i);
         expect(highlightRaw('<a href="data:text/html,<script>Y</script>">Y</a>')).not.toContain('data:');
         expect(highlightRaw('<a href="vbscript:msgbox">Y</a>')).not.toContain('vbscript:');
     });
