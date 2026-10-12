@@ -35,6 +35,97 @@ const {
 } = require('./dom_utils');
 
 /**
+ * Tags that may be preserved as live markup within highlighted code.
+ *
+ * Anything outside this set is dropped when nodes are extracted: the tag no
+ * longer wraps its content, and the content remains as highlighted (escaped)
+ * text.
+ *
+ * Deliberately excludes media, form, and scripting elements (`audio`, `video`,
+ * `img`, `svg`, `iframe`, `form`, `script`, `style`, ...), along with
+ * `meta`/`link`/`base`.
+ *
+ * @type {Set<string>}
+ * @private
+ */
+const allowedTags = new Set([
+    // Inline formatting and semantics
+    'a', 'abbr', 'b', 'bdi', 'bdo', 'br', 'cite', 'code', 'del', 'dfn', 'em',
+    'i', 'ins', 'kbd', 'mark', 'q', 'rb', 'rp', 'rt', 'ruby', 's', 'samp',
+    'small', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
+    // Structural markup shown inside code samples
+    'blockquote', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt',
+    'figcaption', 'figure', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'li',
+    'ol', 'p', 'pre', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul',
+]);
+
+/**
+ * Attributes that may be preserved on extracted nodes.
+ *
+ * `data-prefix` is set by our own `fence_prefix` modifier; `class` by our own
+ * wrappers and by upstream token markup. Everything else is dropped — including
+ * every `on*` event handler attribute, which is checked separately so it is
+ * rejected even if this list is later broadened.
+ *
+ * @type {Set<string>}
+ * @private
+ */
+const allowedAttributes = new Set([
+    'alt', 'class', 'colspan', 'data-prefix', 'datetime', 'dir', 'href',
+    'lang', 'reversed', 'rowspan', 'start', 'title',
+]);
+
+/**
+ * Attributes holding URLs, which must pass the safe-URL check in addition to the allowlist.
+ *
+ * @type {Set<string>}
+ * @private
+ */
+const urlAttributes = new Set([ 'href', 'src', 'action', 'formaction' ]);
+
+/**
+ * Check a URL value is safe to preserve.
+ *
+ * Only relative URLs and a small set of schemes are permitted. Whitespace and
+ * control characters are stripped before the scheme check, matching how
+ * browsers resolve URLs.
+ *
+ * @param {string} value URL value to check.
+ * @returns {boolean}
+ * @private
+ */
+const isSafeUrl = value => {
+    // eslint-disable-next-line no-control-regex -- browsers drop control characters when resolving URLs, so they must not break up the scheme
+    const stripped = value.replace(/[\s\x00-\x1f\x7f]/g, '');
+    if (/^[/#.?]/.test(stripped) || !/^[a-z][a-z0-9+.-]*:/i.test(stripped)) return true;
+    return /^(https?|mailto):/i.test(stripped);
+};
+
+/**
+ * Filter a node's attributes down to the allowlist, dropping event handlers and unsafe URLs.
+ *
+ * @param {Object<string, string>} attributes Attributes of the extracted HTML node.
+ * @returns {Object<string, string>} Sanitized attributes.
+ * @private
+ */
+const sanitizeAttributes = attributes => {
+    const clean = {};
+    Object.entries(attributes).forEach(([ name, value ]) => {
+        // Never preserve event handlers, regardless of the allowlist
+        if (/^on/i.test(name)) return;
+
+        // Drop anything not explicitly allowed
+        if (!allowedAttributes.has(name)) return;
+
+        // URL-bearing attributes must also hold a safe URL
+        if (urlAttributes.has(name) && !isSafeUrl(value)) return;
+
+        clean[name] = value;
+    });
+    return clean;
+};
+
+/**
  * Prism plugin to preserve existing HTML within the code. Supports non-browser environments.
  *
  * @param {import('prismjs')} Prism Prism instance to register plugin for.
@@ -120,9 +211,14 @@ const plugin = Prism => {
         // Handle bad input HTML
         if (stack.length) throw new Error(`Unclosed tag(s) in code: ${stack.map(node => `<${node.name}>`).join(', ')}`);
 
-        // Filter out token nodes, and sort by depth
+        // Filter out non-allowlisted tags, token nodes, and sort by depth.
+        // Non-allowlisted tags are dropped entirely: their content stays in the
+        // plain text (highlighted and escaped as usual), but they are never
+        // re-emitted as live markup.
         const nodes = allNodes
+            .filter(node => allowedTags.has(node.name))
             .filter(node => node.name !== 'span' || !/(^| )token( |$)/.test(node.attributes.class || ''))
+            .map(node => ({ ...node, attributes: sanitizeAttributes(node.attributes) }))
             .sort((a, b) => (a.depth !== b.depth
                 // Deepest nodes first
                 ? b.depth - a.depth
