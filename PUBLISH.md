@@ -35,4 +35,13 @@ Verify the tag exists in the remote repository by running `git ls-remote --tags 
 Run `npm publish --dry-run` to verify that the package can be published, and that all files are
 included that we intend to publish.
 
-Finally, run `npm publish` to publish the package.
+Verify that you are logged in to the shared `digitalocean-eng` account by running `npm whoami`. If
+not, run `npm login --scope=@digitalocean`, and ensure the browser session that authorizes the
+login is logged in to npmjs.com as `digitalocean-eng`.
+
+Finally, run `npm publish --otp=<code>` to publish the package, providing a one-time password from
+the account's authenticator. A `404 Not Found` error on publish means the account does not have
+write access to the package, not that the package is missing. Verify access by running
+`npm access list collaborators @digitalocean/do-markdownit`, and if needed, grant the
+`@digitalocean:developers` team write access by running
+`npm access grant read-write digitalocean:developers @digitalocean/do-markdownit --otp=<code>`.
