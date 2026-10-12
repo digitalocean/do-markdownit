@@ -19,9 +19,11 @@ Any non-code changes should be prefixed with `(docs)`.
 
 See `PUBLISH.md` for instructions on how to publish a new version.
 -->
+## v1.18.0 - 92be843
 
 - (minor) The Prism keep-HTML plugin now filters the tags and attributes it preserves inside highlighted code: tags and attributes outside an allowlist are no longer preserved as live markup (their content remains as highlighted text), `on*` event handler attributes are always dropped, and preserved URL attributes are restricted to relative and `http`/`https`/`mailto` schemes.
 - (minor) The vendored Prism markdown component now registers itself only once per Prism instance, so consumers bundling several copies of do-markdownit (one per chunk or build target) no longer stack its hooks against the shared Prism singleton.
+
 
 ## v1.17.2 - 2c2ee34
 
