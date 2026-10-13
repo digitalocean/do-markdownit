@@ -110,3 +110,19 @@ it('handles callout embeds with an extra class name', () => {
 </div>
 `);
 });
+
+const mdStringAllowedClasses = require('markdown-it')().use(require('./callout'), {
+    allowedClasses: 'admin',
+});
+
+const mdCommaStringAllowedClasses = require('markdown-it')().use(require('./callout'), {
+    allowedClasses: 'admin,info',
+});
+
+it('handles callout embeds with an exact string allowed class name', () => {
+    expect(mdStringAllowedClasses.render('<$>[admin]\nhello\n<$>')).toContain('class="callout admin"');
+});
+
+it('does not treat string allowedClasses as a substring allow-list', () => {
+    expect(mdCommaStringAllowedClasses.render('<$>[in]\nhello\n<$>')).not.toContain('class="callout in"');
+});
